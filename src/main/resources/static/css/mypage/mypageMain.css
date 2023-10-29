@@ -14,11 +14,10 @@
 
 .mypageMenu {width: 750px; margin: auto; }
 .mypageMenu__top { display: flex; }
-
 .mypageMenu__topLeft { width: 320px; margin-right: 50px; font-size: 20px; font-weight: bold; background-color: #F6F6F6; border: 1px solid #D1D2D8; border-radius: 20px;}
 .topLeft__cover {padding: 0px 37px;}
-.mypageMenu__level { padding: 15px 0px; border-bottom: 1px solid #D1D2D8;}
 
+.mypageMenu__level { padding: 15px 0px; border-bottom: 1px solid #D1D2D8;}
 .level__icon {width: 50%; align-items: center;}
 .level__icon i {font-size: 30px;}
 .icon__txt {margin-left: 20px;}
