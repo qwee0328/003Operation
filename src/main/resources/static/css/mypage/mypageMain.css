@@ -1,0 +1,209 @@
+@charset "UTF-8";
+*{box-sizing: border-box;}
+
+.container {margin:auto; width:1300px; display:flex;}
+.profile{width:230px; height:330px; border:1.5px solid #D1D2D8; border-radius: 20px;}
+.profile__cover{margin-top:50px;}
+.profile__nickname{font-size:20px; text-align: center; font-weight: bold; margin-top:20px; margin-bottom:50px;}
+.profile__nickname i{font-size: 12px; color:#D1D2D8; margin-top: 7px;}
+.profile__logoutBtn{width:200px; height:40px; border-radius: 50px; font-size:20px; transition-duration:0.3s;}
+.profile__logoutBtn:hover{background-color: #e1e6f5; border:0px;} 
+
+.mypageMenu{
+    width: 800px;
+    margin: auto;
+}
+
+.mypageMenu__topLeft{
+    width:350px;
+    margin-right:50px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #F6F6F6;
+    border: 1px solid #D1D2D8;
+    border-radius: 20px;
+}
+.topLeft__cover{
+    padding:0px 37px;
+}
+
+.mypageMenu__level{
+    padding:15px 0px;
+    border-bottom: 1px solid #D1D2D8;
+
+}
+.level__icon{
+    width:50%;
+    align-items: center;
+}
+
+.level__icon i{
+    font-size: 30px;
+}
+.icon__txt{
+    margin-left: 20px;
+}
+.level__txt{
+    width:50%;
+    text-align: end;
+    
+}
+
+.mypageMenu__point{
+    padding:15px 0px;
+}
+.point__icon{
+    width:50%;
+    align-items: center;
+}
+.point__icon i{
+    font-size: 23px;
+}
+.point__txt{
+    width:50%;
+    text-align: end;
+    
+}
+
+
+
+.mypageMenu__topRight{
+    width:400px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #F6F6F6;
+    border: 1px solid #D1D2D8;
+    border-radius: 20px;
+}
+.topRight__cover{
+    padding:0px 37px;
+}
+
+.title__top{
+    padding-top:15px;
+    border-bottom: 1px solid #D1D2D8;
+}
+.title__icon{
+    width:50%;
+    align-items: center;
+}
+.title__icon i{
+    font-size: 23px;
+}
+
+.title__modify{
+    font-size: 15px;
+    text-align: end;
+}
+
+.title__modify i{
+    font-size: 12px;
+}
+
+.title__bottom{
+    margin: 15px 0px;
+}
+
+
+
+
+
+.mypageMenu__bottom{
+    width: 100%;
+    border: 1px solid #D1D2D8;
+    margin-top: 50px;
+    border-radius: 20px;
+    padding:40px 30px;
+}
+
+.mypageMenu__myActivity, .mypageMenu__myAsk{
+    margin-bottom: 70px;
+}
+
+.myActivity__title{
+    font-size: 25px;
+    font-weight: bold;
+    padding-left:10px;
+    margin-bottom: 30px;
+}
+
+.myActivity__menu>div>div{
+    width:50%;
+    padding-bottom: 20px;
+    margin-bottom:20px;
+    border-bottom: 1px solid #D2D2D8;
+}
+
+.myActivity__icon{
+    width:10%;
+}
+.myActivity__icon i{
+    font-size: 20px;
+    margin-top:4px;
+}
+.myActivity__txt{
+    width:80%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.myActivity__move{
+    width:10%;
+}
+
+
+.myAsk__title{
+    font-size: 25px;
+    font-weight: bold;
+    padding-left:10px;
+    margin-bottom: 30px;
+}
+.myAsk__menu>div>div{
+    width:50%;
+    padding-bottom: 20px;
+    margin-bottom:20px;
+    border-bottom: 1px solid #D2D2D8;
+}
+.myAsk__icon{
+    width:10%;
+}
+.myAsk__icon i{
+    font-size: 20px;
+    margin-top:4px;
+}
+.myAsk__txt{
+    width:80%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.myAsk__move{
+    width:10%;
+}
+
+
+.mypageMenu__myInfo{
+    margin-bottom: 0px;
+}
+.myInfo__title{
+    font-size: 25px;
+    font-weight: bold;
+    padding-left:10px;
+    margin-bottom: 30px;
+}
+.myInfo__menu>div>div{
+    width:50%;
+    padding-bottom: 20px;
+    margin-bottom:20px;
+    border-bottom: 1px solid #D2D2D8;
+}
+.myInfo__icon{
+    width:10%;
+}
+.myInfo__icon i{
+    font-size: 20px;
+    margin-top:4px;
+}
+.myInfo__txt{
+    width:80%;
+    font-size: 18px;
+    font-weight: bold;
+}

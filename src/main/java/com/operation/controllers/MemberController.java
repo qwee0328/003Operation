@@ -28,9 +28,10 @@ public class MemberController {
 		// 로그인
 	}
 	
-	@RequestMapping("/viewMapage")
-	public void viewMapage() {
+	@RequestMapping("/viewMypage")
+	public String viewMapage() {
 		// 마이페이지 출력
+		return "mypage/mypageMain";
 	}
 	
 	@RequestMapping("/updateInfo")

@@ -12,12 +12,27 @@
   color: black;
 }
 
+.d-flex{
+  display:flex;
+}
+.d-none{
+  display:none;
+}
+
+.align-center{
+  display:flex; justify-content: center; align-items: center;
+}
+
 .fontEN {
   font-family: "Roboto", sans-serif;
 }
 
 .colorWhite {
   color: white;
+}
+
+.colorGray{
+  color: #7d7d7d;
 }
 
 .bColorMainBlue {
