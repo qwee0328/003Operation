@@ -10,6 +10,7 @@
 <body>
 <div class="container-fluid p-0">
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
+	<%@ include file="/WEB-INF/jsp/commons/footer.jsp" %>
 </div>
 </body>
 </html>

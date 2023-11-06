@@ -6,5 +6,12 @@ $(document).ready(function() {
 	$("#xBtns").on("click", function() {
 		$(".tabNav").css("display", "none")
 	})
+
+	window.onresize = function() {
+		const width = window.innerWidth;
+		if (width > 786) {
+			$(".tabNav").css("display", "none");
+		}
+	}
 });
-	
+
