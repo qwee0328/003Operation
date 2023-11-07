@@ -125,12 +125,21 @@
 
 	.tabNav {
 		display: none;
-		position: absolute;
+		position: fixed;
 		right: 0px;
 		top: 0px;
+		width: 100%;
+		height: 100dvh;
+		background-color: #7d7d7d50;
+		z-index: 999;
+	}
+
+	.tabNav__contents {
 		width: 300px;
 		height: 100%;
-		z-index: 999;
+		align-items: end;
+		position: absolute;
+		right: 0;
 	}
 
 	.tabNav-header {
@@ -145,6 +154,7 @@
 		position: absolute;
 		top: 47px;
 		right: 30px;
+		height: 40px;
 	}
 
 	.xBtns>div {
@@ -155,6 +165,7 @@
 
 	.xBtns>div:first-child {
 		rotate: 45deg;
+		position: absolute;
 	}
 
 	.xBtns>div:last-child {
