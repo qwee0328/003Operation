@@ -33,7 +33,7 @@
                 <div class="contentBox">
                     <div class="contentBox__title colorWhite fontEN">CONTACT US</div>
                     <div class="contentBox__con colorWhite fontEN"><i class="fa-solid fa-envelope colorWhite"></i> :
-                        qwee0328@naver.com</div>
+                        0qwee0328@gmail.com</div>
                     <div class="contentBox__con colorWhite fontEN"><i class="fa-brands fa-github colorWhite"></i> :
                         <a href="https://github.com/qwee0328" class="colorWhite fontEN"
                             target="_blank">https://github.com/qwee0328</a>
@@ -62,7 +62,7 @@
                     <div class="contentBox">
                         <div class="contentBox__title colorWhite fontEN">CONTACT US</div>
                         <div class="contentBox__con colorWhite fontEN"><i class="fa-solid fa-envelope colorWhite"></i> :
-                            qwee0328@naver.com</div>
+                            0qwee0328@gmail.com</div>
                         <div class="contentBox__con colorWhite fontEN"><i class="fa-brands fa-github colorWhite"></i> :
                             <a href="https://github.com/qwee0328" class="colorWhite fontEN"
                                 target="_blank">https://github.com/qwee0328</a>

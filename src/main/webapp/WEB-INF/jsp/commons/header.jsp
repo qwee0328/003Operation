@@ -47,8 +47,8 @@
 			</div>
 
 			<div class="header_right">
-				<a href="#"><input type="button" class="blueBtn" value="로그인"></input></a>
-				<a href="#"><input type="button" class="blueBtn" value="회원가입"></input></a>
+				<input type="button" class="blueBtn" value="로그인"></input>
+				<input type="button" class="blueBtn signupBtn" value="회원가입"></input>
 			</div>
 
 			<div class="hamNav" id="hamNav">
@@ -64,8 +64,8 @@
 							<div></div>
 						</div>
 						<div class="memberBtns">
-							<a href="#"><input type="button" class="blueBtn" value="로그인"></input></a>
-							<a href="#"><input type="button" class="blueBtn" value="회원가입"></input></a>
+							<input type="button" class="blueBtn" value="로그인"></input>
+							<input type="button" class="blueBtn signupBtn" value="회원가입"></input>
 						</div>
 					</div>
 					<div class="tabNab_body">

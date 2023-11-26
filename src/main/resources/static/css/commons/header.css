@@ -39,7 +39,7 @@
 	align-items: center;
 }
 
-.header_right>a:last-child>input {
+.header_right>input:last-child {
 	margin-left: 10px;
 }
 
@@ -50,10 +50,7 @@
 	text-align: center;
 	border-radius: 10px;
 	display: none;
-}
-
-.board:hover>ul {
-	display: block;
+	z-index: 999;
 }
 
 .board>ul li {
@@ -176,7 +173,7 @@
 		margin-bottom: 20px;
 	}
 
-	.memberBtns>a:last-child {
+	.memberBtns>input:last-child {
 		margin-left: 10px;
 	}
 

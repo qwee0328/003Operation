@@ -6,8 +6,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+<!-- 공통 css -->
+<link rel="syplesheet" href="/css/commons/common.css"/>
+
+<!-- index js/css -->
+<link rel="stylesheet" href="/css/index.css" />
+<script type="text/javascript" src="/js/index.js"></script>
 </head>
 <body>
 <div class="container-fluid p-0">

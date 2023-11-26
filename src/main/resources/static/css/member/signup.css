@@ -1,0 +1,321 @@
+@charset "UTF-8";
+
+.signup_guide {
+	max-width: 1200px;
+	width: 100%;
+	margin: 150px auto;
+}
+
+.title {
+	font-size: 50px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.stepBox,
+.stepBox__step {
+	display: flex;
+}
+
+.stepBox {
+	margin-top: 70px;
+	border-radius: 100px;
+	background-color: #fee9e8;
+	justify-content: space-between;
+}
+
+.stepBox__step {
+	width: calc((100% - 80px) / 3);
+	padding: 20px;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.step__info {
+	width: 90px;
+	padding: 7px;
+	text-align: center;
+	color: #7d7d7d;
+	border-radius: 100px;
+	background-color: white;
+	margin-right: 15px;
+}
+
+.currentStep>.step__title {
+	font-weight: 700;
+}
+
+.stepBox__arrow {
+	margin: auto 0;
+	width: 30px;
+	text-align: center;
+}
+
+.stepBox__arrow>i {
+	color: #7d7d7d;
+}
+
+.currentStep {
+	border-radius: 100px;
+	background-color: #fb8f8a;
+}
+
+input[type="checkbox"] {
+	zoom: 2;
+	accent-color: #375abb;
+}
+
+.totallyAgree,
+.use__agree,
+.privacy__agree {
+	display: flex;
+	align-items: center;
+	margin: 50px 0 0 30px;
+}
+
+label {
+	margin-left: 20px;
+}
+
+label>span {
+	color: #fb8f8a;
+}
+
+.use__detail,
+.privacy__detail {
+	margin: 20px 30px 0 75px;
+	border: 1px solid #d1d2d8;
+	padding: 20px;
+	background-color: #d1d2d8;
+	height: 400px;
+	overflow-y: auto;
+}
+
+.use__detail::-webkit-scrollbar {
+	width: 20px;
+}
+
+.use__detail::-webkit-scrollbar-thumb {
+	background-color: #7d7d7d;
+	border-radius: 10px;
+	border: 7px solid #d1d2d8;
+	/* 스크롤을 적용할 영역 색깔과 border 색상을 똑같이 맞춘다 */
+}
+
+.use__detail::-webkit-scrollbar-track {
+	background-color: #d1d2d8;
+	/* 스크롤바 뒷 배경을 투명 처리한다 */
+}
+
+.privacy__detail::-webkit-scrollbar {
+	width: 20px;
+}
+
+.privacy__detail::-webkit-scrollbar-thumb {
+	background-color: #7d7d7d;
+	border-radius: 10px;
+	border: 7px solid #d1d2d8;
+	/* 스크롤을 적용할 영역 색깔과 border 색상을 똑같이 맞춘다 */
+}
+
+.privacy__detail::-webkit-scrollbar-track {
+	background-color: #d1d2d8;
+	/* 스크롤바 뒷 배경을 투명 처리한다 */
+}
+
+.article:not(:first-child) {
+	margin-top: 50px;
+}
+
+.article__title {
+	font-weight: 700;
+	margin-bottom: 20px;
+	font-size: 16px;
+}
+
+.article__text {
+	font-size: 13px;
+}
+
+.article__text:not(:first-child) {
+	margin-top: 20px;
+}
+
+.nextBtnBox {
+	text-align: center;
+	margin-top: 100px;
+}
+
+.nextBtn {
+	background-color: #7d7d7d;
+	border-radius: 100px;
+	border: none;
+	padding: 20px 80px;
+	font-size: 18px;
+	font-weight: 600;
+	color: white;
+}
+
+.stepTwoBox,
+.stepThreeBox {
+	display: none;
+}
+
+.basicInfo {
+	margin: 50px 30px;
+}
+
+.basicInfo>div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.basicInfo>div:not(:nth-child(2)) {
+	margin-bottom: 17px;
+}
+
+.basicInfo input {
+	padding: 10px 15px;
+	border: 1px solid #d1d2d8;
+	border-radius: 10px;
+}
+
+.basicInfo__title {
+	width: 150px;
+	color: #7d7d7d;
+	padding-top: 10px;
+}
+
+.essential {
+	color: #fb8f8a;
+}
+
+.basicInfo__inputBox {
+	width: calc(100% - 150px);
+	position: relative;
+}
+
+.basicInfo__inputBox>input {
+	width: 100%;
+}
+
+.basicInfo__check {
+	height: 25px;
+	font-size: 14px;
+	margin-left: 10px;
+}
+
+.pw__info {
+	font-size: 12px;
+	color: #7d7d7d;
+	margin-left: 10px;
+}
+.basicInfo__phone .basicInfo__inputBox div:first-child{
+	display: flex;
+}
+.basicInfo__phone .selectorType {
+	margin-right: 10px;
+}
+
+.basicInfo__phone input {
+	width: calc(100% - 150px);
+}
+
+/* selector box */
+.selectorType {
+	display: flex;
+	justify-content: space-between;
+	width: 150px;
+	padding: 5px 10px;
+	border: 1px solid #7d7d7d40;
+	border-radius: 10px;
+}
+
+.selector__option {
+	display: none;
+	position: absolute;
+	border: 1px solid #7d7d7d40;
+	border-radius: 10px;
+	width: 150px;
+	top: 41px;
+	background-color: white;
+	z-index: 999;
+}
+
+.option__item {
+	padding: 5px 10px;
+}
+
+.option__item:hover {
+	background-color: #dcedd4;
+}
+
+.option__item:first-child:hover {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.option__item:last-child:hover {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+#directInput{
+	display: none;
+	width: 150px;
+	margin-right: 10px;
+}
+
+.ssnBox {
+	display: flex;
+}
+
+.ssnBox__birth,
+.ssnBox__gender {
+	width: calc((100% - 30px) / 2);
+}
+
+.ssnBox__birth>input,
+.ssnBox__gender>input {
+	width: 100%;
+}
+
+.ssnBox__separator {
+	width: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+input[type="checkbox"],
+#stepOneNextBnt:not(:disabled) {
+	cursor: pointer;
+}
+
+@media (max-width: 786px) {
+	.signup_guide {
+		max-width: 700px;
+		margin: 100px auto;
+	}
+
+	.title {
+		font-size: 30px;
+	}
+
+	.stepBox {
+		margin-top: 50px;
+	}
+
+	.stepBox__step {
+		width: calc(100% / 3);
+	}
+
+	.step__info {
+		display: none;
+	}
+
+	.stepBox__arrow {
+		display: none;
+	}
+}

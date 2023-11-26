@@ -9,4 +9,9 @@ import com.operation.dao.MemberDAO;
 public class MemberService {
 	@Autowired
 	private MemberDAO dao;
+	
+	// 아이디 중복 체크
+	public boolean idDuplicationCheck(String id) {
+		return dao.idDuplicationCheck("%"+id+"%");
+	}
 }
