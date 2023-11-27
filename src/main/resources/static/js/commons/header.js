@@ -32,5 +32,10 @@ $(document).ready(function() {
 			$(".tabNav").css("display", "none");
 		}
 	}
+	
+	// 로고 누르면 홈화면으로 이동
+	$(".header_left .logo").on("click",function(){
+		location.href="/";
+	});
 });
 

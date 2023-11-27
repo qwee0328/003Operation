@@ -19,6 +19,10 @@
 	font-weight: 700;
 }
 
+.header_left .logo:hover{
+	cursor: pointer;
+}
+
 .header_left {
 	display: flex;
 }
