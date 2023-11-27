@@ -188,7 +188,7 @@
 			</div>
 		</div>
 	</div>
-	</div>
+	<%@ include file="/WEB-INF/jsp/commons/footer.jsp"%>
 </body>
 
 </html>

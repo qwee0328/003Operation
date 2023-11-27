@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/css/kiosk/kiosk.css">
 </head>
 <body>
+	<%@ include file="/WEB-INF/jsp/commons/header.jsp"%>
 	<div class="container">
         <div class="guide">
             <div class="kiosk__kioskStep">[ 1단계 ]</div>
@@ -24,5 +25,6 @@
             <div class="kiosk__area"></div>
         </div>
     </div>
+    <%@ include file="/WEB-INF/jsp/commons/footer.jsp" %>
 </body>
 </html>

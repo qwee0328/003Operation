@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/css/kiosk/kioskList.css">
 </head>
 <body>
+	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
 	<div class="container">
 		<div class="guide">
 			<div class="kioskCategory__practice">
@@ -26,5 +27,6 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/jsp/commons/footer.jsp" %>
 </body>
 </html>
