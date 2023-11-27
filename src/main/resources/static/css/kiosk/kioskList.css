@@ -80,7 +80,7 @@
 	}
 
 	.kioskList_line {
-		display: block;
+		display: block !important;
 	}
 
 

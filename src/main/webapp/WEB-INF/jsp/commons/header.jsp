@@ -67,7 +67,7 @@
 						</div>
 					</div>
 					<div class="tabNab_body">
-						<div class="ham-practice"><a href="#">키오스크 연습</a></div>
+						<div class="ham-practice"><a href="/practice/listPractice">키오스크 연습</a></div>
 						<div class="ham-game"><a href="#">키오스크 게임</a></div>
 						<div class="ham-board"><a href="#">게시판</a></div>
 						<div class="ham-board-sub"><a href="#">자유게시판</a></div>
