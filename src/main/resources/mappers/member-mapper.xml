@@ -7,13 +7,11 @@
 		select count(*) from member where id like #{id};
 	</select>
 	
+	<select id="chkInfo" resultType="Boolean">
+		select count(*) from member where id = #{id} and pw = #{pw};
+	</select>
 
 	<insert id="signupUser">
 	
 	</insert>
-
-	<select id="login" resultType="Boolean">
-		select count(*) from member where id = #{id} and pw = #{pw};
-	</select>
-
 </mapper>
