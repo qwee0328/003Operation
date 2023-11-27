@@ -18,7 +18,6 @@
 <body>
 <div class="container-fluid p-0">
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
-	<a href="/member/viewMypage">이동</a>
 	<div class="container">
         <div class="banner">
             <div class="banner_guide">

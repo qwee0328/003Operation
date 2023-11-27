@@ -38,10 +38,10 @@
 					<c:choose>
 						<c:when test="${not empty loginID}">
 							<div class="mypage" id="mypage">
-								<a href="#" class="colorWhite">마이페이지&nbsp;<i
+								<a href="/member/viewMypage" class="colorWhite">마이페이지&nbsp;<i
 									class="fa-solid fa-chevron-down colorWhite"></i></a>
 								<ul class="bColorLightBlue" id="mypageMenu">
-									<li><a href="#">내 정보</a></li>
+									<li><a href="/member/viewMypage">내 정보</a></li>
 									<li><a href="#">게임 기록</a></li>
 									<li><a href="#">포인트 적립 내역</a></li>
 									<li><a href="#">내 게시글</a></li>
@@ -100,8 +100,8 @@
 						
 						<c:choose>
 							<c:when test="${not empty loginID}">
-								<div class="ham-mypage"><a href="#">마이페이지</a></div>
-								<div class="ham-mypage-sub"><a href="#">내 정보</a></div>
+								<div class="ham-mypage"><a href="/member/viewMypage">마이페이지</a></div>
+								<div class="ham-mypage-sub"><a href="/member/viewMypage">내 정보</a></div>
 								<div class="ham-mypage-sub"><a href="#">게임 기록</a></div>
 								<div class="ham-mypage-sub"><a href="#">포인트 적립 내역</a></div>
 								<div class="ham-mypage-sub"><a href="#">내 게시글</a></div>
