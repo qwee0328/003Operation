@@ -17,7 +17,7 @@ public class MemberDAO {
 	}
 	
 	// 로그인
-	public boolean login(Map<String, String> param) {
-		return db.selectOne("Member.login",param);
+	public boolean chkInfo(Map<String, String> param) {
+		return db.selectOne("Member.chkInfo",param);
 	}
 }

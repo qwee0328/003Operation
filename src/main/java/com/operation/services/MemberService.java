@@ -19,10 +19,10 @@ public class MemberService {
 	}
 	
 	// 로그인
-	public boolean login(String id, String pw) {
+	public boolean chkInfo(String id, String pw) {
 		Map<String, String> param = new HashMap<>();
 		param.put("id", id);
 		param.put("pw", pw);
-		return dao.login(param);
+		return dao.chkInfo(param);
 	}
 }

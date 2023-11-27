@@ -45,7 +45,7 @@ public class MemberController {
 		// 비번 암호화 
 		// EncryptionUtils.getSHA512(pw);
 		
-		boolean loginResult = mservice.login(id, pw);
+		boolean loginResult = mservice.chkInfo(id, pw);
 		if(loginResult) {
 			session.setAttribute("loginID", id);
 		}
@@ -62,6 +62,22 @@ public class MemberController {
 	public String viewMapage() {
 		// 마이페이지 출력
 		return "mypage/mypageMyInfo";
+	}
+	
+	@RequestMapping("/goChkInfo")
+	public String goChkInfo() {
+		return "mypage/mypageChkInfo";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/chkInfo")
+	public boolean chkInfo(String pw) {
+		return mservice.chkInfo((String) session.getAttribute("loginID"), pw);
+	}
+	
+	@RequestMapping("/goUpdateInfo")
+	public String goUpdateInfo() {
+		return "mypage/mypageUpdateInfo";
 	}
 	
 	@RequestMapping("/updateInfo")
