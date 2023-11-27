@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link rel="stylesheet" href="/css/commons.common.css" />
 <link rel="stylesheet" href="/css/mypage/mypageMain.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -175,9 +176,9 @@
 						<div class="myInfo__menu1 d-flex">
 							<div class="myInfo__setting d-flex">
 								<div class="myInfo__icon">
-									<i class="fa-solid fa-circle-question colorGray"></i>
+									<i class="fa-solid fa-gear colorGray"></i>
 								</div>
-								<div class="myInfo__txt colorGray">Q&A 문의 내역</div>
+								<div class="myInfo__txt colorGray">개인 정보 확인 및 수정</div>
 								<div class="myInfo__move">
 									<i class="fa-solid fa-chevron-right colorGray"></i>
 								</div>

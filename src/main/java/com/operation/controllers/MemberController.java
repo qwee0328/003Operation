@@ -52,10 +52,16 @@ public class MemberController {
 		return loginResult;
 	}
 	
+	@RequestMapping("/goMypage")
+	public String goMapage() {
+		// 마이페이지로 이동
+		return "mypage/mypageMain";
+	}
+	
 	@RequestMapping("/viewMypage")
 	public String viewMapage() {
 		// 마이페이지 출력
-		return "mypage/mypageMain";
+		return "mypage/mypageMyInfo";
 	}
 	
 	@RequestMapping("/updateInfo")
