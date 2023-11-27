@@ -6,4 +6,8 @@
 	<select id="idDuplicationCheck" resultType="Boolean">
 		select count(*) from member where id like #{id};
 	</select>
+	
+	<insert id="signupUser">
+	
+	</insert>
 </mapper>

@@ -25,6 +25,10 @@
   color: black;
 }
 
+input[type="checkbox"] {
+	accent-color: #375abb;
+}
+
 .fontEN {
   font-family: "Roboto", sans-serif;
 }

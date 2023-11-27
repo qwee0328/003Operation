@@ -63,7 +63,6 @@
 
 input[type="checkbox"] {
 	zoom: 2;
-	accent-color: #375abb;
 }
 
 .totallyAgree,
@@ -323,7 +322,7 @@ label>span {
 }
 
 input[type="checkbox"],
-#stepOneNextBnt:not(:disabled) {
+#stepOneNextBnt:not(:disabled),#stepTwoNextBnt:not(:disabled) {
 	cursor: pointer;
 }
 
