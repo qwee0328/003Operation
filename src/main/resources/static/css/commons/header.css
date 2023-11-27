@@ -1,202 +1,227 @@
 @charset "UTF-8";
+
 .header {
-  height: 100px;
-  display: flex;
-  text-align: center;
+	height: 100px;
+	display: flex;
+	text-align: center;
 }
 
 .header_guide {
-  max-width: 1300px;
-  width: 100%;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
+	max-width: 1300px;
+	width: 100%;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
 }
 
 .logo {
-  font-size: 60px;
-  font-weight: 700;
+	font-size: 60px;
+	font-weight: 700;
 }
 
 .header_left {
-  display: flex;
+	display: flex;
 }
 
 .navBar {
-  display: flex;
+	display: flex;
 }
 
-.navBar > div {
-  margin-left: 40px;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
+.navBar>div {
+	margin-left: 40px;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
 }
 
 .header_right {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
-.header_right > a:last-child > input {
-  margin-left: 10px;
+.header_right>input:last-child {
+	margin-left: 10px;
 }
 
-.board > ul {
-  position: absolute;
-  top: 75px;
-  width: 150px;
-  text-align: center;
-  border-radius: 10px;
-  display: none;
+.board>ul {
+	position: absolute;
+	top: 75px;
+	width: 150px;
+	text-align: center;
+	border-radius: 10px;
+	display: none;
+	z-index: 999;
 }
 
-.board:hover > ul {
-  display: block;
+.board>ul li {
+	height: 50px;
+	line-height: 50px;
+	position: relative;
 }
 
-.board > ul li {
-  height: 50px;
-  line-height: 50px;
-  position: relative;
+.board>ul li:before {
+	content: "";
+	position: absolute;
+	left: 10px;
+	width: 130px;
+	height: 1px;
+	background: #7d7d7d50;
 }
 
-.board > ul li:before {
-  content: "";
-  position: absolute;
-  left: 10px;
-  width: 130px;
-  height: 1px;
-  background: #7d7d7d50;
-}
-.board > ul > li:first-child {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+.board>ul>li:first-child {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }
 
-.board > ul > li:last-child {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+.board>ul>li:last-child {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
-.board > ul li:hover {
-  background-color: #1b1f3b;
+.board>ul li:hover {
+	background-color: #1b1f3b;
 }
 
-.board > ul li:hover a {
-  color: white;
+.board>ul li:hover a {
+	color: white;
 }
 
 .hamNav,
 .tabNav {
-  display: none;
+	display: none;
 }
 
 @media (max-width: 786px) {
-  .navBar,
-  .header_right {
-    display: none;
-  }
 
-  .header_guide {
-    justify-content: center;
-  }
+	.navBar,
+	.header_right {
+		display: none;
+	}
 
-  .hamNav {
-    display: block;
-    position: absolute;
-    right: 30px;
-    top: 37px;
-    cursor: pointer;
-  }
-  .hamNav > div {
-    width: 40px;
-    height: 2px;
-    background-color: white;
-  }
-  .hamNav > div:not(:first-child) {
-    margin-top: 10px;
-  }
+	.header_guide {
+		justify-content: center;
+	}
 
-  .tabNav {
-    display: none;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 300px;
-  }
+	.hamNav {
+		display: block;
+		position: absolute;
+		right: 30px;
+		top: 37px;
+		cursor: pointer;
+	}
 
-  .tabNav-header {
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-  }
+	.hamNav>div {
+		width: 40px;
+		height: 2px;
+		background-color: white;
+	}
 
-  .xBtns {
-    cursor: pointer;
-    position: absolute;
-    top: 47px;
-    right: 30px;
-  }
+	.hamNav>div:not(:first-child) {
+		margin-top: 10px;
+	}
 
-  .xBtns > div {
-    width: 38px;
-    height: 2px;
-    background-color: white;
-  }
+	.tabNav {
+		display: none;
+		position: fixed;
+		right: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100dvh;
+		background-color: #7d7d7d50;
+		z-index: 999;
+	}
 
-  .xBtns > div:first-child {
-    rotate: 45deg;
-  }
-  .xBtns > div:last-child {
-    rotate: 135deg;
-  }
-  .memberBtns {
-    margin-bottom: 20px;
-  }
-  .memberBtns > a:last-child {
-    margin-left: 10px;
-  }
+	.tabNav__contents {
+		width: 300px;
+		height: 100%;
+		align-items: end;
+		position: absolute;
+		right: 0;
+	}
 
-  .tabNab_body > div {
-    display: flex;
+	.tabNav-header {
+		height: 200px;
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+	}
 
-    font-size: 25px;
-    font-weight: 700;
-  }
-  .tabNab_body > div > a {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    width: 100%;
-  }
-  .tabNab_body > div:not(.ham-board-sub):before {
-    content: "";
-    position: absolute;
-    left: 10px;
-    width: 280px;
-    height: 1px;
-    background: #7d7d7d50;
-  }
+	.xBtns {
+		cursor: pointer;
+		position: absolute;
+		top: 47px;
+		right: 30px;
+		height: 40px;
+	}
 
-  .tabNab_body > div:not(.ham-board-sub):hover > a {
-    background-color: #1b1f3b;
-    color: white;
-  }
+	.xBtns>div {
+		width: 38px;
+		height: 2px;
+		background-color: white;
+	}
 
-  .ham-board {
-    display: flex;
-    flex-direction: column;
-  }
+	.xBtns>div:first-child {
+		rotate: 45deg;
+		position: absolute;
+	}
 
-  .ham-board-sub > a {
-    font-size: 20px;
-    font-weight: 500;
-  }
+	.xBtns>div:last-child {
+		rotate: 135deg;
+	}
 
-  .ham-board-sub:hover > a {
-    background-color: #1b1f3b;
-    color: white;
-  }
+	.memberBtns {
+		margin-bottom: 20px;
+	}
+
+	.memberBtns>input:last-child {
+		margin-left: 10px;
+	}
+
+	.tabNab_body {
+		background-color: white;
+		height: calc(100% - 200px);
+	}
+
+	.tabNab_body>div {
+		display: flex;
+
+		font-size: 25px;
+		font-weight: 700;
+	}
+
+	.tabNab_body>div>a {
+		display: flex;
+		align-items: center;
+		padding: 10px 20px;
+		width: 100%;
+	}
+
+	.tabNab_body>div:not(.ham-board-sub):before {
+		content: "";
+		position: absolute;
+		left: 10px;
+		width: 280px;
+		height: 1px;
+		background: #7d7d7d50;
+	}
+
+	.tabNab_body>div:not(.ham-board-sub):hover>a {
+		background-color: #1b1f3b;
+		color: white;
+	}
+
+	.ham-board {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.ham-board-sub>a {
+		font-size: 20px;
+		font-weight: 500;
+	}
+
+	.ham-board-sub:hover>a {
+		background-color: #1b1f3b;
+		color: white;
+	}
 }

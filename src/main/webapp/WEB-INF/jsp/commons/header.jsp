@@ -45,8 +45,8 @@
 			</div>
 
 			<div class="header_right">
-				<a href="#"><input type="button" class="blueBtn" value="로그인"></input></a>
-				<a href="#"><input type="button" class="blueBtn" value="회원가입"></input></a>
+				<input type="button" class="blueBtn" value="로그인"></input>
+				<input type="button" class="blueBtn signupBtn" value="회원가입"></input>
 			</div>
 
 			<div class="hamNav" id="hamNav">
@@ -54,39 +54,26 @@
 				<div></div>
 				<div></div>
 			</div>
-
 			<div class="tabNav">
-				<div class="tabNav-header bColorMainBlue">
-					<div class="xBtns" id="xBtns">
-						<div></div>
-						<div></div>
+				<div class="tabNav__contents">
+					<div class="tabNav-header bColorMainBlue">
+						<div class="xBtns" id="xBtns">
+							<div></div>
+							<div></div>
+						</div>
+						<div class="memberBtns">
+							<input type="button" class="blueBtn" value="로그인"></input>
+							<input type="button" class="blueBtn signupBtn" value="회원가입"></input>
+						</div>
 					</div>
-					<div class="memberBtns">
-						<a href="#"><input type="button" class="blueBtn" value="로그인"></input></a>
-						<a href="#"><input type="button" class="blueBtn" value="회원가입"></input></a>
-					</div>
-				</div>
-				<div class="tabNab_body">
-					<div class="ham-practice">
-						<a href="#">키오스크 연습</a>
-					</div>
-					<div class="ham-game">
-						<a href="#">키오스크 게임</a>
-					</div>
-					<div class="ham-board">
-						<a href="#">게시판</a>
-					</div>
-					<div class="ham-board-sub">
-						<a href="#">자유게시판</a>
-					</div>
-					<div class="ham-board-sub">
-						<a href="#">질문게시판</a>
-					</div>
-					<div class="ham-board-sub">
-						<a href="#">자주 묻는 질문</a>
-					</div>
-					<div class="ham-board-sub">
-						<a href="#">Q&A</a>
+					<div class="tabNab_body">
+						<div class="ham-practice"><a href="#">키오스크 연습</a></div>
+						<div class="ham-game"><a href="#">키오스크 게임</a></div>
+						<div class="ham-board"><a href="#">게시판</a></div>
+						<div class="ham-board-sub"><a href="#">자유게시판</a></div>
+						<div class="ham-board-sub"><a href="#">질문게시판</a></div>
+						<div class="ham-board-sub"><a href="#">자주 묻는 질문</a></div>
+						<div class="ham-board-sub"><a href="#">Q&A</a></div>
 					</div>
 				</div>
 			</div>
