@@ -20,7 +20,7 @@
 				<div class="logo fontEN colorWhite">logo</div>
 				<div class="navBar">
 					<div class="practice">
-						<a href="#" class="colorWhite">키오스크 연습</a>
+						<a href="/practice/listPractice" class="colorWhite">키오스크 연습</a>
 					</div>
 					<div class="game">
 						<a href="#" class="colorWhite">키오스크 게임</a>

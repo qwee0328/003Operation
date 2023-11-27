@@ -2,52 +2,55 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap");
 
 * {
-  box-sizing: border-box;
-  font-family: "Noto Sans KR", sans-serif;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  list-style: none;
-  color: black;
+	box-sizing: border-box;
+	font-family: "Noto Sans KR", sans-serif;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	list-style: none;
+	color: black;
 }
 
-.d-flex{
-  display:flex;
-}
-.d-none{
-  display:none;
+.d-flex {
+	display: flex;
 }
 
-.align-center{
-  display:flex; justify-content: center; align-items: center;
+.d-none {
+	display: none;
+}
+
+.align-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .fontEN {
-  font-family: "Roboto", sans-serif;
+	font-family: "Roboto", sans-serif;
 }
 
 .colorWhite {
-  color: white;
+	color: white;
 }
 
-.colorGray{
-  color: #7d7d7d;
+.colorGray {
+	color: #7d7d7d;
 }
 
 .bColorMainBlue {
-  background-color: #375abb;
+	background-color: #375abb;
 }
 
 .bColorLightBlue {
-  background-color: #e1e6f5;
+	background-color: #e1e6f5;
 }
 
 .blueBtn {
-  background-color: #375abb;
-  border: 1px solid white;
-  color: white;
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
+	background-color: #375abb;
+	border: 1px solid white;
+	color: white;
+	border-radius: 10px;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
 }
