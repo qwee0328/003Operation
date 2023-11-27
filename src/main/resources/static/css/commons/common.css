@@ -1,28 +1,28 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap&family=Bagel+Fat+One&display=swap");
-@font-face {
-    font-family: 'PartialSansKR-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/PartialSansKR-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'GoryeongStrawberry';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/GoryeongStrawberry.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
 
 * {
-  box-sizing: border-box;
-  font-family: "Noto Sans KR", sans-serif;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  list-style: none;
-  color: black;
+	box-sizing: border-box;
+	font-family: "Noto Sans KR", sans-serif;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	list-style: none;
+	color: black;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.d-none {
+	display: none;
+}
+
+.align-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 input[type="checkbox"] {
@@ -30,31 +30,35 @@ input[type="checkbox"] {
 }
 
 .fontEN {
-  font-family: "Roboto", sans-serif;
+	font-family: "Roboto", sans-serif;
 }
 
-.fontLogo{
+.fontLogo {
 	font-family: "Bagel Fat One";
 }
 
 .colorWhite {
-  color: white;
+	color: white;
+}
+
+.colorGray {
+	color: #7d7d7d;
 }
 
 .bColorMainBlue {
-  background-color: #375abb;
+	background-color: #375abb;
 }
 
 .bColorLightBlue {
-  background-color: #e1e6f5;
+	background-color: #e1e6f5;
 }
 
 .blueBtn {
-  background-color: #375abb;
-  border: 1px solid white;
-  color: white;
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
+	background-color: #375abb;
+	border: 1px solid white;
+	color: white;
+	border-radius: 10px;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
 }

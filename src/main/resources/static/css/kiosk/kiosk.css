@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+
+.guide {
+	max-width: 1000px;
+	margin: 100px auto 150px auto;
+}
+
+
+.kiosk__kioskName {
+	font-size: 30px;
+	font-weight: bold;
+	margin-bottom: 60px;
+}
+
+.kiosk__progressBar {
+	width: 100%;
+}
+
+.progressBar__name {
+	width: 60px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.kiosk__kioskStep {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.progressBar__bar {
+	width: calc(100% - 120px);
+	margin: 0px 10px 0px 15px;
+	border: 2px solid #D1D2D8;
+	border-radius: 50px;
+	position: relative;
+}
+
+.progressBar__fill {
+	max-width: 100%;
+	height: 100%;
+	border-radius: 50px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #375ABB;
+}
+
+.progressBar__per {
+	width: 60px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: end;
+}
+
+.kiosk__area {
+	width: 100%;
+	height: 600px;
+	background-color: #D1D2D8;
+	margin-top: 30px;
+}
+
+@media (max-width:950px) {
+
+	.guide {
+		max-width: 650px;
+		margin: 100px auto 100px auto;
+	}
+
+}

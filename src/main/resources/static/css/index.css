@@ -104,6 +104,10 @@
 	padding-top: 20px;
 }
 
+.bannerBtn{
+	cursor: pointer;
+}
+
 .title {
 	font-size: 30px;
 	font-weight: 600;

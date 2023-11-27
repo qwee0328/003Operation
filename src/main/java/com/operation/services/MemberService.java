@@ -1,8 +1,12 @@
 package com.operation.services;
 
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,7 @@ public class MemberService {
 		return dao.idDuplicationCheck("%"+id+"%");
 	}
 	
+
 	// 회원가입
 	public boolean signupUser(String id, String pw, String name, String phoneFirst,String phone, String birth, String gender,String nickName) throws Exception {
 		MemberDTO user = new MemberDTO();
@@ -48,5 +53,13 @@ public class MemberService {
 		}
 		
 		return dao.signupUser(user);
+	}
+
+	// 로그인
+	public boolean login(String id, String pw) {
+		Map<String, String> param = new HashMap<>();
+		param.put("id", id);
+		param.put("pw", pw);
+		return dao.login(param);
 	}
 }

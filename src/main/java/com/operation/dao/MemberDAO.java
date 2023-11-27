@@ -1,5 +1,7 @@
 package com.operation.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,7 @@ public class MemberDAO {
 		return db.selectOne("Member.idDuplicationCheck",id);
 	}
 	
+
 	// 회원가입
 	public boolean signupUser(MemberDTO dto) {
 		int result = db.insert("Member.signupUser", dto);
@@ -25,5 +28,10 @@ public class MemberDAO {
 		}else {
 			return false;
 		}
+	}
+
+	// 로그인
+	public boolean login(Map<String, String> param) {
+		return db.selectOne("Member.login",param);
 	}
 }
