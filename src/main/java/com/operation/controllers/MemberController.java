@@ -2,12 +2,15 @@ package com.operation.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.operation.commons.EncryptionUtils;
+import com.operation.dto.MemberDTO;
 import com.operation.services.MemberService;
 
 import jakarta.servlet.http.HttpSession;
@@ -57,7 +60,7 @@ public class MemberController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public boolean login(String id, String pw) {
 		// 비번 암호화 
-		// EncryptionUtils.getSHA512(pw);
+		pw = EncryptionUtils.getSHA512(pw);
 		
 		boolean loginResult = mservice.chkInfo(id, pw);
 		if(loginResult) {
@@ -65,6 +68,19 @@ public class MemberController {
 		}
 		return loginResult;
 	}
+	
+	// 로그아웃
+	@RequestMapping("/logout")
+	public String logout() throws Exception{
+		session.invalidate();
+		return "redirect:/";
+	}
+		
+		
+	
+	
+	
+	// 마이페이지 -------------------------------------
 	
 	// 마이페이지로 이동
 	@RequestMapping("/goMypage")
@@ -75,8 +91,9 @@ public class MemberController {
 	
 	// 마이페이지 내 정보
 	@RequestMapping("/viewMypage")
-	public String viewMapage() {
-		// 마이페이지 출력
+	public String viewMapage(Model model) {
+		MemberDTO dto = mservice.selectInfoById((String)session.getAttribute("loginID"));
+		model.addAttribute("info",dto);
 		return "mypage/mypageMyInfo";
 	}
 	
@@ -90,13 +107,17 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("/chkInfo")
 	public boolean chkInfo(String pw) {
+		pw = EncryptionUtils.getSHA512(pw);
 		return mservice.chkInfo((String) session.getAttribute("loginID"), pw);
 	}
 	
 	// 마이페이지 정보 수정 페이지로 이동
 	@RequestMapping("/goUpdateInfo")
-	public String goUpdateInfo() {
-		return "mypage/mypageUpdateInfo";
+	public String goUpdateInfo(Model model) {
+		MemberDTO dto = mservice.selectInfoById((String)session.getAttribute("loginID"));
+		model.addAttribute("info",dto);
+		model.addAttribute("isUpdate",true);
+		return "mypage/mypageMyInfo";
 	}
 
 	// 마이페이지 정보 수정
@@ -105,12 +126,7 @@ public class MemberController {
 		// 마이페이지 수정
 	}
 
-	// 로그아웃
-	@RequestMapping("/logout")
-	public String logout() throws Exception{
-		session.invalidate();
-		return "redirect:/";
-	}
+	
 
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

@@ -14,4 +14,8 @@
 	<insert id="signupUser">
 	
 	</insert>
+	
+	<select id="selectInfoById" resultType="com.operation.dto.MemberDTO">
+		select * from member where id = #{id};
+	</select>
 </mapper>
