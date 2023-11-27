@@ -15,7 +15,7 @@
  <div class="footer bColorMainBlue">
         <div class="footer_guide">
             <div class="footer_logo">
-                <div class="logo fontEN colorWhite">logo</div>
+                <div class="logo fontLogo colorWhite">003</div>
                 <div class="copy fontEN colorWhite">COPYRIGHT © 003작전. ALL RIGHT RESERVED</div>
             </div>
             <div class="footer_contents">

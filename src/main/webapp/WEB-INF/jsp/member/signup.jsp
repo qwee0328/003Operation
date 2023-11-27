@@ -48,65 +48,65 @@
 				<div class="terms">
 					<div class="terms__use">
 						<div class="use__agree">
-							<input type="checkbox" id="chk_use"> <label for="chk_use">logo
+							<input type="checkbox" id="chk_use"> <label for="chk_use"><span class="fontLogo signupLogo">003</span>
 								이용약관<span>(필수)</span>
 							</label>
 						</div>
 						<div class="use__detail">
 							<div class="article">
 								<div class="article__title">여러분을 환영합니다.</div>
-								<div class="article__text">logo 서비스를 이용해 주셔서 감사합니다. 본 약관은
-									다양한 logo 서비스의 이용과 관련하여 logo 서비스를 제공하는 003작전팀과 이를 이용하는 logo 서비스
-									회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 logo 서비스 이용에 도움이 될 수 있는
+								<div class="article__text"><span class="fontLogo signupLogo">003</span> 서비스를 이용해 주셔서 감사합니다. 본 약관은
+									다양한 <span class="fontLogo signupLogo">003</span> 서비스의 이용과 관련하여 <span class="fontLogo signupLogo">003</span> 서비스를 제공하는 003작전팀과 이를 이용하는 <span class="fontLogo signupLogo">003</span> 서비스
+									회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 <span class="fontLogo signupLogo">003</span> 서비스 이용에 도움이 될 수 있는
 									유익한 정보를 포함하고 있습니다.</div>
-								<div class="article__text">logo 서비스를 이용하시거나 logo 서비스 회원으로
+								<div class="article__text"><span class="fontLogo signupLogo">003</span> 서비스를 이용하시거나 <span class="fontLogo signupLogo">003</span> 서비스 회원으로
 									가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게
 									살펴봐 주시기 바랍니다.</div>
 							</div>
 							<div class="article">
-								<div class="article__title">다양한 logo 서비스를 즐겨보세요.</div>
-								<div class="article__text">logo는 키오스크 환경 연습, 키오스크 환경 게임,
+								<div class="article__title">다양한 <span class="fontLogo signupLogo">003</span> 서비스를 즐겨보세요.</div>
+								<div class="article__text"><span class="fontLogo signupLogo">003</span>은 키오스크 환경 연습, 키오스크 환경 게임,
 									다른 이용자와의 커뮤니케이션 등 여러분의 키오스크 이용에 편리함을 더할 수 있는 다양한 서비스를 제공하고
-									있습니다. 여러분은 PC, 휴대폰 등 인터넷 이용이 가능한 각종 단말기를 통해 각양각색의 logo 서비스를
+									있습니다. 여러분은 PC, 휴대폰 등 인터넷 이용이 가능한 각종 단말기를 통해 각양각색의 <span class="fontLogo signupLogo">003</span> 서비스를
 									자유롭게 이용하실 수 있으며, 개발 환경 상 PC를 이용하는 것을 추천드립니다. 개별 서비스들의 구체적인 내용은
 									공지사항, QNA, 웹 챗봇 등에서 쉽게 확인하실 수 있습니다.</div>
 							</div>
 							<div class="article">
-								<div class="article__title">회원으로 가입하시면 logo 서비스를 보다 편리하게
+								<div class="article__title">회원으로 가입하시면 <span class="fontLogo signupLogo">003</span> 서비스를 보다 편리하게
 									이용할 수 있습니다.</div>
 								<div class="article__text">여러분은 본 약관을 읽고 동의하신 후 회원 가입을
-									신청하실 수 있으며, logo는 이에 대한 승낙을 통해 회원 가입 절차를 완료하고 여러분께 logo 서비스 이용
-									계정(이하 ‘계정’)을 부여합니다. 계정이란 회원이 logo 서비스에 로그인한 이후 이용하는 각종 서비스 이용
+									신청하실 수 있으며, <span class="fontLogo signupLogo">003</span>은 이에 대한 승낙을 통해 회원 가입 절차를 완료하고 여러분께 <span class="fontLogo signupLogo">003</span> 서비스 이용
+									계정(이하 ‘계정’)을 부여합니다. 계정이란 회원이 <span class="fontLogo signupLogo">003</span> 서비스에 로그인한 이후 이용하는 각종 서비스 이용
 									이력을 회원 별로 관리하기 위해 설정한 회원 식별 단위를 말합니다. 회원은 자신의 계정을 통해 좀더 다양한
-									logo 서비스를 보다 편리하게 이용할 수 있습니다.</div>
+									<span class="fontLogo signupLogo">003</span> 서비스를 보다 편리하게 이용할 수 있습니다.</div>
 							</div>
 							<div class="article">
 								<div class="article__title">여러분이 제공한 콘텐츠를 소중히 다룰 것입니다.</div>
-								<div class="article__text">logo는 여러분이 게재한 게시물이 logo 서비스를
+								<div class="article__text"><span class="fontLogo signupLogo">003</span>은 여러분이 게재한 게시물이 <span class="fontLogo signupLogo">003</span> 서비스를
 									통해 다른 이용자들에게 전달되어 우리 모두의 삶을 더욱 풍요롭게 해줄 것을 기대합니다. 게시물은 여러분이 타인
-									또는 자신이 보게 할 목적으로 logo 서비스 상에 게재한 부호, 문자, 음성, 음향, 그림, 사진, 동영상,
+									또는 자신이 보게 할 목적으로 <span class="fontLogo signupLogo">003</span> 서비스 상에 게재한 부호, 문자, 음성, 음향, 그림, 사진, 동영상,
 									링크 등으로 구성된 각종 콘텐츠 자체 또는 파일을 말합니다.</div>
-								<div class="article__text">logo는 여러분의 생각과 감정이 표현된 콘텐츠를 소중히
+								<div class="article__text"><span class="fontLogo signupLogo">003</span>은 여러분의 생각과 감정이 표현된 콘텐츠를 소중히
 									보호할 것을 약속 드립니다. 여러분이 제작하여 게재한 게시물에 대한 지식재산권 등의 권리는 당연히 여러분에게
 									있습니다.</div>
-								<div class="article__text">여러분은 logo 서비스 내에 콘텐츠 삭제, 비공개 등의
+								<div class="article__text">여러분은 <span class="fontLogo signupLogo">003</span> 서비스 내에 콘텐츠 삭제, 비공개 등의
 									관리기능이 제공되는 경우 이를 통해 직접 타인의 이용 또는 접근을 통제할 수 있고, 고객센터를 통해서도 콘텐츠의
-									삭제, 비공개, 검색결과 제외 등의 조치를 요청할 수 있습니다. 다만, 일부 logo 서비스의 경우 삭제, 비공개
+									삭제, 비공개, 검색결과 제외 등의 조치를 요청할 수 있습니다. 다만, 일부 <span class="fontLogo signupLogo">003</span> 서비스의 경우 삭제, 비공개
 									등의 처리가 어려울 수 있으며, 이러한 내용은 각 서비스 상의 안내, 공지사항, 고객센터 도움말 등에서 확인해
 									주시길 부탁 드립니다.</div>
 							</div>
 							<div class="article">
 								<div class="article__title">여러분의 개인정보를 소중히 보호합니다.</div>
-								<div class="article__text">logo는 서비스의 원활한 제공을 위하여 회원이 동의한
+								<div class="article__text"><span class="fontLogo signupLogo">003</span>은 서비스의 원활한 제공을 위하여 회원이 동의한
 									목적과 범위 내에서만 개인정보를 수집∙이용하며, 개인정보 보호 관련 법령에 따라 안전하게 관리합니다.</div>
 							</div>
 							<div class="article">
-								<div class="article__title">logo 서비스 이용과 관련하여 몇 가지 주의사항이
+								<div class="article__title"><span class="fontLogo signupLogo">003</span> 서비스 이용과 관련하여 몇 가지 주의사항이
 									있습니다.</div>
-								<div class="article__text">logo는 여러분이 logo 서비스를 자유롭고 편리하게
-									이용할 수 있도록 최선을 다하고 있습니다. 다만, 여러분이 logo 서비스를 보다 안전하게 이용하고 logo
+								<div class="article__text"><span class="fontLogo signupLogo">003</span>은 여러분이 <span class="fontLogo signupLogo">003</span> 서비스를 자유롭고 편리하게
+									이용할 수 있도록 최선을 다하고 있습니다. 다만, 여러분이 <span class="fontLogo signupLogo">003</span> 서비스를 보다 안전하게 이용하고 <span class="fontLogo signupLogo">003</span>
 									서비스에서 여러분과 타인의 권리가 서로 존중되고 보호받으려면 여러분의 도움과 협조가 필요합니다. 여러분의 안전한
-									서비스 이용과 권리 보호를 위해 부득이 아래와 같은 경우 여러분의 게시물 게재나 logo 서비스 이용이 제한될 수
+									서비스 이용과 권리 보호를 위해 부득이 아래와 같은 경우 여러분의 게시물 게재나 <span class="fontLogo signupLogo">003</span> 서비스 이용이 제한될 수
 									있으므로, 이에 대한 확인 및 준수를 요청 드립니다.</div>
 								<div class="article__text">회원 가입 시 이름, 생년월일, 휴대전화번호 등의 정보를
 									허위로 기재해서는 안 됩니다. 회원 계정에 등록된 정보는 항상 정확한 최신 정보가 유지될 수 있도록 관리해
@@ -129,15 +129,15 @@
 							<div class="article">
 								<div class="article__title">부득이 서비스 이용을 제한할 경우 합리적인 절차를
 									준수합니다.</div>
-								<div class="article__text">logo는 다양한 정보와 의견이 담긴 여러분의 콘텐츠를
+								<div class="article__text"><span class="fontLogo signupLogo">003</span>은 다양한 정보와 의견이 담긴 여러분의 콘텐츠를
 									소중히 다룰 것을 약속 드립니다만, 여러분이 게재한 게시물이 관련 법령, 본 약관, 게시물 운영정책, 각 개별
 									서비스에서의 약관, 운영정책 등에 위배되는 경우, 부득이 이를 비공개 또는 삭제 처리하거나 게재를 거부할 수
-									있습니다. 다만, 이것이 logo가 모든 콘텐츠를 검토할 의무가 있다는 것을 의미하지는 않습니다.</div>
+									있습니다. 다만, 이것이 <span class="fontLogo signupLogo">003</span>이 모든 콘텐츠를 검토할 의무가 있다는 것을 의미하지는 않습니다.</div>
 								<div class="article__text">또한 여러분이 관련 법령, 본 약관, 계정 및 게시물
-									운영정책, 각 개별 서비스에서의 약관, 운영정책 등을 준수하지 않을 경우, logo는 여러분의 관련 행위 내용을
-									확인할 수 있으며, 그 확인 결과에 따라 logo 서비스 이용에 대한 주의를 당부하거나, logo 서비스 이용을
+									운영정책, 각 개별 서비스에서의 약관, 운영정책 등을 준수하지 않을 경우, <span class="fontLogo signupLogo">003</span>은 여러분의 관련 행위 내용을
+									확인할 수 있으며, 그 확인 결과에 따라 <span class="fontLogo signupLogo">003</span> 서비스 이용에 대한 주의를 당부하거나, <span class="fontLogo signupLogo">003</span> 서비스 이용을
 									일부 또는 전부, 일시 또는 영구히 정지시키는 등 그 이용을 제한할 수 있습니다. 한편, 이러한 이용 제한에도
-									불구하고 더 이상 logo 서비스 이용계약의 온전한 유지를 기대하기 어려운 경우엔 부득이 여러분과의 이용계약을
+									불구하고 더 이상 <span class="fontLogo signupLogo">003</span> 서비스 이용계약의 온전한 유지를 기대하기 어려운 경우엔 부득이 여러분과의 이용계약을
 									해지할 수 있습니다.</div>
 								<div class="article__text">부득이 여러분의 서비스 이용을 제한해야 할 경우 명백한
 									법령 위반이나 타인의 권리침해로서 긴급한 위험 또는 피해 차단이 요구되는 사안 외에는 위와 같은 단계적 서비스
@@ -146,25 +146,25 @@
 									주시기 바랍니다.</div>
 							</div>
 							<div class="article">
-								<div class="article__title">언제든지 logo 서비스 이용계약을 해지하실 수
+								<div class="article__title">언제든지 <span class="fontLogo signupLogo">003</span> 서비스 이용계약을 해지하실 수
 									있습니다.</div>
-								<div class="article__text">logo에게는 참 안타까운 일입니다만, 회원은 언제든지
-									logo 서비스 이용계약 해지를 신청하여 회원에서 탈퇴할 수 있으며, 이 경우 logo는 관련 법령 등이 정하는
+								<div class="article__text"><span class="fontLogo signupLogo">003</span>에게는 참 안타까운 일입니다만, 회원은 언제든지
+									<span class="fontLogo signupLogo">003</span> 서비스 이용계약 해지를 신청하여 회원에서 탈퇴할 수 있으며, 이 경우 <span class="fontLogo signupLogo">003</span>은 관련 법령 등이 정하는
 									바에 따라 이를 지체 없이 처리하겠습니다.</div>
 								<div class="article__text">또한 여러분이 관련 법령, 본 약관, 계정 및 게시물
-									운영정책, 각 개별 서비스에서의 약관, 운영정책 등을 준수하지 않을 경우, logo는 여러분의 관련 행위 내용을
-									확인할 수 있으며, 그 확인 결과에 따라 logo 서비스 이용에 대한 주의를 당부하거나, logo 서비스 이용을
+									운영정책, 각 개별 서비스에서의 약관, 운영정책 등을 준수하지 않을 경우, <span class="fontLogo signupLogo">003</span>은 여러분의 관련 행위 내용을
+									확인할 수 있으며, 그 확인 결과에 따라 <span class="fontLogo signupLogo">003</span> 서비스 이용에 대한 주의를 당부하거나, <span class="fontLogo signupLogo">003</span> 서비스 이용을
 									일부 또는 전부, 일시 또는 영구히 정지시키는 등 그 이용을 제한할 수 있습니다. 한편, 이러한 이용 제한에도
-									불구하고 더 이상 logo 서비스 이용계약의 온전한 유지를 기대하기 어려운 경우엔 부득이 여러분과의 이용계약을
+									불구하고 더 이상 <span class="fontLogo signupLogo">003</span> 서비스 이용계약의 온전한 유지를 기대하기 어려운 경우엔 부득이 여러분과의 이용계약을
 									해지할 수 있습니다.</div>
-								<div class="article__text">logo 서비스 이용계약이 해지되면, 관련 법령 및
-									개인정보처리방침에 따라 logo가 해당 회원의 정보를 보유할 수 있는 경우를 제외하고, 해당 회원 계정에 부속된
+								<div class="article__text"><span class="fontLogo signupLogo">003</span> 서비스 이용계약이 해지되면, 관련 법령 및
+									개인정보처리방침에 따라 <span class="fontLogo signupLogo">003</span>이 해당 회원의 정보를 보유할 수 있는 경우를 제외하고, 해당 회원 계정에 부속된
 									게시물 일체를 포함한 회원의 모든 데이터는 소멸됨과 동시에 복구할 수 없게 됩니다.</div>
 							</div>
 							<div class="article">
 								<div class="article__text">
 									공지 일자: 2023년 11월 12일<br> 적용 일자: 2018년 11월 12일<br>
-									logo 서비스와 관련하여 궁금하신 사항이 있으시면 고객센터(대표 메일: 0qwee0328@gamil.com/
+									<span class="fontLogo signupLogo">003</span> 서비스와 관련하여 궁금하신 사항이 있으시면 고객센터(대표 메일: 0qwee0328@gamil.com/
 									평일 09:00~18:00)로 문의 주시기 바랍니다.
 								</div>
 							</div>
@@ -177,17 +177,17 @@
 						</div>
 						<div class="privacy__detail">
 							<div class="article">
-								<div class="article__text">개인정보보호법에 따라 logo에 회원가입 신청하시는 분께
+								<div class="article__text">개인정보보호법에 따라 <span class="fontLogo signupLogo">003</span>에 회원가입 신청하시는 분께
 									수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부
 									시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.</div>
 							</div>
 							<div class="article">
 								<div class="article__title">1. 수집하는 개인정보</div>
-								<div class="article__text">이용자는 회원가입을 하지 않아도 게임 이용 등 logo
+								<div class="article__text">이용자는 회원가입을 하지 않아도 게임 이용 등 <span class="fontLogo signupLogo">003</span>
 									서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 게임 이용, 게시판 글 작성 등과 같이 개인화 혹은 회원제
-									서비스를 이용하기 위해 회원가입을 할 경우, logo는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
+									서비스를 이용하기 위해 회원가입을 할 경우, <span class="fontLogo signupLogo">003</span>은 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
 								</div>
-								<div class="article__text">회원가입 시점에 logo가 이용자로부터 수집하는
+								<div class="article__text">회원가입 시점에 <span class="fontLogo signupLogo">003</span>이 이용자로부터 수집하는
 									개인정보는 아래와 같습니다.</div>
 								<div class="article__text">- 회원 가입 시 필수항목으로 아이디, 비밀번호, 이름,
 									생년월일, 성별, 휴대전화번호, 본인확인 이메일주소를 수집합니다. 서비스 이용 과정에서 IP 주소, 쿠키, 서비스
@@ -200,12 +200,12 @@
 							</div>
 							<div class="article">
 								<div class="article__title">2. 수집한 개인정보의 이용</div>
-								<div class="article__text">logo 및 logo 관련 제반 서비스(모바일 웹/앱
+								<div class="article__text"><span class="fontLogo signupLogo">003</span> 및 <span class="fontLogo signupLogo">003</span> 관련 제반 서비스(모바일 웹/앱
 									포함)의 회원관리, 서비스 개발・제공 및 향상, 안전한 인터넷 이용환경 구축 등 아래의 목적으로만 개인정보를
 									이용합니다.</div>
 								<div class="article__text">- 회원 가입 의사의 확인, 이용자 식별, 회원탈퇴
 									의사의 확인 등 회원관리를 위하여 개인정보를 이용합니다.</div>
-								<div class="article__text">- 법령 및 logo 이용약관을 위반하는 회원에 대한
+								<div class="article__text">- 법령 및 <span class="fontLogo signupLogo">003</span> 이용약관을 위반하는 회원에 대한
 									이용 제한 조치, 부정 이용 행위를 포함하여 서비스의 원활한 운영에 지장을 주는 행위에 대한 방지 및 제재,
 									계정도용 및 부정거래 방지, 약관 개정 등의 고지사항 전달, 분쟁조정을 위한 기록 보존, 민원처리 등 이용자 보호
 									및 서비스 운영을 위하여 개인정보를 이용합니다.</div>
@@ -271,7 +271,7 @@
 							비밀번호<span class="essential">*</span>
 						</div>
 						<div class="basicInfo__inputBox">
-							<input type="text">
+							<input type="password" id="pwInput">
 							<div class="pw__info">8~30자의 영문 대소문자, 숫자 및 특수문자를 사용하세요.</div>
 							<div class="basicInfo__check" id="pw_check"></div>
 						</div>
@@ -282,7 +282,7 @@
 							비밀번호 확인<span class="essential">*</span>
 						</div>
 						<div class="basicInfo__inputBox">
-							<input type="text">
+							<input type="password" id="pwCheckInput">
 							<div class="basicInfo__check" id="pwCheck_check"></div>
 						</div>
 
@@ -292,7 +292,7 @@
 							이름<span class="essential">*</span>
 						</div>
 						<div class="basicInfo__inputBox">
-							<input type="text">
+							<input type="text" id="nameInput">
 							<div class="basicInfo__check" id="name_check"></div>
 						</div>
 
@@ -319,7 +319,7 @@
 									<div class="option__item" value="directInput">직접입력</div>
 								</div>
 								<input type="text" maxlength="3" id="directInput"> <input
-									type="text">
+									type="text" id="phoneInput">
 							</div>
 
 							<div class="basicInfo__check" id="phone_check"></div>
@@ -333,11 +333,12 @@
 						<div class="basicInfo__inputBox">
 							<div class="ssnBox">
 								<div class="ssnBox__birth">
-									<input type="text">
+									<input type="text" id="birthInput">
 								</div>
 								<div class="ssnBox__separator">-</div>
 								<div class="ssnBox__gender">
 									<input type="password" id="backId" maxlength="1" required>
+									<div class="circles"><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i><i class="fa-solid fa-circle"></i></div>
 								</div>
 							</div>
 							<div class="basicInfo__check" id="ssn_check"></div>
@@ -346,7 +347,7 @@
 					</div>
 					<div class="basicInfo__nickName">
 						<div class="basicInfo__title">
-							닉네임<span class="essential">*</span>
+							닉네임
 						</div>
 						<div class="basicInfo__inputBox">
 							<input type="text">

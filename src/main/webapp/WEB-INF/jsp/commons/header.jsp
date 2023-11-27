@@ -19,7 +19,7 @@
 	<div class="header bColorMainBlue">
 		<div class="header_guide">
 			<div class="header_left">
-				<div class="logo fontEN colorWhite">logo</div>
+				<div class="logo fontLogo colorWhite">003</div>
 				<div class="navBar">
 					<div class="practice">
 						<a href="#" class="colorWhite">키오스크 연습</a>
