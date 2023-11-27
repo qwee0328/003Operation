@@ -14,13 +14,13 @@ public class PracticeController {
 	private PracticeService pservice;
 	
 	@RequestMapping("/listPractice")
-	public void listPractice() {
-		// 연습 목록 출력
+	public String listPractice() {
+		return "kiosk/kioskList";
 	}
 	
 	@RequestMapping("/viewPractice")
-	public void viewPractice() {
-		// 연습 화면 출력
+	public String viewPractice() {
+		return "kiosk/kiosk";
 	}
 	
 	@ExceptionHandler(Exception.class)
