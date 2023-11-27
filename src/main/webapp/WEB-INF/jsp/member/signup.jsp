@@ -350,7 +350,7 @@
 							닉네임
 						</div>
 						<div class="basicInfo__inputBox">
-							<input type="text">
+							<input type="text" id="nickNameInput">
 							<div class="basicInfo__check" id="nickName_check"></div>
 						</div>
 
@@ -359,7 +359,7 @@
 
 
 				<div class="nextBtnBox">
-					<button class="nextBtn" id="stepOneNextBnt" disabled>다음</button>
+					<button class="nextBtn" id="stepTwoNextBnt" disabled>다음</button>
 				</div>
 			</div>
 			<div class="stepThreeBox"></div>

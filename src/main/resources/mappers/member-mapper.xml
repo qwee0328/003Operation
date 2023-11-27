@@ -10,4 +10,8 @@
 	<select id="chkInfo" resultType="Boolean">
 		select count(*) from member where id = #{id} and pw = #{pw};
 	</select>
+
+	<insert id="signupUser">
+	
+	</insert>
 </mapper>

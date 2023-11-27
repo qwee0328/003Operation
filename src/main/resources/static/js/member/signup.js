@@ -1,3 +1,12 @@
+// 회원가입 정보 체크 변수
+let idValidation = false;
+let pwValidation = false;
+let pwCheckValidation = false;
+let nameValidation = false;
+let phoneValidation = false;
+let birthValidation = false;
+let genderValidation = false;
+let signupValidation = false;
 $(document).ready(function() {
 	// step 1
 	// 전체 동의 눌렀을 때
@@ -68,6 +77,13 @@ $(document).ready(function() {
 					$(this).parent().parent().find(".selectorType").css("display", "none");
 					$("#directInput").css("display", "inline-block");
 				}
+
+				if ($(this).parent().parent().find(".typeName").html() !== "선택해주세요." && $(this).parent().parent().find(".typeName").html() !== "직접입력") {
+					phoneValidation = true;
+					checkStepTwoVariables();
+				} else {
+					phoneValidation = false;
+				}
 			});
 			showSelector = true;
 		} else {
@@ -115,21 +131,22 @@ $(document).ready(function() {
 	});
 
 	// 아이디 input 입력 시 중복 확인
+
 	$("#idInput").on("keyup", function() {
+		console.log(idValidation)
 		if ($(this).val() === "") {
 			$("#id_check").html("");
 			$("#id_check").css("color", "black");
 		} else {
-			console.log("머라도 있음")
 			$.ajax({
 				url: "/member/idDuplicationCheck",
 				type: "POST",
 				data: { id: $(this).val() }
 			}).done(function(resp) {
-				console.log(resp);
 				if (resp === "true") {
 					$("#id_check").html("사용 불가능한 아이디 입니다.");
 					$("#id_check").css("color", "#fb8f8a");
+					idValidation = false;
 				} else { // 중복되는 아이디가 없다면 유효성 검사 확인
 					let regexId = /^[\w]{8,14}$/; // 8~14자로 구성, 알파벳 대소문자, 숫자, _로만 구성
 					let resultId = regexId.test($("#idInput").val());
@@ -137,14 +154,18 @@ $(document).ready(function() {
 						if ($("#idInput").val() === "") {
 							$("#id_check").html("");
 							$("#id_check").css("color", "black");
+							idValidation = false;
 						} else {
 							$("#id_check").html("아이디 형식이 맞지 않습니다. (영어 대소문자, 숫자, _로 구성된 8~14자)");
 							$("#id_check").css("color", "#fb8f8a");
+							idValidation = false;
 						}
 
 					} else {
 						$("#id_check").html("사용 가능한 아이디 입니다.");
 						$("#id_check").css("color", "forestgreen");
+						idValidation = true;
+						checkStepTwoVariables();
 					}
 				}
 			});
@@ -160,12 +181,14 @@ $(document).ready(function() {
 			$("#pw_check").css("color", "black");
 			$("#pwCheck_check").html("");
 			$("#pwCheck_check").css("color", "black");
+			pwValidation = false;
 		} else {
 			let regexPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,30}$/;
 			let resultPw = regexPw.test($("#pwInput").val());
 			if (!resultPw) {
 				$("#pw_check").html("비밀번호 형식이 올바르지 않습니다.");
 				$("#pw_check").css("color", "#FB8F8A");
+				pwValidation = false;
 				if ($("#pwCheckInput").val() !== "") {
 					$("#pwCheck_check").html("");
 					$("#pwCheck_check").css("color", "black");
@@ -176,13 +199,18 @@ $(document).ready(function() {
 				console.log($("#pwCheckInput").val())
 				console.log($("#pwCheckInput").val() !== "")
 				startPwCheck = true;
+				pwValidation = true;
+				checkStepTwoVariables();
 				if ($("#pwInput").val() === $("#pwCheckInput").val()) {
 					$("#pwCheck_check").html("비밀번호가 일치합니다.");
 					$("#pwCheck_check").css("color", "forestgreen");
+					pwCheckValidation = true;
+					checkStepTwoVariables();
 				} else {
 					if ($("#pwCheckInput").val() !== "") {
 						$("#pwCheck_check").html("비밀번호가 일치하지 않습니다.");
 						$("#pwCheck_check").css("color", "#FB8F8A");
+						pwCheckValidation = false;
 					}
 				}
 			}
@@ -197,17 +225,22 @@ $(document).ready(function() {
 				if ($("#pwInput").val() === $("#pwCheckInput").val()) {
 					$("#pwCheck_check").html("비밀번호가 일치합니다.");
 					$("#pwCheck_check").css("color", "forestgreen");
+					pwCheckValidation = true;
+					checkStepTwoVariables();
 				} else {
 					$("#pwCheck_check").html("비밀번호가 일치하지 않습니다.");
 					$("#pwCheck_check").css("color", "#FB8F8A");
+					pwCheckValidation = false;
 				}
 			} else {
 				$("#pwCheck_check").html("");
 				$("#pwCheck_check").css("color", "black");
+				pwCheckValidation = false;
 			}
 		} else {
 			$("#pwCheck_check").html("비밀번호를 입력해주세요");
 			$("#pwCheck_check").css("color", "#FB8F8A");
+			pwCheckValidation = false;
 		}
 	});
 
@@ -218,56 +251,120 @@ $(document).ready(function() {
 		if (!resultName) {
 			$("#name_check").html("이름 형식이 올바르지 않습니다. 한글 2~5글자로 입력해주세요.");
 			$("#name_check").css("color", "#FB8F8A");
+			nameValidation = false;
 		} else {
 			$("#name_check").html("");
+			nameValidation = true;
+			checkStepTwoVariables();
 		}
 	});
-	
+
 	// 전화번호 형식
-	$("#phoneInput").on("keyup",function(){
-		let regexPhone = /^(-?[0-9]{4}){2}$/;
+	$("#phoneInput").on("keyup", function() {
+		let regexPhone = /^([0-9]{4}){2}$/;
 		let resultPhone = regexPhone.test($("#phoneInput").val());
-		if(!resultPhone){
-			$("#phone_check").html("전화번호 형식이 올바르지 않습니다.");
+		if (!resultPhone) {
+			$("#phone_check").html("전화번호 형식이 올바르지 않습니다. 숫자만 입력해주세요.");
 			$("#phone_check").css("color", "#FB8F8A");
-		}else{
+			phoneValidation = false;
+		} else {
 			$("#phone_check").html("");
+			if ($(this).parent().parent().find(".typeName").html() !== "선택해주세요." && $(this).parent().parent().find(".typeName").html() !== "직접입력" && resultPhone) {
+				phoneValidation = true;
+			} else {
+				phoneValidation = false;
+			}
+
+			checkStepTwoVariables();
 		}
 	});
-	
+
+
+
 	// 전화번호 앞자리 선택사항
-	$("#directInput").on("keyup",function(){
-		let regexPhone = /^(-?[0-9]{3})$/;
+	$("#directInput").on("keyup", function() {
+		let regexPhone = /^([0-9]{3})$/;
 		let resultPhone = regexPhone.test($("#directInput").val());
-		if(!resultPhone){
+		if (!resultPhone) {
 			$("#phone_check").html("전화번호 형식이 올바르지 않습니다.");
 			$("#phone_check").css("color", "#FB8F8A");
-		}else{
+			phoneValidation = false;
+		} else {
 			$("#phone_check").html("");
+			phoneValidation = true;
+			checkStepTwoVariables();
 		}
 	});
-	
+
 	// 주민번호 생일 형식
-	$("#birthInput").on("keyup",function(){
-		let regexBirth = /^(-?[0-9]{6})$/;
+	$("#birthInput").on("keyup", function() {
+		let regexBirth = /^([0-9]{6})$/;
 		let resultBirth = regexBirth.test($("#birthInput").val());
-		if(!resultBirth){
+		if (!resultBirth) {
 			$("#ssn_check").html("생년월일 형식이 올바르지 않습니다.");
 			$("#ssn_check").css("color", "#FB8F8A");
-		}else{
+			birthValidation = false;
+		} else {
 			$("#ssn_check").html("");
+			birthValidation = true;
+			checkStepTwoVariables();
 		}
 	});
-	
-	// 주민번호 생일 형식
-	$("#backId").on("keyup",function(){
-		let regexGender = /^(-?[1-4]{1})$/;
+
+	// 주민번호 성별 형식
+	$("#backId").on("keyup", function() {
+		let regexGender = /^([1-4]{1})$/;
 		let resultGender = regexGender.test($("#backId").val());
-		if(!resultGender){
+		if (!resultGender) {
 			$("#ssn_check").html("주민번호 앞자리 형식이 올바르지 않습니다.");
 			$("#ssn_check").css("color", "#FB8F8A");
-		}else{
+			genderValidation = false;
+		} else {
 			$("#ssn_check").html("");
+			genderValidation = true;
+			checkStepTwoVariables();
 		}
 	});
+
+	// step 2 다음 버튼 눌렀을 때
+	$('#stepTwoNextBnt').on("click", function() {
+		/*if (signupValidation) {
+			$('.stepOneBox').hide();
+			$('.stepTwoBox').hide();
+		} else {
+			$('.stepOneBox').hide();
+			$('.stepTwoBox').show();
+		}*/
+		let phoneFirst = "";
+		if ($(".basicInfo__phone .typeName").html() !== "직접입력") {
+			phoneFirst = $(".basicInfo__phone .typeName").html();
+		} else {
+			phoneFirst = $("#directInput").val();
+		}
+
+		$.ajax({
+			url: "/member/signupUser",
+			dataType: "json",
+			type: "POST",
+			data: { id: $("#idInput").val(), pw: $("#pwInput").val(), name: $("#nameInput").val(), phoneFirst: phoneFirst, phone: $("#phoneInput").val(), birth: $("#birthInput").val(), gender: $("#backId").val(), nickName: $("#nickNameInput").val() },
+		}).done(function(resp) {
+			console.log(resp)
+		})
+	});
+
 });
+
+// 변수 값 변경을 감지하는 함수
+function checkStepTwoVariables() {
+	if (idValidation && pwValidation && pwCheckValidation && nameValidation && phoneValidation && birthValidation && genderValidation) {
+		$("#stepTwoNextBnt").prop("disabled", false);
+		$('#stepTwoNextBnt').css('backgroundColor', '#FB8F8A');
+		signupValidation = true;
+
+	} else {
+		$("#stepOneNextBnt").prop("disabled", true);
+		$('#stepTwoNextBnt').css('backgroundColor', '#7D7D7D');
+		signupValidation = false;
+	}
+}
+
