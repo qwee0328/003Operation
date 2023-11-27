@@ -47,7 +47,7 @@
 	margin-left: 10px;
 }
 
-.board>ul {
+.board>ul, .mypage>ul{
 	position: absolute;
 	top: 75px;
 	width: 150px;
@@ -57,13 +57,13 @@
 	z-index: 999;
 }
 
-.board>ul li {
+.board>ul li, .mypage>ul li{
 	height: 50px;
 	line-height: 50px;
 	position: relative;
 }
 
-.board>ul li:before {
+.board>ul li:before, .mypage>ul li:before {
 	content: "";
 	position: absolute;
 	left: 10px;
@@ -72,21 +72,21 @@
 	background: #7d7d7d50;
 }
 
-.board>ul>li:first-child {
+.board>ul>li:first-child, .mypage>ul>li:first-child {
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
 
-.board>ul>li:last-child {
+.board>ul>li:last-child, .mypage>ul>li:last-child {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
 
-.board>ul li:hover {
+.board>ul li:hover, .mypage>ul li:hover {
 	background-color: #1b1f3b;
 }
 
-.board>ul li:hover a {
+.board>ul li:hover a, .mypage>ul li:hover a{
 	color: white;
 }
 
@@ -200,7 +200,8 @@
 		width: 100%;
 	}
 
-	.tabNab_body>div:not(.ham-board-sub):before {
+	.tabNab_body>div:not(.ham-board-sub):before,
+	.tabNab_body>div:not(.ham-mypage-sub):before {
 		content: "";
 		position: absolute;
 		left: 10px;
@@ -209,22 +210,23 @@
 		background: #7d7d7d50;
 	}
 
-	.tabNab_body>div:not(.ham-board-sub):hover>a {
+	.tabNab_body>div:not(.ham-board-sub):hover>a,
+	.tabNab_body>div:not(.ham-mypage-sub):hover>a {
 		background-color: #1b1f3b;
 		color: white;
 	}
 
-	.ham-board {
+	.ham-board, .ham-mypage {
 		display: flex;
 		flex-direction: column;
 	}
 
-	.ham-board-sub>a {
+	.ham-board-sub>a, .ham-mypage-sub>a {
 		font-size: 20px;
 		font-weight: 500;
 	}
 
-	.ham-board-sub:hover>a {
+	.ham-board-sub:hover>a, .ham-mypage-sub:hover>a {
 		background-color: #1b1f3b;
 		color: white;
 	}

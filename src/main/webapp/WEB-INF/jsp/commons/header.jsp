@@ -29,24 +29,40 @@
 						<a href="#" class="colorWhite">게시판&nbsp;<i
 							class="fa-solid fa-chevron-down colorWhite"></i></a>
 						<ul class="bColorLightBlue" id="boradMenu">
-
 							<li><a href="#">자유게시판</a></li>
 							<li><a href="#">질문게시판</a></li>
-
-
 							<li><a href="#">자주 묻는 질문</a></li>
-
-
 							<li><a href="#">Q&A</a></li>
-
 						</ul>
 					</div>
+					<c:choose>
+						<c:when test="${not empty loginID}">
+							<div class="mypage" id="mypage">
+								<a href="#" class="colorWhite">마이페이지&nbsp;<i
+									class="fa-solid fa-chevron-down colorWhite"></i></a>
+								<ul class="bColorLightBlue" id="mypageMenu">
+									<li><a href="#">내 정보</a></li>
+									<li><a href="#">게임 기록</a></li>
+									<li><a href="#">포인트 적립 내역</a></li>
+									<li><a href="#">내 게시글</a></li>
+								</ul>
+							</div>
+						</c:when>
+					</c:choose>
+					
 				</div>
 			</div>
 
 			<div class="header_right">
-				<input type="button" class="blueBtn" value="로그인"></input>
-				<input type="button" class="blueBtn signupBtn" value="회원가입"></input>
+				<c:choose>
+					<c:when test="${empty loginID}">
+						<input type="button" class="blueBtn loginBtn" value="로그인"></input>
+						<input type="button" class="blueBtn signupBtn" value="회원가입"></input>
+					</c:when>
+					<c:otherwise>
+						<input type="button" class="blueBtn logoutBtn" value="로그아웃"></input>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 			<div class="hamNav" id="hamNav">
@@ -62,8 +78,15 @@
 							<div></div>
 						</div>
 						<div class="memberBtns">
-							<input type="button" class="blueBtn" value="로그인"></input>
-							<input type="button" class="blueBtn signupBtn" value="회원가입"></input>
+							<c:choose>
+								<c:when test="${empty loginID}">
+									<input type="button" class="blueBtn loginBtn" value="로그인"></input>
+									<input type="button" class="blueBtn signupBtn" value="회원가입"></input>
+								</c:when>
+								<c:otherwise>
+									<input type="button" class="blueBtn logoutBtn" value="로그아웃"></input>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<div class="tabNab_body">
@@ -74,6 +97,18 @@
 						<div class="ham-board-sub"><a href="#">질문게시판</a></div>
 						<div class="ham-board-sub"><a href="#">자주 묻는 질문</a></div>
 						<div class="ham-board-sub"><a href="#">Q&A</a></div>
+						
+						<c:choose>
+							<c:when test="${not empty loginID}">
+								<div class="ham-mypage"><a href="#">마이페이지</a></div>
+								<div class="ham-mypage-sub"><a href="#">내 정보</a></div>
+								<div class="ham-mypage-sub"><a href="#">게임 기록</a></div>
+								<div class="ham-mypage-sub"><a href="#">포인트 적립 내역</a></div>
+								<div class="ham-mypage-sub"><a href="#">내 게시글</a></div>
+							</c:when>
+						</c:choose>	
+						
+
 					</div>
 				</div>
 			</div>

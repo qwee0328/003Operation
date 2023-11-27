@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,9 +34,22 @@ public class MemberController {
 		return mservice.idDuplicationCheck(id);
 	}
 	
-	@RequestMapping("/login")
-	public void login() {
-		// 로그인
+	@RequestMapping("/goLogin")
+	public String goLogin() {
+		return "member/login";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public boolean login(String id, String pw) {
+		// 비번 암호화 
+		// EncryptionUtils.getSHA512(pw);
+		
+		boolean loginResult = mservice.login(id, pw);
+		if(loginResult) {
+			session.setAttribute("loginID", id);
+		}
+		return loginResult;
 	}
 	
 	@RequestMapping("/viewMypage")
@@ -50,8 +64,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/logout")
-	public void logout() throws Exception{
-		// 로그아웃
+	public String logout() throws Exception{
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 	@ExceptionHandler(Exception.class)
