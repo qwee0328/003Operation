@@ -116,9 +116,7 @@ $(document).ready(function() {
 
 	// 아이디 input 입력 시 중복 확인
 	$("#idInput").on("keyup", function() {
-		console.log($(this).val())
 		if ($(this).val() === "") {
-			console.log("비어있음")
 			$("#id_check").html("");
 			$("#id_check").css("color", "black");
 		} else {
@@ -136,7 +134,7 @@ $(document).ready(function() {
 					let regexId = /^[\w]{8,14}$/; // 8~14자로 구성, 알파벳 대소문자, 숫자, _로만 구성
 					let resultId = regexId.test($("#idInput").val());
 					if (!resultId) {
-						if ($($("#idInput").val()).val() === "") {
+						if ($("#idInput").val() === "") {
 							$("#id_check").html("");
 							$("#id_check").css("color", "black");
 						} else {
@@ -152,5 +150,124 @@ $(document).ready(function() {
 			});
 		}
 
-	})
+	});
+
+	// 비밀번호 정규식 확인
+	let startPwCheck = false;
+	$("#pwInput").on("keyup", function() {
+		if ($(this).val() === "") {
+			$("#pw_check").html("");
+			$("#pw_check").css("color", "black");
+			$("#pwCheck_check").html("");
+			$("#pwCheck_check").css("color", "black");
+		} else {
+			let regexPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,30}$/;
+			let resultPw = regexPw.test($("#pwInput").val());
+			if (!resultPw) {
+				$("#pw_check").html("비밀번호 형식이 올바르지 않습니다.");
+				$("#pw_check").css("color", "#FB8F8A");
+				if ($("#pwCheckInput").val() !== "") {
+					$("#pwCheck_check").html("");
+					$("#pwCheck_check").css("color", "black");
+				}
+			} else {
+				$("#pw_check").html("올바른 비밀번호 형식 입니다.");
+				$("#pw_check").css("color", "forestgreen");
+				console.log($("#pwCheckInput").val())
+				console.log($("#pwCheckInput").val() !== "")
+				startPwCheck = true;
+				if ($("#pwInput").val() === $("#pwCheckInput").val()) {
+					$("#pwCheck_check").html("비밀번호가 일치합니다.");
+					$("#pwCheck_check").css("color", "forestgreen");
+				} else {
+					if ($("#pwCheckInput").val() !== "") {
+						$("#pwCheck_check").html("비밀번호가 일치하지 않습니다.");
+						$("#pwCheck_check").css("color", "#FB8F8A");
+					}
+				}
+			}
+		}
+	});
+
+	// 비밀번호 확인
+	$("#pwCheckInput").on("keyup", function() {
+		console.log("durl")
+		if (startPwCheck) {
+			if ($("#pwCheckInput").val() !== "") {
+				if ($("#pwInput").val() === $("#pwCheckInput").val()) {
+					$("#pwCheck_check").html("비밀번호가 일치합니다.");
+					$("#pwCheck_check").css("color", "forestgreen");
+				} else {
+					$("#pwCheck_check").html("비밀번호가 일치하지 않습니다.");
+					$("#pwCheck_check").css("color", "#FB8F8A");
+				}
+			} else {
+				$("#pwCheck_check").html("");
+				$("#pwCheck_check").css("color", "black");
+			}
+		} else {
+			$("#pwCheck_check").html("비밀번호를 입력해주세요");
+			$("#pwCheck_check").css("color", "#FB8F8A");
+		}
+	});
+
+	// 이름 한글 2~5글자로 구성
+	$("#nameInput").on("keyup", function() {
+		let regexName = /^[가-힣]{2,5}$/;
+		let resultName = regexName.test($("#nameInput").val());
+		if (!resultName) {
+			$("#name_check").html("이름 형식이 올바르지 않습니다. 한글 2~5글자로 입력해주세요.");
+			$("#name_check").css("color", "#FB8F8A");
+		} else {
+			$("#name_check").html("");
+		}
+	});
+	
+	// 전화번호 형식
+	$("#phoneInput").on("keyup",function(){
+		let regexPhone = /^(-?[0-9]{4}){2}$/;
+		let resultPhone = regexPhone.test($("#phoneInput").val());
+		if(!resultPhone){
+			$("#phone_check").html("전화번호 형식이 올바르지 않습니다.");
+			$("#phone_check").css("color", "#FB8F8A");
+		}else{
+			$("#phone_check").html("");
+		}
+	});
+	
+	// 전화번호 앞자리 선택사항
+	$("#directInput").on("keyup",function(){
+		let regexPhone = /^(-?[0-9]{3})$/;
+		let resultPhone = regexPhone.test($("#directInput").val());
+		if(!resultPhone){
+			$("#phone_check").html("전화번호 형식이 올바르지 않습니다.");
+			$("#phone_check").css("color", "#FB8F8A");
+		}else{
+			$("#phone_check").html("");
+		}
+	});
+	
+	// 주민번호 생일 형식
+	$("#birthInput").on("keyup",function(){
+		let regexBirth = /^(-?[0-9]{6})$/;
+		let resultBirth = regexBirth.test($("#birthInput").val());
+		if(!resultBirth){
+			$("#ssn_check").html("생년월일 형식이 올바르지 않습니다.");
+			$("#ssn_check").css("color", "#FB8F8A");
+		}else{
+			$("#ssn_check").html("");
+		}
+	});
+	
+	// 주민번호 생일 형식
+	$("#backId").on("keyup",function(){
+		let regexGender = /^(-?[1-4]{1})$/;
+		let resultGender = regexGender.test($("#backId").val());
+		if(!resultGender){
+			$("#ssn_check").html("주민번호 앞자리 형식이 올바르지 않습니다.");
+			$("#ssn_check").css("color", "#FB8F8A");
+		}else{
+			$("#ssn_check").html("");
+		}
+	});
 });
