@@ -50,21 +50,18 @@
 
 @media (max-width: 1000px) {
 	.profile,.profile__mini {display: none;}
-	.profile__md { display: flex; width: 750px; height: 230px; margin-bottom: 30px;}
+	.profile__md { display: flex; min-width: 100%; height: 230px; margin-bottom: 30px;}
 	.profile__cover {margin: auto;}
 	.profile__nickname {margin: 10px 0px;}
 }
 
 @media (max-width: 786px) {
 	.container {margin: 100px auto 100px auto;}
-	.mypageMenu__cover {display: flex;}
-	.profile, .profile__md {display: none;}
-	.profile__mini { display: flex; margin-right: 20px; height: 280px;}
-	.profile__cover {margin: auto;}
-	.profile__nickname{ margin-top: 20px; margin-bottom: 50px;}
+	.profile__md { display: flex; min-width: 100%; height: 230px; margin-bottom: 30px;}
 	.mypageMenu__top {display: block;}
-	.mypageMenu__topLeft { width: 500px; margin-bottom: 30px; margin-right: 0px;}
-	.mypageMenu__topRight {width: 500px;}
+	.mypageMenu__topLeft { min-width: 100%; margin-bottom: 30px; margin-right: 0px;}
+	.mypageMenu__topRight { min-width: 100%;}
+	.mypageMenu__bottom{min-width: 100%;}
 	.mypageMenu__bottom>div>div[class*="title"] { margin: auto; width: 70%; padding: 0px;}
 	.mypageMenu__bottom>div>div[class*="menu"]>div {display: block;}
 	.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div {margin: 25px auto;width: 70%;}
