@@ -4,18 +4,55 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
 	<select id="idDuplicationCheck" resultType="Boolean">
-		select count(*) from member where id like #{id};
+		select count(*) from
+		member where id like #{id};
 	</select>
-	
+
+	<select id="emailDuplicationCheck" resultType="Boolean">
+		select count(*)
+		from member where email = #{email};
+	</select>
+
+	<select id="recommenderDuplicationCheck" resultType="Boolean">
+		select
+		count(*) from member where id = #{id};
+	</select>
+
 	<select id="chkInfo" resultType="Boolean">
-		select count(*) from member where id = #{id} and pw = #{pw};
+		select count(*) from member
+		where id = #{id} and pw = #{pw};
 	</select>
 
 	<insert id="signupUser">
-	
+		insert into member (id, pw, name, nickname, phone
+		<if test="email!=null">
+			, email
+		</if>
+		,birthday, gender, profile_image
+		<if test="recommender_id!=null">
+			, recommender_id
+		</if>
+		) values
+		(#{id}, #{pw}, #{name},
+		<if test="nickname != null and nickname != ''">
+			#{nickname}
+		</if>
+		<if test="nickname == null or nickname == ''">
+			#{id}
+		</if>
+		,#{phone}
+		<if test="email!=null">
+			, #{email}
+		</if>
+		,#{birthday},#{gender},null
+		<if test="recommender_id!=null">
+			, #{recommender_id}
+		</if>
+		);
 	</insert>
-	
-	<select id="selectInfoById" resultType="com.operation.dto.MemberDTO">
+
+	<select id="selectInfoById"
+		resultType="com.operation.dto.MemberDTO">
 		select * from member where id = #{id};
 	</select>
 </mapper>

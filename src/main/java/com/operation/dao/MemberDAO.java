@@ -12,31 +12,40 @@ import com.operation.dto.MemberDTO;
 public class MemberDAO {
 	@Autowired
 	private SqlSession db;
-	
+
 	// 아이디 중복 체크
 	public boolean idDuplicationCheck(String id) {
-		return db.selectOne("Member.idDuplicationCheck",id);
+		return db.selectOne("Member.idDuplicationCheck", id);
+	}
+
+	// 이메일 중복 체크
+	public boolean emailDuplicationCheck(String email) {
+		return db.selectOne("Member.emailDuplicationCheck", email);
 	}
 	
+	// 추천인 존재 체크
+	public boolean recommenderDuplicationCheck(String id) {
+		return db.selectOne("Member.recommenderDuplicationCheck", id);
+	}
 
 	// 회원가입
 	public boolean signupUser(MemberDTO dto) {
 		int result = db.insert("Member.signupUser", dto);
-		System.out.println("result : "+result);
-		if(result>0) {
+		System.out.println("result : " + result);
+		if (result > 0) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 
 	// 로그인
 	public boolean chkInfo(Map<String, String> param) {
-		return db.selectOne("Member.chkInfo",param);
+		return db.selectOne("Member.chkInfo", param);
 	}
-	
+
 	// 내 정보 보기
 	public MemberDTO selectInfoById(String id) {
-		return db.selectOne("Member.selectInfoById",id);
+		return db.selectOne("Member.selectInfoById", id);
 	}
 }

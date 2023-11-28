@@ -165,7 +165,8 @@ label>span {
 	display: none;
 }
 
-.basicInfo {
+.basicInfo,
+.additionalInfo {
 	margin: 50px 30px;
 }
 
@@ -178,13 +179,15 @@ label>span {
 	margin-bottom: 17px;
 }
 
-.basicInfo input {
+.basicInfo input,
+.additionalInfo input {
 	padding: 10px 15px;
 	border: 1px solid #d1d2d8;
 	border-radius: 10px;
 }
 
-.basicInfo__title {
+.basicInfo__title,
+.additional__title {
 	width: 150px;
 	color: #7d7d7d;
 	padding-top: 10px;
@@ -194,16 +197,19 @@ label>span {
 	color: #fb8f8a;
 }
 
-.basicInfo__inputBox {
+.basicInfo__inputBox,
+.additional__inputBox {
 	width: calc(100% - 150px);
 	position: relative;
 }
 
-.basicInfo__inputBox>input {
+.basicInfo__inputBox>input,
+.additional__inputBox>input {
 	width: 100%;
 }
 
-.basicInfo__check {
+.basicInfo__check,
+.additional__check {
 	height: 25px;
 	font-size: 14px;
 	margin-left: 10px;
@@ -322,10 +328,22 @@ label>span {
 }
 
 input[type="checkbox"],
-#stepOneNextBnt:not(:disabled),#stepTwoNextBnt:not(:disabled) {
+#stepOneNextBnt:not(:disabled),
+#stepTwoNextBnt:not(:disabled) {
 	cursor: pointer;
 }
 
+.additionalInfo .title {
+	font-size: 25px;
+	font-weight: 700;
+	margin-bottom: 30px;
+}
+
+.additionalInfo>div {
+	margin-bottom: 17px;
+	display: flex;
+	justify-content: space-between;
+}
 
 @media (max-width: 786px) {
 	.signup_guide {

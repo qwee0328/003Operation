@@ -356,7 +356,27 @@
 
 					</div>
 				</div>
-
+				<div class="additionalInfo">
+					<div class="title">추가 정보</div>
+					<div class="additional__email">
+						<div class="additional__title">
+							이메일
+						</div>
+						<div class="additional__inputBox">
+							<input type="text" id="emailInput">
+							<div class="additional__check" id="email_check"></div>
+						</div>
+					</div>
+					<div class="additional__recommender">
+						<div class="additional__title">
+							추천인 아이디
+						</div>
+						<div class="additional__inputBox">
+							<input type="text" id="recommenderInput">
+							<div class="additional__check" id="recommender_check"></div>
+						</div>
+					</div>
+				</div>
 
 				<div class="nextBtnBox">
 					<button class="nextBtn" id="stepTwoNextBnt" disabled>다음</button>
