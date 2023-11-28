@@ -22,7 +22,12 @@ public class MemberDAO {
 	public boolean emailDuplicationCheck(String email) {
 		return db.selectOne("Member.emailDuplicationCheck", email);
 	}
-	
+
+	// 전화번호 중복 체크
+	public boolean phoneDuplicationCheck(String phone) {
+		return db.selectOne("Member.phoneDuplicationCheck",phone);
+	}
+
 	// 추천인 존재 체크
 	public boolean recommenderDuplicationCheck(String id) {
 		return db.selectOne("Member.recommenderDuplicationCheck", id);

@@ -441,21 +441,30 @@ $(document).ready(function() {
 
 	// step 2 다음 버튼 눌렀을 때
 	$('#stepTwoNextBnt').on("click", function() {
-		/*if (signupValidation) {
+		if (signupValidation) {
 			$('.stepOneBox').hide();
 			$('.stepTwoBox').hide();
+			$('.stepThreeBox').show();
+			// step3
+			$.ajax({
+				url: "/member/selectUserName",
+				dataType: "json",
+				type: "POST",
+				data: { id: $("#idInput").val() }
+			}).done(function(resp){
+				console.log(resp)
+			});
 		} else {
 			$('.stepOneBox').hide();
 			$('.stepTwoBox').show();
-		}*/
+			$('.stepThreeBox').hide();
+		}
 		let phoneFirst = "";
 		if ($(".basicInfo__phone .typeName").html() !== "직접입력") {
 			phoneFirst = $(".basicInfo__phone .typeName").html();
 		} else {
 			phoneFirst = $("#directInput").val();
 		}
-
-
 
 		$.ajax({
 			url: "/member/signupUser",
@@ -467,28 +476,19 @@ $(document).ready(function() {
 		})
 	});
 
+
+
+
 });
 
 // 변수 값 변경을 감지하는 함수
 function checkStepTwoVariables() {
-	console.log(idValidation)
-	console.log(pwValidation)
-	console.log(pwCheckValidation)
-	console.log(nameValidation)
-	console.log(phoneValidation)
-	console.log(birthValidation)
-	console.log(genderValidation)
-	console.log(emailValidation)
-	console.log(recommenderValidation)
-	console.log(idValidation && pwValidation && pwCheckValidation && nameValidation && phoneValidation && birthValidation && genderValidation && emailValidation && recommenderValidation)
 	if (idValidation && pwValidation && pwCheckValidation && nameValidation && phoneValidation && birthValidation && genderValidation && emailValidation && recommenderValidation) {
-		console.log("회원가입가능여부1:"+signupValidation)
 		$("#stepTwoNextBnt").prop("disabled", false);
 		$('#stepTwoNextBnt').css('backgroundColor', '#FB8F8A');
 		signupValidation = true;
 
 	} else {
-		console.log("회원가입가능여부2:"+signupValidation)
 		$("#stepOneNextBnt").prop("disabled", true);
 		$('#stepTwoNextBnt').css('backgroundColor', '#7D7D7D');
 		signupValidation = false;

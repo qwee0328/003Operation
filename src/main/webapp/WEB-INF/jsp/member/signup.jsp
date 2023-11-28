@@ -382,7 +382,47 @@
 					<button class="nextBtn" id="stepTwoNextBnt" disabled>다음</button>
 				</div>
 			</div>
-			<div class="stepThreeBox"></div>
+			<div class="stepThreeBox">
+				<div class="stepBox">
+                    <div class="stepBox__step ">
+                        <div class="step__title">약관동의</div>
+                    </div>
+                    <div class="stepBox__arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <div class="stepBox__step">
+                        <div class="step__title">정보입력</div>
+                    </div>
+                    <div class="stepBox__arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <div class="stepBox__step currentStep">
+                        <div class="step__info">STEP 03</div>
+                        <div class="step__title">가입완료</div>
+                    </div>
+                </div>
+                <div class="userWelcome">
+                    <div>
+                        <div class="backCircle">
+                            <div class="mainCircle">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="userWelcome__title">회원가입 완료</div>
+                    <div class="userWelcome__conf">
+                        홍길동님(아이디)의 회원가입이 성공적으로 완료되었습니다.
+                    </div>
+                    <div class="userWelcome__info">
+                        입력한 회원 정보는 마이페이지에서 확인 및 수정이 가능합니다.
+                    </div>
+                </div>
+                <div class="btns">
+                    <button class="nextBtn">홈으로</button>
+                    <button class="pinkBtn">로그인</button>
+                </div>
+			</div>
 		</div>
 		<%@ include file="/WEB-INF/jsp/commons/footer.jsp"%>
 	</div>

@@ -66,29 +66,9 @@ public class MemberService {
 		}else {
 			user.setGender("여");
 		}
-		
-	/*	if(nickName.equals("")) {
-			System.out.println("비어있음");
-			user.setNickname(nickName);
-		}else {
-			System.out.println("비어있지않음");
-			user.setNickname(user.getId());
-		}
-		
-		if(email.equals("")) {
-			user.setEmail(email);
-		}else {
-			user.setEmail(null);;
-		}
-		System.out.println(recommender);
-		if(recommender.equals("")) {
-			user.setRecommender_id(recommender);
-		}else {
-			user.setRecommender_id(null);
-		}
-		System.out.println(user.getRecommender_id());*/
 		return dao.signupUser(user);
 	}
+	
 
 	// 로그인
 	public boolean chkInfo(String id, String pw) {

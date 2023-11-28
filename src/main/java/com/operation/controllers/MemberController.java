@@ -1,5 +1,7 @@
 package com.operation.controllers;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,6 +62,13 @@ public class MemberController {
 			@RequestParam("gender") String gender, @RequestParam("nickName") String nickName,
 			@RequestParam("email") String email, @RequestParam("recommender") String recommender) throws Exception {
 		return mservice.signupUser(id, pw, name, phoneFirst, phone, birth, gender, nickName, email, recommender);
+	}
+	
+	// 회원가입한 이름 불러오기
+	@ResponseBody
+	@RequestMapping("/selectUserName")
+	public MemberDTO selectUserName(@RequestParam("id") String id){
+		return mservice.selectInfoById(id);
 	}
 
 	// 로그인 창으로 이동
