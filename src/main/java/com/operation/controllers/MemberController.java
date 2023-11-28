@@ -45,6 +45,13 @@ public class MemberController {
 	public boolean emailDuplicationCheck(@RequestParam("email") String email) {
 		return mservice.emailDuplicationCheck(email);
 	}
+	
+	// 전화번호 중복 체크
+	@ResponseBody
+	@RequestMapping("/phoneDuplicationCheck")
+	public boolean phoneDuplicationCheck(@RequestParam("phone") String phone) {
+		return mservice.phoneDuplicationCheck(phone);
+	}
 
 	// 추천인 존재 체크
 	@ResponseBody
