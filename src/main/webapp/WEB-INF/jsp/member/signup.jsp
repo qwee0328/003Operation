@@ -419,8 +419,8 @@
                     </div>
                 </div>
                 <div class="btns">
-                    <button class="nextBtn">홈으로</button>
-                    <button class="pinkBtn">로그인</button>
+                    <button class="nextBtn" id="goHome">홈으로</button>
+                    <button class="pinkBtn" id="goLogin">로그인</button>
                 </div>
 			</div>
 		</div>

@@ -27,8 +27,12 @@ public class MemberService {
 	
 	// 이메일 중복 체크
 	public boolean emailDuplicationCheck(String email) {
-		String cleanedEmail = email.replaceAll("\\s", "");
-		return dao.emailDuplicationCheck(cleanedEmail);
+		return dao.emailDuplicationCheck(email);
+	}
+	
+	// 전화번호 중복 체크
+	public boolean phoneDuplicationCheck(String phone) {
+		return dao.phoneDuplicationCheck(phone);
 	}
 	
 	// 추천인 존재 체크

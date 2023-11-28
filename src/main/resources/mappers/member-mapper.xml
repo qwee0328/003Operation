@@ -12,6 +12,11 @@
 		select count(*)
 		from member where email = #{email};
 	</select>
+	
+	<select id="phoneDuplicationCheck" resultType="Boolean">
+		select count(*)
+		from member where phone = #{phone};
+	</select>
 
 	<select id="recommenderDuplicationCheck" resultType="Boolean">
 		select

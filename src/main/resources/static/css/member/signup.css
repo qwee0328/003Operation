@@ -408,6 +408,9 @@ input[type="checkbox"],
   justify-content: center;
   margin-top: 100px;
 }
+.btns button{
+	cursor: pointer;
+}
 .btns button:first-child {
   margin-right: 50px;
 }
