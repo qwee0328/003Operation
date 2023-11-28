@@ -1,6 +1,7 @@
 package com.operation.dto;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class MemberDTO {
 	private String id;
@@ -143,5 +144,23 @@ public class MemberDTO {
 
 	public void setRecommender_id(String recommender_id) {
 		this.recommender_id = recommender_id;
+	}
+
+
+	public String getFormedGender() {
+		if(this.gender.equals("여"))
+			return "여성";
+		else
+			return "남성";
+	}
+	
+	public String getFormedBirthday() {
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년 MM월 dd일생");
+		return sdf.format(this.birthday);
+	}
+	
+	public String getFormedSignup_date() {
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년 MM월 dd일 HH:mm");
+		return sdf.format(this.signup_date);
 	}
 }

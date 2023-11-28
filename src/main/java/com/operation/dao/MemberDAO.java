@@ -34,4 +34,9 @@ public class MemberDAO {
 	public boolean chkInfo(Map<String, String> param) {
 		return db.selectOne("Member.chkInfo",param);
 	}
+	
+	// 내 정보 보기
+	public MemberDTO selectInfoById(String id) {
+		return db.selectOne("Member.selectInfoById",id);
+	}
 }

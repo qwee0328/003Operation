@@ -62,4 +62,9 @@ public class MemberService {
 		param.put("pw", pw);
 		return dao.chkInfo(param);
 	}
+	
+	// 내 정보 보기
+	public MemberDTO selectInfoById(String id) {
+		return dao.selectInfoById(id);
+	}
 }

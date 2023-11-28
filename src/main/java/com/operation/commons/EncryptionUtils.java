@@ -1,6 +1,5 @@
 package com.operation.commons;
 
-import java.math.BigInteger;
 import java.security.MessageDigest;
 
 public class EncryptionUtils {

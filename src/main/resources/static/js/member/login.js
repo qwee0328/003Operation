@@ -38,6 +38,8 @@ $(document).ready(function(){
 		}).done(function(loginResult){
 			if(loginResult){
 				location.href="/";
+			}else{
+				alert("아이디나 비밀번호를 다시 확인해주세요.");
 			}
 		});
 	}
