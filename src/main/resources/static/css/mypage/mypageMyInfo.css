@@ -14,6 +14,8 @@
 .footerBtn__modify:hover{cursor: pointer;}
 .body__info{margin: auto; margin-bottom: 70px; }
 .info__nickname{width:calc(100% - 110px);}
+.info__explain{height: 23.1px;}
+button:disabled{opacity: 0.2; cursor: default;}
 
 @media (max-width: 786px) {
     .body__infoCover{display: flex; justify-content: center; margin-bottom: 30px;}

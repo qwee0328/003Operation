@@ -67,4 +67,9 @@ public class MemberService {
 	public MemberDTO selectInfoById(String id) {
 		return dao.selectInfoById(id);
 	}
+	
+	// 닉네임 중복 확인
+	public boolean chkNickname(String nickname) {
+		return dao.chkNickname(nickname);
+	}
 }

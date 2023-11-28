@@ -125,6 +125,13 @@ public class MemberController {
 	public void updateInfo() {
 		// 마이페이지 수정
 	}
+	
+	// 닉네임 중복 확인
+	@ResponseBody
+	@RequestMapping("/chkNickname")
+	public boolean chkNickname(String nickname) {
+		return mservice.chkNickname(nickname);
+	}
 
 	
 
