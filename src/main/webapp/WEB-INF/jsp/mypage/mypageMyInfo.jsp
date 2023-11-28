@@ -45,7 +45,7 @@
 	                            <c:choose>
 									<c:when test="${not empty isUpdate}">
 											<input type="text" value="${info.nickname}" class="info__inputNick">
-			                           	    <div><button class="info__modifyBtn">수정</button></div>
+			                           	    <div><button class="info__modifyBtn" disabled>수정</button></div>
 		                           		</div>
 		                           	     <div class="info__explain info__dupResult">&nbsp;</div>
 									</c:when>
@@ -89,10 +89,10 @@
                                 <div class="info__content d-flex">
                                 <c:choose>
 									<c:when test="${not empty isUpdate}">
-		                                    <input type="text" value="${info.phone}" class="info__input">
-		                                    <div><button class="info__modifyBtn">수정</button></div>
+		                                    <input type="text" value="${info.phone}" class="info__input info__phone">
+		                                    <div><button class="info__modifyBtn" disabled>수정</button></div>
 		                                </div>
-		                                <div class="info__explain info__compareResult">&nbsp;</div>
+		                                <div class="info__explain info__compareResult info__phoneRegexResult">&nbsp;</div>
 									</c:when>
 									<c:otherwise>
 										${info.phone}</div>
@@ -108,10 +108,10 @@
                                 <div class="info__content d-flex">
                                  <c:choose>
 									<c:when test="${not empty isUpdate}">
-		                                   <input type="text" value="${info.email}" class="info__input">
-		                                    <div><button class="info__modifyBtn">수정</button></div>
+		                                   <input type="text" value="${info.email}" class="info__email info__input">
+		                                    <div><button class="info__modifyBtn" disabled>수정</button></div>
 		                                </div>
-		                                <div class="info__explain info__compareResult">&nbsp;</div>
+		                                <div class="info__explain info__compareResult info__emailRegexResult">&nbsp;</div>
 									</c:when>
 									<c:otherwise>
 										${info.email}</div>
@@ -133,7 +133,7 @@
                      <c:choose>
 						<c:when test="${not empty isUpdate}">
 							<div class="info__pwModify">
-		                        <div class="pwModify__title d-flex">비밀번호 변경 <div><button class="info__modifyBtn">수정</button></div></div>
+		                        <div class="pwModify__title d-flex">비밀번호 변경 <div><button class="info__modifyBtn" disabled>수정</button></div></div>
 		                        <div class="pwModify__explain">8~30자의 영문 대소문자, 숫자 및 특수문자를 사용하세요.</div>
 		
 		                        <div class="pwModify__inputPw">
