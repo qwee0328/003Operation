@@ -22,8 +22,8 @@
         <div class="banner">
             <div class="banner_guide">
                 <div class="banner__contents">
-                    <div class="contents__title">키오스크의 첫 걸음은 logo와 함께!</div>
-                    <div class="contents__sub">키오스크를 처음 사용하는 사용자도 logo를 통해 누구나 쉽고 재미있게!!<br>
+                    <div class="contents__title">키오스크의 첫 걸음은 <span class="fontLogo">003</span>과 함께!</div>
+                    <div class="contents__sub">키오스크를 처음 사용하는 사용자도 <span class="fontLogo">003</span>을 통해 누구나 쉽고 재미있게!!<br>
                         메뉴 주문, 구성 변경, 포인트 적립까지 단계별로<br>
                         키오스크 이용 실력을 향상 시켜보세요.</div>
                     <div class="kioskBtns">

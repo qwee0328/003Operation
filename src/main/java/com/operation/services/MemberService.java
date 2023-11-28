@@ -25,9 +25,19 @@ public class MemberService {
 		return dao.idDuplicationCheck("%"+id+"%");
 	}
 	
+	// 이메일 중복 체크
+	public boolean emailDuplicationCheck(String email) {
+		String cleanedEmail = email.replaceAll("\\s", "");
+		return dao.emailDuplicationCheck(cleanedEmail);
+	}
+	
+	// 추천인 존재 체크
+	public boolean recommenderDuplicationCheck(String id) {
+		return dao.recommenderDuplicationCheck(id);
+	}
 
 	// 회원가입
-	public boolean signupUser(String id, String pw, String name, String phoneFirst,String phone, String birth, String gender,String nickName) throws Exception {
+	public boolean signupUser(String id, String pw, String name, String phoneFirst,String phone, String birth, String gender,String nickName,String email, String recommender) throws Exception {
 		MemberDTO user = new MemberDTO();
 		user.setId(id);
 		user.setPw(EncryptionUtils.getSHA512(pw));
@@ -35,25 +45,30 @@ public class MemberService {
 		user.setPhone(phoneFirst+phone);
 		
 		// String -> Timestamp
+
+		
+		String result = null;
+		int century = Integer.parseInt(gender);
+		if(century<3) {
+			result ="19" + birth.substring(0, 2) + "-" + birth.substring(2, 4) + "-" + birth.substring(4, 6);
+		}else {
+			result ="20" + birth.substring(0, 2) + "-" + birth.substring(2, 4) + "-" + birth.substring(4, 6);
+		}
+		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date parsedDate = dateFormat.parse(birth);
+		Date parsedDate = dateFormat.parse(result);
 		Timestamp timestampDate = new Timestamp(parsedDate.getTime());
 		
 		user.setBirthday(timestampDate);
+		
 		if(gender.equals("1")||gender.equals("3")) {
-			user.setGender("남자");
+			user.setGender("남");
 		}else {
-			user.setGender("여자");
+			user.setGender("여");
 		}
-		
-		if(nickName!=null) {
-			user.setNickname(nickName);
-		}else {
-			user.setNickname(user.getId());
-		}
-		
 		return dao.signupUser(user);
 	}
+	
 
 	// 로그인
 	public boolean chkInfo(String id, String pw) {
