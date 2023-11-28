@@ -3,7 +3,7 @@ $(document).ready(function(){
 		location.href="/member/viewMypage";
 	});
 	
-	$(".bottomBtn__check").on("click",function(){
+	function chkInfo(){
 		if($(".content_pw").val()==""){
 			alert("비밀번호를 이력해주세요.");
 			return;
@@ -21,5 +21,15 @@ $(document).ready(function(){
 				$(".content_pw").val("").focus();	
 			}
 		});
+	}
+	
+	$(".bottomBtn__check").on("click",function(){
+		chkInfo();
 	});
+	
+	$(document).on("keydown",function(e){
+		if(e.keyCode == 13){
+			chkInfo();
+		}
+	})
 });

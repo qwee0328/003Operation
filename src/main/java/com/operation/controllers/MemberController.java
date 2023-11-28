@@ -139,9 +139,13 @@ public class MemberController {
 	}
 
 	// 마이페이지 정보 수정
+	@ResponseBody
 	@RequestMapping("/updateInfo")
-	public void updateInfo() {
-		// 마이페이지 수정
+	public int updateInfo(String key, String value) {
+		if(key.equals("pw")) {
+			value = EncryptionUtils.getSHA512(value);
+		}
+		return mservice.updateInfo((String) session.getAttribute("loginID"), key, value);
 	}
 	
 	// 닉네임 중복 확인

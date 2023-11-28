@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	 $("#password").on("keyup",function(){
             let regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,30}$/;
-
+			$(".info__pwModify .info__modifyBtn").attr("disabled",true);
             if(regex.test($(this).val())){
                 $(".inputPw__regResult").html("올바른 비밀번호 형식 입니다.").css("color","#375ABB");
                 let pw = $("#password_confirm").val();
@@ -17,9 +17,10 @@ $(document).ready(function(){
         });
 
         $("#password_confirm").on("keyup",function(){
+			$(".info__pwModify .info__modifyBtn").attr("disabled",true);
             let pw = $("#password").val();
             if(pw!="" &&  $(".inputPw__regResult").html()=="올바른 비밀번호 형식 입니다."){
-                if(pw == $(this).val()) $(".inputPw__compareResult").html("비밀번호가 일치합니다.").css("color","#375ABB");
+                if(pw == $(this).val()) {$(".inputPw__compareResult").html("비밀번호가 일치합니다.").css("color","#375ABB");$(".info__pwModify .info__modifyBtn").removeAttr("disabled");}
                 else $(".inputPw__compareResult").html("비밀번호가 일치하지 않습니다.").css("color","#FB8F8A");
             }
         });
@@ -108,6 +109,26 @@ $(document).ready(function(){
 		
 		// 개인정보 변경
 		$(".info__modifyBtn").on("click",function(){
+			let key = $(this).attr("data-id");
+			let value = $(this).parent().prev().val();
+			if($(this).attr("data-id")=="pw"){
+				value=$(".inputPw__pw").val();
+			}
+			$.ajax({
+				url:"/member/updateInfo",
+				data:{
+					key: key, 
+					value: value
+				},
+				type:"post"
+			}).done(function(isUpdate){
+				if(isUpdate==1){
+					alert("정보가 수정되었습니다.");
+				}else{
+					alert("문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+				}
+				location.href="/member/viewMypage";
+			});
 			
 		});
 });

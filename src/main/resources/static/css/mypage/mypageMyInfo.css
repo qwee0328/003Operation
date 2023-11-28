@@ -10,7 +10,7 @@
 .info__halfLine{width:50%;}
 .info__margin{width: 100px;}
 .info__fullLine{width: 100%;}
-.footerBtn__modify{ width: 300px; height: 65px; color:#ffffff; background-color: #FB8F8A; font-size: 30px; font-weight: bold; border-radius: 100px; border:0;}
+.footerBtn__modify{ width: 300px; height: 65px; color:#ffffff; background-color: #FB8F8A; font-size: 18px; font-weight: bold; border-radius: 100px; border:0;}
 .footerBtn__modify:hover{cursor: pointer;}
 .body__info{margin: auto; margin-bottom: 70px; }
 .info__nickname{width:calc(100% - 110px);}

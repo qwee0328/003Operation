@@ -1,5 +1,6 @@
 package com.operation.dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -52,6 +53,11 @@ public class MemberDAO {
 	// 내 정보 보기
 	public MemberDTO selectInfoById(String id) {
 		return db.selectOne("Member.selectInfoById", id);
+	}
+	
+	// 내 정보 수정
+	public int updateInfo(Map<String, String> param) {
+		return db.update("Member.updateInfo",param);
 	}
 	
 	// 닉네임 중복 확인

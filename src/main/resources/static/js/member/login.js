@@ -10,12 +10,12 @@ $(document).ready(function(){
 		if(e.keyCode == 13){
 			login();
 		}
-	})
+	});
 	
 	// 로그인 버튼 클릭 시 로그인 시도
 	$(".login__btn").on("click",function(){
 		login();
-	})
+	});
 	
 	// login 함수
 	function login(){
