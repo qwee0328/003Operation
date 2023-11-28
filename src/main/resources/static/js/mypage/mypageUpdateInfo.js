@@ -29,12 +29,6 @@ $(document).ready(function(){
             console.log("프사변경");
         })
 
-       /* $(document).on("click",".info__input",function(){
-            $(this).on("keyup",function(){
-                $(this).closest(".info__cover").find(".info__compareResult").html("정규식 결과");
-            })
-        })*/
-        
         
 		// 닉네임 입력 (중복 확인)
         $(".info__inputNick").on("keyup",function(){
@@ -63,14 +57,33 @@ $(document).ready(function(){
         
         // 이메일 입력 (정규식 확인)
         $(".info__email").on("keyup",function(){
+			let email = $(this);
 			if($(this).val()==""){
 			  $(".info__emailRegexResult").text("");
 			  $(this).next().children().attr("disabled",true);
 			  return;
 			}
+			// 정규식
 			let emailRegex = /^[a-zA-Z0-9_]+@[a-z]+\.[a-z]+(\.*[a-z])*$/;
 			let result = emailRegex.test($(this).val());
 			if(result){
+				
+				// 중복 검사
+				
+				$.ajax({
+					url:"/member/emailDuplicationCheck",
+					data:{email:$(this).val()},
+					type:"post"
+				}).done(function(dup){
+					if(dup){ //중복
+						$(".info__emailRegexResult").text("중복된 이메일입니다.").css("color","#FB8F8A");
+						$(email).next().children().attr("disabled",true);
+					}else{ // 사용 가능
+						$(".info__emailRegexResult").text("사용 가능한 이메일입니다.").css("color","#375ABB");
+						$(email).next().children().removeAttr("disabled");
+					}
+				});
+				
 				$(".info__emailRegexResult").text("올바른 이메일 형식 입니다.").css("color","#375ABB");
 				$(this).next().children().removeAttr("disabled");
 			}else{
@@ -79,8 +92,12 @@ $(document).ready(function(){
 			}
 		});
 		
+
+		
 		// 전화번호 입력 (정규식 확인)
 		$(".info__phone").on("input",function(){
+			let phone = $(this);
+			
 			if($(this).val()==""){
 			  $(".info__phoneRegexResult").text("");
 			  $(this).next().children().attr("disabled",true);
@@ -92,8 +109,20 @@ $(document).ready(function(){
 			
 			let phoneRegex = /^[0-9]{11}$/;
 			if(phoneRegex.test($(this).val())){
-				$(".info__phoneRegexResult").text("올바른 전화번호 형식 입니다.").css("color","#375ABB");
-				$(this).next().children().removeAttr("disabled");
+				// 중복 검사
+				$.ajax({
+					url:"/phone/emailDuplicationCheck",
+					data:{phone:$(this).val()},
+					type:"post"
+				}).done(function(dup){
+					if(dup){ //중복
+						$(".info__phoneRegexResult").text("중복된 전화번호입니다.").css("color","#FB8F8A");
+						$(phone).next().children().attr("disabled",true);
+					}else{ // 사용 가능
+						$(".info__phoneRegexResult").text("사용 가능한 전화번호입니다.").css("color","#375ABB");
+						$(phone).next().children().removeAttr("disabled");
+					}
+				})
 			}else{
 				$(".info__phoneRegexResult").text("전화번호 형식이 맞지 않습니다.").css("color","#FB8F8A");
 				$(this).next().children().attr("disabled",true);
