@@ -22,7 +22,9 @@
                 <div class="progressBar__bar"><div class="progressBar__fill"></div></div>
                 <div class="progressBar__per">100%</div>
             </div>
-            <div class="kiosk__area"></div>
+            <div class="kiosk__area">
+            	<iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://magiclampjin.github.io/kiosktest/"></iframe>
+            </div>
             
             <!-- 기록 영역 ( 게임용 ) -->
             <div class="kiosk__myRecord">
