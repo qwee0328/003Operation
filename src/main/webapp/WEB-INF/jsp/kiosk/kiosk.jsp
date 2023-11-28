@@ -23,6 +23,28 @@
                 <div class="progressBar__per">100%</div>
             </div>
             <div class="kiosk__area"></div>
+            
+            <!-- 기록 영역 ( 게임용 ) -->
+            <div class="kiosk__myRecord">
+                <div class="kiosk__recordName">내 최고 기록</div>
+                <div class="myRecord__cover">
+                    <div class="myRecord__record d-flex">
+                        <div class="myRecord__step align-center">1단계</div>
+                        <div class="myRecord__time align-center">1분 30초</div>
+                        <div class="myRecord__ranking align-center">상위 50%</div>
+                    </div>
+                    <div class="myRecord__record d-flex">
+                        <div class="myRecord__step align-center">1단계</div>
+                        <div class="myRecord__time align-center">1분 30초</div>
+                        <div class="myRecord__ranking align-center">상위 50%</div>
+                    </div>
+                    <div class="myRecord__record d-flex">
+                        <div class="myRecord__step align-center">1단계</div>
+                        <div class="myRecord__time align-center">1분 30초</div>
+                        <div class="myRecord__ranking align-center">상위 50%</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <%@ include file="/WEB-INF/jsp/commons/footer.jsp" %>
