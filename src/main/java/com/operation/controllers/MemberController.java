@@ -108,7 +108,6 @@ public class MemberController {
 	// 마이페이지로 이동
 	@RequestMapping("/goMypage")
 	public String goMapage() {
-		// 마이페이지로 이동
 		return "mypage/mypageMain";
 	}
 

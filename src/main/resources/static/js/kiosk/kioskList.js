@@ -17,7 +17,7 @@ $(document).ready(function(){
         $(kioskList_line).append(kioskCategory__kiosk.append(kiosk__name).append(kiosk__imageCover).append(kiost__btn));   
         
         $(kioskCategory__kiosk).on("click",function(){
-			location.href = "/practice/viewPractice";
+			location.href = "/kiosk/viewPractice";
 		});
     }
 });
