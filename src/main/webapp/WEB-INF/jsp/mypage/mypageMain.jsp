@@ -8,8 +8,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="/css/commons.common.css" />
 <link rel="stylesheet" href="/css/mypage/mypageMain.css" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<script src="/js/mypage/mypageMain.js"></script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp"%>
@@ -20,7 +20,7 @@
 					<img src="/images/profileImg.png">
 				</div>
 				<div class="profile__nickname align-center">
-					닉네임님&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray"></i>
+					닉네임님&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray goMypage"></i>
 				</div>
 				<div class="profile__logoutBtnCover align-center">
 					<button class="profile__logoutBtn bColorWhite">로그아웃</button>
@@ -38,7 +38,7 @@
 							<img src="/images/profileImg.png">
 						</div>
 						<div class="profile__nickname align-center">
-							닉네임님&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray"></i>
+							닉네임님&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray goMypage"></i>
 						</div>
 						<div class="profile__logoutBtnCover align-center">
 							<button class="profile__logoutBtn bColorWhite">로그아웃</button>
@@ -78,7 +78,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="mypageMenu__topRight">
+					<!-- <div class="mypageMenu__topRight">
 						<div class="topRight__cover">
 							<div class="title__top">
 								<div class="title__icon d-flex">
@@ -92,7 +92,7 @@
 							<div class="title__bottom align-center colorGray">현재 선택한
 								칭호명</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="mypageMenu__bottom">
@@ -161,7 +161,8 @@
 								<div class="myAsk__icon">
 									<i class="fa-solid fa-circle-question colorGray"></i>
 								</div>
-								<div class="myAsk__txt colorGray">Q&A 문의 내역</div>
+								<!-- <div class="myAsk__txt colorGray">Q&A 문의 내역</div> -->
+								<div class="myAsk__txt"><a href="#" class="colorGray">Q&A 문의 내역</a></div>
 								<div class="myAsk__move">
 									<i class="fa-solid fa-chevron-right colorGray"></i>
 								</div>
@@ -178,7 +179,7 @@
 								<div class="myInfo__icon">
 									<i class="fa-solid fa-gear colorGray"></i>
 								</div>
-								<div class="myInfo__txt colorGray">개인 정보 확인 및 수정</div>
+								<div class="myInfo__txt"><a href="/member/viewMypage" class="colorGray">개인 정보 확인 및 수정</a></div>
 								<div class="myInfo__move">
 									<i class="fa-solid fa-chevron-right colorGray"></i>
 								</div>

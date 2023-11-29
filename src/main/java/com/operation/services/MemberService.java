@@ -87,6 +87,15 @@ public class MemberService {
 		return dao.selectInfoById(id);
 	}
 	
+	// 내 정보 수정
+	public int updateInfo(String id, String key, String value) {
+		Map<String, String> param = new HashMap<>();
+		param.put("id", id);
+		param.put("key", key);
+		param.put("value", value);
+		return dao.updateInfo(param);
+	}
+	
 	// 닉네임 중복 확인
 	public boolean chkNickname(String nickname) {
 		return dao.chkNickname(nickname);
