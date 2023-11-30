@@ -13,11 +13,10 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
-	
 	<div class="container">
 		<div class="body__guide">
 			<c:choose>
-				<c:when test="${not empty question}"> 
+				<c:when test="${not empty isQuestion}"> 
 					<div class="titleArea">질문 게시글 작성</div>
 				</c:when>
 				<c:otherwise>
@@ -37,7 +36,7 @@
 					<!-- 질문 게시판의 경우 비밀글 설정 -->
 					<div class="postArea__secret d-flex">
 					<c:choose>
-						<c:when test="${not empty question}"> 
+						<c:when test="${not empty isQuestion}"> 
 							<input type="checkbox" class="postArea__secretChk" id="secretChk">
 							<label for="secretChk">비밀글 설정</label>
 						</c:when>

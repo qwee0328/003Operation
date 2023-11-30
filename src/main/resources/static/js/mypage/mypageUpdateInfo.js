@@ -162,13 +162,12 @@ $(document).ready(function() {
 	
 	// 프로필 이미지 수정 클릭
 	$(".profileImg__icon").on("click",function(){
-		$(".profileImg__input").trigger("click");
+		$(".profileImg__input").click();
 	});
 	
 	// 프로필 이미지 변경
 	$(".profileImg__input").on("change",function(e){
 		let formData = new FormData();
-		console.log(e.target.files[0]);
 		formData.append("profileImg",e.target.files[0]);
 		
 		$.ajax({

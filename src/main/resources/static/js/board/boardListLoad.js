@@ -1,7 +1,8 @@
 // 글쓰기 버튼
 $(document).ready(function(){
 	$(".board__writeBtn").on("click",function(){
-		location.href ="/board/writePost";
+		if($(".board__title").text().slice(0,2)=="질문") location.href ="/board/goWritePost/question";
+		else location.href ="/board/goWritePost/free";
 	})
 });
 

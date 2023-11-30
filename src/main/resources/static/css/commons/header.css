@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+*{
+	text-decoration: none !important;
+	list-style: none !important;
+}
 .header {
 	height: 100px;
 	display: flex;
@@ -36,6 +40,14 @@
 	font-size: 20px;
 	display: flex;
 	align-items: center;
+	
+}
+
+li>a, .tabNab_body a{
+	color: black !important;
+}
+li>a:hover, .tabNab_body a:hover{
+	color:white !important;
 }
 
 .header_right {
@@ -83,11 +95,11 @@
 }
 
 .board>ul li:hover, .mypage>ul li:hover {
-	background-color: #1b1f3b;
+	background-color: #1b1f3b !important;
 }
 
 .board>ul li:hover a, .mypage>ul li:hover a{
-	color: white;
+	color: white !important;
 }
 
 .hamNav,

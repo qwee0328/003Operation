@@ -1,15 +1,18 @@
 package com.operation.services;
 
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.commons.EncryptionUtils;
 import com.operation.dao.MemberDAO;
@@ -93,11 +96,27 @@ public class MemberService {
 	}
 	
 	// 내 정보 수정
-	public int updateInfo(String id, String key, String value) {
+	public int updateInfo(String id, String key, String value){
 		Map<String, String> param = new HashMap<>();
 		param.put("id", id);
 		param.put("key", key);
 		param.put("value", value);
+		return dao.updateInfo(param);
+	}
+	
+	@Transactional
+	public int updateInfo(String id, MultipartFile profileImg) throws Exception {
+		String path = "c:/003Operation/profileImgs/";
+		File uploadPath = new File(path);
+		if(!uploadPath.exists()) uploadPath.mkdir();
+		
+		String sysName = UUID.randomUUID()+"_"+profileImg.getOriginalFilename();
+		profileImg.transferTo(new File(uploadPath,sysName));
+		
+		Map<String, String> param = new HashMap<>();
+		param.put("id", id);
+		param.put("key", "profile_image");
+		param.put("value", sysName);
 		return dao.updateInfo(param);
 	}
 	

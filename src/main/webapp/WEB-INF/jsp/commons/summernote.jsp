@@ -18,9 +18,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="postArea__summernote"></div>
+<div id="summernote"></div>
 <script>
-	$('.postArea__summernote').summernote({
+	$('#summernote').summernote({
 	    placeholder:"내용을 입력해주세요",
 	    height:500,
 	    disableResizeEditor: true,

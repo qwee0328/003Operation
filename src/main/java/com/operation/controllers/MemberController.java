@@ -169,13 +169,14 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("/updateProfileImg")
 	public int updateProfileImg(MultipartFile profileImg) throws Exception {
-		String path = "c:/profileImgs";
-		File uploadPath = new File(path);
-		if(!uploadPath.exists()) uploadPath.mkdir();
-		
-		String sysName = UUID.randomUUID()+"_"+profileImg.getOriginalFilename();
-		profileImg.transferTo(new File(uploadPath,sysName));
-		return mservice.updateInfo((String) session.getAttribute("loginID"), "profile_image", sysName);
+//		String path = "C:/003Operation/profileImgs/";
+//		File uploadPath = new File(path);
+//		if(!uploadPath.exists()) uploadPath.mkdir();
+//		
+//		String sysName = UUID.randomUUID()+"_"+profileImg.getOriginalFilename();
+//		profileImg.transferTo(new File(uploadPath,sysName));
+//		return mservice.updateInfo((String) session.getAttribute("loginID"), "profile_image", sysName);
+		return mservice.updateInfo((String) session.getAttribute("loginID"), profileImg);
 	}
 	
 	// 프로필 이미지 불러오기

@@ -11,7 +11,7 @@ public class BoardDTO {
 	private String content;
 	private Timestamp write_date;
 	private int view_count;
-	private boolean isFix;
+	private boolean is_fix;
 	
 	public BoardDTO() {
 		super();
@@ -19,7 +19,7 @@ public class BoardDTO {
 	}
 
 	public BoardDTO(int id, String bulletin_category_id, String member_id, String member_nickname, String title,
-			String content, Timestamp write_date, int view_count, boolean isFix) {
+			String content, Timestamp write_date, int view_count, boolean is_fix) {
 		super();
 		this.id = id;
 		this.bulletin_category_id = bulletin_category_id;
@@ -29,7 +29,7 @@ public class BoardDTO {
 		this.content = content;
 		this.write_date = write_date;
 		this.view_count = view_count;
-		this.isFix = isFix;
+		this.is_fix = is_fix;
 	}
 
 	public int getId() {
@@ -97,10 +97,10 @@ public class BoardDTO {
 	}
 
 	public boolean isFix() {
-		return isFix;
+		return is_fix;
 	}
 
-	public void setFix(boolean isFix) {
-		this.isFix = isFix;
+	public void setFix(boolean is_fix) {
+		this.is_fix = is_fix;
 	}
 }
