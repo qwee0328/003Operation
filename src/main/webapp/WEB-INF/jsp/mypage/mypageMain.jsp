@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<link rel="stylesheet" href="/css/commons.common.css" />
+<link rel="stylesheet" href="/css/commons/common.css" />
 <link rel="stylesheet" href="/css/mypage/mypageMain.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <script src="/js/mypage/mypageMain.js"></script>
@@ -59,7 +59,7 @@
 						</div>
 					</div>
 				</div>
-				<%-- <div class="profile__mini">
+			<%-- 	<div class="profile__mini">
 					<div class="profile__cover">
 						<div class="profile__img align-center">
 							<img src="/images/profileImg.png">
