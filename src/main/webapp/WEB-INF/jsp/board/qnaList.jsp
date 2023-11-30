@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/css/commons/common.css"/> 
 </head>
 <body>
+	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
     <div class="container">
         <div class="guide">
             <div class="board__header">
@@ -55,5 +56,6 @@
             </div>
         </div>
     </div>
+    <%@ include file="/WEB-INF/jsp/commons/footer.jsp" %>
 </body>
 </html>
