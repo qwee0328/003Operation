@@ -24,8 +24,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/listBoard")
-	public void listBoard() {
-		// 게시판 목록 출력
+	public String listBoard() {
+		return "board/boardList";
 	}
 	
 	@RequestMapping("/viewPost")
