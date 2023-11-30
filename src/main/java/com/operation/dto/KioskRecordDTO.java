@@ -68,10 +68,10 @@ public class KioskRecordDTO {
 		this.play_stage = play_stage;
 	}
 	
-	public boolean is_success() {
+	public boolean isSuccess() {
 		return is_success;
 	}
-	public void setIs_success(boolean is_success) {
+	public void setSuccess(boolean is_success) {
 		this.is_success = is_success;
 	}
 	@Override

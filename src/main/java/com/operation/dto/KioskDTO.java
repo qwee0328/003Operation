@@ -63,11 +63,11 @@ public class KioskDTO {
 		this.description = description;
 	}
 
-	public boolean is_game() {
+	public boolean isGame() {
 		return is_game;
 	}
 
-	public void setIs_game(boolean is_game) {
+	public void setGame(boolean is_game) {
 		this.is_game = is_game;
 	}
 	
