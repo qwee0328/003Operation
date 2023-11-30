@@ -185,6 +185,10 @@
 	display: none;
 }
 
+.postAnswer__content{
+	display: none;
+}
+
 .board__post .post__cover .board__postMini {
 	display: none;
 }
