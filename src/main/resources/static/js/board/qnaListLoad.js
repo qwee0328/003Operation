@@ -31,7 +31,7 @@ $(document).ready(function(){
 		board__postMini.append(postMini__writer).append(postMini__writeDate).append(postMini__file);
 
 		let postAwswer__area = $("<div>").attr("class","postAwswer__area colorMainBlue").html("답변 미리보기 <i class='fa-solid fa-chevron-down colorMainBlue'></i>");
-		let postAnswer__content = $("<div>").attr("class","postAnswer__content d-none").text("해당 문제는 오랜 시간 창을 켜둔 채로");
+		let postAnswer__content = $("<div>").attr("class","postAnswer__content").text("해당 문제는 오랜 시간 창을 켜둔 채로");
 
         board__postAwswer.append(board__postMini).append(postAwswer__area).append(postAnswer__content);
 
