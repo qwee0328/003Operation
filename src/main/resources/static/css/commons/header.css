@@ -46,7 +46,7 @@
 li>a, .tabNab_body a{
 	color: black !important;
 }
-li>a:hover, .tabNab_body a:hover{
+.navBar a:hover, li>a:hover, .tabNab_body a:hover{
 	color:white !important;
 }
 
