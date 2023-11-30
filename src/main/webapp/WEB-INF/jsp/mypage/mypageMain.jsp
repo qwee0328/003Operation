@@ -17,10 +17,17 @@
 		<div class="profile">
 			<div class="profile__cover">
 				<div class="profile__img align-center">
-					<img src="/images/profileImg.png">
+					<c:choose>
+                   		<c:when test="${empty info.profile_image}">
+                   			<img src="/images/profileImg.png" class="profileImg__img" alt="프로필 이미지">
+                   		</c:when>
+                   		<c:otherwise>
+                   			<img src="/profileImgs/${info.profile_image}" class="profileImg__img" alt="프로필 이미지">
+                   		</c:otherwise>
+                   	</c:choose>
 				</div>
 				<div class="profile__nickname align-center">
-					닉네임님&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray goMypage"></i>
+					${loginNickName}&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray goMypage"></i>
 				</div>
 				<div class="profile__logoutBtnCover align-center">
 					<button class="profile__logoutBtn bColorWhite">로그아웃</button>
@@ -35,29 +42,36 @@
 				<div class="profile__md">
 					<div class="profile__cover">
 						<div class="profile__img align-center">
-							<img src="/images/profileImg.png">
+							<c:choose>
+                        		<c:when test="${empty info.profile_image}">
+                        			<img src="/images/profileImg.png" class="profileImg__img" alt="프로필 이미지">
+                        		</c:when>
+                        		<c:otherwise>
+                        			<img src="/profileImgs/${info.profile_image}" class="profileImg__img" alt="프로필 이미지">
+                        		</c:otherwise>
+                        	</c:choose>
 						</div>
 						<div class="profile__nickname align-center">
-							닉네임님&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray goMypage"></i>
+							${loginNickName}&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray goMypage"></i>
 						</div>
 						<div class="profile__logoutBtnCover align-center">
 							<button class="profile__logoutBtn bColorWhite">로그아웃</button>
 						</div>
 					</div>
 				</div>
-				<div class="profile__mini">
+				<%-- <div class="profile__mini">
 					<div class="profile__cover">
 						<div class="profile__img align-center">
 							<img src="/images/profileImg.png">
 						</div>
 						<div class="profile__nickname align-center">
-							닉네임님&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray"></i>
+							${loginNickName}&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray"></i>
 						</div>
 						<div class="profile__logoutBtnCover align-center">
 							<button class="profile__logoutBtn bColorWhite">로그아웃</button>
 						</div>
 					</div>
-				</div>
+				</div> --%>
 				<div class="mypageMenu__top">
 					<div class="mypageMenu__topLeft">
 						<div class="topLeft__cover">
@@ -66,7 +80,7 @@
 									<i class="fa-solid fa-award colorGray"></i>
 									<div class="icon__txt colorGray">레벨</div>
 								</div>
-								<div class="level__txt colorGray">Lv.0</div>
+								<div class="level__txt colorGray">Lv.${info.level_id}</div>
 							</div>
 
 							<div class="mypageMenu__point d-flex">
@@ -74,7 +88,7 @@
 									<i class="fa-solid fa-coins colorGray"></i>
 									<div class="icon__txt colorGray">포인트</div>
 								</div>
-								<div class="point__txt colorGray">0 P</div>
+								<div class="point__txt colorGray">${info.point} P</div>
 							</div>
 						</div>
 					</div>

@@ -1,5 +1,9 @@
 package com.operation.controllers;
 
+import java.io.File;
+import java.util.Map;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.commons.EncryptionUtils;
 import com.operation.dto.MemberDTO;
@@ -92,6 +97,7 @@ public class MemberController {
 		boolean loginResult = mservice.chkInfo(id, pw);
 		if (loginResult) {
 			session.setAttribute("loginID", id);
+			session.setAttribute("loginNickName", mservice.selectNickNameById(id)); // 닉네임
 		}
 		return loginResult;
 	}
@@ -107,7 +113,8 @@ public class MemberController {
 
 	// 마이페이지로 이동
 	@RequestMapping("/goMypage")
-	public String goMapage() {
+	public String goMapage(Model model) {
+		model.addAttribute("info",mservice.selectMainMypageInfoById((String) session.getAttribute("loginID")));
 		return "mypage/mypageMain";
 	}
 
@@ -149,8 +156,41 @@ public class MemberController {
 		if(key.equals("pw")) {
 			value = EncryptionUtils.getSHA512(value);
 		}
-		return mservice.updateInfo((String) session.getAttribute("loginID"), key, value);
+		
+		int result = mservice.updateInfo((String) session.getAttribute("loginID"), key, value);
+		if(key.equals("nickname") && result == 1) {
+			session.setAttribute("loginNickName", value); // 닉네임
+		}
+		
+		return result;
 	}
+	
+	// 프로필 이미지 변경
+	@ResponseBody
+	@RequestMapping("/updateProfileImg")
+	public int updateProfileImg(MultipartFile profileImg) throws Exception {
+		String path = "c:/profileImgs";
+		File uploadPath = new File(path);
+		if(!uploadPath.exists()) uploadPath.mkdir();
+		
+		String sysName = UUID.randomUUID()+"_"+profileImg.getOriginalFilename();
+		profileImg.transferTo(new File(uploadPath,sysName));
+		return mservice.updateInfo((String) session.getAttribute("loginID"), "profile_image", sysName);
+	}
+	
+	// 프로필 이미지 불러오기
+	@ResponseBody
+	@RequestMapping("/selectProfileImgById")
+	public String selectProfileImgById() {
+		return mservice.selectProfileImgById((String) session.getAttribute("loginID"));
+	}
+	
+//	// 마이페이지 메인 화면 정보 불러오기 (프로필 이미지, 레벨, 포인트) -> goMypage에 model로 추가
+//	@ResponseBody
+//	@RequestMapping("/selectMainMypageInfoById")
+//	public Map<String, Object> selectMainMypageInfoById() {
+//		return mservice.selectMainMypageInfoById((String) session.getAttribute("loginID"));
+//	}
 	
 	// 닉네임 중복 확인
 	@ResponseBody

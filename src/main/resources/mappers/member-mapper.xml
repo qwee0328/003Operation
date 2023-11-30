@@ -69,8 +69,29 @@
 		select count(*) from member where nickname = #{nickname};
 	</select>
 	
+	<!-- 닉네임 가져오기 -->
+	<select id="selectNickNameById" resultType="String">
+		select nickname from member where id = #{id};
+	</select>
+	
 	<!-- 개인정보 수정 -->
 	<update id="updateInfo">
 		update member set ${key} = #{value} where id = #{id};
 	</update>
+	
+	<!-- 프로필 이미지 불러오기 -->
+	<select id="selectProfileImgById" resultType="String">
+		select profile_image from member where id = #{id};
+	</select>
+	
+	<!-- 마이페이지 메인 화면 정보 불러오기 ( 프로필 이미지 , 레벨 , 포인트 정보 ) -->
+	<resultMap id="MainMypageInfo" type="java.util.HashMap">
+		<result property="profile_image" column="profile_image"/>
+		<result property="point" column="point"/>
+		<result property="level_id" column="level_id"/>
+	</resultMap>
+	
+	<select id="selectMainMypageInfoById" resultMap="MainMypageInfo">
+		select profile_image, level_id, point from member where id = #{id};
+	</select>
 </mapper>

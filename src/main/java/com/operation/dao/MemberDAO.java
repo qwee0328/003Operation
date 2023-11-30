@@ -1,6 +1,5 @@
 package com.operation.dao;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -49,6 +48,11 @@ public class MemberDAO {
 	public boolean chkInfo(Map<String, String> param) {
 		return db.selectOne("Member.chkInfo", param);
 	}
+	
+	// 닉네임 불러오기
+	public String selectNickNameById(String id) {
+		return db.selectOne("Member.selectNickNameById",id);
+	}
 
 	// 내 정보 보기
 	public MemberDTO selectInfoById(String id) {
@@ -63,5 +67,15 @@ public class MemberDAO {
 	// 닉네임 중복 확인
 	public boolean chkNickname(String nickname) {
 		return db.selectOne("Member.selectByNickname",nickname);
+	}
+	
+	// 프로필 이미지 불러오기
+	public String selectProfileImgById(String id) {
+		return db.selectOne("Member.selectProfileImgById",id);
+	}
+	
+	// 마이페이지 메인 화면 정보 불러오기 (프로필 이미지, 레벨, 포인트)
+	public Map<String, Object> selectMainMypageInfoById(String id){
+		return db.selectOne("Member.selectMainMypageInfoById",id);
 	}
 }

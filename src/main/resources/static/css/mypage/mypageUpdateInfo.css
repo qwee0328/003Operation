@@ -15,6 +15,7 @@
 .inputPw__pw{width: 100%; height: 30px; border:0; outline: none; font-size: 15px;}
 .info__content>input{border:0; outline: none; font-size: 15px;}
 
+.profileImg__input{display:none;}
 
 @media (max-width: 786px) {
     .info__halfLineBottom{margin-top: 30px; width: 100%;}

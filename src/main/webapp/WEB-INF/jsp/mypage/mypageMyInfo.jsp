@@ -32,10 +32,19 @@
                 <div class="body__info">
                     <div class="info__firstLine d-flex">
                         <div class="info__profileImg">
-                            <img src="/images/profileImg.png" class="profileImg__img" alt="프로필 이미지">
+                        	<c:choose>
+                        		<c:when test="${empty info.profile_image}">
+                        			<img src="/images/profileImg.png" class="profileImg__img" alt="프로필 이미지">
+                        		</c:when>
+                        		<c:otherwise>
+                        			<img src="/profileImgs/${info.profile_image}" class="profileImg__img" alt="프로필 이미지">
+                        		</c:otherwise>
+                        	</c:choose>
+                            
                             <c:choose>
 								<c:when test="${not empty isUpdate}">
-									<div class="profileImg__icon"><i class="fa-solid fa-pen"></i></div>
+									<label for="profileImg__input"><div class="profileImg__icon"><i class="fa-solid fa-pen"></i></div></label>
+									<input type="file" class="profileImg__input" name="profileImg__input">
 								</c:when>
 							</c:choose>
                         </div>
@@ -47,12 +56,13 @@
 											<input type="text" value="${info.nickname}" class="info__inputNick">
 			                           	    <div><button class="info__modifyBtn" data-id="nickname" disabled>수정</button></div>
 		                           		</div>
-		                           	     <div class="info__explain info__dupResult">&nbsp;</div>
+		                           	     <div class="info__explain info__dupResult">&nbsp;
 									</c:when>
 									<c:otherwise>
-										${info.nickname}</div>
+										${info.nickname}
 									</c:otherwise>
 								</c:choose>	
+							</div>
                         </div>
                     </div>
             
