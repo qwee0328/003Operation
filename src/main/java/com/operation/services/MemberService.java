@@ -82,6 +82,11 @@ public class MemberService {
 		return dao.chkInfo(param);
 	}
 	
+	// 닉네임 불러오기
+	public String selectNickNameById(String id) {
+		return dao.selectNickNameById(id);
+	}
+	
 	// 내 정보 보기
 	public MemberDTO selectInfoById(String id) {
 		return dao.selectInfoById(id);
@@ -94,6 +99,16 @@ public class MemberService {
 		param.put("key", key);
 		param.put("value", value);
 		return dao.updateInfo(param);
+	}
+	
+	// 프로필 이미지 불러오기
+	public String selectProfileImgById(String id) {
+		return dao.selectProfileImgById(id);
+	}
+	
+	// 마이페이지 메인 화면 정보 불러오기 (프로필 이미지, 레벨, 포인트)
+	public Map<String, Object> selectMainMypageInfoById(String id){
+		return dao.selectMainMypageInfoById(id);
 	}
 	
 	// 닉네임 중복 확인

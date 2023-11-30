@@ -7,7 +7,7 @@ public class KioskDTO {
 	private int width;
 	private int height;
 	private String description;
-	private boolean isGame;
+	private boolean is_game;
 	
 	public KioskDTO() {
 		super();
@@ -15,7 +15,7 @@ public class KioskDTO {
 	}
 	
 	public KioskDTO(int id, String kiosk_category_id, String image_url, int width, int height, String description,
-			boolean isGame) {
+			boolean is_game) {
 		super();
 		this.id = id;
 		this.kiosk_category_id = kiosk_category_id;
@@ -23,7 +23,7 @@ public class KioskDTO {
 		this.width = width;
 		this.height = height;
 		this.description = description;
-		this.isGame = isGame;
+		this.is_game = is_game;
 	}
 	
 	public int getId() {
@@ -62,10 +62,13 @@ public class KioskDTO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public boolean isGame() {
-		return isGame;
+		return is_game;
 	}
-	public void setGame(boolean isGame) {
-		this.isGame = isGame;
+
+	public void setGame(boolean is_game) {
+		this.is_game = is_game;
 	}
+	
 }

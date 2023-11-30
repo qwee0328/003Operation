@@ -11,6 +11,7 @@
 .profile__nickname i { font-size: 12px; color: #D1D2D8; margin-top: 7px; }
 .profile__logoutBtn {width: 200px; height: 40px; border-radius: 50px; font-size: 20px; transition-duration: 0.3s;}
 .profile__logoutBtn:hover{background-color: #e1e6f5; border: 0px; cursor: pointer;}
+.profileImg__img{width: 100px; height: 100px; border-radius: 50px;}
 
 .mypageMenu {width: 750px; margin: auto; }
 .mypageMenu__top { display: flex; }

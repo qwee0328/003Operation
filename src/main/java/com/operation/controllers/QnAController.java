@@ -19,8 +19,9 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/listBoard")
-	public void listBoard() {
+	public String listBoard() {
 		// QNA 목록 출력
+		return "/qna/qnaList";
 	}
 	
 	@RequestMapping("/viewPost")

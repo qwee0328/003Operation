@@ -1,0 +1,380 @@
+@charset "UTF-8";
+
+.guide {
+	max-width: 1300px;
+	margin: 100px auto 150px auto;
+}
+
+.board__title {
+	font-size: 40px;
+	font-weight: bold;
+	margin-bottom: 50px;
+}
+
+.board__serach {
+	background-color: #D1D2D8;
+	width: 100%;
+	height: 100px;
+	padding: 20px 80px;
+	border-radius: 5px;
+	margin-bottom: 60px;
+}
+
+
+.search__key {
+	width: 20%;
+	padding-right: 30px;
+	height: 100%;
+	position: relative;
+	z-index: 1;
+}
+
+.search__selectCover {
+	width: 100%;
+	height: 100%;
+	background-color: #FFFFFF;
+	border-radius: 10px;
+	position: relative;
+	z-index: 1;
+}
+
+.search__select {
+	width: 100%;
+	height: 100%;
+	padding: 0 20px;
+	border-radius: 10px;
+	font-size: 20px;
+	outline: none;
+	appearance: none;
+	position: relative;
+	z-index: 3;
+	background: transparent;
+}
+
+.search__select>option {
+	background-color: #FFFFFF;
+}
+
+.search__arrow {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 2;
+	width: 35px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.search__arrow>i {
+	width: 50%;
+	transition: .3s;
+}
+
+.search__select:focus+.search__arrow>i {
+	transform: rotate(180deg);
+}
+
+.search__value {
+	width: 60%;
+	height: 100%;
+}
+
+.search__value>input {
+	width: 100%;
+	height: 100%;
+	padding: 0 20px;
+	border-radius: 10px;
+	border: 0;
+	outline: none;
+	font-size: 20px;
+}
+
+.search__btnCover {
+	width: 20%;
+	height: 100%;
+	padding-left: 30px
+}
+
+.search__btn {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	border: 0;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+
+
+.board__postCnt {
+	padding-left: 2px;
+	margin-bottom: 10px;
+}
+
+.board__postHeader,
+.board__post {
+	width: 100%;
+	background-color: #D1D2D8;
+	border-bottom: 3px solid #375ABB;
+	padding: 10px 0;
+}
+
+.board__postHeader>div,
+.board__post>div {
+	width: 10%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.board__post>div {
+	font-weight: 400;
+}
+
+
+.board__post .post__writer {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.board__postHeader .postHeader__title {
+	width: 45%;
+	justify-content: start;
+}
+
+.post__cover .post__title {
+	width: 100%;
+	justify-content: start;
+	font-weight: 500;
+}
+
+.board__postHeader .postHeader__writeDate,
+.board__post .post__writeDate {
+	width: 15%;
+}
+
+.board__post {
+	background-color: #FFFFFF;
+	border-top: 1px solid #7D7D7D50;
+	border-bottom: 1px solid #7D7D7D50;
+}
+
+.board__post .post__cover {
+	width: 45%;
+}
+
+.title__name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.title__secret>i {
+	color: #7d7d7d;
+	margin-right: 10px;
+}
+
+.title__answerState {
+	width: 15%;
+	display: none;
+}
+
+.postAnswer__content{
+	display: none;
+}
+
+.board__post .post__cover .board__postMini {
+	display: none;
+}
+
+.post__anwserState {
+	color: #375ABB;
+}
+.title__answerStateCover {
+	display: none;
+}
+
+.board__footer {
+	margin-top: 20px;
+	position: relative;
+}
+
+.board__pagination {
+	width: 100%;
+
+}
+
+.board__writeBtnCover {
+	position: absolute;
+	right: 0;
+}
+
+.board__writeBtn {
+	width: 100px;
+	height: 50px;
+	border-radius: 10px;
+	font-size: 20px;
+	border: 0;
+}
+
+.board__writeBtn:hover{
+	cursor: pointer;
+}
+
+.board__pagination a {
+	width: 40px;
+	height: 40px;
+	font-size: 20px;
+	border-radius: 50px;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 5px;
+}
+
+.board__post .post__cover {
+	display: block;
+}
+
+.title__name:hover {
+	cursor: pointer;
+}
+
+.postAwswer__area {
+	margin-top: 25px;
+}
+
+.postAwswer__area:hover{
+	cursor: pointer;
+}
+
+.postAwswer__area>i {
+	font-size: 15px;
+}
+
+.abled {
+	display: block;
+	font-size: 15px;
+	font-weight: 400;
+	margin-top: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@media (max-width: 786px) {
+	.guide {
+		margin: 100px 10px;
+	}
+
+	.board__postHeader>div,
+	.board__post>div {
+		display: none;
+	}
+
+	.board__postHeader .postHeader__seq,
+	.board__post .post__seq {
+		width: 20%;
+		display: flex;
+	}
+
+	.board__postHeader .postHeader__title,
+	.board__post .post__title {
+		width: 80%;
+		display: flex;
+	}
+
+	.noticePost__seq {
+		width: 50px;
+		height: 30px;
+		font-size: 15px;
+	}
+
+	.board__post .post__title {
+		width: 100%;
+	}
+
+	.title__name {
+		width: auto;
+	}
+
+	.title__replyCnt {
+		display: none;
+	}
+
+	.title__answerState {
+		justify-content: center;
+		display: flex;
+		font-size: 15px;
+		width: 80px;
+		border-radius: 15px;
+	}
+
+	.title__answerStateCover {
+		display: flex;
+		justify-content: start;
+	}
+
+	.board__post .post__cover {
+		display: block;
+		width: 80%;
+	}
+
+	.board__post .post__cover .board__postMini {
+		display: flex;
+		margin-top: 10px;
+	}
+
+	.board__postMini * {
+		color: #7d7d7d;
+		margin-right: 5px;
+		font-size: 15px;
+	}
+
+	.board__postMini>div {
+		margin-right: 25px;
+	}
+
+	.board__serach {
+		padding: 20px;
+	}
+
+	.board__serach>div {
+		padding-right: 10px;
+	}
+
+	.search__key {
+		width: 20%;
+	}
+
+	.search__select {
+		padding: 0 10px;
+	}
+
+	.search__value {
+		width: 50%;
+	}
+
+	.search__btnCover {
+		padding-left: 0;
+	}
+
+	.board__pagination a {
+		width: 30px;
+		height: 30px;
+		font-size: 15px;
+		border-radius: 50px;
+		font-weight: 500;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 2.5px;
+	}
+}

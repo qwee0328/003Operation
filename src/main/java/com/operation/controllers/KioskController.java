@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.operation.dto.KioskDTO;
+import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
 
 @Controller
@@ -37,8 +37,8 @@ public class KioskController {
 	}
 	
 	@PostMapping("/insertData")
-	public String insert(@RequestBody KioskDTO dto) {
-		System.out.println(dto);
+	public String insert(@RequestBody KioskRecordDTO dto) {
+		System.out.println(dto.toString());
 		return "hiMH...";
 	}
 	
