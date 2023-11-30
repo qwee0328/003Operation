@@ -1,0 +1,83 @@
+@charset "UTF-8";
+.body__guide {
+	max-width: 1100px;
+	margin: auto;
+	padding: 0 50px;
+	margin-top: 100px;
+	margin-bottom: 150px;
+}
+
+.titleArea {
+	font-size: 40px;
+	font-weight: bold;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 50px;
+}
+
+.postArea__titleInput {
+	border: 0;
+	outline: none;
+	width: 100%;
+	border-bottom: 1px solid #7D7D7D50;
+	font-size: 25px;
+}
+
+.postArea__file {
+	padding: 20px 0;
+}
+
+.fileInput__label {
+	background-color: #E1E6F5;
+	padding: 5px 10px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.postArea__fileInput {
+	display: none !important;
+}
+
+.postArea__bottom>div {
+	width: 50%;
+}
+
+.postArea__secret {
+	align-items: center;
+	justify-content: start;
+}
+
+.postArea__secret>label {
+	margin-left: 10px;
+	margin-top: 7px;
+	font-weight: 500;
+}
+
+.postArea__btns {
+	justify-content: end;
+	align-items: center;
+}
+
+.postArea__btns>button {
+	width: 100px;
+	height: 35px;
+	color: #FFFFFF;
+	border-radius: 10px;
+	border: 0;
+}
+
+.write {
+	margin-left: 15px;
+}
+
+@media ( max-width : 786px) {
+	.body__guide {
+		max-width: 600px;
+		margin-bottom: 100px;
+	}
+}
+
+::placeholder {
+	color: #7d7d7d50;
+}

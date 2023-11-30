@@ -18,9 +18,10 @@ public class BoardController {
 	@Autowired
 	private HttpSession session;
 	
+	// 게시글 작성
 	@RequestMapping("/writePost")
-	public void writePost() {
-		// 게시글 작성
+	public String writePost() {
+		return "board/writePost";
 	}
 	
 	@RequestMapping("/listBoard")

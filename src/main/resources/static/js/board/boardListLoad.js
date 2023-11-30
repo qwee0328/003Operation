@@ -1,3 +1,10 @@
+// 글쓰기 버튼
+$(document).ready(function(){
+	$(".board__writeBtn").on("click",function(){
+		location.href ="/board/writePost";
+	})
+});
+
 $(document).ready(function() {
 	let board__post = $("<div>").attr("class", "board__post d-flex");
 	let post__seq = $("<div>").attr("class", "post__seq");

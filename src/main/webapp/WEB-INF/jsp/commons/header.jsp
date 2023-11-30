@@ -26,7 +26,7 @@
 						<a href="#" class="colorWhite">키오스크 게임</a>
 					</div>
 					<div class="board" id="board">
-						<a href="#" class="colorWhite">게시판&nbsp;<i
+						<a href="/board/listBoard" class="colorWhite">게시판&nbsp;<i
 							class="fa-solid fa-chevron-down colorWhite"></i></a>
 						<ul class="bColorLightBlue" id="boradMenu">
 							<li><a href="/board/listBoard">자유게시판</a></li>
@@ -92,7 +92,7 @@
 					<div class="tabNab_body">
 						<div class="ham-practice"><a href="/practice/listPractice">키오스크 연습</a></div>
 						<div class="ham-game"><a href="#">키오스크 게임</a></div>
-						<div class="ham-board"><a href="#">게시판</a></div>
+						<div class="ham-board"><a href="/board/listBoard">게시판</a></div>
 						<div class="ham-board-sub"><a href="/board/listBoard">자유게시판</a></div>
 						<div class="ham-board-sub"><a href="#">질문게시판</a></div>
 						<div class="ham-board-sub"><a href="#">자주 묻는 질문</a></div>

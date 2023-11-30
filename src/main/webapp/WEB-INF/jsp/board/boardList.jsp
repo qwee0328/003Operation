@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>자유 게시판</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="/js/board/boardListLoad.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -31,7 +32,7 @@
                     <div class="search__value align-center">
                         <input type="text" placeholder="검색어를 입력해주세요.">
                     </div>
-                    <div class="search__btnCover  align-center">
+                    <div class="search__btnCover align-center">
                         <button class="search__btn bColorMainPink colorWhite">검색</button>
                     </div>
                 </div>
