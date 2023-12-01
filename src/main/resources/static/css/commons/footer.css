@@ -39,6 +39,10 @@
   font-weight: 400;
 }
 
+.contentBox__con a:hover {
+	color:white;
+}
+
 .footer_contents_tab {
   display: none;
 }

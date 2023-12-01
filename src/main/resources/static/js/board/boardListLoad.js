@@ -1,3 +1,11 @@
+// 글쓰기 버튼
+$(document).ready(function(){
+	$(".board__writeBtn").on("click",function(){
+		if($(".board__title").text().slice(0,2)=="질문") location.href ="/board/goWritePost/question";
+		else location.href ="/board/goWritePost/free";
+	})
+});
+
 $(document).ready(function() {
 	let board__post = $("<div>").attr("class", "board__post d-flex");
 	let post__seq = $("<div>").attr("class", "post__seq");
