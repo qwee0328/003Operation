@@ -66,7 +66,7 @@ $(document).ready(function(){
 			formData.append("attachFiles",$(".postArea__fileInput")[0].files[i]);
 		}
 		
-		// 공지글인지도 판단 
+		// 공지글인지도 판단 필요
 		$.ajax({
 			url:"/board/writePost",
 			type:"post",
@@ -99,13 +99,20 @@ $(document).ready(function(){
 		formData.append("title",$(".postArea__titleInput").val());
 		formData.append("content",$(".note-editable").html());
 		
+		// 새로 등록한 파일 중 삭제한 파일
 		for(let i=0; i<deleteFileList.length; i++){
 			formData.append("deleteFileList",deleteFileList[i]);
 		}
-
+		
+		// 기존 파일 중 삭제한 파일
 		for(let i=0; i<deleteExisingFileList.length; i++){
 			formData.append("deleteExisingFileList",deleteExisingFileList[i]);
 		};
+		
+		// 기존 이미지 중 삭제한 이미지
+		for(let i=0; i<deleteImgs.length; i++){
+			formData.append("deleteImgs",deleteImgs[i]);
+		}
 		
 		// 자유 vs 질문
 		let bulletin_category_id = "free";
@@ -132,6 +139,15 @@ $(document).ready(function(){
 	$(".goList").on("click",function(){
 		let bulletin_category_id = "free";
 		if($(".titleArea").text().slice(0,2)=="질문") bulletin_category_id = question;
+		
+		// 수정중이었으면 삽입된 이미지 다시 삭제
+		$.ajax({
+			url: "/board/deleteImage",
+			type: "POST",
+			traditional: true,
+			data: { srcList : insertImgs }
+		});
+		
 		location.href="/board/listBoard/"+bulletin_category_id;
 	});
 	

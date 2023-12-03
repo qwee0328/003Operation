@@ -20,6 +20,8 @@
 <div id="summernote"></div>
 <script>
 	var $j = jQuery.noConflict();
+	let deleteImgs = [];
+	let insertImgs = [];
 	
 	function uploadImg(imgs){
 		let formData = new FormData();
@@ -40,6 +42,10 @@
 					img.css('width', '100%');
 					img.attr("src", data[i]);
 					$j("#summernote").summernote("insertNode", img[0]);
+				
+					if('${post}'!=''){ // 수정 중이면
+						insertImgs.push(data[i]);
+					}
 				}
 			}
 		})
@@ -63,18 +69,20 @@
 	    ],
 		callbacks: {
 			onImageUpload: function(files) {
-				uploadImg(files);
+				uploadImg(files);			
 			},
 			onMediaDelete: function($target, editor, $editable) {     
-				// 수정일 때
-	
-				// 새 글일 때
-				$.ajax({
-	    			url: "/board/deleteImage",
-	    			type: "POST",
-	    			data: { src : $target.attr("src") }
-	    		})
-				
+				if('${post}'==''){
+					// 수정이 아닌 새 글일 때
+					$.ajax({
+		    			url: "/board/deleteImage",
+		    			type: "POST",
+		    			data: { src : $target.attr("src") }
+		    		});
+				}else{
+					// 수정 중
+					deleteImgs.push($target.attr("src"));
+				}
 			}
 		}
 	});

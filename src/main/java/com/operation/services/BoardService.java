@@ -108,6 +108,15 @@ public class BoardService {
 		Files.deleteIfExists(path);
 	}
 	
+	// 이미지 일괄 삭제 ( 수정중 이미지 삽입하고 목록으로 이동한 경우 )
+	@Transactional
+	public void deleteImage(String[] srcList) throws Exception {
+		for(String src:srcList) {
+			Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
+			Files.deleteIfExists(path);
+		}
+	}
+	
 	// 게시글 정보 불러오기 ( 수정용 )
 	public Map<String, Object> selectPostById(int id){
 		return dao.selectPostById(id);
@@ -115,7 +124,7 @@ public class BoardService {
 	
 	// 게시글 정보 수정
 	@Transactional
-	public void update(BoardDTO dto, MultipartFile[] files, Integer[] deleteFileList, Integer[] deleteExisingFileList) throws Exception {
+	public void update(BoardDTO dto, MultipartFile[] files, Integer[] deleteFileList, Integer[] deleteExisingFileList, String[] deleteImgsSrc) throws Exception {
 		dao.update(dto);
 		
 		// 기존 파일 삭제
@@ -130,10 +139,17 @@ public class BoardService {
 			}
 			
 			for(String src:deleteFileNameList) {
-				System.out.println(src);
 				Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
 				Files.deleteIfExists(path);
 			}
+		}
+		
+		// 기존 이미지 삭제
+		if(deleteImgsSrc != null && deleteImgsSrc.length >=1) {
+			for(String src:deleteImgsSrc) {
+				Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
+				Files.deleteIfExists(path);
+			}	
 		}
 		
 	

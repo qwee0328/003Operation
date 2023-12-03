@@ -105,8 +105,9 @@ public class BoardController {
 	public void updatePost(BoardDTO dto, 
 							@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles, 
 							@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList, 
-							@RequestParam(value = "deleteExisingFileList", required = false) Integer[] deleteExisingFileList) throws Exception {
-		bservice.update(dto, attachFiles, deleteFileList, deleteExisingFileList);
+							@RequestParam(value = "deleteExisingFileList", required = false) Integer[] deleteExisingFileList,
+							@RequestParam(value = "deleteImgs", required = false) String[] deleteImgs) throws Exception {
+		bservice.update(dto, attachFiles, deleteFileList, deleteExisingFileList, deleteImgs);
 	}
 	
 	@RequestMapping("/deletePost")
@@ -125,8 +126,15 @@ public class BoardController {
 	// summernote 이미지 경로에서 삭제
 	@ResponseBody
 	@RequestMapping("/deleteImage")
-	public void deleteImage(@RequestParam("src") String src) throws Exception {
-		bservice.deleteImage(src);
+	public void deleteImage(@RequestParam(value="src", required = false) String src, @RequestParam(value="srcList", required = false) String[] srcList) throws Exception {
+		if(src != null && !src.isBlank()) {
+			System.out.println("여기아님");
+			bservice.deleteImage(src);
+		}else if(srcList != null && srcList.length >= 1) {
+			System.out.println(srcList[0]);
+			bservice.deleteImage(srcList);
+		}
+		
 	}
 	
 	@ExceptionHandler(Exception.class)
