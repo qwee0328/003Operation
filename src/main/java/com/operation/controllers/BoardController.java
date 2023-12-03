@@ -126,8 +126,7 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping("/deleteImage")
 	public void deleteImage(@RequestParam("src") String src) throws Exception {
-		Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src); // String을 Path 객체로 변환
-		Files.deleteIfExists(path);
+		bservice.deleteImage(src);
 	}
 	
 	@ExceptionHandler(Exception.class)
