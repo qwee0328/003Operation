@@ -66,18 +66,14 @@
 			},
 			onMediaDelete: function($target, editor, $editable) {     
 				// 수정일 때
-				if($("#temporary").val() == "true") {
-					let deleteUrl = $target.attr("src");
-					let prev = $("#deleteUrl").val();
-					$("#deleteUrl").val(prev + ":" + deleteUrl);
+	
 				// 새 글일 때
-				} else {
-					$.ajax({
-		    			url: "/board/deleteImage",
-		    			type: "POST",
-		    			data: { src : $target.attr("src") }
-		    		})
-				} 
+				$.ajax({
+	    			url: "/board/deleteImage",
+	    			type: "POST",
+	    			data: { src : $target.attr("src") }
+	    		})
+				
 			}
 		}
 	});

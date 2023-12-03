@@ -110,9 +110,10 @@ public class BoardController {
 	}
 
 	// summernote 이미지 경로에서 삭제
+	@ResponseBody
 	@RequestMapping("/deleteImage")
 	public void deleteImage(@RequestParam("src") String src) throws Exception {
-		Path path = FileSystems.getDefault().getPath("C:/" + src); // String을 Path 객체로 변환
+		Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src); // String을 Path 객체로 변환
 		Files.deleteIfExists(path);
 	}
 	
