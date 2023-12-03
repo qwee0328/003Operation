@@ -196,6 +196,7 @@ li>a, .tabNab_body a{
 	.tabNab_body {
 		background-color: white;
 		height: calc(100% - 200px);
+		overflow-x:auto;
 	}
 
 	.tabNab_body>div {
@@ -241,5 +242,19 @@ li>a, .tabNab_body a{
 	.ham-board-sub:hover>a, .ham-mypage-sub:hover>a {
 		background-color: #1b1f3b;
 		color: white;
+	}
+	
+	.tabNab_body::-webkit-scrollbar {
+   	 	width: 5px;
+    	
+	}
+	.tabNab_body::-webkit-scrollbar-thumb{
+	    background-color: #7d7d7d;
+	    border-radius: 10px; 
+	
+	    border: 7px solid transparent /* 스크롤을 적용할 영역 색깔과 border 색상을 똑같이 맞춘다 */
+	}
+	.tabNab_body::-webkit-scrollbar-track{
+	    background-color: transparent/* 스크롤바 뒷 배경을 투명 처리한다 */
 	}
 }
