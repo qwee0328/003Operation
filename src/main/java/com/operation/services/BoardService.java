@@ -11,6 +11,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
@@ -27,7 +29,7 @@ public class BoardService {
 	@Autowired
 	private FileDAO fdao;
 	
-	// 게시글에 파일 업로드
+	// 게시글 업로드 (+ 파일 업로드)
 	@Transactional 
 	public void insert(BoardDTO dto, MultipartFile[] files, Integer[] deleteFileList) throws Exception {
 		int bulletin_board_id = dao.insert(dto);
@@ -82,7 +84,7 @@ public class BoardService {
 	
 	// 이미지 업로드
 	@Transactional 
-	public List<String>  saveImage(MultipartFile[] files) throws Exception {
+	public List<String> saveImage(MultipartFile[] files) throws Exception {
 		List<String> list = new ArrayList<>();
 		if(files != null && files.length >= 1) {
 			String path = "c:/003Operation/uploads";
@@ -96,5 +98,51 @@ public class BoardService {
 			}
 		}
 		return list;
+	}
+	
+	// 게시글 정보 불러오기 ( 수정용 )
+	public Map<String, Object> selectPostById(int id){
+		return dao.selectPostById(id);
+	}
+	
+	// 게시글 정보 수정
+	public void update(BoardDTO dto, MultipartFile[] files, Integer[] deleteFileList, Integer[] deleteExisingFileList) throws Exception {
+		dao.update(dto);
+		
+		
+		// 파일 삭제
+		if(deleteExisingFileList != null && deleteExisingFileList.length >= 1) {
+			fdao.delete(deleteExisingFileList);
+		}
+	
+		
+		
+		if(files != null && files.length >= 1) {
+			String path = "c:/003Operation/uploads";
+			File uploadPath = new File(path);
+			if(!uploadPath.exists()) uploadPath.mkdir();
+			
+			if(deleteFileList != null && deleteFileList.length >= 1) {
+				int idx = 0;
+				for(int i=0; i<files.length; i++){
+					if(idx < deleteFileList.length && deleteFileList[idx] == i) {
+						idx++; 
+						continue;
+					}
+					String oriName = files[i].getOriginalFilename();
+					String sysName = UUID.randomUUID()+"_"+oriName;
+					files[i].transferTo(new File(uploadPath,sysName));
+					fdao.insert(new FileDTO(0, dto.getId(), sysName, oriName));
+				}
+			}else {
+				for(int i=0; i<files.length; i++){
+					String oriName = files[i].getOriginalFilename();
+					String sysName = UUID.randomUUID()+"_"+oriName;
+					files[i].transferTo(new File(uploadPath,sysName));
+					fdao.insert(new FileDTO(0, dto.getId(), sysName, oriName));
+				}
+			}
+			
+		}
 	}
 }

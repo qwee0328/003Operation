@@ -70,7 +70,6 @@ public class BoardController {
 	public void writePost(BoardDTO dto, @RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList) throws Exception {
 		dto.setMember_id(((String)session.getAttribute("loginID")));
 		dto.setMember_nickname(((String)session.getAttribute("loginNickName")));
-
 		bservice.insert(dto, attachFiles, deleteFileList);
 	}
 	
@@ -79,10 +78,6 @@ public class BoardController {
 	public String listBoard(@PathVariable String catogory, Model model) {
 		if(catogory.equals("question"))
 			model.addAttribute("isQuestion",true);
-		
-		//int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
-		
-		//bservice.selectAll(catogory, currentPage);
 		return "board/boardList";
 	}
 	
@@ -91,9 +86,27 @@ public class BoardController {
 		// 게시글 출력
 	}
 	
+	
+	// 게시글 작성 페이지로 이동
+	@RequestMapping("/goUpdatePost/{catogory}/{post_id}")
+	public String goUpdatePost(@PathVariable String catogory, Model model,@PathVariable  int post_id) {
+		if(catogory.equals("question"))
+			model.addAttribute("isQuestion",true);
+		model.addAttribute("post",bservice.selectPostById(post_id));
+		
+		return "board/writePost";
+	}
+	
+	
+	
+	// 게시글 수정
+	@ResponseBody
 	@RequestMapping("/updatePost")
-	public void updatePost() {
-		// 게시글 수정
+	public void updatePost(BoardDTO dto, 
+							@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles, 
+							@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList, 
+							@RequestParam(value = "deleteExisingFileList", required = false) Integer[] deleteExisingFileList) throws Exception {
+		bservice.update(dto, attachFiles, deleteFileList, deleteExisingFileList);
 	}
 	
 	@RequestMapping("/deletePost")

@@ -5,7 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 작성</title>
+<c:choose>
+	<c:when test="${not empty post.id}">
+		<title>게시글 수정</title>
+	</c:when>
+	<c:otherwise>
+		<title>게시글 작성</title>
+	</c:otherwise>
+</c:choose>
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
@@ -22,20 +29,55 @@
 		<div class="body__guide">
 			<c:choose>
 				<c:when test="${not empty isQuestion}"> 
-					<div class="titleArea">질문 게시글 작성</div>
+					<c:choose>
+						<c:when test="${not empty post.id}">
+							<div class="titleArea">질문 게시글 수정</div>
+						</c:when>
+						<c:otherwise>
+							<div class="titleArea">질문 게시글 작성</div>
+						</c:otherwise>
+					</c:choose>
 				</c:when>
 				<c:otherwise>
-					<div class="titleArea">자유 게시글 작성</div>
+					<c:choose>
+						<c:when test="${not empty post.id}">
+							<div class="titleArea">자유 게시글 수정</div>
+						</c:when>
+						<c:otherwise>
+							<div class="titleArea">자유 게시글 작성</div>
+						</c:otherwise>
+					</c:choose>	
 				</c:otherwise>
 			</c:choose>
 			<div class="postArea">
 				<div class="postArea__title">
-					<input type="text" class="postArea__titleInput" placeholder="제목을 입력해주세요">
+					<input type="text" class="postArea__titleInput" value="${post.title}" placeholder="제목을 입력해주세요">
 				</div>
 				<div class="postArea__file">
 					<div class="d-flex">
 						<label class="fileInput__label" for="fileInput">파일 첨부</label>
-						<div class="fileNameList d-flex"></div>
+							<div class="fileNameList d-flex">
+								<c:choose>	
+									<c:when test="${not empty post.file_names}">
+										
+										<script>
+											// 기존 파일 목록
+											let fileNames = `${post.file_names}`.split(",");
+											let fileIds = `${post.file_ids}`.split(",");
+											
+											for(let i=0; i<fileNames.length; i++){
+												let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
+												let fileName = $("<div>").attr("class","fileName").text(fileNames[i]);
+												let fileIcon = $("<div>").attr("class","ml5").html("<i class='fa-solid fa-xmark deleteFileBtn' data-seq="+fileIds[i]+"></i>")
+												$(".fileNameList").append(fileNameTag.append(fileName).append(fileIcon))		
+											}
+										</script>
+										
+									</c:when>
+									
+								</c:choose>
+								
+							</div>
 					</div>
 					<input type="file" class="postArea__fileInput" id="fileInput" multiple>
 					
@@ -53,8 +95,16 @@
 					</c:choose>		
 					</div>			
 					<div class="postArea__btns d-flex">
-						<button class="goList bColorGray">목록으로</button>
-						<button class="write bColorMainPink">작성완료</button>
+						<c:choose>
+							<c:when test="${not empty post}">
+								<button class="goList bColorGray">수정취소</button>
+								<button class="update bColorMainPink" data-id="${post.id}">수정완료</button>
+							</c:when>
+							<c:otherwise>
+								<button class="goList bColorGray">목록으로</button>
+								<button class="write bColorMainPink">작성완료</button>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 

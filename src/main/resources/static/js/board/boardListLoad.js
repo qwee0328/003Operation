@@ -74,9 +74,6 @@ function postLoad(cpage) {
 			data: { category: category, cpage: cpage },
 			type: "post"
 		}).done(function(result) {
-			
-			console.log(result)
-			
 			let recordTotalCount = result.recordTotalCount;
 			let recordCountPerPage = result.recordCountPerPage;
 			let naviCountPerPage = result.naviCountPerPage;
@@ -240,3 +237,22 @@ window.onresize = function() {
 	drawPagination(recordTotalCount, postCurPage,10,10);
 }
 */
+
+$(document).on("click",".title__name",function(){
+	console.log("게시글 수정 테스트" + $(this).attr('data-id'));
+	
+	let url = "/board/goUpdatePost/free";
+	if ($(".board__title").text().slice(0, 2) == "질문") location.href = "/board/goUpdatePost/question";
+	
+	url+="/"+$(this).attr('data-id');	
+	
+	location.href=url;
+	/*$.ajax({
+		url:url,
+		data:{
+			post_id:$(this).attr('data-id')
+		},
+		type:"post"
+	});*/
+	
+});

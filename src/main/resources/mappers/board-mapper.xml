@@ -17,6 +17,20 @@
 		<result property="reply_cnt" column="reply_cnt"/>
 		<result property="file_cnt" column="file_cnt"/>
 	</resultMap>
+	
+	<resultMap id="updatePostInfo" type="java.util.Map">
+		<result property="id" column="id"/>
+		<result property="bulletin_category_id" column="bulletin_category_id"/>
+		<result property="member_id" column="member_id"/>
+		<result property="member_nickname" column="member_nickname"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="write_date" column="write_date"/>
+		<result property="view_count" column="view_count"/>
+		<result property="is_fix" column="is_fix"/>
+		<result property="file_names" column="file_names"/>
+		<result property="file_ids" column="file_ids"/>
+	</resultMap>
 
 	<!-- 게시글 작성 -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
@@ -46,4 +60,15 @@
 		</if>
 		order by id desc;
 	</select>
+	
+	<!-- 게시글 정보 불러오기 -->
+	<select id="selectPostById" resultMap="updatePostInfo">
+		select * from updatePostInfo where id = #{id};
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="update">
+		update bulletin_board set title=#{title}, content=#{content} where id=#{id};
+	</update>
+	
 </mapper>

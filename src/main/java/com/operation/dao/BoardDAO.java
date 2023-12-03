@@ -34,4 +34,14 @@ public class BoardDAO {
 	public int selectToalCnt(String bulletin_category_id) {
 		return db.selectOne("Board.selectToalCnt",bulletin_category_id);
 	}
+	
+	// 게시글 정보 불러오기 ( 수정용 )
+	public Map<String, Object> selectPostById(int id){
+		return db.selectOne("Board.selectPostById",id);
+	}
+	
+	// 게시글 수정
+	public int update(BoardDTO dto) {
+		return db.update("Board.update",dto);
+	}
 }

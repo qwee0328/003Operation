@@ -20,6 +20,7 @@
 <div id="summernote"></div>
 <script>
 	var $j = jQuery.noConflict();
+	
 	function uploadImg(imgs){
 		let formData = new FormData();
 		
@@ -77,6 +78,9 @@
 			}
 		}
 	});
+	
+	
+	$j('#summernote').summernote("code",`${post.content}`);
 </script>
 </body>
 </html>
