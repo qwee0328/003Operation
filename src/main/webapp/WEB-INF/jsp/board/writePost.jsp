@@ -6,9 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 작성</title>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 <link rel="stylesheet" href="/css/commons/common.css">
 <link rel="stylesheet" href="/css/board/writePost.css">
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 <script src="/js/board/writePost.js"></script>
 </head>
 <body>
@@ -31,7 +34,8 @@
 					<label class="fileInput__label" for="fileInput">파일 첨부</label>
 					<input type="file" class="postArea__fileInput" id="fileInput" multiple>
 				</div>
-				<%@ include file="/WEB-INF/jsp/commons/summernote.jsp" %>
+				<%@ include file="/WEB-INF/jsp/commons/summernote.jsp" %>	
+				
 				<div class="postArea__bottom d-flex">
 					<!-- 질문 게시판의 경우 비밀글 설정 -->
 					<div class="postArea__secret d-flex">

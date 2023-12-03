@@ -1,4 +1,8 @@
 $(document).ready(function(){
+	
+	
+	
+	
     // 글 작성 버튼
     $(".write").on("click",function(){
 		// 제목 입력 검사
