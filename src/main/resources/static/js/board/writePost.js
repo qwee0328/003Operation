@@ -5,7 +5,11 @@ $(document).ready(function(){
 	$("#fileInput").on("change",function(e){
 		$(".fileNameList").html("");
 		deleteFileList = [];
+		if(e.target.files.length>=6){
+			alert("파일은 최대 5개까지 올릴 수 있습니다.");
+		}
 		for(let i=0; i<e.target.files.length; i++){
+			if(i==5) break;
 			let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
 			let fileName = $("<div>").attr("class","fileName").text(e.target.files[i].name);
 			let fileIcon = $("<div>").attr("class","ml5").html(`<i class='fa-solid fa-xmark deleteFileBtn' data-id=${i}></i>`)
@@ -50,6 +54,7 @@ $(document).ready(function(){
 		formData.append("bulletin_category_id",bulletin_category_id);
 		
 		for(let i=0; i<$(".postArea__fileInput")[0].files.length; i++){
+			if(i==5) break;
 			formData.append("attachFiles",$(".postArea__fileInput")[0].files[i]);
 		}
 		
