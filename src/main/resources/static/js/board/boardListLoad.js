@@ -230,29 +230,13 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 	}
 }
 
-/*
-window.onresize = function() {
-	// 에이젝스로 값 다시 불러오든가.. 하기..?
-	console.log(resize);
-	drawPagination(recordTotalCount, postCurPage,10,10);
-}
-*/
 
-$(document).on("click",".title__name",function(){
-	console.log("게시글 수정 테스트" + $(this).attr('data-id'));
-	
+// 게시글 수정 페이지로 이동하는 코드 -> 추후에 post 내에서 수정 버튼과  연결
+/*$(document).on("click",".title__name",function(){
 	let url = "/board/goUpdatePost/free";
 	if ($(".board__title").text().slice(0, 2) == "질문") location.href = "/board/goUpdatePost/question";
 	
 	url+="/"+$(this).attr('data-id');	
 	
 	location.href=url;
-	/*$.ajax({
-		url:url,
-		data:{
-			post_id:$(this).attr('data-id')
-		},
-		type:"post"
-	});*/
-	
-});
+});*/
