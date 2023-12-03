@@ -2,6 +2,7 @@ package com.operation.services;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,20 +29,36 @@ public class BoardService {
 	
 	// 게시글에 파일 업로드
 	@Transactional 
-	public int insert(BoardDTO dto, MultipartFile[] files) throws Exception {
+	public void insert(BoardDTO dto, MultipartFile[] files, Integer[] deleteFileList) throws Exception {
 		int bulletin_board_id = dao.insert(dto);
 		if(files != null && files.length >= 1) {
 			String path = "c:/003Operation/uploads";
 			File uploadPath = new File(path);
 			if(!uploadPath.exists()) uploadPath.mkdir();
-			for(MultipartFile f:files) {
-				String oriName = f.getOriginalFilename();
-				String sysName = UUID.randomUUID()+"_"+oriName;
-				f.transferTo(new File(uploadPath,sysName));
-				fdao.insert(new FileDTO(0, bulletin_board_id, sysName, oriName));
+			
+			if(deleteFileList != null && deleteFileList.length >= 1) {
+				int idx = 0;
+				System.out.println("길이: :"+deleteFileList.length);
+				for(int i=0; i<files.length; i++){
+					if(idx < deleteFileList.length && deleteFileList[idx] == i) {
+						idx++; 
+						continue;
+					}
+					String oriName = files[i].getOriginalFilename();
+					String sysName = UUID.randomUUID()+"_"+oriName;
+					files[i].transferTo(new File(uploadPath,sysName));
+					fdao.insert(new FileDTO(0, bulletin_board_id, sysName, oriName));
+				}
+			}else {
+				for(int i=0; i<files.length; i++){
+					String oriName = files[i].getOriginalFilename();
+					String sysName = UUID.randomUUID()+"_"+oriName;
+					files[i].transferTo(new File(uploadPath,sysName));
+					fdao.insert(new FileDTO(0, bulletin_board_id, sysName, oriName));
+				}
 			}
+			
 		}
-		return 0;
 	}
 	
 	// 게시글 목록 불러오기

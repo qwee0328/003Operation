@@ -9,10 +9,12 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="stylesheet" href="/css/commons/common.css">
 <link rel="stylesheet" href="/css/board/writePost.css">
 
 <script src="/js/board/writePost.js"></script>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
@@ -31,8 +33,12 @@
 					<input type="text" class="postArea__titleInput" placeholder="제목을 입력해주세요">
 				</div>
 				<div class="postArea__file">
-					<label class="fileInput__label" for="fileInput">파일 첨부</label>
+					<div class="d-flex">
+						<label class="fileInput__label" for="fileInput">파일 첨부</label>
+						<div class="fileNameList d-flex"></div>
+					</div>
 					<input type="file" class="postArea__fileInput" id="fileInput" multiple>
+					
 				</div>
 				<%@ include file="/WEB-INF/jsp/commons/summernote.jsp" %>	
 				

@@ -67,11 +67,11 @@ public class BoardController {
 	// 게시글 작성
 	@ResponseBody
 	@RequestMapping("/writePost")
-	public void writePost(BoardDTO dto, @RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles) throws Exception {
+	public void writePost(BoardDTO dto, @RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList) throws Exception {
 		dto.setMember_id(((String)session.getAttribute("loginID")));
 		dto.setMember_nickname(((String)session.getAttribute("loginNickName")));
 
-		bservice.insert(dto, attachFiles);
+		bservice.insert(dto, attachFiles, deleteFileList);
 	}
 	
 	// 게시글 목록으로 이동
