@@ -3,7 +3,47 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
+	<resultMap id="postInfo" type="java.util.Map">
+		<result property="id" column="id"/>
+		<result property="bulletin_category_id" column="bulletin_category_id"/>
+		<result property="member_id" column="member_id"/>
+		<result property="member_nickname" column="member_nickname"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="write_date" column="write_date"/>
+		<result property="view_count" column="view_count"/>
+		<result property="is_fix" column="is_fix"/>
+		<result property="recom_cnt" column="recom_cnt"/>
+		<result property="reply_cnt" column="reply_cnt"/>
+		<result property="file_cnt" column="file_cnt"/>
+	</resultMap>
+
+	<!-- 게시글 작성 -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert into bulletin_board values (null, #{bulletin_category_id}, #{member_id}, #{member_nickname}, #{title}, #{content}, default, default, #{is_fix});
 	</insert>
+	
+	<!-- 게시글 목록 불러오기 -->
+	<select id="selectAll" resultMap="postInfo">
+		select * from postInfo where bulletin_category_id = #{bulletin_category_id} 
+		<if test="bulletin_category_id.equals('notice')">
+			and is_fix = 1
+		</if>
+		order by id desc 
+		<if test="bulletin_category_id.equals('notice')">
+			limit 0,5;
+		</if>
+		<if test="!bulletin_category_id.equals('notice')">
+			limit #{start},#{count};
+		</if>
+	</select>
+	
+	<!-- 게시글 총 개수 불러오기 -->
+	<select id="selectToalCnt" resultType="int">
+		select count(*) from bulletin_board where bulletin_category_id = #{bulletin_category_id} 
+		<if test="bulletin_category_id.equals('notice')">
+			and is_fix = 1
+		</if>
+		order by id desc;
+	</select>
 </mapper>

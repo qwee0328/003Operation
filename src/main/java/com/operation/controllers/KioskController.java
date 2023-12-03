@@ -2,6 +2,7 @@ package com.operation.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,8 +37,10 @@ public class KioskController {
 		return "kiosk/kiosk";
 	}
 	
+	@CrossOrigin(origins = "https://pushssun.github.io")
 	@PostMapping("/insertData")
 	public String insert(@RequestBody KioskRecordDTO dto) {
+		System.out.println("insert in");
 		System.out.println(dto.toString());
 		return "hiMH...";
 	}
