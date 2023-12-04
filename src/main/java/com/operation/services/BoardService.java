@@ -69,22 +69,23 @@ public class BoardService {
 	public List<Map<String, Object>> selectAll(String bulletin_category_id, int currentPage) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("bulletin_category_id", bulletin_category_id);
-		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE -1) -1 );
+		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
 		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
 		return dao.selectAll(param);
 	}
-	
+
 	// 게시글 검색 목록 불러오기
-	public List<Map<String, Object>> selectByKeyword(String bulletin_category_id, String select, String keyword, int currentPage){
+	public List<Map<String, Object>> selectByKeyword(String bulletin_category_id, String select, String keyword,
+			int currentPage) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("bulletin_category_id", bulletin_category_id);
 		param.put("select", select);
-		param.put("keyword", "%"+keyword+"%");
-		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE -1) -1 );
+		param.put("keyword", "%" + keyword + "%");
+		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
 		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
 		return dao.selectByKeyword(param);
 	}
-	
+
 	// 공지 목록 불러오기
 	public List<Map<String, Object>> selectAll(String bulletin_category_id) {
 		return dao.selectAll(bulletin_category_id);
@@ -100,7 +101,7 @@ public class BoardService {
 		Map<String, Object> param = new HashMap<>();
 		param.put("bulletin_category_id", bulletin_category_id);
 		param.put("select", select);
-		param.put("keyword", "%"+keyword+"%");
+		param.put("keyword", "%" + keyword + "%");
 		return dao.selectSearchCnt(param);
 	}
 
@@ -227,6 +228,21 @@ public class BoardService {
 	// 게시글 댓글 수 불러오기
 	public int selectReplyById(int id) {
 		return dao.selectBookmarkById(id);
+	}
+
+	// 게시글 추천
+	public void insertRecommendById(Map<String, Object> param) {
+		dao.insertRecommendById(param);
+	}
+
+	// 게시글 북마크
+	public void insertBookmarkById(Map<String, Object> param) {
+		dao.insertBookmarkById(param);
+	}
+	
+	// 게시판 파일 불러오기
+	public List<Map<String, Object>> selectFileById(Map<String, Object> param) {
+		return dao.selectFileById(param);
 	}
 
 	// 게시글 삭제

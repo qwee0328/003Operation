@@ -68,7 +68,6 @@
             </div>
             <div class="board__footer d-flex">
                 <div class="board__pagination align-center">
-                    123456
                 </div>
                 <div class="board__writeBtnCover"><button class="board__writeBtn bColorMainPink colorWhite">글쓰기</button></div>
             </div>

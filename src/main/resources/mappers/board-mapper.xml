@@ -4,46 +4,52 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Board">
 	<resultMap id="postInfo" type="java.util.Map">
-		<result property="id" column="id"/>
-		<result property="bulletin_category_id" column="bulletin_category_id"/>
-		<result property="member_id" column="member_id"/>
-		<result property="member_nickname" column="member_nickname"/>
-		<result property="title" column="title"/>
-		<result property="content" column="content"/>
-		<result property="write_date" column="write_date"/>
-		<result property="view_count" column="view_count"/>
-		<result property="is_fix" column="is_fix"/>
-		<result property="recom_cnt" column="recom_cnt"/>
-		<result property="reply_cnt" column="reply_cnt"/>
-		<result property="file_cnt" column="file_cnt"/>
+		<result property="id" column="id" />
+		<result property="bulletin_category_id"
+			column="bulletin_category_id" />
+		<result property="member_id" column="member_id" />
+		<result property="member_nickname" column="member_nickname" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="write_date" column="write_date" />
+		<result property="view_count" column="view_count" />
+		<result property="is_fix" column="is_fix" />
+		<result property="recom_cnt" column="recom_cnt" />
+		<result property="reply_cnt" column="reply_cnt" />
+		<result property="file_cnt" column="file_cnt" />
 	</resultMap>
-	
+
 	<resultMap id="updatePostInfo" type="java.util.Map">
-		<result property="id" column="id"/>
-		<result property="bulletin_category_id" column="bulletin_category_id"/>
-		<result property="member_id" column="member_id"/>
-		<result property="member_nickname" column="member_nickname"/>
-		<result property="title" column="title"/>
-		<result property="content" column="content"/>
-		<result property="write_date" column="write_date"/>
-		<result property="view_count" column="view_count"/>
-		<result property="is_fix" column="is_fix"/>
-		<result property="file_names" column="file_names"/>
-		<result property="file_ids" column="file_ids"/>
+		<result property="id" column="id" />
+		<result property="bulletin_category_id"
+			column="bulletin_category_id" />
+		<result property="member_id" column="member_id" />
+		<result property="member_nickname" column="member_nickname" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="write_date" column="write_date" />
+		<result property="view_count" column="view_count" />
+		<result property="is_fix" column="is_fix" />
+		<result property="file_names" column="file_names" />
+		<result property="file_ids" column="file_ids" />
 	</resultMap>
 
 	<!-- 게시글 작성 -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
-		insert into bulletin_board values (null, #{bulletin_category_id}, #{member_id}, #{member_nickname}, #{title}, #{content}, default, default, #{is_fix});
+		insert
+		into bulletin_board values (null, #{bulletin_category_id},
+		#{member_id}, #{member_nickname}, #{title}, #{content}, default,
+		default, #{is_fix});
 	</insert>
-	
+
 	<!-- 게시글 목록 불러오기 -->
 	<select id="selectAll" resultMap="postInfo">
-		select * from postInfo where bulletin_category_id = #{bulletin_category_id} 
+		select * from postInfo where bulletin_category_id =
+		#{bulletin_category_id}
 		<if test="bulletin_category_id.equals('notice')">
 			and is_fix = 1
 		</if>
-		order by id desc 
+		order by id desc
 		<if test="bulletin_category_id.equals('notice')">
 			limit 0,5;
 		</if>
@@ -51,59 +57,98 @@
 			limit #{start},#{count};
 		</if>
 	</select>
-	
+
 	<!-- 게시글 검색 결과 불러오기 -->
 	<select id="selectByKeyword" resultMap="postInfo">
-		select * from postInfo where bulletin_category_id = #{bulletin_category_id} and ${select} like #{keyword}
-		order by id desc 
+		select * from postInfo
+		where bulletin_category_id = #{bulletin_category_id} and ${select}
+		like #{keyword}
+		order by id desc
 		limit #{start},#{count};
 	</select>
-	
+
 	<!-- 게시글 총 개수 불러오기 -->
 	<select id="selectTotalCnt" resultType="int">
-		select count(*) from bulletin_board where bulletin_category_id = #{bulletin_category_id} 
+		select count(*) from bulletin_board where bulletin_category_id =
+		#{bulletin_category_id}
 		<if test="bulletin_category_id.equals('notice')">
 			and is_fix = 1
 		</if>
 		order by id desc;
 	</select>
-	
+
 	<!-- 검색 게시글 총 개수 불러오기 -->
 	<select id="selectSearchCnt" resultType="int">
-		select count(*) from bulletin_board where bulletin_category_id = #{bulletin_category_id} and ${select} like #{keyword}
+		select count(*) from
+		bulletin_board where bulletin_category_id = #{bulletin_category_id}
+		and ${select} like #{keyword}
 		order by id desc;
 	</select>
-	
+
 	<!-- 게시글 정보 불러오기 -->
 	<select id="selectPostById" resultMap="updatePostInfo">
-		select * from updatePostInfo where id = #{id};
+		select * from
+		updatePostInfo where id = #{id};
 	</select>
-	
+
 	<!-- 게시글 수정 -->
 	<update id="update">
-		update bulletin_board set title=#{title}, content=#{content} where id=#{id};
+		update bulletin_board set title=#{title},
+		content=#{content} where id=#{id};
 	</update>
-	
+
 	<!-- 게시글 조회수 업데이트 -->
 	<update id="updateViewCountById">
-		update bulletin_board set view_count= view_count+1 where id=#{id};
+		update bulletin_board set view_count= view_count+1
+		where id=#{id};
 	</update>
-	
+
 	<!-- 게시글 추천수 불러오기 -->
 	<select id="selectRecommendById" resultType="int">
-		select count(*) count from board_recommend where bulletin_board_id=#{id};
+		select count(*)
+		count from board_recommend where bulletin_board_id=#{id};
 	</select>
-	
+
 	<!-- 게시글 북마크 수 불러오기 -->
 	<select id="selectBookmarkById" resultType="int">
-		select count(*) count from board_bookmark where bulletin_board_id=#{id};
+		select count(*) count
+		from board_bookmark where bulletin_board_id=#{id};
 	</select>
-	
+
 	<!-- 게시글 댓글 수 불러오기 -->
 	<select id="selectReplyById" resultType="int">
-		select count(*) count from reply where bulletin_board_id=#{id};
+		select count(*) count
+		from reply where bulletin_board_id=#{id};
 	</select>
-	
+
+	<!-- 게시글 추천 -->
+	<insert id="insertRecommendById">
+		insert board_recommend values(0,#{postId},#{userId});
+	</insert>
+
+	<!-- 게시글 북마크 -->
+	<insert id="insertBookmarkById">
+		insert board_bookmark values(0,#{postId},#{userId});
+	</insert>
+
+	<!-- 게시글 파일 불러오기 -->
+	<select id="selectFileById" resultType="map">
+		select * from
+		<if test="type.equals('free')">
+			bulletin_board_file
+		</if>
+		<if test="type.equals('question')">
+			fqa_board_file
+		</if>
+		where 
+		<if test="type.equals('free')">
+			bulletin_board_id=#{id}
+		</if>
+		<if test="type.equals('question')">
+			fqa_board_id=#{id}
+		</if>
+	</select>
+
 	<!-- 게시글 삭제 -->
 	<delete id="deletePost">
 		delete from bulletin_board where id=#{id};

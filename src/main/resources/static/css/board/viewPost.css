@@ -198,8 +198,17 @@
     border-radius: 50%;
 }
 
+.fileDown{
+	display: flex;
+	cursor: pointer;
+}
+
 @media (max-width: 1050px) {
+	.naviBackground{
+		left: 0px;
+	}
 	.boardPost__navi {
+		position: fixed;
 		left: 0px;
 		bottom: 0px;
 		width: 100%;

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${post.title }</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
@@ -20,20 +20,21 @@
  <div class="container">
  <%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
         <div class="boardPost_guide">
-            <div class="boardType">자유 게시판</div>
+            <div class="boardType">${type } 게시판</div>
+            <input type="hidden" id="boardType" value="${type }">
             <div class="boardPost">
             	<div class="naviBackground">
 	            	<div class="stickyContainer">
 	            		<div class="boardPost__navi">
 		                    <div class="navi__conf">
-		                        <div class="conf__circle">
+		                        <div class="conf__circle" id="recommendBtn">
 		                            <i class="fa-regular fa-thumbs-up"></i>
 		                            <div>추천 <span class="conf__miniCount recommendCount"></span></div>
 		                        </div>
 		                        <div class="conf__count recommendCount"></div>
 		                    </div>
 		                    <div class="navi__conf">
-		                        <div class="conf__circle">
+		                        <div class="conf__circle" id="bookmarkBtn">
 		                            <i class="fa-regular fa-bookmark"></i>
 		                            <div>북마크<span class="conf__miniCount bookmarkCount"></span></div>
 		                        </div>
@@ -53,7 +54,7 @@
 		                        </div>
 		                    </div>
 		                    <div class="navi__conf">
-		                        <div class="conf__circle">
+		                        <div class="conf__circle" id="boardListBtn">
 		                            <i class="fa-solid fa-list"></i>
 		                            <div>목록</div>
 		                        </div>
@@ -62,12 +63,10 @@
 	            	</div>
 	            	
             	</div>
-                <script type="text/javascript">
-                console.log("${post}");
-                console.log("${profileImgUrl}");
-                </script>
+     
                 <div class="boardPost__guide">
                 	<input type="hidden" value="${post.id }" id="postId">
+
                     <div class="postTitle">
                         ${post.title }
                     </div>
@@ -99,14 +98,7 @@
                             첨부파일
                         </div>
                         <div class="files__conf">
-                            <div class="files__Line">
-                                <i class="fa-regular fa-file"></i>
-                                <div>파일 이름</div>
-                            </div>
-                            <div class="files__Line">
-                                <i class="fa-regular fa-file"></i>
-                                <div>파일 이름</div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="pageBtns">

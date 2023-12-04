@@ -25,10 +25,10 @@ public class BoardDAO {
 	public List<Map<String, Object>> selectAll(Map<String, Object> param) {
 		return db.selectList("Board.selectAll", param);
 	}
-	
+
 	// 게시글 검색 목록 불러오기
-	public List<Map<String, Object>> selectByKeyword(Map<String, Object> param){
-		return db.selectList("Board.selectByKeyword",param);
+	public List<Map<String, Object>> selectByKeyword(Map<String, Object> param) {
+		return db.selectList("Board.selectByKeyword", param);
 	}
 
 	// 공지 목록 불러오기
@@ -38,12 +38,12 @@ public class BoardDAO {
 
 	// 게시글 개수 불러오기
 	public int selectTotalCnt(String bulletin_category_id) {
-		return db.selectOne("Board.selectTotalCnt",bulletin_category_id);
+		return db.selectOne("Board.selectTotalCnt", bulletin_category_id);
 	}
-	
+
 	// 검색 게시글 개수 불러오기
 	public int selectSearchCnt(Map<String, Object> param) {
-		return db.selectOne("Board.selectSearchCnt",param);
+		return db.selectOne("Board.selectSearchCnt", param);
 	}
 
 	// 게시글 정보 불러오기 ( 수정용 )
@@ -77,6 +77,21 @@ public class BoardDAO {
 	public int selectReplyById(int id) {
 		Integer result = db.selectOne("Board.selectReplyById", id);
 		return (result != null) ? result.intValue() : 0;
+	}
+
+	// 게시글 추천
+	public void insertRecommendById(Map<String, Object> param) {
+		db.update("Board.insertRecommendById", param);
+	}
+
+	// 게시글 북마크
+	public void insertBookmarkById(Map<String, Object> param) {
+		db.update("Board.insertBookmarkById", param);
+	}
+	
+	// 게시글 파일 불러오기
+	public List<Map<String, Object>> selectFileById(Map<String, Object> param){
+		return db.selectList("Board.selectFileById",param);
 	}
 
 	// 게시글 삭제
