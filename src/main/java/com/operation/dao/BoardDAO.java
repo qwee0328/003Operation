@@ -1,5 +1,6 @@
 package com.operation.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,11 @@ public class BoardDAO {
 	public List<Map<String, Object>> selectAll(Map<String, Object> param) {
 		return db.selectList("Board.selectAll", param);
 	}
+	
+	// 게시글 검색 목록 불러오기
+	public List<Map<String, Object>> selectByKeyword(Map<String, Object> param){
+		return db.selectList("Board.selectByKeyword",param);
+	}
 
 	// 공지 목록 불러오기
 	public List<Map<String, Object>> selectAll(String bulletin_category_id) {
@@ -31,8 +37,13 @@ public class BoardDAO {
 	}
 
 	// 게시글 개수 불러오기
-	public int selectToalCnt(String bulletin_category_id) {
-		return db.selectOne("Board.selectToalCnt", bulletin_category_id);
+	public int selectTotalCnt(String bulletin_category_id) {
+		return db.selectOne("Board.selectTotalCnt",bulletin_category_id);
+	}
+	
+	// 검색 게시글 개수 불러오기
+	public int selectSearchCnt(Map<String, Object> param) {
+		return db.selectOne("Board.selectSearchCnt",param);
 	}
 
 	// 게시글 정보 불러오기 ( 수정용 )

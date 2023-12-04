@@ -17,21 +17,16 @@ import com.operation.dto.KioskDTO;
 import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/kiosk")
 public class KioskController {
 	@Autowired
 	private	KioskService kservice;
 	
-	@RequestMapping("/listGame")
-	public void listGame() {
-		// 게임 목록 출력
-	}
-	
-	@RequestMapping("/viewGame")
-	public void viewGame() {
-		// 게임 화면 출력
-	}
+	@Autowired
+	private HttpSession session;
 	
 	// 키오스크 목록으로 이동
 	@RequestMapping("/goKioskList/{is_game}")
@@ -40,7 +35,7 @@ public class KioskController {
 		return "kiosk/kioskList";
 	}
 	
-	// 연습 목록 가져오기
+	// 키오스크 목록 가져오기
 	@ResponseBody
 	@RequestMapping("/getKioskList")
 	public List<KioskDTO> getKioskList(int is_game) {
@@ -49,19 +44,24 @@ public class KioskController {
 	}
 	
 	// 키오스크로 페이지로 이동
-	@RequestMapping("/viewPractice/{id}")
+	@RequestMapping("/viewKiosk/{id}")
 	public String viewPractice(Model model, @PathVariable int id) {
 		KioskDTO info = kservice.selectById(id);
 		model.addAttribute("info",info);
 		return "kiosk/kiosk";
 	}
 	
+	@ResponseBody
 	@CrossOrigin(origins = "https://pushssun.github.io")
 	@PostMapping("/insertData")
-	public String insert(@RequestBody KioskRecordDTO dto) {
-		System.out.println("insert in");
-		System.out.println(dto.toString());
-		return "hiMH...";
+	public void insert(@RequestBody KioskRecordDTO dto) {
+		String loginID = (String) session.getAttribute("loginID");
+		if(loginID!=null) {
+			System.out.println("로그인중");
+			dto.setMember_id(loginID);
+			dto.setMember_nickname((String) session.getAttribute("loginNickName"));
+			kservice.insert(dto);
+		}
 	}
 	
 	

@@ -31,7 +31,7 @@
 						<ul class="bColorLightBlue" id="boradMenu">
 							<li><a href="/board/listBoard/free">자유게시판</a></li>
 							<li><a href="/board/listBoard/question">질문게시판</a></li>
-							<li><a href="#">자주 묻는 질문</a></li>
+					<!-- 		<li><a href="#">자주 묻는 질문</a></li> -->
 							<li><a href="/qna/listBoard">Q&A</a></li>
 						</ul>
 					</div>
@@ -95,7 +95,7 @@
 						<div class="ham-board"><a href="/board/listBoard/free">게시판</a></div>
 						<div class="ham-board-sub"><a href="/board/listBoard/free">자유게시판</a></div>
 						<div class="ham-board-sub"><a href="/board/listBoard/question">질문게시판</a></div>
-						<div class="ham-board-sub"><a href="#">자주 묻는 질문</a></div>
+<!-- 						<div class="ham-board-sub"><a href="#">자주 묻는 질문</a></div> -->
 						<div class="ham-board-sub"><a href="/qna/listBoard">Q&A</a></div>
 						
 						<c:choose>

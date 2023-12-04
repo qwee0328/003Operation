@@ -40,7 +40,7 @@
                             <select class="search__select">
                                 <option value="title">제목</option>
                                 <option value="content">내용</option>
-                                <option value="writer">작성자</option>
+                                <option value="member_nickname">작성자</option>
                             </select>
                             <span class="search__arrow"><i class="fa-solid fa-chevron-down"></i></span>
                         </div>
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="board__body">
-                <div class="board__postCnt">전체 <span class="colorMainBlue">20건</span></div>
+                <div class="board__postCnt">전체 <span class="postCnt__txt colorMainBlue">20</span>건</div>
                 <div class="board__postHeader align-center">
                     <div class="postHeader__seq">번호</div>
                     <div class="postHeader__title">제목</div>

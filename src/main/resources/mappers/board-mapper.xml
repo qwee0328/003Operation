@@ -52,12 +52,25 @@
 		</if>
 	</select>
 	
+	<!-- 게시글 검색 결과 불러오기 -->
+	<select id="selectByKeyword" resultMap="postInfo">
+		select * from postInfo where bulletin_category_id = #{bulletin_category_id} and ${select} like #{keyword}
+		order by id desc 
+		limit #{start},#{count};
+	</select>
+	
 	<!-- 게시글 총 개수 불러오기 -->
-	<select id="selectToalCnt" resultType="int">
+	<select id="selectTotalCnt" resultType="int">
 		select count(*) from bulletin_board where bulletin_category_id = #{bulletin_category_id} 
 		<if test="bulletin_category_id.equals('notice')">
 			and is_fix = 1
 		</if>
+		order by id desc;
+	</select>
+	
+	<!-- 검색 게시글 총 개수 불러오기 -->
+	<select id="selectSearchCnt" resultType="int">
+		select count(*) from bulletin_board where bulletin_category_id = #{bulletin_category_id} and ${select} like #{keyword}
 		order by id desc;
 	</select>
 	

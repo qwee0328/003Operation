@@ -201,13 +201,12 @@
 }
 
 .board__footer {
-	margin-top: 20px;
+	margin-top: 40px;
 	position: relative;
 }
 
 .board__pagination {
 	width: 100%;
-
 }
 
 .board__writeBtnCover {
