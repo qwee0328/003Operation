@@ -1,8 +1,5 @@
 package com.operation.controllers;
 
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +49,7 @@ public class BoardController {
 		}else {
 			int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
 			list = bservice.selectAll(category, currentPage);
-			int recordTotalCount = bservice.selectToalCnt(category);
+			int recordTotalCount = bservice.selectTotalCnt(category);
 			result.put("recordTotalCount", recordTotalCount);
 			result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 			result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
@@ -60,7 +57,25 @@ public class BoardController {
 		result.put("postCurPage", cpage);
 		result.put("list", list);
 		return result;
-		
+	}
+	
+	
+	// 게시글 검색 목록 불러오기
+	@ResponseBody
+	@RequestMapping("/selectByKeyword")
+	public Map<String, Object> selectByKeyword(String category, String select, String keyword, @RequestParam(value="cpage", required=false) String cpage){
+		Map<String, Object> result = new HashMap<>();
+		List<Map<String, Object>> list = new ArrayList<>();
+		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
+		list = bservice.selectByKeyword(category, select, keyword, currentPage);
+		int recordTotalCount = bservice.selectSearchCnt(category, select, keyword);
+		result.put("recordTotalCount", recordTotalCount);
+		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+	
+		result.put("postCurPage", cpage);
+		result.put("list", list);
+		return result;
 	}
 
 	
@@ -134,8 +149,8 @@ public class BoardController {
 			System.out.println(srcList[0]);
 			bservice.deleteImage(srcList);
 		}
-		
 	}
+	
 	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

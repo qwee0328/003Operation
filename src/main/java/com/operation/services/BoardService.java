@@ -69,8 +69,19 @@ public class BoardService {
 		Map<String, Object> param = new HashMap<>();
 		param.put("bulletin_category_id", bulletin_category_id);
 		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE -1) -1 );
-		param.put("count", currentPage * Constants.RECORD_COUNT_PER_PAGE);
+		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
 		return dao.selectAll(param);
+	}
+	
+	// 게시글 검색 목록 불러오기
+	public List<Map<String, Object>> selectByKeyword(String bulletin_category_id, String select, String keyword, int currentPage){
+		Map<String, Object> param = new HashMap<>();
+		param.put("bulletin_category_id", bulletin_category_id);
+		param.put("select", select);
+		param.put("keyword", "%"+keyword+"%");
+		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE -1) -1 );
+		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
+		return dao.selectByKeyword(param);
 	}
 	
 	// 공지 목록 불러오기
@@ -79,10 +90,19 @@ public class BoardService {
 	}
 	
 	// 게시글 개수 불러오기
-	public int selectToalCnt(String bulletin_category_id) {
-		return dao.selectToalCnt(bulletin_category_id);
+	public int selectTotalCnt(String bulletin_category_id) {
+		return dao.selectTotalCnt(bulletin_category_id);
 	}
 	
+	// 검색 게시글 개수 불러오기
+	public int selectSearchCnt(String bulletin_category_id, String select, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("bulletin_category_id", bulletin_category_id);
+		param.put("select", select);
+		param.put("keyword", "%"+keyword+"%");
+		return dao.selectSearchCnt(param);
+	}
+
 	// 이미지 업로드
 	@Transactional 
 	public List<String> saveImage(MultipartFile[] files) throws Exception {
