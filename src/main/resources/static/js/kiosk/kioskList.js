@@ -26,7 +26,7 @@ $(document).ready(function(){
         
         $(kioskCategory__kiosk).on("click",function(){
 			let id = $(this).closest(".kioskCategory__kiosk").attr("data-id");
-			location.href = "/kiosk/viewPractice/"+id;
+			location.href = "/kiosk/viewKiosk/"+id;
 		});
     }
 	});

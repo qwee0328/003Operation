@@ -35,8 +35,10 @@ $(document).ready(function(){
     // 글 작성 버튼
     $(".write").on("click",function(){
 		// 제목 입력 검사
-		if($(".postArea__titleInput").val()==""){
+		let title = $(".postArea__titleInput").val();
+		if(title==""||title.trim()==""){
 			alert("제목을 입력하세요.");
+			$(".postArea__titleInput").val("");
 			$(".postArea__titleInput").focus();
 			return;
 		}

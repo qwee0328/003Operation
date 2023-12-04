@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="board__body">
-                <div class="board__postCnt">전체 <span class="colorMainBlue">20건</span></div>
+                <div class="board__postCnt">전체 <span class="postCnt__txt colorMainBlue">20</span>건</div>
                 <div class="board__postHeader align-center">
                     <div class="postHeader__seq">번호</div>
                     <div class="postHeader__title">제목</div>

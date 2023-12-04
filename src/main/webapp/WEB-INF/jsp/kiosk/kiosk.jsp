@@ -17,13 +17,19 @@
         <div class="guide">
             <div class="kiosk__kioskStep">[ 1단계 ]</div>
             <div class="kiosk__kioskName">${info.name}</div>
-            <div class="kiosk__progressBar d-flex">
-                <div class="progressBar__name">진행도</div>
-                <div class="progressBar__bar"><div class="progressBar__fill"></div></div>
-                <div class="progressBar__per">100%</div>
-            </div>
+            <c:choose>
+            	<c:when test="${info.is_game}">
+           			<div class="kiosk__progressBar d-flex">
+		                <div class="progressBar__name">진행도</div>
+		                <div class="progressBar__bar"><div class="progressBar__fill"></div></div>
+		                <div class="progressBar__per">100%</div>
+		            </div>
+            	</c:when>
+            </c:choose>
+            
             <div class="kiosk__area">
-            	<iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://pushssun.github.io/${info.url}"></iframe>
+            	<%-- <iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://pushssun.github.io/${info.url}"></iframe> --%>
+            	<iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://pushssun.github.io/TORDERTest1/"></iframe> <!-- 테스트용 -->
             </div>
             
             <!-- 기록 영역 ( 게임용 ) -->
