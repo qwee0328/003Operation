@@ -6,7 +6,7 @@
 	
 	<!-- 키오스크 목록 불러오기 -->
 	<select id="selectAll" resultType="com.operation.dto.KioskDTO">
-		select * from kiosk where is_game = #{is_game};
+		select * from kiosk where is_game = #{is_game} order by name;
 	</select>
 	
 	<!-- 키오스크 정보 불러오기 -->
