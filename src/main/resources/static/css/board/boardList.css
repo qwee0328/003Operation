@@ -184,15 +184,13 @@
 	width: 35%;
 }
 	
-.board__post:hover{
-	cursor: pointer;
-}
 
 .title__name {
-	width: 75%;
+	width: fit-content;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	cursor: pointer;
 }
 
 .title__replyCnt {
@@ -201,7 +199,7 @@
 
 .title__replyCntMini {
 	width: 15%;
-	display: none;
+	display: none !important;
 }
 
 .title__replyCnt,
@@ -222,7 +220,7 @@
 
 
 .board__footer {
-	margin-top: 20px;
+	margin-top: 40px;
 	position: relative;
 }
 
@@ -294,17 +292,16 @@
 	}
 
 	.title__name {
-		width: 85%;
+		width: fit-content;
 	}
 
 	.title__replyCnt {
-		display: none;
+		display: none !important;
 	}
 
 	.title__replyCntMini {
-		justify-content: start;
 		width: 15%;
-		display: flex;
+		display: flex !important;
 	}
 
 	.board__post {

@@ -96,11 +96,13 @@ public class BoardDTO {
 		this.view_count = view_count;
 	}
 
-	public boolean isFix() {
+	public boolean isIs_fix() {
 		return is_fix;
 	}
 
-	public void setFix(boolean is_fix) {
+	public void setIs_fix(boolean is_fix) {
 		this.is_fix = is_fix;
 	}
+
+
 }

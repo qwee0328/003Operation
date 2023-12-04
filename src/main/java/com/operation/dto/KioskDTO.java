@@ -3,7 +3,8 @@ package com.operation.dto;
 public class KioskDTO {
 	private int id;
 	private String kiosk_category_id;
-	private String image_url;
+	private String name;
+	private String url;
 	private int width;
 	private int height;
 	private String description;
@@ -14,18 +15,22 @@ public class KioskDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public KioskDTO(int id, String kiosk_category_id, String image_url, int width, int height, String description,
-			boolean is_game) {
-		super();
+	
+	
+	public KioskDTO(int id, String kiosk_category_id, String name, String url, int width, int height,
+			String description, boolean is_game) {
 		this.id = id;
 		this.kiosk_category_id = kiosk_category_id;
-		this.image_url = image_url;
+		this.name = name;
+		this.url = url;
 		this.width = width;
 		this.height = height;
 		this.description = description;
 		this.is_game = is_game;
 	}
-	
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -38,11 +43,21 @@ public class KioskDTO {
 	public void setKiosk_category_id(String kiosk_category_id) {
 		this.kiosk_category_id = kiosk_category_id;
 	}
-	public String getImage_url() {
-		return image_url;
+	
+	public String getName() {
+		return name;
 	}
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	public int getWidth() {
 		return width;
@@ -63,12 +78,14 @@ public class KioskDTO {
 		this.description = description;
 	}
 
-	public boolean isGame() {
+
+	public boolean isIs_game() {
 		return is_game;
 	}
 
-	public void setGame(boolean is_game) {
+	public void setIs_game(boolean is_game) {
 		this.is_game = is_game;
 	}
-	
+
+
 }

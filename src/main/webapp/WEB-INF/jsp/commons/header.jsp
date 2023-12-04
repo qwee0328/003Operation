@@ -20,10 +20,10 @@
 				<div class="logo fontLogo colorWhite">003</div>
 				<div class="navBar">
 					<div class="practice">
-						<a href="/practice/listPractice" class="colorWhite">키오스크 연습</a>
+						<a href="/kiosk/goKioskList/0" class="colorWhite">키오스크 연습</a>
 					</div>
 					<div class="game">
-						<a href="#" class="colorWhite">키오스크 게임</a>
+						<a href="/kiosk/goKioskList/1" class="colorWhite">키오스크 게임</a>
 					</div>
 					<div class="board" id="board">
 						<a href="/board/listBoard/free" class="colorWhite">게시판&nbsp;<i
@@ -90,8 +90,8 @@
 						</div>
 					</div>
 					<div class="tabNab_body">
-						<div class="ham-practice"><a href="/practice/listPractice">키오스크 연습</a></div>
-						<div class="ham-game"><a href="#">키오스크 게임</a></div>
+						<div class="ham-practice"><a href="/kiosk/goKioskList/0">키오스크 연습</a></div>
+						<div class="ham-game"><a href="/kiosk/goKioskList/1">키오스크 게임</a></div>
 						<div class="ham-board"><a href="/board/listBoard/free">게시판</a></div>
 						<div class="ham-board-sub"><a href="/board/listBoard/free">자유게시판</a></div>
 						<div class="ham-board-sub"><a href="/board/listBoard/question">질문게시판</a></div>

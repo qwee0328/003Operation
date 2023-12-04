@@ -13,6 +13,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
+	<input type="hidden" class="is_game" value="${is_game}">
 	<div class="container">
 		<div class="guide">
 			<div class="kioskCategory__practice">

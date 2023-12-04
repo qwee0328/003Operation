@@ -16,37 +16,42 @@
 	<div class="container">
         <div class="guide">
             <div class="kiosk__kioskStep">[ 1단계 ]</div>
-            <div class="kiosk__kioskName">키오스크 이름</div>
+            <div class="kiosk__kioskName">${info.name}</div>
             <div class="kiosk__progressBar d-flex">
                 <div class="progressBar__name">진행도</div>
                 <div class="progressBar__bar"><div class="progressBar__fill"></div></div>
                 <div class="progressBar__per">100%</div>
             </div>
             <div class="kiosk__area">
-            	<iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://magiclampjin.github.io/unityKiostTest/"></iframe>
+            	<iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://pushssun.github.io/${info.url}"></iframe>
             </div>
             
             <!-- 기록 영역 ( 게임용 ) -->
-            <div class="kiosk__myRecord">
-                <div class="kiosk__recordName">내 최고 기록</div>
-                <div class="myRecord__cover">
-                    <div class="myRecord__record d-flex">
-                        <div class="myRecord__step align-center">1단계</div>
-                        <div class="myRecord__time align-center">1분 30초</div>
-                        <div class="myRecord__ranking align-center">상위 50%</div>
-                    </div>
-                    <div class="myRecord__record d-flex">
-                        <div class="myRecord__step align-center">1단계</div>
-                        <div class="myRecord__time align-center">1분 30초</div>
-                        <div class="myRecord__ranking align-center">상위 50%</div>
-                    </div>
-                    <div class="myRecord__record d-flex">
-                        <div class="myRecord__step align-center">1단계</div>
-                        <div class="myRecord__time align-center">1분 30초</div>
-                        <div class="myRecord__ranking align-center">상위 50%</div>
-                    </div>
-                </div>
-            </div>
+            <c:choose>
+            	<c:when test="${info.is_game}">
+           			<div class="kiosk__myRecord">
+		                <div class="kiosk__recordName">내 최고 기록</div>
+		                <div class="myRecord__cover">
+		                    <div class="myRecord__record d-flex">
+		                        <div class="myRecord__step align-center">1단계</div>
+		                        <div class="myRecord__time align-center">1분 30초</div>
+		                        <div class="myRecord__ranking align-center">상위 50%</div>
+		                    </div>
+		                    <div class="myRecord__record d-flex">
+		                        <div class="myRecord__step align-center">1단계</div>
+		                        <div class="myRecord__time align-center">1분 30초</div>
+		                        <div class="myRecord__ranking align-center">상위 50%</div>
+		                    </div>
+		                    <div class="myRecord__record d-flex">
+		                        <div class="myRecord__step align-center">1단계</div>
+		                        <div class="myRecord__time align-center">1분 30초</div>
+		                        <div class="myRecord__ranking align-center">상위 50%</div>
+		                    </div>
+		                </div>
+		            </div>
+            	</c:when>
+            </c:choose>
+          
         </div>
     </div>
     <%@ include file="/WEB-INF/jsp/commons/footer.jsp" %>
