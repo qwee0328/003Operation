@@ -51,11 +51,10 @@ public class KioskController {
 		return "kiosk/kiosk";
 	}
 	
+	@ResponseBody
 	@CrossOrigin(origins = "https://pushssun.github.io")
 	@PostMapping("/insertData")
 	public void insert(@RequestBody KioskRecordDTO dto) {
-		System.out.println("insert in");
-		System.out.println(dto.toString());
 		String loginID = (String) session.getAttribute("loginID");
 		if(loginID!=null) {
 			System.out.println("로그인중");
@@ -63,7 +62,6 @@ public class KioskController {
 			dto.setMember_nickname((String) session.getAttribute("loginNickName"));
 			kservice.insert(dto);
 		}
-	
 	}
 	
 	
