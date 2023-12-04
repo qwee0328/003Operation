@@ -12,6 +12,7 @@ $(document).ready(function() {
 
 function drawList(result){
 	let recordTotalCount = result.recordTotalCount;
+	$(".postCnt__txt").text(recordTotalCount);	
 	let recordCountPerPage = result.recordCountPerPage;
 	let naviCountPerPage = result.naviCountPerPage;
 	let postCurPage = result.postCurPage;
