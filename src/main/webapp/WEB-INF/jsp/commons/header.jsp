@@ -40,7 +40,7 @@
 							<div class="mypage" id="mypage">
 								<a href="/member/goMypage" class="colorWhite">마이페이지&nbsp;<i
 									class="fa-solid fa-chevron-down colorWhite"></i></a>
-								<ul class="bColorLightBlue" id="mypageMenu">
+								<ul id="mypageMenu">
 									<li><a href="/member/viewMypage">내 정보</a></li>
 									<li><a href="#">게임 기록</a></li>
 									<li><a href="#">포인트 적립 내역</a></li>
