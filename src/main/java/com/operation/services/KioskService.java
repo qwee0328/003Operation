@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.operation.dao.KioskDAO;
 import com.operation.dto.KioskDTO;
+import com.operation.dto.KioskRecordDTO;
 
 @Service
 public class KioskService {
@@ -21,5 +22,10 @@ public class KioskService {
 	// 키오스크 상세 정보 불러오기
 	public KioskDTO selectById(int id) {
 		return dao.selectById(id);
+	}
+	
+	// 키오스크 기록 추가
+	public int insert(KioskRecordDTO dto) {
+		return dao.insert(dto);
 	}
 }

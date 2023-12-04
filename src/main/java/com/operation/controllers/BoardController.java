@@ -33,7 +33,9 @@ public class BoardController {
 	// 게시글 작성 페이지로 이동
 	@RequestMapping("/goWritePost/{catogory}")
 	public String goWritePost(@PathVariable String catogory, Model model) {
-		if(catogory.equals("question"))
+		if(catogory.equals("qna"))
+			model.addAttribute("isQna",true);
+		else if(catogory.equals("question"))
 			model.addAttribute("isQuestion",true);
 		return "board/writePost";
 	}
@@ -91,7 +93,9 @@ public class BoardController {
 	// 게시글 목록으로 이동
 	@RequestMapping("/listBoard/{catogory}")
 	public String listBoard(@PathVariable String catogory, Model model) {
-		if(catogory.equals("question"))
+		if(catogory.equals("qna"))
+			model.addAttribute("isQna",true);
+		else if(catogory.equals("question"))
 			model.addAttribute("isQuestion",true);
 		return "board/boardList";
 	}
