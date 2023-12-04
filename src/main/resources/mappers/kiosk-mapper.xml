@@ -4,14 +4,14 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Kiosk">
 	
-	<!-- 키오스크 목록 불러오기 -->
-	<select id="selectAll" resultType="com.operation.dto.KioskDTO">
-		select * from kiosk where is_game = #{is_game} order by name;
+	<!-- 키오스크 카테고리 목록 불러오기 -->
+	<select id="selectAll" resultType="com.operation.dto.KioskCategoryDTO">
+		select * from kiosk_category order by name;
 	</select>
 	
 	<!-- 키오스크 정보 불러오기 -->
 	<select id="selectById" resultType="com.operation.dto.KioskDTO">
-		select * from kiosk where id = #{id};
+		select * from kiosk_info where id = #{id};
 	</select>
 	
 	<!-- 키오스크 기록 추가 -->

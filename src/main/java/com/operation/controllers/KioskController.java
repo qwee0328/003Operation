@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.operation.dto.KioskCategoryDTO;
 import com.operation.dto.KioskDTO;
 import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
@@ -35,12 +36,19 @@ public class KioskController {
 		return "kiosk/kioskList";
 	}
 	
-	// 키오스크 목록 가져오기
+//	// 키오스크 목록 가져오기
+//	@ResponseBody
+//	@RequestMapping("/getKioskList")
+//	public List<KioskDTO> getKioskList(int is_game) {
+//		List<KioskDTO> list =  kservice.selectAll(is_game);
+//		return list;
+//	}
+	
+	// 키오스크 카테고리 목록 가져오기
 	@ResponseBody
 	@RequestMapping("/getKioskList")
-	public List<KioskDTO> getKioskList(int is_game) {
-		List<KioskDTO> list =  kservice.selectAll(is_game);
-		return list;
+	public List<KioskCategoryDTO> getKioskList() {
+		return kservice.selectAll();
 	}
 	
 	// 키오스크로 페이지로 이동

@@ -19,7 +19,7 @@ $(document).ready(function(){
         let kioskCategory__kiosk = $("<div>").attr("class","kioskCategory__kiosk").attr("data-id",list[i].id);
         let kiosk__name = $("<div>").attr("class","kiosk__name align-center").html(list[i].name);
         let kiosk__imageCover =  $("<div>").attr("class","kiosk__imageCover align-center");
-        let kiosk__image = $("<img>").attr("class","kiosk__image").attr("src",`/images/kiosk_logo/${list[i].id}_logo.png`);
+        let kiosk__image = $("<img>").attr("class","kiosk__image").attr("src",`/images/kiosk_logo/${list[i].kiosk_category_id}_logo.png`);
         kiosk__imageCover.append(kiosk__image);
         let kiost__btn = $("<div>").attr("class","kiost__btn align-center").html(btnTxt);
         $(kioskList_line).append(kioskCategory__kiosk.append(kiosk__name).append(kiosk__imageCover).append(kiost__btn));   
