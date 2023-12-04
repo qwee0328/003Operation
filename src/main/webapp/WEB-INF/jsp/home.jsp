@@ -27,8 +27,8 @@
                         메뉴 주문, 구성 변경, 포인트 적립까지 단계별로<br>
                         키오스크 이용 실력을 향상 시켜보세요.</div>
                     <div class="kioskBtns">
-                        <a href="/kiosk/listPractice"><button class="bannerBtn">연습하러가기</button></a>
-                        <a href=""><button class="bannerBtn">게임하러가기</button></a>
+                        <a href="/kiosk/goKioskList/0"><button class="bannerBtn">연습하러가기</button></a>
+                        <a href="/kiosk/goKioskList/1"><button class="bannerBtn">게임하러가기</button></a>
 
                     </div>
                 </div>
