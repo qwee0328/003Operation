@@ -71,4 +71,28 @@
 		update bulletin_board set title=#{title}, content=#{content} where id=#{id};
 	</update>
 	
+	<!-- 게시글 조회수 업데이트 -->
+	<update id="updateViewCountById">
+		update bulletin_board set view_count= view_count+1 where id=#{id};
+	</update>
+	
+	<!-- 게시글 추천수 불러오기 -->
+	<select id="selectRecommendById" resultType="int">
+		select count(*) count from board_recommend where bulletin_board_id=#{id};
+	</select>
+	
+	<!-- 게시글 북마크 수 불러오기 -->
+	<select id="selectBookmarkById" resultType="int">
+		select count(*) count from board_bookmark where bulletin_board_id=#{id};
+	</select>
+	
+	<!-- 게시글 댓글 수 불러오기 -->
+	<select id="selectReplyById" resultType="int">
+		select count(*) count from reply where bulletin_board_id=#{id};
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deletePost">
+		delete from bulletin_board where id=#{id};
+	</delete>
 </mapper>

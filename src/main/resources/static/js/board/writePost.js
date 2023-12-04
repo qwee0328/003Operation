@@ -131,7 +131,7 @@ $(document).ready(function(){
 			contentType: false,
 			processData: false
 		}).done(function(){
-			location.href="/board/listBoard/"+bulletin_category_id;
+			location.href="/board/viewPost/"+$(".update").attr("data-id");
 		});
 	});
 	

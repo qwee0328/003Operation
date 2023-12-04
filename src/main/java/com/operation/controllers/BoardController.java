@@ -1,8 +1,5 @@
 package com.operation.controllers;
 
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.operation.constants.Constants;
 import com.operation.dto.BoardDTO;
 import com.operation.services.BoardService;
+import com.operation.services.MemberService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -29,6 +28,9 @@ import jakarta.servlet.http.HttpSession;
 public class BoardController {
 	@Autowired
 	private BoardService bservice;
+	
+	@Autowired
+	private MemberService mservice;
 	
 	@Autowired
 	private HttpSession session;
@@ -81,9 +83,29 @@ public class BoardController {
 		return "board/boardList";
 	}
 	
-	@RequestMapping("/viewPost")
-	public void viewPost() {
-		// 게시글 출력
+	// 게시글 출력
+	@RequestMapping("/viewPostConf/{dataId}")
+	public String viewPostConf(@PathVariable String dataId, Model model) {
+		int postId=Integer.parseInt(dataId);
+		Map<String, Object> post = bservice.selectPostByIdJustView(postId);
+		model.addAttribute("post", post);
+
+		return "board/viewPost";
+	}
+	
+	// 게시글 관련 정보 불러오기
+	@ResponseBody
+	@RequestMapping("/selectPostInfoById")
+	public Map<String, Object> selectPostInfoById(@RequestParam String postId) {
+		int id = Integer.parseInt(postId);
+		Map<String, Object> postInfo = new HashMap<>();
+		int recommend = bservice.selectRecommendById(id);
+		int bookmark = bservice.selectBookmarkById(id);
+		int reply = bservice.selectReplyById(id);
+		postInfo.put("recommend", recommend);
+		postInfo.put("bookmark", bookmark);
+		postInfo.put("reply", reply);
+		return postInfo;
 	}
 	
 	
@@ -109,10 +131,13 @@ public class BoardController {
 							@RequestParam(value = "deleteImgs", required = false) String[] deleteImgs) throws Exception {
 		bservice.update(dto, attachFiles, deleteFileList, deleteExisingFileList, deleteImgs);
 	}
-	
-	@RequestMapping("/deletePost")
-	public void deletePost() {
-		// 게시글 삭제
+	// 게시글 삭제
+	@RequestMapping("/deletePost/{category}/{dataId}")
+	public String deletePost(@PathVariable String category, @PathVariable String dataId){
+		int postId = Integer.parseInt(dataId);
+		System.out.println(category+dataId);
+		bservice.deletePost(postId);
+		return "redirect:/board/listBoard/" + category;
 	}
 	
 	// summernote 이미지 경로 설정

@@ -230,6 +230,13 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 	}
 }
 
+// 게시글 보기 페이지로 이동
+$(document).on("click",".title__name",function(){
+	let url="/board/viewPostConf/"+$(this).attr("data-id");
+	console.log(url);
+	location.href=url;
+})
+
 
 // 게시글 수정 페이지로 이동하는 코드 -> 추후에 post 내에서 수정 버튼과  연결
 /*$(document).on("click",".title__name",function(){

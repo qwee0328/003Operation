@@ -186,6 +186,12 @@ public class MemberController {
 		return mservice.selectProfileImgById((String) session.getAttribute("loginID"));
 	}
 	
+	@ResponseBody
+	@RequestMapping("/selectProfileImgByIdBoard")
+	public String selectProfileImgById(String writerId) {
+		return mservice.selectProfileImgById(writerId);
+	}
+	
 //	// 마이페이지 메인 화면 정보 불러오기 (프로필 이미지, 레벨, 포인트) -> goMypage에 model로 추가
 //	@ResponseBody
 //	@RequestMapping("/selectMainMypageInfoById")
