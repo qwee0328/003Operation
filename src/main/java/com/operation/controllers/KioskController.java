@@ -1,6 +1,5 @@
 package com.operation.controllers;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.operation.dto.KioskCategoryDTO;
-import com.operation.dto.KioskDTO;
 import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
 
@@ -62,7 +60,6 @@ public class KioskController {
 	public void insert(@RequestBody KioskRecordDTO dto) {
 		String loginID = (String) session.getAttribute("loginID");
 		if(!(loginID==null || loginID.isEmpty())) {
-			System.out.println("로그인중");
 			dto.setMember_id(loginID);
 			dto.setMember_nickname((String) session.getAttribute("loginNickName"));
 			kservice.insert(dto);

@@ -152,7 +152,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 	let pagination = $(".board__pagination");
 	pagination.html("");
 	if (recordTotalCount == 0) {
-		let empty = $("<div>").html("검색 결과가 존재하지 않습니다.");
+		let empty = $("<div class='empty align-center'>").html("검색 결과가 존재하지 않습니다.");
 		$(".board__posts").append(empty);
 	}
 	else {
@@ -280,39 +280,33 @@ $(document).on("click", ".title__name", function() {
 })
 
 
-// 게시글 수정 페이지로 이동하는 코드 -> 추후에 post 내에서 수정 버튼과  연결
-/*$(document).on("click",".title__name",function(){
-	let url = "/board/goUpdatePost/free";
-	if ($(".board__title").text().slice(0, 2) == "질문") location.href = "/board/goUpdatePost/question";
-	
-	url+="/"+$(this).attr('data-id');	
-	
-	location.href=url;
-});*/
-
-
 // 검색 기능
 function search(cpage) {
 	keyword = $(".search__value").children().val();
 
-	select = $(".search__select option:selected").val();
-	let category = "free";
-	if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
-
-	$.ajax({
-		url: "/board/selectByKeyword",
-		data: {
-			category: category,
-			select: select,
-			keyword: keyword,
-			cpage: cpage
-		},
-		type: "post"
-	}).done(function(result) {
-		console.log(result)
-		$(".board__posts").html("");
-		drawList(result);
-	});
+	if(keyword==""){
+		postLoad(1);
+	}else{
+		select = $(".search__select option:selected").val();
+		let category = "free";
+		if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
+	
+		$.ajax({
+			url: "/board/selectByKeyword",
+			data: {
+				category: category,
+				select: select,
+				keyword: keyword,
+				cpage: cpage
+			},
+			type: "post"
+		}).done(function(result) {
+			console.log(result)
+			$(".board__posts").html("");
+			drawList(result);
+		});
+	}
+	
 }
 
 $(document).on("click", ".search__btn", function() {
