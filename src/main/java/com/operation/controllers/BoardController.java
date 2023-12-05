@@ -41,11 +41,13 @@ public class BoardController {
 
 	// 게시글 작성 페이지로 이동
 	@RequestMapping("/goWritePost/{catogory}")
-	public String goWritePost(@PathVariable String catogory, Model model) {
+	public String goWritePost(@PathVariable String catogory, String select, String keyword, Model model) {
 		if (catogory.equals("qna"))
 			model.addAttribute("isQna", true);
 		else if (catogory.equals("question"))
 			model.addAttribute("isQuestion", true);
+		model.addAttribute("select",select);
+		model.addAttribute("keyword",keyword);
 		return "board/writePost";
 	}
 
@@ -232,11 +234,12 @@ public class BoardController {
 
 	// 게시글 작성 페이지로 이동
 	@RequestMapping("/goUpdatePost/{catogory}/{post_id}")
-	public String goUpdatePost(@PathVariable String catogory, Model model, @PathVariable int post_id) {
+	public String goUpdatePost(@PathVariable String catogory, Model model, @PathVariable int post_id,  String select, String keyword) {
 		if (catogory.equals("question"))
 			model.addAttribute("isQuestion", true);
 		model.addAttribute("post", bservice.selectPostById(post_id));
-
+		model.addAttribute("select",select);
+		model.addAttribute("keyword",keyword);
 		return "board/writePost";
 	}
 

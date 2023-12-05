@@ -97,7 +97,7 @@
 					<div class="postArea__btns d-flex">
 						<c:choose>
 							<c:when test="${not empty post}">
-								<button class="goList bColorGray">수정취소</button>
+								<button class="goPost bColorGray">수정취소</button>
 								<button class="update bColorMainPink" data-id="${post.id}">수정완료</button>
 							</c:when>
 							<c:otherwise>
@@ -107,10 +107,11 @@
 						</c:choose>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
+    <input type="hidden" id="select" value="${select }">
+    <input type="hidden" id="keyword" value="${keyword }">
 <%@ include file="/WEB-INF/jsp/commons/footer.jsp" %>
 </body>
 </html>

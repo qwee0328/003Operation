@@ -4,7 +4,7 @@ $(document).ready(function() {
 	// 글쓰기 버튼
 	$(".board__writeBtn").on("click", function() {
 		if ($(".board__title").text().slice(0, 2) == "질문") location.href = "/board/goWritePost/question";
-		else location.href = "/board/goWritePost/free";
+		else location.href = "/board/goWritePost/free?select="+select+"&keyword="+keyword;
 	})
 	
 	// 게시글에서 목록 나올 때
