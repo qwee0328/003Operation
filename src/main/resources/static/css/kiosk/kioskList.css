@@ -7,7 +7,7 @@
 }
 
 .kioskList_line {
-	justify-content: space-between;	
+	/*justify-content: space-between;	*/
 }
 
 .kioskCategory__practice {
@@ -38,6 +38,11 @@
 	width: 300px;
 	height: 370px;
 	margin-bottom: 70px;
+	margin-right: calc((100% - 300px * 3) / 2);
+}
+
+.kioskCategory__kiosk:last-child{
+	margin-right: 0;
 }
 
 .kioskCategory__kiosk:hover {
