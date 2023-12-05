@@ -278,6 +278,16 @@ public class BoardService {
 	public Map<String,Object> selectPrevNextPost(Map<String, Object> param){
 		return dao.selectPrevNextPost(param);
 	}
+	
+	// 게시글 댓글 작성하기
+	public boolean insertPostReply(int postId, String reply) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("postId", postId);
+		param.put("userId", (String) session.getAttribute("loginID"));
+		param.put("loginNickName", (String) session.getAttribute("loginNickName"));
+		param.put("reply", reply);
+		return dao.insertPostReply(param);
+	}
 
 	// 게시글 삭제
 	public void deletePost(int id) {

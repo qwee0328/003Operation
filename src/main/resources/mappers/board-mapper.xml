@@ -197,6 +197,11 @@
 		and bulletin_category_id=#{type}
 		) as boardLeadLag where id=#{postId};	
 	</select>
+	
+	<!-- 게시글 댓글 작성하기 -->
+	<insert id="insertPostReply">
+		insert reply (bulletin_board_id, member_id, member_nickname, content) values(#{postId},#{userId},#{loginNickName},#{reply});
+	</insert>
 
 	<!-- 게시글 삭제 -->
 	<delete id="deletePost">

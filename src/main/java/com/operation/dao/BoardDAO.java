@@ -115,10 +115,16 @@ public class BoardDAO {
 	public List<Map<String, Object>> selectFileById(Map<String, Object> param) {
 		return db.selectList("Board.selectFileById", param);
 	}
-	
+
 	// 이전글 다음글 불러오기
-	public Map<String,Object> selectPrevNextPost(Map<String, Object> param){
+	public Map<String, Object> selectPrevNextPost(Map<String, Object> param) {
 		return db.selectOne("Board.selectPrevNextPost", param);
+	}
+
+	// 게시글 댓글 작성하기
+	public boolean insertPostReply(Map<String, Object> param) {
+		int result = db.insert("Board.insertPostReply", param);
+		return result > 0 ? true : false;
 	}
 
 	// 게시글 삭제

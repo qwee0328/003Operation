@@ -1,8 +1,22 @@
 $(document).ready(function() {
 	let category = "free";
-	if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
+	if ($(".boardType").text().slice(0, 2) == "질문") category = "question";
 
-	$("#postUpdate").on("click", function() {
+	$.ajax({
+		url: "/board/isMyPost",
+		data: { writerId: $("#writerId").val() },
+		type: "post"
+	}).done(function(resp) {
+		console.log(resp)
+		if (resp) {
+			let postUpdate = $("<button>").attr("id", "postUpdate").attr("data-id", $("#postId").val()).html("수정")
+			let postDelete = $("<button>").attr("id", "postDelete").attr("data-id", $("#postId").val()).html("삭제")
+			$(".postInfo__right").append(postUpdate).append(postDelete);
+		}
+	})
+
+	// 게시글 수정
+	$(document).on("click", "#postUpdate", function() {
 		let url = "/board/goUpdatePost/free";
 		if ($(".postTitle").html().slice(0, 2) == "질문") {
 			url = "/board/goUpdatePost/question";
@@ -11,7 +25,8 @@ $(document).ready(function() {
 		location.href = url;
 	})
 
-	$("#postDelete").on("click", function() {
+	// 게시글 삭제
+	$(document).on("click", "#postDelete", function() {
 		let url = "/board/deletePost/free";
 		if ($(".postTitle").html().slice(0, 2) == "질문") {
 			url = "/board/deletePost/question";
@@ -53,15 +68,23 @@ $(document).ready(function() {
 		type: "post"
 	}).done(function(resp) {
 		console.log(resp)
-		$(".files__conf").empty();
-		for (let i = 0; i < resp.length; i++) {
-			let fileLine = $("<div>").attr("class", "files__Line").attr("sysName", resp[i].system_name).attr("oriName", resp[i].origin_name);
-			let fileDown = $("<a>").attr("class", "fileDown").attr("href", "/board/downloadFile?sysName=" + resp[i].system_name + "&oriName=" + resp[i].origin_name);
-			let fileIcon = $("<i>").attr("class", "fa-regular fa-file");
-			let fileName = $("<div>").html(resp[i].origin_name);
-			fileDown.append(fileIcon).append(fileName);
-			$(".files__conf").append(fileLine.append(fileDown));
+
+		if (resp.length > 0) {
+			let files = $("<div>").attr("class", "files");
+			let title = $("<div>").attr("class", "files__title").html("첨부파일");
+			let conf = $("<div>").attr("calss", "files__conf");
+			for (let i = 0; i < resp.length; i++) {
+				let fileLine = $("<div>").attr("class", "files__Line").attr("sysName", resp[i].system_name).attr("oriName", resp[i].origin_name);
+				let fileDown = $("<a>").attr("class", "fileDown").attr("href", "/board/downloadFile?sysName=" + resp[i].system_name + "&oriName=" + resp[i].origin_name);
+				let fileIcon = $("<i>").attr("class", "fa-regular fa-file");
+				let fileName = $("<div>").html(resp[i].origin_name);
+				fileDown.append(fileIcon).append(fileName);
+				conf.append(fileLine.append(fileDown));
+			}
+			files.append(title).append(conf);
+			$(".postConf").after(files);
 		}
+
 	})
 
 	// 게시글 추천, 북마크
@@ -113,6 +136,7 @@ $(document).ready(function() {
 
 	});
 
+	// 목록으로 이동 버튼
 	$("#boardListBtn").on("click", function() {
 		let url = "/board/listBoard";
 
@@ -129,38 +153,54 @@ $(document).ready(function() {
 		type: "post"
 	}).done(function(resp) {
 		console.log(resp)
-		
-		if(resp.NextId){
+
+		if (resp.NextId) {
 			console.log("asdf")
-			let downPage = $("<div>").attr("class","pageBtns__pageLine").attr("id","downPage");
-			let iconBox = $("<div>").attr("class","pageLine__icon").attr("data-id",resp.NextId);
-			let icon = $("<i>").attr("class","fa-solid fa-chevron-up");
+			let downPage = $("<div>").attr("class", "pageBtns__pageLine").attr("id", "downPage");
+			let iconBox = $("<div>").attr("class", "pageLine__icon").attr("data-id", resp.NextId);
+			let icon = $("<i>").attr("class", "fa-solid fa-chevron-up");
 			let text = $("<div>").html("다음글");
 			iconBox.append(icon).append(text);
-			
-			let upPageTitle = $("<div>").attr("class","pageLine__title").html(resp.NextTitle).attr("data-id",resp.NextId);;
+
+			let upPageTitle = $("<div>").attr("class", "pageLine__title").html(resp.NextTitle).attr("data-id", resp.NextId);;
 			downPage.append(iconBox).append(upPageTitle);
 			$(".pageBtns").append(downPage);
 		}
-		if(resp.PrevId){
+		if (resp.PrevId) {
 			console.log("dlwjsrmf")
-			let upPage = $("<div>").attr("class","pageBtns__pageLine").attr("id","upPage");
-			let iconBox = $("<div>").attr("class","pageLine__icon").attr("data-id",resp.PrevId);
-			let icon = $("<i>").attr("class","fa-solid fa-chevron-down");
+			let upPage = $("<div>").attr("class", "pageBtns__pageLine").attr("id", "upPage");
+			let iconBox = $("<div>").attr("class", "pageLine__icon").attr("data-id", resp.PrevId);
+			let icon = $("<i>").attr("class", "fa-solid fa-chevron-down");
 			let text = $("<div>").html("이전글");
 			iconBox.append(icon).append(text);
-			
-			let upPageTitle = $("<div>").attr("class","pageLine__title").html(resp.PrevTitle).attr("data-id",resp.PrevId);
+
+			let upPageTitle = $("<div>").attr("class", "pageLine__title").html(resp.PrevTitle).attr("data-id", resp.PrevId);
 			upPage.append(iconBox).append(upPageTitle);
 			$(".pageBtns").append(upPage);
 		}
 	});
-	
+
+	// 이전, 다음 글로 이동하기
 	$(document).on("click", "#upPage > .pageLine__icon, #upPage > .pageLine__title, #downPage > .pageLine__icon, #downPage > .pageLine__title", function() {
 		console.log("dlqpsxm")
-		let url = "/board/viewPostConf/"+category+"/"+$("#select").val()+"/"+$(this).attr("data-id")+"?keyword="+$("#keyword").val();
-		location.href=url;
+		let url = "/board/viewPostConf/" + category + "/" + $("#select").val() + "/" + $(this).attr("data-id") + "?keyword=" + $("#keyword").val();
+		location.href = url;
 	})
+
+	// 댓글 작성하기
+	$("#replyInputSubmit").on("click", function() {
+		insertReply();
+	})
+
+	// 댓글 작성중 엔터 누르면 작성 시도
+	$("#replyInput").on("keydown", function(e) {
+		console.log("enter")
+		if (e.keyCode == 13) {
+			console.log("test")
+			insertReply();
+		}
+	});
+
 
 });
 
@@ -198,4 +238,25 @@ function myPostInfo() {
 			$("#bookmarkBtn").find("i").css("color", "#FB8F8A");
 		}
 	});
+}
+
+// 댓글 작성
+function insertReply() {
+
+	if ($("#replyInput").val() !== "") {
+		$.ajax({
+			url: "/board/insertPostReply",
+			data: { postId: $("#postId").val(), reply: $("#replyInput").val() },
+			type: "post"
+		}).done(function(resp) {
+			if (resp) {
+				alert("댓글이 작성되었습니다.");
+				$("#replyInput").val("");
+			}
+		})
+	} else {
+		alert("댓글 내용을 입력해주세요.");
+		$("#replyInput").focus();
+	}
+
 }

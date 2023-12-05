@@ -135,6 +135,14 @@ public class BoardController {
 		model.addAttribute("keyword", keyword);
 		return "board/viewPost";
 	}
+	
+	// 본인이 작성한 게시글인지 확인
+	@ResponseBody
+	@RequestMapping("/isMyPost")
+	public boolean isMyPost(@RequestParam String writerId) {
+		String loginID=(String)session.getAttribute("loginID");
+		return writerId.equals(loginID);
+	}
 
 	// 게시글 관련 정보 불러오기
 	@ResponseBody
@@ -228,6 +236,14 @@ public class BoardController {
 		param.put("select", select);
 		Map<String, Object> result = bservice.selectPrevNextPost(param);
 		return result;
+	}
+	
+	// 게시글 댓글 작성하기
+	@ResponseBody
+	@RequestMapping("/insertPostReply")
+	public boolean insertPostReply(@RequestParam String postId, @RequestParam String reply) {
+		int id = Integer.parseInt(postId);
+		return bservice.insertPostReply(id,reply);
 	}
 
 	// 게시글 작성 페이지로 이동
