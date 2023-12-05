@@ -249,21 +249,6 @@ public class BoardService {
 		return info;
 	}
 
-//	// 게시글 추천 수 불러오기
-//	public int selectRecommendById(int id) {
-//		return dao.selectRecommendById(id);
-//	}
-//
-//	// 게시글 북마크 수 불러오기
-//	public int selectBookmarkById(int id) {
-//		return dao.selectBookmarkById(id);
-//	}
-//
-//	// 게시글 댓글 수 불러오기
-//	public int selectReplyById(int id) {
-//		return dao.selectBookmarkById(id);
-//	}
-
 	// 게시글 추천
 	public void insertRecommendById(Map<String, Object> param) {
 		dao.insertRecommendById(param);
@@ -287,6 +272,11 @@ public class BoardService {
 	// 게시판 파일 불러오기
 	public List<Map<String, Object>> selectFileById(Map<String, Object> param) {
 		return dao.selectFileById(param);
+	}
+	
+	// 이전글 다음 글 불러오기
+	public Map<String,Object> selectPrevNextPost(Map<String, Object> param){
+		return dao.selectPrevNextPost(param);
 	}
 
 	// 게시글 삭제

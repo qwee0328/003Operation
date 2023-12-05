@@ -269,11 +269,11 @@ $(document).on("click", ".title__name", function() {
 	let category = "free";
 	if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
 
-	keyword = $(".search__value").children().val() !== "" ? $(".search__value").children().val() : "none";
-	select = $(".search__select option:selected").val() != +"" ? $(".search__select option:selected").val() : "none";
-	console.log(keyword === "")
+	keyword = $(".search__value").children().val() !== "" ? $(".search__value").children().val() : "";
+	select = $(".search__select option:selected").val() != +"" ? $(".search__select option:selected").val() : "";
 
-	url += "/" + category + "/" + keyword + "/" + select + "/" + $(this).attr("data-id");
+
+	url += "/" + category + "/" + select + "/" + $(this).attr("data-id")+"?keyword="+keyword;
 
 	console.log(url);
 	location.href = url;

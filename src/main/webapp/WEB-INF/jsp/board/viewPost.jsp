@@ -106,6 +106,7 @@
                         </div>
                     </div>
                     <div class="pageBtns">
+                    <!-- 
                         <div class="pageBtns__pageLine" id="upPage">
                             <div class="pageLine__icon">
                                 <i class="fa-solid fa-chevron-up"></i>
@@ -120,6 +121,7 @@
                             </div>
                             <div class="pageLine__title">다음글 제목</div>
                         </div>
+                         -->
                     </div>
                 </div>
             </div>

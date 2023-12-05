@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	let category = "free";
+	if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
+
 	$("#postUpdate").on("click", function() {
 		let url = "/board/goUpdatePost/free";
 		if ($(".postTitle").html().slice(0, 2) == "질문") {
@@ -44,7 +47,6 @@ $(document).ready(function() {
 	} else {
 		fileUrl += "/question";
 	}
-	console.log(fileUrl);
 	$.ajax({
 		url: fileUrl,
 		data: { postId: $("#postId").val() },
@@ -64,9 +66,9 @@ $(document).ready(function() {
 
 	// 게시글 추천, 북마크
 	$("#recommendBtn, #bookmarkBtn").on("click", function() {
-		
+
 		// 추천 혹은 북마크 하기
-		if (($("#myRecommendRecord").val()==="false" && $(this).attr("id") === "recommendBtn") || ($("#myBookmarkRecord").val()==="false" && $(this).attr("id") === "bookmarkBtn")) {
+		if (($("#myRecommendRecord").val() === "false" && $(this).attr("id") === "recommendBtn") || ($("#myBookmarkRecord").val() === "false" && $(this).attr("id") === "bookmarkBtn")) {
 			let url = "/board/insertPostInfoById";
 			console.log($(this).attr("id") === "recommendBtn")
 			if ($(this).attr("id") === "recommendBtn") {
@@ -88,16 +90,16 @@ $(document).ready(function() {
 				icon.css("color", "#FB8F8A");
 			})
 		}
-		if (($("#myRecommendRecord").val()==="true" && $(this).attr("id") === "recommendBtn") || ($("#myBookmarkRecord").val()==="true" && $(this).attr("id") === "bookmarkBtn")) {
+		if (($("#myRecommendRecord").val() === "true" && $(this).attr("id") === "recommendBtn") || ($("#myBookmarkRecord").val() === "true" && $(this).attr("id") === "bookmarkBtn")) {
 			let url = "/board/deletePostInfoById";
 			if ($(this).attr("id") === "recommendBtn") {
 				url = url + "/recommend";
 			} else {
 				url = url + "/bookmark";
 			}
-			
+
 			let icon = $(this).find("i");
-			
+
 			$.ajax({
 				url: url,
 				data: { postId: $("#postId").val() },
@@ -113,13 +115,52 @@ $(document).ready(function() {
 
 	$("#boardListBtn").on("click", function() {
 		let url = "/board/listBoard";
-		let category = "free";
-		if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
-		url += "/" + category+"?select="+$("#select").val()+"&keyword="+$("#keyword").val();
+
+		url += "/" + category + "?select=" + $("#select").val() + "&keyword=" + $("#keyword").val();
 		location.href = url;
 	})
 
-
+	// 이전글 다음글 불러오기
+	console.log(category)
+	console.log($("#keyword").val())
+	$.ajax({
+		url: "/board/selectPrevNextPost",
+		data: { postId: $("#postId").val(), category: category, keyword: $("#keyword").val(), select: $("#select").val() },
+		type: "post"
+	}).done(function(resp) {
+		console.log(resp)
+		
+		if(resp.NextId){
+			console.log("asdf")
+			let downPage = $("<div>").attr("class","pageBtns__pageLine").attr("id","downPage");
+			let iconBox = $("<div>").attr("class","pageLine__icon").attr("data-id",resp.NextId);
+			let icon = $("<i>").attr("class","fa-solid fa-chevron-up");
+			let text = $("<div>").html("다음글");
+			iconBox.append(icon).append(text);
+			
+			let upPageTitle = $("<div>").attr("class","pageLine__title").html(resp.NextTitle).attr("data-id",resp.NextId);;
+			downPage.append(iconBox).append(upPageTitle);
+			$(".pageBtns").append(downPage);
+		}
+		if(resp.PrevId){
+			console.log("dlwjsrmf")
+			let upPage = $("<div>").attr("class","pageBtns__pageLine").attr("id","upPage");
+			let iconBox = $("<div>").attr("class","pageLine__icon").attr("data-id",resp.PrevId);
+			let icon = $("<i>").attr("class","fa-solid fa-chevron-down");
+			let text = $("<div>").html("이전글");
+			iconBox.append(icon).append(text);
+			
+			let upPageTitle = $("<div>").attr("class","pageLine__title").html(resp.PrevTitle).attr("data-id",resp.PrevId);
+			upPage.append(iconBox).append(upPageTitle);
+			$(".pageBtns").append(upPage);
+		}
+	});
+	
+	$(document).on("click", "#upPage > .pageLine__icon, #upPage > .pageLine__title, #downPage > .pageLine__icon, #downPage > .pageLine__title", function() {
+		console.log("dlqpsxm")
+		let url = "/board/viewPostConf/"+category+"/"+$("#select").val()+"/"+$(this).attr("data-id")+"?keyword="+$("#keyword").val();
+		location.href=url;
+	})
 
 });
 
@@ -138,7 +179,7 @@ function postInfo() {
 	myPostInfo();
 }
 
-function myPostInfo(){
+function myPostInfo() {
 	// 내가 추천 혹은 북마크를 했는지 불러오기
 	$.ajax({
 		url: "/board/selectPostInfoFromMy",
@@ -146,8 +187,8 @@ function myPostInfo(){
 		type: "post"
 	}).done(function(resp) {
 		console.log(resp)
-		$("#myRecommendRecord").val(resp.recommend!==null?resp.recommend:false);
-		$("#myBookmarkRecord").val(resp.bookmark!==null?resp.bookmark:false);
+		$("#myRecommendRecord").val(resp.recommend !== null ? resp.recommend : false);
+		$("#myBookmarkRecord").val(resp.bookmark !== null ? resp.bookmark : false);
 
 		if (resp.recommend) {
 			$("#recommendBtn").find("i").css("color", "#FB8F8A");
