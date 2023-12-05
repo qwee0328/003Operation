@@ -28,8 +28,7 @@
             </c:choose>
             
             <div class="kiosk__area">
-            	<%-- <iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://pushssun.github.io/${info.url}"></iframe> --%>
-            	<iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://pushssun.github.io/TORDERTest1/"></iframe> <!-- 테스트용 -->
+            	<iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://pushssun.github.io/${info.url}"></iframe>
             </div>
             
             <!-- 기록 영역 ( 게임용 ) -->
