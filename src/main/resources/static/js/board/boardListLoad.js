@@ -3,7 +3,7 @@ let select;
 $(document).ready(function() {
 	// 글쓰기 버튼
 	$(".board__writeBtn").on("click", function() {
-		if ($(".board__title").text().slice(0, 2) == "질문") location.href = "/board/goWritePost/question";
+		if ($(".board__title").text().slice(0, 2) == "질문") location.href = "/board/goWritePost/question?select="+select+"&keyword="+keyword;
 		else location.href = "/board/goWritePost/free?select="+select+"&keyword="+keyword;
 	})
 	
