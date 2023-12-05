@@ -22,10 +22,14 @@
         <div class="boardPost_guide">
             <div class="boardType">${type } 게시판</div>
             <input type="hidden" id="boardType" value="${type }">
+            <input type="hidden" id="select" value="${select }">
+            <input type="hidden" id="keyword" value="${keyword }">
             <div class="boardPost">
             	<div class="naviBackground">
 	            	<div class="stickyContainer">
 	            		<div class="boardPost__navi">
+	            			<input type="hidden" id="myRecommendRecord">
+	            			<input type="hidden" id="myBookmarkRecord">
 		                    <div class="navi__conf">
 		                        <div class="conf__circle" id="recommendBtn">
 		                            <i class="fa-regular fa-thumbs-up"></i>

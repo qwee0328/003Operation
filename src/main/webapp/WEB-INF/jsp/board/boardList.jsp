@@ -25,6 +25,8 @@
     <div class="container">	
         <div class="guide">
             <div class="board__header">
+            <input type="hidden" id="keywordFromPost" value="${keyword }">
+            <input type="hidden" id="selectFromPost" value="${select }">
 	            <c:choose>
 					<c:when test="${not empty isQuestion}"> 
 						<div class="board__title align-center">질문 게시판</div>

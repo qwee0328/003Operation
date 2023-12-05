@@ -54,7 +54,7 @@ $(document).ready(function() {
 		$(".files__conf").empty();
 		for (let i = 0; i < resp.length; i++) {
 			let fileLine = $("<div>").attr("class", "files__Line").attr("sysName", resp[i].system_name).attr("oriName", resp[i].origin_name);
-			let fileDown = $("<a>").attr("class","fileDown").attr("href","/board/downloadFile?sysName="+resp[i].system_name+"&oriName="+resp[i].origin_name);
+			let fileDown = $("<a>").attr("class", "fileDown").attr("href", "/board/downloadFile?sysName=" + resp[i].system_name + "&oriName=" + resp[i].origin_name);
 			let fileIcon = $("<i>").attr("class", "fa-regular fa-file");
 			let fileName = $("<div>").html(resp[i].origin_name);
 			fileDown.append(fileIcon).append(fileName);
@@ -64,41 +64,67 @@ $(document).ready(function() {
 
 	// 게시글 추천, 북마크
 	$("#recommendBtn, #bookmarkBtn").on("click", function() {
-		let url = "/board/insertPostInfoById";
+		
+		// 추천 혹은 북마크 하기
+		if (($("#myRecommendRecord").val()==="false" && $(this).attr("id") === "recommendBtn") || ($("#myBookmarkRecord").val()==="false" && $(this).attr("id") === "bookmarkBtn")) {
+			let url = "/board/insertPostInfoById";
+			console.log($(this).attr("id") === "recommendBtn")
+			if ($(this).attr("id") === "recommendBtn") {
+				url = url + "/recommend";
+			} else {
+				url = url + "/bookmark";
+			}
 
-		if ($(this) === $("#recommendBtn")) {
-			url = url + "/recommend";
-		} else {
-			url = url + "/bookmark";
+			let icon = $(this).find("i");
+
+			$.ajax({
+				url: url,
+				data: { postId: $("#postId").val() },
+				type: "post"
+			}).done(function(resp) {
+				// 추천 수, 북마크 수, 댓글 수 불러오기
+				postInfo();
+				console.log($(this))
+				icon.css("color", "#FB8F8A");
+			})
+		}
+		if (($("#myRecommendRecord").val()==="true" && $(this).attr("id") === "recommendBtn") || ($("#myBookmarkRecord").val()==="true" && $(this).attr("id") === "bookmarkBtn")) {
+			let url = "/board/deletePostInfoById";
+			if ($(this).attr("id") === "recommendBtn") {
+				url = url + "/recommend";
+			} else {
+				url = url + "/bookmark";
+			}
+			
+			let icon = $(this).find("i");
+			
+			$.ajax({
+				url: url,
+				data: { postId: $("#postId").val() },
+				type: "post"
+			}).done(function(resp) {
+				// 추천 수, 북마크 수, 댓글 수 불러오기
+				postInfo();
+				icon.css("color", "black");
+			})
 		}
 
-		$.ajax({
-			url: url,
-			data: { postId: $("#postId").val() },
-			type: "post"
-		}).done(function(resp) {
-			// 추천 수, 북마크 수, 댓글 수 불러오기
-			postInfo();
-
-
-		})
 	});
 
 	$("#boardListBtn").on("click", function() {
 		let url = "/board/listBoard";
 		let category = "free";
 		if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
-		url += "/" + category;
+		url += "/" + category+"?select="+$("#select").val()+"&keyword="+$("#keyword").val();
 		location.href = url;
 	})
 
 
 
-
 });
 
+// 추천 수, 북마크 수, 댓글 수 불러오기
 function postInfo() {
-
 	$.ajax({
 		url: "/board/selectPostInfoById",
 		data: { postId: $("#postId").val() },
@@ -108,4 +134,27 @@ function postInfo() {
 		$(".bookmarkCount").html(resp.bookmark);
 		$(".replyCount").html(resp.reply);
 	})
+
+	myPostInfo();
+}
+
+function myPostInfo(){
+	// 내가 추천 혹은 북마크를 했는지 불러오기
+	$.ajax({
+		url: "/board/selectPostInfoFromMy",
+		data: { postId: $("#postId").val() },
+		type: "post"
+	}).done(function(resp) {
+		console.log(resp)
+		$("#myRecommendRecord").val(resp.recommend!==null?resp.recommend:false);
+		$("#myBookmarkRecord").val(resp.bookmark!==null?resp.bookmark:false);
+
+		if (resp.recommend) {
+			$("#recommendBtn").find("i").css("color", "#FB8F8A");
+		}
+
+		if (resp.bookmark) {
+			$("#bookmarkBtn").find("i").css("color", "#FB8F8A");
+		}
+	});
 }

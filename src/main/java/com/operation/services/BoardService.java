@@ -22,6 +22,8 @@ import com.operation.dao.FileDAO;
 import com.operation.dto.BoardDTO;
 import com.operation.dto.FileDTO;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class BoardService {
 	@Autowired
@@ -29,6 +31,9 @@ public class BoardService {
 
 	@Autowired
 	private FileDAO fdao;
+
+	@Autowired
+	private HttpSession session;
 
 	// 게시글 업로드 (+ 파일 업로드)
 	@Transactional
@@ -215,20 +220,49 @@ public class BoardService {
 		return dao.selectPostById(id);
 	}
 
-	// 게시글 추천 수 불러오기
-	public int selectRecommendById(int id) {
-		return dao.selectRecommendById(id);
+	// 게시글 관련 정보 불러오기
+	@Transactional
+	public Map<String, Object> selectPostInfoById(int id) {
+		Map<String, Object> postInfo = new HashMap<>();
+		int recommend = dao.selectRecommendById(id);
+		int bookmark = dao.selectBookmarkById(id);
+		int reply = dao.selectReplyById(id);
+		postInfo.put("recommend", recommend);
+		postInfo.put("bookmark", bookmark);
+		postInfo.put("reply", reply);
+		return postInfo;
 	}
 
-	// 게시글 북마크 수 불러오기
-	public int selectBookmarkById(int id) {
-		return dao.selectBookmarkById(id);
+	// 내가 추천 혹은 북마크를 했는지 불러오기
+	@Transactional
+	public Map<String, Object> selectPostInfoFromMy(int postId) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("postId", postId);
+		param.put("userId", (String) session.getAttribute("loginID"));
+		Map<String, Object> postInfo = new HashMap<>();
+		boolean recommend = dao.selectRecommendFromMy(param);
+		boolean bookmark = dao.selectBookmarkFromMy(param);
+
+		Map<String, Object> info = new HashMap<>();
+		info.put("recommend", recommend);
+		info.put("bookmark", bookmark);
+		return info;
 	}
 
-	// 게시글 댓글 수 불러오기
-	public int selectReplyById(int id) {
-		return dao.selectBookmarkById(id);
-	}
+//	// 게시글 추천 수 불러오기
+//	public int selectRecommendById(int id) {
+//		return dao.selectRecommendById(id);
+//	}
+//
+//	// 게시글 북마크 수 불러오기
+//	public int selectBookmarkById(int id) {
+//		return dao.selectBookmarkById(id);
+//	}
+//
+//	// 게시글 댓글 수 불러오기
+//	public int selectReplyById(int id) {
+//		return dao.selectBookmarkById(id);
+//	}
 
 	// 게시글 추천
 	public void insertRecommendById(Map<String, Object> param) {
@@ -239,7 +273,17 @@ public class BoardService {
 	public void insertBookmarkById(Map<String, Object> param) {
 		dao.insertBookmarkById(param);
 	}
-	
+
+	// 게시글 추천 삭제
+	public void deleteRecommendById(Map<String, Object> param) {
+		dao.deleteRecommendById(param);
+	}
+
+	// 게시글 북마크 삭제
+	public void deleteBookmarkById(Map<String, Object> param) {
+		dao.deleteBookmarkById(param);
+	}
+
 	// 게시판 파일 불러오기
 	public List<Map<String, Object>> selectFileById(Map<String, Object> param) {
 		return dao.selectFileById(param);

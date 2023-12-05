@@ -6,7 +6,16 @@ $(document).ready(function() {
 		if ($(".board__title").text().slice(0, 2) == "질문") location.href = "/board/goWritePost/question";
 		else location.href = "/board/goWritePost/free";
 	})
-	postLoad(1);
+	
+	// 게시글에서 목록 나올 때
+	if ($("#keywordFromPost").val() !== "") {
+		$(".search__value").children().val($("#keywordFromPost").val());
+		$(".search__select").val($("#selectFromPost").val()).prop("selected", true);
+		search(1);
+	}else{
+		postLoad(1);
+	}
+	
 });
 
 function drawList(result) {
@@ -259,9 +268,12 @@ $(document).on("click", ".title__name", function() {
 	let url = "/board/viewPostConf";
 	let category = "free";
 	if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
-	
 
-	url += "/"+category+"/" + $(this).attr("data-id");
+	keyword = $(".search__value").children().val() !== "" ? $(".search__value").children().val() : "none";
+	select = $(".search__select option:selected").val() != +"" ? $(".search__select option:selected").val() : "none";
+	console.log(keyword === "")
+
+	url += "/" + category + "/" + keyword + "/" + select + "/" + $(this).attr("data-id");
 
 	console.log(url);
 	location.href = url;
@@ -286,6 +298,7 @@ function search(cpage) {
 	select = $(".search__select option:selected").val();
 	let category = "free";
 	if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
+
 	$.ajax({
 		url: "/board/selectByKeyword",
 		data: {
@@ -296,6 +309,7 @@ function search(cpage) {
 		},
 		type: "post"
 	}).done(function(result) {
+		console.log(result)
 		$(".board__posts").html("");
 		drawList(result);
 	});

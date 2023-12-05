@@ -103,17 +103,28 @@ public class BoardController {
 
 	// 게시글 목록으로 이동
 	@RequestMapping("/listBoard/{catogory}")
-	public String listBoard(@PathVariable String catogory, Model model) {
+	public String listBoard(@PathVariable String catogory,
+			@RequestParam(value = "select", required = false) String select,
+			@RequestParam(value = "keyword", required = false) String keyword, Model model) {
 		if (catogory.equals("qna"))
 			model.addAttribute("isQna", true);
 		else if (catogory.equals("question"))
 			model.addAttribute("isQuestion", true);
+		
+		if(keyword!=null&&!keyword.equals("none")) {
+			System.out.println("여기");
+			model.addAttribute("select", select);
+			model.addAttribute("keyword", keyword);
+		}
 		return "board/boardList";
 	}
 
 	// 게시글 출력
-	@RequestMapping("/viewPostConf/{type}/{dataId}")
-	public String viewPostConf(@PathVariable String type, @PathVariable String dataId, Model model) {
+	@RequestMapping("/viewPostConf/{type}/{keyword}/{select}/{dataId}")
+	public String viewPostConf(@PathVariable String type, @PathVariable String keyword, @PathVariable String select,
+			@PathVariable String dataId, Model model) {
+		System.out.println(keyword);
+		System.out.println(keyword);
 		int postId = Integer.parseInt(dataId);
 		Map<String, Object> post = bservice.selectPostByIdJustView(postId);
 		model.addAttribute("post", post);
@@ -123,6 +134,8 @@ public class BoardController {
 			type = "자유";
 		}
 		model.addAttribute("type", type);
+		model.addAttribute("select", select);
+		model.addAttribute("keyword", keyword);
 		return "board/viewPost";
 	}
 
@@ -131,14 +144,23 @@ public class BoardController {
 	@RequestMapping("/selectPostInfoById")
 	public Map<String, Object> selectPostInfoById(@RequestParam String postId) {
 		int id = Integer.parseInt(postId);
-		Map<String, Object> postInfo = new HashMap<>();
-		int recommend = bservice.selectRecommendById(id);
-		int bookmark = bservice.selectBookmarkById(id);
-		int reply = bservice.selectReplyById(id);
-		postInfo.put("recommend", recommend);
-		postInfo.put("bookmark", bookmark);
-		postInfo.put("reply", reply);
-		return postInfo;
+		return bservice.selectPostInfoById(id);
+//		Map<String, Object> postInfo = new HashMap<>();
+//		int recommend = bservice.selectRecommendById(id);
+//		int bookmark = bservice.selectBookmarkById(id);
+//		int reply = bservice.selectReplyById(id);
+//		postInfo.put("recommend", recommend);
+//		postInfo.put("bookmark", bookmark);
+//		postInfo.put("reply", reply);
+//		return postInfo;
+	}
+
+	// 내가 추천 혹은 북마크를 했는지 불러오기
+	@ResponseBody
+	@RequestMapping("/selectPostInfoFromMy")
+	public Map<String, Object> selectPostInfoFromMy(@RequestParam String postId) {
+		int id = Integer.parseInt(postId);
+		return bservice.selectPostInfoFromMy(id);
 	}
 
 	// 게시글 추천, 북마크
@@ -154,6 +176,22 @@ public class BoardController {
 			bservice.insertRecommendById(param);
 		} else {
 			bservice.insertBookmarkById(param);
+		}
+	}
+
+	// 게시글 추천, 북마크 취소
+	@ResponseBody
+	@RequestMapping("/deletePostInfoById/{type}")
+	public void deletePostInfoById(@PathVariable String type, @RequestParam String postId) {
+		int id = Integer.parseInt(postId);
+		Map<String, Object> param = new HashMap<>();
+		param.put("postId", id);
+		param.put("userId", (String) session.getAttribute("loginID"));
+
+		if (type.equals("recommend")) {
+			bservice.deleteRecommendById(param);
+		} else {
+			bservice.deleteBookmarkById(param);
 		}
 	}
 

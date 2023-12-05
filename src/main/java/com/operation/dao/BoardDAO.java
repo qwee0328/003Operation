@@ -88,10 +88,32 @@ public class BoardDAO {
 	public void insertBookmarkById(Map<String, Object> param) {
 		db.update("Board.insertBookmarkById", param);
 	}
-	
+
+	// 게시글 추천 삭제
+	public void deleteRecommendById(Map<String, Object> param) {
+		db.update("Board.deleteRecommendById", param);
+	}
+
+	// 게시글 북마크 삭제
+	public void deleteBookmarkById(Map<String, Object> param) {
+		db.update("Board.deleteBookmarkById", param);
+	}
+
+	// 내가 추천했는지
+	public boolean selectRecommendFromMy(Map<String, Object> param) {
+		Boolean result = db.selectOne("Board.selectRecommendFromMy", param);
+		return (result != null) ? result.booleanValue() : false;
+	}
+
+	// 내가 북마크했는지
+	public boolean selectBookmarkFromMy(Map<String, Object> param) {
+		Boolean result = db.selectOne("Board.selectBookmarkFromMy", param);
+		return (result != null) ? result.booleanValue() : false;
+	}
+
 	// 게시글 파일 불러오기
-	public List<Map<String, Object>> selectFileById(Map<String, Object> param){
-		return db.selectList("Board.selectFileById",param);
+	public List<Map<String, Object>> selectFileById(Map<String, Object> param) {
+		return db.selectList("Board.selectFileById", param);
 	}
 
 	// 게시글 삭제
