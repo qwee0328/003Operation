@@ -16,7 +16,7 @@
 	<div class="container">
         <div class="guide">
             <div class="kiosk__kioskStep">[ 1단계 ]</div>
-            <div class="kiosk__kioskName">${info.name}</div>
+            <div class="kiosk__kioskName" data-id="${info.kiosk_category_id}">${info.name}</div>
             <c:choose>
             	<c:when test="${info.is_game}">
            			<div class="kiosk__progressBar d-flex">
@@ -39,18 +39,18 @@
 		                <div class="myRecord__cover">
 		                    <div class="myRecord__record d-flex">
 		                        <div class="myRecord__step align-center">1단계</div>
-		                        <div class="myRecord__time align-center">1분 30초</div>
-		                        <div class="myRecord__ranking align-center">상위 50%</div>
+		                        <div class="myRecord__time step1 align-center">-</div>
+		                        <div class="myRecord__ranking step1 align-center">-</div>
 		                    </div>
 		                    <div class="myRecord__record d-flex">
-		                        <div class="myRecord__step align-center">1단계</div>
-		                        <div class="myRecord__time align-center">1분 30초</div>
-		                        <div class="myRecord__ranking align-center">상위 50%</div>
+		                        <div class="myRecord__step align-center">2단계</div>
+		                        <div class="myRecord__time step2 align-center">-</div>
+		                        <div class="myRecord__ranking step2 align-center">-</div>
 		                    </div>
 		                    <div class="myRecord__record d-flex">
-		                        <div class="myRecord__step align-center">1단계</div>
-		                        <div class="myRecord__time align-center">1분 30초</div>
-		                        <div class="myRecord__ranking align-center">상위 50%</div>
+		                        <div class="myRecord__step align-center">3단계</div>
+		                        <div class="myRecord__time step3 align-center">-</div>
+		                        <div class="myRecord__ranking step3 align-center">-</div>
 		                    </div>
 		                </div>
 		            </div>

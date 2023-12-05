@@ -36,4 +36,9 @@ public class KioskDAO {
 	public int insert(KioskRecordDTO dto) {
 		return db.insert("Kiosk.insert", dto);
 	}
+	
+	// 키오스크 내 최고 기록 불러오기 (게임)
+	public List<Map<String, Object>> selectBestRecord(Map<String, Object> param){
+		return db.selectList("Kiosk.selectBestRecord", param);
+	}
 }

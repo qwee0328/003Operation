@@ -13,6 +13,11 @@
 		<result property="name" column="name"/>
 	</resultMap>
 	
+	<resultMap id="kiosk_bestRecord" type="java.util.Map">
+		<result property="kiosk_category_id" column="kiosk_category_id"/>
+		<result property="play_time" column="play_time"/>
+	</resultMap>
+	
 	<!-- 키오스크 카테고리 목록 불러오기 -->
 	<select id="selectAll" resultType="com.operation.dto.KioskCategoryDTO">
 		select * from
@@ -46,6 +51,11 @@
 	<!-- 현재 수행할 단계에 대한 키오스크 정보 불러오기 -->
 	<select id="selectByCategoryAndStage" resultMap="kiosk_info">
 		select * from kiosk_info where kiosk_category_id = #{kiosk_category_id} and play_stage = #{play_stage} and is_game=#{is_game};
+	</select>
+	
+	<!-- 키오스크 내 최고 기록 불러오기 (게임) -->
+	<select id="selectBestRecord" resultMap="kiosk_bestRecord">
+		select play_stage, min(play_time) play_time from kiosk_record r join kiosk k on r.kiosk_id = k.id where member_id=#{member_id} and kiosk_category_id=#{kiosk_category_id} group by play_stage order by play_stage;
 	</select>
 	
 	<!-- 키오스크 기록 추가 -->

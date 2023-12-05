@@ -1,5 +1,6 @@
 package com.operation.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,13 @@ public class KioskController {
 			dto.setMember_nickname((String) session.getAttribute("loginNickName"));
 			kservice.insert(dto);
 		}
+	}
+	
+	// 키오스크 내 최고 기록 불러오기 (게임)
+	@ResponseBody
+	@RequestMapping("/getBestRecord")
+	public List<Map<String, Object>> selectBestRecord(String kiosk_category_id){
+		return kservice.selectBestRecord(kiosk_category_id);
 	}
 	
 	
