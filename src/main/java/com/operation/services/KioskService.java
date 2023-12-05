@@ -20,9 +20,15 @@ public class KioskService {
 //		return dao.selectAll(is_game);
 //	}
 	
-	// 키오스크 카테고리 목록 불러오기
-	public List<KioskCategoryDTO> selectAll(){
-		return dao.selectAll();
+	// 키오스크 카테고리 목록 이름순불러오기
+	public List<KioskCategoryDTO> selectAll(String order){
+		return dao.selectAll(order);
+	}
+	
+	// 키오스크 카테고리 최다 플레이순 불러오기
+	public List<KioskCategoryDTO> selectAllOrderByPlayCnt(String order){
+		
+		return dao.selectAll(order);
 	}
 	
 	// 키오스크 상세 정보 불러오기

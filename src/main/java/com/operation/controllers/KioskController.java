@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.operation.dto.KioskCategoryDTO;
@@ -47,8 +48,13 @@ public class KioskController {
 	// 키오스크 카테고리 목록 가져오기
 	@ResponseBody
 	@RequestMapping("/getKioskList")
-	public List<KioskCategoryDTO> getKioskList() {
-		return kservice.selectAll();
+	public List<KioskCategoryDTO> getKioskList (@RequestParam(value="order", required=false) String order) {
+		order = (order == null || order.isEmpty()) ? "name"  : order;
+		if(!order.equals("name")) {
+			return kservice.selectAllOrderByPlayCnt(order);
+		}else {
+			return kservice.selectAll(order);
+		}
 	}
 	
 	// 키오스크로 페이지로 이동
@@ -64,7 +70,7 @@ public class KioskController {
 	@PostMapping("/insertData")
 	public void insert(@RequestBody KioskRecordDTO dto) {
 		String loginID = (String) session.getAttribute("loginID");
-		if(loginID!=null) {
+		if(!(loginID==null || loginID.isEmpty())) {
 			System.out.println("로그인중");
 			dto.setMember_id(loginID);
 			dto.setMember_nickname((String) session.getAttribute("loginNickName"));

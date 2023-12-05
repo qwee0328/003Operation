@@ -22,8 +22,8 @@ public class KioskDAO {
 //	}
 	
 	// 키오스크 카테고리 목록 불러오기
-	public List<KioskCategoryDTO> selectAll(){
-		return db.selectList("Kiosk.selectAll");
+	public List<KioskCategoryDTO> selectAll(String order){
+		return db.selectList("Kiosk.selectAll", order);
 	}
 	
 	// 키오스크 상세 정보 불러오기

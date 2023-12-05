@@ -20,8 +20,8 @@
 				<div class="kioskCategory__name">키오스크 카테고리</div>
 				<div class="kioskCategory__selectCover d-flex">
 					<select class="kioskCateogy__select">
-						<option>이름 순</option>
-						<option>최다 플레이 순</option>
+						<option value="name">이름 순</option>
+						<option value="playCnt">최다 플레이 순</option>
 					</select>
 				</div>
 				<div class="kioskCategory__kioskList"></div>

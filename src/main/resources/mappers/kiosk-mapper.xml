@@ -6,7 +6,7 @@
 	
 	<!-- 키오스크 카테고리 목록 불러오기 -->
 	<select id="selectAll" resultType="com.operation.dto.KioskCategoryDTO">
-		select * from kiosk_category order by name;
+		select * from kiosk_category order by ${order};
 	</select>
 	
 	<!-- 키오스크 정보 불러오기 -->
