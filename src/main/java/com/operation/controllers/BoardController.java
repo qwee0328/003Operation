@@ -110,9 +110,8 @@ public class BoardController {
 			model.addAttribute("isQna", true);
 		else if (catogory.equals("question"))
 			model.addAttribute("isQuestion", true);
-		
-		if(keyword!=null&&!keyword.equals("none")) {
-			System.out.println("여기");
+
+		if (keyword != null && !keyword.equals("none")) {
 			model.addAttribute("select", select);
 			model.addAttribute("keyword", keyword);
 		}
@@ -120,11 +119,9 @@ public class BoardController {
 	}
 
 	// 게시글 출력
-	@RequestMapping("/viewPostConf/{type}/{keyword}/{select}/{dataId}")
-	public String viewPostConf(@PathVariable String type, @PathVariable String keyword, @PathVariable String select,
-			@PathVariable String dataId, Model model) {
-		System.out.println(keyword);
-		System.out.println(keyword);
+	@RequestMapping("/viewPostConf/{type}/{select}/{dataId}")
+	public String viewPostConf(@PathVariable String type, @PathVariable String select, @PathVariable String dataId,
+			@RequestParam(value = "keyword", required = false) String keyword, Model model) {
 		int postId = Integer.parseInt(dataId);
 		Map<String, Object> post = bservice.selectPostByIdJustView(postId);
 		model.addAttribute("post", post);
@@ -145,14 +142,6 @@ public class BoardController {
 	public Map<String, Object> selectPostInfoById(@RequestParam String postId) {
 		int id = Integer.parseInt(postId);
 		return bservice.selectPostInfoById(id);
-//		Map<String, Object> postInfo = new HashMap<>();
-//		int recommend = bservice.selectRecommendById(id);
-//		int bookmark = bservice.selectBookmarkById(id);
-//		int reply = bservice.selectReplyById(id);
-//		postInfo.put("recommend", recommend);
-//		postInfo.put("bookmark", bookmark);
-//		postInfo.put("reply", reply);
-//		return postInfo;
 	}
 
 	// 내가 추천 혹은 북마크를 했는지 불러오기
@@ -224,6 +213,21 @@ public class BoardController {
 			sos.write(fileContents);
 			sos.flush();
 		}
+	}
+
+	// 이전글 다음 글 불러오기
+	@ResponseBody
+	@RequestMapping("/selectPrevNextPost")
+	public Map<String, Object> selectPrevNextPost(@RequestParam String postId, @RequestParam String category,
+			@RequestParam String keyword, @RequestParam String select) {
+		int id = Integer.parseInt(postId);
+		Map<String, Object> param = new HashMap<>();
+		param.put("postId", id);
+		param.put("type", category);
+		param.put("keyword", "%" + keyword + "%");
+		param.put("select", select);
+		Map<String, Object> result = bservice.selectPrevNextPost(param);
+		return result;
 	}
 
 	// 게시글 작성 페이지로 이동

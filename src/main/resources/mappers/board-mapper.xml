@@ -130,25 +130,31 @@
 	<insert id="insertBookmarkById">
 		insert board_bookmark values(0,#{postId},#{userId});
 	</insert>
-	
+
 	<!-- 게시글 추천 취소 -->
 	<delete id="deleteRecommendById">
-		delete from board_recommend where bulletin_board_id=#{postId} and member_id=#{userId};
+		delete from board_recommend where
+		bulletin_board_id=#{postId} and member_id=#{userId};
 	</delete>
-	
+
 	<!-- 게시글 북마크 취소 -->
 	<delete id="deleteBookmarkById">
-		delete from board_bookmark where bulletin_board_id=#{postId} and member_id=#{userId};
+		delete from board_bookmark where
+		bulletin_board_id=#{postId} and member_id=#{userId};
 	</delete>
-	
+
 	<!-- 내가 추천했는지 -->
 	<select id="selectRecommendFromMy" resultType="boolean">
-		select * from board_recommend where bulletin_board_id=#{postId} and member_id=#{userId};
+		select * from
+		board_recommend where bulletin_board_id=#{postId} and
+		member_id=#{userId};
 	</select>
-	
+
 	<!-- 내가 북마크했는지 -->
 	<select id="selectBookmarkFromMy" resultType="boolean">
-		select * from board_bookmark where bulletin_board_id=#{postId} and member_id=#{userId};
+		select * from
+		board_bookmark where bulletin_board_id=#{postId} and
+		member_id=#{userId};
 	</select>
 
 	<!-- 게시글 파일 불러오기 -->
@@ -160,13 +166,36 @@
 		<if test="type.equals('question')">
 			fqa_board_file
 		</if>
-		where 
+		where
 		<if test="type.equals('free')">
 			bulletin_board_id=#{id}
 		</if>
 		<if test="type.equals('question')">
 			fqa_board_id=#{id}
 		</if>
+	</select>
+
+	<!-- 이전글 다음글 불러오기 -->
+	<select id="selectPrevNextPost" resultType="map">
+		select id, NextId,  (select title from bulletin_board where id = NextId) as NextTitle, 
+		PrevId, (select title from bulletin_board where id = PrevId) as PrevTitle
+		from(
+		select id,
+		lead(id) over (order by id) as NextId,
+		lag(id) over (order by id) as PrevId
+		from bulletin_board
+		where 
+		<if test="select.equals('title')">
+			title like #{keyword} 
+		</if>
+		<if test="select.equals('content')">
+			content like #{keyword} 
+		</if>
+		<if test="select.equals('member_nickname')">
+			member_nickname like #{keyword} 
+		</if>
+		and bulletin_category_id=#{type}
+		) as boardLeadLag where id=#{postId};	
 	</select>
 
 	<!-- 게시글 삭제 -->

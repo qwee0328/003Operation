@@ -115,6 +115,11 @@ public class BoardDAO {
 	public List<Map<String, Object>> selectFileById(Map<String, Object> param) {
 		return db.selectList("Board.selectFileById", param);
 	}
+	
+	// 이전글 다음글 불러오기
+	public Map<String,Object> selectPrevNextPost(Map<String, Object> param){
+		return db.selectOne("Board.selectPrevNextPost", param);
+	}
 
 	// 게시글 삭제
 	public void deletePost(int id) {
