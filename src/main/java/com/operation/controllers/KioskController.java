@@ -1,6 +1,8 @@
 package com.operation.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.operation.dto.KioskCategoryDTO;
 import com.operation.dto.KioskDTO;
 import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
@@ -35,33 +39,41 @@ public class KioskController {
 		return "kiosk/kioskList";
 	}
 	
-	// 키오스크 목록 가져오기
+	// 키오스크 카테고리 목록 가져오기
 	@ResponseBody
 	@RequestMapping("/getKioskList")
-	public List<KioskDTO> getKioskList(int is_game) {
-		List<KioskDTO> list =  kservice.selectAll(is_game);
-		return list;
+	public List<KioskCategoryDTO> getKioskList (@RequestParam(value="order", required=false) String order, int is_game) {
+		order = (order == null || order.isEmpty()) ? "name"  : order;
+		return kservice.selectAll(order, is_game);
 	}
 	
-	// 키오스크로 페이지로 이동
+	// 키오스크 상세 페이지로 이동
 	@RequestMapping("/viewKiosk/{id}")
-	public String viewPractice(Model model, @PathVariable int id) {
-		KioskDTO info = kservice.selectById(id);
+	public String viewPractice(Model model, @PathVariable String id, int is_game) {
+		Map<String, Object> info = kservice.selectByCategoryAndStage(id, is_game);
 		model.addAttribute("info",info);
 		return "kiosk/kiosk";
 	}
 	
+	// 키오스크 이용 기록 저장
 	@ResponseBody
 	@CrossOrigin(origins = "https://pushssun.github.io")
 	@PostMapping("/insertData")
 	public void insert(@RequestBody KioskRecordDTO dto) {
 		String loginID = (String) session.getAttribute("loginID");
-		if(loginID!=null) {
+		if(!(loginID==null || loginID.isEmpty())) {
 			System.out.println("로그인중");
 			dto.setMember_id(loginID);
 			dto.setMember_nickname((String) session.getAttribute("loginNickName"));
 			kservice.insert(dto);
 		}
+	}
+	
+	// 키오스크 내 최고 기록 불러오기 (게임)
+	@ResponseBody
+	@RequestMapping("/getBestRecord")
+	public List<Map<String, Object>> selectBestRecord(String kiosk_category_id){
+		return kservice.selectBestRecord(kiosk_category_id);
 	}
 	
 	

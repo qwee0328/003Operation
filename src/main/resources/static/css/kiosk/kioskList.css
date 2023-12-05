@@ -6,6 +6,9 @@
 	margin: 100px auto 150px auto;
 }
 
+.kioskList_line {
+	/*justify-content: space-between;	*/
+}
 
 .kioskCategory__practice {
 	max-width: 1000px;
@@ -34,7 +37,12 @@
 .kioskCategory__kiosk {
 	width: 300px;
 	height: 370px;
-	margin: 0 17.5px 70px 17.5px;
+	margin-bottom: 70px;
+	margin-right: calc((100% - 300px * 3) / 2);
+}
+
+.kioskCategory__kiosk:last-child{
+	margin-right: 0;
 }
 
 .kioskCategory__kiosk:hover {

@@ -3,15 +3,59 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Kiosk">
+	<resultMap id="kiosk_info" type="java.util.Map">
+		<result property="kiosk_category_id" column="kiosk_category_id"/>
+		<result property="url" column="url"/>
+		<result property="play_stage" column="play_stage"/>
+		<result property="width" column="width"/>
+		<result property="height" column="height"/>
+		<result property="is_game" column="is_game"/>
+		<result property="name" column="name"/>
+	</resultMap>
 	
-	<!-- 키오스크 목록 불러오기 -->
-	<select id="selectAll" resultType="com.operation.dto.KioskDTO">
-		select * from kiosk where is_game = #{is_game};
+	<resultMap id="kiosk_bestRecord" type="java.util.Map">
+		<result property="kiosk_category_id" column="kiosk_category_id"/>
+		<result property="play_time" column="play_time"/>
+	</resultMap>
+	
+	<!-- 키오스크 카테고리 목록 불러오기 -->
+	<select id="selectAll" resultType="com.operation.dto.KioskCategoryDTO">
+		select * from
+		
+		<!-- 이름순 정렬 (default) -->
+		<if test="order.equals('name')">
+			kiosk_category order by ${order};
+		</if>
+		
+		<!-- 게임 플레이순 정렬 -->
+		<if test="order.equals('playCnt')">
+			<if test="is_game=0">
+				kiosk_orderby_playcount_prac;
+			</if>
+			<if test="is_game=1">
+				kiosk_orderby_playcount_game;
+			</if>
+		</if>
+		 
 	</select>
 	
 	<!-- 키오스크 정보 불러오기 -->
-	<select id="selectById" resultType="com.operation.dto.KioskDTO">
-		select * from kiosk where id = #{id};
+	<!-- 선택한 키오스크의 현재 수행할 단계 고르기 -->
+	<select id="selectIdByPlayStage" resultType="int">
+		select ifnull(max(kaj.play_stage), 0) play_stage
+		from kiosk_category kc
+		left join (select * from kiosk_all_join where member_id=#{member_id} and is_game=#{is_game}) kaj on kc.id = kaj.kiosk_category_id and kaj.is_success
+		where kc.id = #{kiosk_category_id};
+	</select>
+
+	<!-- 현재 수행할 단계에 대한 키오스크 정보 불러오기 -->
+	<select id="selectByCategoryAndStage" resultMap="kiosk_info">
+		select * from kiosk_info where kiosk_category_id = #{kiosk_category_id} and play_stage = #{play_stage} and is_game=#{is_game};
+	</select>
+	
+	<!-- 키오스크 내 최고 기록 불러오기 (게임) -->
+	<select id="selectBestRecord" resultMap="kiosk_bestRecord">
+		select play_stage, min(play_time) play_time from kiosk_record r join kiosk k on r.kiosk_id = k.id where member_id=#{member_id} and kiosk_category_id=#{kiosk_category_id} group by play_stage order by play_stage;
 	</select>
 	
 	<!-- 키오스크 기록 추가 -->
