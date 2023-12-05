@@ -1,6 +1,8 @@
 package com.operation.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,8 @@ public class KioskDAO {
 //	}
 	
 	// 키오스크 카테고리 목록 불러오기
-	public List<KioskCategoryDTO> selectAll(String order){
-		return db.selectList("Kiosk.selectAll", order);
+	public List<KioskCategoryDTO> selectAll(Map<String,Object> param){
+		return db.selectList("Kiosk.selectAll", param);
 	}
 	
 	// 키오스크 상세 정보 불러오기

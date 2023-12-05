@@ -48,13 +48,15 @@ public class KioskController {
 	// 키오스크 카테고리 목록 가져오기
 	@ResponseBody
 	@RequestMapping("/getKioskList")
-	public List<KioskCategoryDTO> getKioskList (@RequestParam(value="order", required=false) String order) {
+	public List<KioskCategoryDTO> getKioskList (@RequestParam(value="order", required=false) String order, int is_game) {
 		order = (order == null || order.isEmpty()) ? "name"  : order;
-		if(!order.equals("name")) {
-			return kservice.selectAllOrderByPlayCnt(order);
-		}else {
-			return kservice.selectAll(order);
-		}
+		return kservice.selectAll(order, is_game);
+		
+//		if(!order.equals("name")) {
+//			return kservice.selectAllOrderByPlayCnt(order);
+//		}else {
+//			return kservice.selectAll(order);
+//		}
 	}
 	
 	// 키오스크로 페이지로 이동

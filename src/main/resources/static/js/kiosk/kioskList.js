@@ -5,13 +5,20 @@ $(document).ready(function(){
 	let reploadList = (order) => {
 		$.ajax({
 			url:"/kiosk/getKioskList",
-			data:{order:order}
+			data:{
+				order:order,
+				is_game :parseInt($(".is_game").val())
+			}
 		}).done(function(list){
+			console.log(list);
+			
+			$(".kioskCategory__kioskList").html("");
 			let btnTxt = "연습하기";
 			if($(".is_game").val() == 1){
 				btnTxt = "게임하기";
 			}
 			for(let i=0; i<list.length; i++){
+				console.log(list[i]);
 		        if(i%3==0){
 		            kioskList_line = $(kioskList_lineClone).clone();
 		            $(".kioskCategory__kioskList").append(kioskList_line);

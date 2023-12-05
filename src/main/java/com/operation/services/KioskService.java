@@ -1,6 +1,8 @@
 package com.operation.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,16 +22,19 @@ public class KioskService {
 //		return dao.selectAll(is_game);
 //	}
 	
-	// 키오스크 카테고리 목록 이름순불러오기
-	public List<KioskCategoryDTO> selectAll(String order){
-		return dao.selectAll(order);
+	// 키오스크 카테고리 목록 불러오기
+	public List<KioskCategoryDTO> selectAll(String order, int is_game){
+		Map<String,Object> param = new HashMap<>();
+		param.put("order", order);
+		param.put("is_game", is_game);
+		return dao.selectAll(param);
 	}
 	
 	// 키오스크 카테고리 최다 플레이순 불러오기
-	public List<KioskCategoryDTO> selectAllOrderByPlayCnt(String order){
-		
-		return dao.selectAll(order);
-	}
+//	public List<KioskCategoryDTO> selectAllOrderByPlayCnt(String order){
+//		return dao.selectAllOrderByPlayCnt()
+//		return dao.selectAll(order);
+//	}
 	
 	// 키오스크 상세 정보 불러오기
 	public KioskDTO selectById(int id) {

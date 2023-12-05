@@ -6,7 +6,23 @@
 	
 	<!-- 키오스크 카테고리 목록 불러오기 -->
 	<select id="selectAll" resultType="com.operation.dto.KioskCategoryDTO">
-		select * from kiosk_category order by ${order};
+		select * from
+		
+		<!-- 이름순 정렬 (default) -->
+		<if test="order.equals('name')">
+			kiosk_category order by ${order};
+		</if>
+		
+		<!-- 게임 플레이순 정렬 -->
+		<if test="order.equals('playCnt')">
+			<if test="is_game=0">
+				kiosk_orderby_playcount_prac;
+			</if>
+			<if test="is_game=1">
+				kiosk_orderby_playcount_game;
+			</if>
+		</if>
+		 
 	</select>
 	
 	<!-- 키오스크 정보 불러오기 -->
