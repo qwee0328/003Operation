@@ -25,6 +25,8 @@
     <div class="container">	
         <div class="guide">
             <div class="board__header">
+            <input type="hidden" id="keywordFromPost" value="${keyword }">
+            <input type="hidden" id="selectFromPost" value="${select }">
 	            <c:choose>
 					<c:when test="${not empty isQuestion}"> 
 						<div class="board__title align-center">질문 게시판</div>
@@ -68,7 +70,6 @@
             </div>
             <div class="board__footer d-flex">
                 <div class="board__pagination align-center">
-                    123456
                 </div>
                 <div class="board__writeBtnCover"><button class="board__writeBtn bColorMainPink colorWhite">글쓰기</button></div>
             </div>

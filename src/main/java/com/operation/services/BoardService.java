@@ -22,185 +22,275 @@ import com.operation.dao.FileDAO;
 import com.operation.dto.BoardDTO;
 import com.operation.dto.FileDTO;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class BoardService {
 	@Autowired
 	private BoardDAO dao;
-	
+
 	@Autowired
 	private FileDAO fdao;
-	
+
+	@Autowired
+	private HttpSession session;
+
 	// 게시글 업로드 (+ 파일 업로드)
-	@Transactional 
+	@Transactional
 	public void insert(BoardDTO dto, MultipartFile[] files, Integer[] deleteFileList) throws Exception {
 		int bulletin_board_id = dao.insert(dto);
-		if(files != null && files.length >= 1) {
+		if (files != null && files.length >= 1) {
 			String path = "c:/003Operation/uploads";
 			File uploadPath = new File(path);
-			if(!uploadPath.exists()) uploadPath.mkdir();
-			
-			if(deleteFileList != null && deleteFileList.length >= 1) {
+			if (!uploadPath.exists())
+				uploadPath.mkdir();
+
+			if (deleteFileList != null && deleteFileList.length >= 1) {
 				int idx = 0;
-				System.out.println("길이: :"+deleteFileList.length);
-				for(int i=0; i<files.length; i++){
-					if(idx < deleteFileList.length && deleteFileList[idx] == i) {
-						idx++; 
+				System.out.println("길이: :" + deleteFileList.length);
+				for (int i = 0; i < files.length; i++) {
+					if (idx < deleteFileList.length && deleteFileList[idx] == i) {
+						idx++;
 						continue;
 					}
 					String oriName = files[i].getOriginalFilename();
-					String sysName = UUID.randomUUID()+"_"+oriName;
-					files[i].transferTo(new File(uploadPath,sysName));
+					String sysName = UUID.randomUUID() + "_" + oriName;
+					files[i].transferTo(new File(uploadPath, sysName));
 					fdao.insert(new FileDTO(0, bulletin_board_id, sysName, oriName));
 				}
-			}else {
-				for(int i=0; i<files.length; i++){
+			} else {
+				for (int i = 0; i < files.length; i++) {
 					String oriName = files[i].getOriginalFilename();
-					String sysName = UUID.randomUUID()+"_"+oriName;
-					files[i].transferTo(new File(uploadPath,sysName));
+					String sysName = UUID.randomUUID() + "_" + oriName;
+					files[i].transferTo(new File(uploadPath, sysName));
 					fdao.insert(new FileDTO(0, bulletin_board_id, sysName, oriName));
 				}
 			}
-			
+
 		}
 	}
-	
+
 	// 게시글 목록 불러오기
-	public List<Map<String, Object>> selectAll(String bulletin_category_id, int currentPage){
+	public List<Map<String, Object>> selectAll(String bulletin_category_id, int currentPage) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("bulletin_category_id", bulletin_category_id);
-		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE -1) -1 );
+		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
 		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
 		return dao.selectAll(param);
 	}
-	
+
 	// 게시글 검색 목록 불러오기
-	public List<Map<String, Object>> selectByKeyword(String bulletin_category_id, String select, String keyword, int currentPage){
+	public List<Map<String, Object>> selectByKeyword(String bulletin_category_id, String select, String keyword,
+			int currentPage) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("bulletin_category_id", bulletin_category_id);
 		param.put("select", select);
-		param.put("keyword", "%"+keyword+"%");
-		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE -1) -1 );
+		param.put("keyword", "%" + keyword + "%");
+		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
 		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
 		return dao.selectByKeyword(param);
 	}
-	
+
 	// 공지 목록 불러오기
-	public List<Map<String, Object>> selectAll(String bulletin_category_id){
+	public List<Map<String, Object>> selectAll(String bulletin_category_id) {
 		return dao.selectAll(bulletin_category_id);
 	}
-	
+
 	// 게시글 개수 불러오기
 	public int selectTotalCnt(String bulletin_category_id) {
 		return dao.selectTotalCnt(bulletin_category_id);
 	}
-	
+
 	// 검색 게시글 개수 불러오기
 	public int selectSearchCnt(String bulletin_category_id, String select, String keyword) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("bulletin_category_id", bulletin_category_id);
 		param.put("select", select);
-		param.put("keyword", "%"+keyword+"%");
+		param.put("keyword", "%" + keyword + "%");
 		return dao.selectSearchCnt(param);
 	}
 
 	// 이미지 업로드
-	@Transactional 
+	@Transactional
 	public List<String> saveImage(MultipartFile[] files) throws Exception {
 		List<String> list = new ArrayList<>();
-		if(files != null && files.length >= 1) {
+		if (files != null && files.length >= 1) {
 			String path = "c:/003Operation/uploads";
 			File uploadPath = new File(path);
-			if(!uploadPath.exists()) uploadPath.mkdir();
-			for(MultipartFile f:files) {
+			if (!uploadPath.exists())
+				uploadPath.mkdir();
+			for (MultipartFile f : files) {
 				String oriName = f.getOriginalFilename();
-				String sysName = UUID.randomUUID()+"_"+oriName;
-				f.transferTo(new File(uploadPath,sysName));
-				list.add("/uploads/"+sysName);
+				String sysName = UUID.randomUUID() + "_" + oriName;
+				f.transferTo(new File(uploadPath, sysName));
+				list.add("/uploads/" + sysName);
 			}
 		}
 		return list;
 	}
-	
+
 	// 이미지 삭제
 	@Transactional
 	public void deleteImage(String src) throws Exception {
 		Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
 		Files.deleteIfExists(path);
 	}
-	
+
 	// 이미지 일괄 삭제 ( 수정중 이미지 삽입하고 목록으로 이동한 경우 )
 	@Transactional
 	public void deleteImage(String[] srcList) throws Exception {
-		for(String src:srcList) {
+		for (String src : srcList) {
 			Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
 			Files.deleteIfExists(path);
 		}
 	}
-	
+
 	// 게시글 정보 불러오기 ( 수정용 )
-	public Map<String, Object> selectPostById(int id){
+	public Map<String, Object> selectPostById(int id) {
 		return dao.selectPostById(id);
 	}
-	
+
 	// 게시글 정보 수정
 	@Transactional
-	public void update(BoardDTO dto, MultipartFile[] files, Integer[] deleteFileList, Integer[] deleteExisingFileList, String[] deleteImgsSrc) throws Exception {
+	public void update(BoardDTO dto, MultipartFile[] files, Integer[] deleteFileList, Integer[] deleteExisingFileList,
+			String[] deleteImgsSrc) throws Exception {
 		dao.update(dto);
-		
+
 		// 기존 파일 삭제
-		if(deleteExisingFileList != null && deleteExisingFileList.length >= 1) {
-			List<String> deleteFileNameList  = new ArrayList<>();
-			if(deleteExisingFileList[0] == -1) {
+		if (deleteExisingFileList != null && deleteExisingFileList.length >= 1) {
+			List<String> deleteFileNameList = new ArrayList<>();
+			if (deleteExisingFileList[0] == -1) {
 				deleteFileNameList = fdao.selectAllByPostId(dto.getId());
 				fdao.deleteAllByPostId(dto.getId());
-			}else {
+			} else {
 				deleteFileNameList = fdao.selectByIds(deleteExisingFileList);
 				fdao.delete(deleteExisingFileList);
 			}
-			
-			for(String src:deleteFileNameList) {
+
+			for (String src : deleteFileNameList) {
 				Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
 				Files.deleteIfExists(path);
 			}
 		}
-		
+
 		// 기존 이미지 삭제
-		if(deleteImgsSrc != null && deleteImgsSrc.length >=1) {
-			for(String src:deleteImgsSrc) {
+		if (deleteImgsSrc != null && deleteImgsSrc.length >= 1) {
+			for (String src : deleteImgsSrc) {
 				Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
 				Files.deleteIfExists(path);
-			}	
+			}
 		}
-		
-	
+
 		// 새로운 파일 삽입
-		if(files != null && files.length >= 1) {
+		if (files != null && files.length >= 1) {
 			String path = "c:/003Operation/uploads";
 			File uploadPath = new File(path);
-			if(!uploadPath.exists()) uploadPath.mkdir();
-			
+			if (!uploadPath.exists())
+				uploadPath.mkdir();
+
 			// 삽입했다가 취소한 파일 제외
-			if(deleteFileList != null && deleteFileList.length >= 1) {
+			if (deleteFileList != null && deleteFileList.length >= 1) {
 				int idx = 0;
-				for(int i=0; i<files.length; i++){
-					if(idx < deleteFileList.length && deleteFileList[idx] == i) {
-						idx++; 
+				for (int i = 0; i < files.length; i++) {
+					if (idx < deleteFileList.length && deleteFileList[idx] == i) {
+						idx++;
 						continue;
 					}
 					String oriName = files[i].getOriginalFilename();
-					String sysName = UUID.randomUUID()+"_"+oriName;
-					files[i].transferTo(new File(uploadPath,sysName));
+					String sysName = UUID.randomUUID() + "_" + oriName;
+					files[i].transferTo(new File(uploadPath, sysName));
 					fdao.insert(new FileDTO(0, dto.getId(), sysName, oriName));
 				}
-			}else {
-				for(int i=0; i<files.length; i++){
+			} else {
+				for (int i = 0; i < files.length; i++) {
 					String oriName = files[i].getOriginalFilename();
-					String sysName = UUID.randomUUID()+"_"+oriName;
-					files[i].transferTo(new File(uploadPath,sysName));
+					String sysName = UUID.randomUUID() + "_" + oriName;
+					files[i].transferTo(new File(uploadPath, sysName));
 					fdao.insert(new FileDTO(0, dto.getId(), sysName, oriName));
 				}
 			}
-			
+
 		}
+	}
+
+	// 게시글 정보 불러오기 ( 출력용 )
+	@Transactional
+	public Map<String, Object> selectPostByIdJustView(int id) {
+		dao.updateViewCountById(id);
+		return dao.selectPostById(id);
+	}
+
+	// 게시글 관련 정보 불러오기
+	@Transactional
+	public Map<String, Object> selectPostInfoById(int id) {
+		Map<String, Object> postInfo = new HashMap<>();
+		int recommend = dao.selectRecommendById(id);
+		int bookmark = dao.selectBookmarkById(id);
+		int reply = dao.selectReplyById(id);
+		postInfo.put("recommend", recommend);
+		postInfo.put("bookmark", bookmark);
+		postInfo.put("reply", reply);
+		return postInfo;
+	}
+
+	// 내가 추천 혹은 북마크를 했는지 불러오기
+	@Transactional
+	public Map<String, Object> selectPostInfoFromMy(int postId) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("postId", postId);
+		param.put("userId", (String) session.getAttribute("loginID"));
+		Map<String, Object> postInfo = new HashMap<>();
+		boolean recommend = dao.selectRecommendFromMy(param);
+		boolean bookmark = dao.selectBookmarkFromMy(param);
+
+		Map<String, Object> info = new HashMap<>();
+		info.put("recommend", recommend);
+		info.put("bookmark", bookmark);
+		return info;
+	}
+
+//	// 게시글 추천 수 불러오기
+//	public int selectRecommendById(int id) {
+//		return dao.selectRecommendById(id);
+//	}
+//
+//	// 게시글 북마크 수 불러오기
+//	public int selectBookmarkById(int id) {
+//		return dao.selectBookmarkById(id);
+//	}
+//
+//	// 게시글 댓글 수 불러오기
+//	public int selectReplyById(int id) {
+//		return dao.selectBookmarkById(id);
+//	}
+
+	// 게시글 추천
+	public void insertRecommendById(Map<String, Object> param) {
+		dao.insertRecommendById(param);
+	}
+
+	// 게시글 북마크
+	public void insertBookmarkById(Map<String, Object> param) {
+		dao.insertBookmarkById(param);
+	}
+
+	// 게시글 추천 삭제
+	public void deleteRecommendById(Map<String, Object> param) {
+		dao.deleteRecommendById(param);
+	}
+
+	// 게시글 북마크 삭제
+	public void deleteBookmarkById(Map<String, Object> param) {
+		dao.deleteBookmarkById(param);
+	}
+
+	// 게시판 파일 불러오기
+	public List<Map<String, Object>> selectFileById(Map<String, Object> param) {
+		return dao.selectFileById(param);
+	}
+
+	// 게시글 삭제
+	public void deletePost(int id) {
+		dao.deletePost(id);
 	}
 }

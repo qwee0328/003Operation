@@ -67,7 +67,10 @@ li>a, .tabNab_body a{
 	border-radius: 10px;
 	display: none;
 	z-index: 999;
+	background-color: white;
+	box-shadow: 3px 3px 3px #7d7d7d50;
 }
+
 
 .board>ul li, .mypage>ul li{
 	height: 50px;
