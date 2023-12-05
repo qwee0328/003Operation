@@ -1,6 +1,7 @@
 package com.operation.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,36 +38,23 @@ public class KioskController {
 		return "kiosk/kioskList";
 	}
 	
-//	// 키오스크 목록 가져오기
-//	@ResponseBody
-//	@RequestMapping("/getKioskList")
-//	public List<KioskDTO> getKioskList(int is_game) {
-//		List<KioskDTO> list =  kservice.selectAll(is_game);
-//		return list;
-//	}
-	
 	// 키오스크 카테고리 목록 가져오기
 	@ResponseBody
 	@RequestMapping("/getKioskList")
 	public List<KioskCategoryDTO> getKioskList (@RequestParam(value="order", required=false) String order, int is_game) {
 		order = (order == null || order.isEmpty()) ? "name"  : order;
 		return kservice.selectAll(order, is_game);
-		
-//		if(!order.equals("name")) {
-//			return kservice.selectAllOrderByPlayCnt(order);
-//		}else {
-//			return kservice.selectAll(order);
-//		}
 	}
 	
-	// 키오스크로 페이지로 이동
+	// 키오스크 상세 페이지로 이동
 	@RequestMapping("/viewKiosk/{id}")
-	public String viewPractice(Model model, @PathVariable int id) {
-		KioskDTO info = kservice.selectById(id);
+	public String viewPractice(Model model, @PathVariable String id, int is_game) {
+		Map<String, Object> info = kservice.selectByCategoryAndStage(id, is_game);
 		model.addAttribute("info",info);
 		return "kiosk/kiosk";
 	}
 	
+	// 키오스크 이용 기록 저장
 	@ResponseBody
 	@CrossOrigin(origins = "https://pushssun.github.io")
 	@PostMapping("/insertData")

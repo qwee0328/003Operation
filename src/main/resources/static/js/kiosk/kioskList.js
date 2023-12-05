@@ -10,15 +10,13 @@ $(document).ready(function(){
 				is_game :parseInt($(".is_game").val())
 			}
 		}).done(function(list){
-			console.log(list);
-			
+
 			$(".kioskCategory__kioskList").html("");
 			let btnTxt = "연습하기";
 			if($(".is_game").val() == 1){
 				btnTxt = "게임하기";
 			}
 			for(let i=0; i<list.length; i++){
-				console.log(list[i]);
 		        if(i%3==0){
 		            kioskList_line = $(kioskList_lineClone).clone();
 		            $(".kioskCategory__kioskList").append(kioskList_line);
@@ -34,7 +32,7 @@ $(document).ready(function(){
 		        
 		        $(kioskCategory__kiosk).on("click",function(){
 					let id = $(this).closest(".kioskCategory__kiosk").attr("data-id");
-					location.href = "/kiosk/viewKiosk/"+id;
+					location.href = "/kiosk/viewKiosk/"+id+"?is_game="+$(".is_game").val();
 				});
 	    	}
 		});	

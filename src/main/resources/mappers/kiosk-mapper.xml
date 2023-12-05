@@ -3,6 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Kiosk">
+	<resultMap id="kiosk_info" type="java.util.Map">
+		<result property="kiosk_category_id" column="kiosk_category_id"/>
+		<result property="url" column="url"/>
+		<result property="play_stage" column="play_stage"/>
+		<result property="width" column="width"/>
+		<result property="height" column="height"/>
+		<result property="is_game" column="is_game"/>
+		<result property="name" column="name"/>
+	</resultMap>
 	
 	<!-- 키오스크 카테고리 목록 불러오기 -->
 	<select id="selectAll" resultType="com.operation.dto.KioskCategoryDTO">
@@ -26,8 +35,17 @@
 	</select>
 	
 	<!-- 키오스크 정보 불러오기 -->
-	<select id="selectById" resultType="com.operation.dto.KioskDTO">
-		select * from kiosk_info where id = #{id};
+	<!-- 선택한 키오스크의 현재 수행할 단계 고르기 -->
+	<select id="selectIdByPlayStage" resultType="int">
+		select ifnull(max(kaj.play_stage), 0) play_stage
+		from kiosk_category kc
+		left join (select * from kiosk_all_join where member_id=#{member_id} and is_game=#{is_game}) kaj on kc.id = kaj.kiosk_category_id and kaj.is_success
+		where kc.id = #{kiosk_category_id};
+	</select>
+
+	<!-- 현재 수행할 단계에 대한 키오스크 정보 불러오기 -->
+	<select id="selectByCategoryAndStage" resultMap="kiosk_info">
+		select * from kiosk_info where kiosk_category_id = #{kiosk_category_id} and play_stage = #{play_stage} and is_game=#{is_game};
 	</select>
 	
 	<!-- 키오스크 기록 추가 -->
