@@ -1,14 +1,15 @@
-let keyword;
-let select;
+let keyword = "";
+let select = "";
+
 $(document).ready(function() {
 	// 글쓰기 버튼
 	$(".board__writeBtn").on("click", function() {
-		if ($(".board__title").text().slice(0, 2) == "질문") location.href = "/board/goWritePost/question";
-		else location.href = "/board/goWritePost/free";
+		if ($(".board__title").text().slice(0, 2) == "질문") location.href = "/board/goWritePost/question?select="+select+"&keyword="+keyword;
+		else location.href = "/board/goWritePost/free?select="+select+"&keyword="+keyword;
 	})
 	
-	// 게시글에서 목록 나올 때
-	if ($("#keywordFromPost").val() !== "") {
+	// 게시글에서 목록으로 나올 때 검색 결과가 있느 경우
+	if ($("#keywordFromPost").val() != "") {
 		$(".search__value").children().val($("#keywordFromPost").val());
 		$(".search__select").val($("#selectFromPost").val()).prop("selected", true);
 		search(1);
@@ -152,7 +153,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 	let pagination = $(".board__pagination");
 	pagination.html("");
 	if (recordTotalCount == 0) {
-		let empty = $("<div>").html("검색 결과가 존재하지 않습니다.");
+		let empty = $("<div class='empty align-center'>").html("검색 결과가 존재하지 않습니다.");
 		$(".board__posts").append(empty);
 	}
 	else {
@@ -280,39 +281,32 @@ $(document).on("click", ".title__name", function() {
 })
 
 
-// 게시글 수정 페이지로 이동하는 코드 -> 추후에 post 내에서 수정 버튼과  연결
-/*$(document).on("click",".title__name",function(){
-	let url = "/board/goUpdatePost/free";
-	if ($(".board__title").text().slice(0, 2) == "질문") location.href = "/board/goUpdatePost/question";
-	
-	url+="/"+$(this).attr('data-id');	
-	
-	location.href=url;
-});*/
-
-
 // 검색 기능
 function search(cpage) {
 	keyword = $(".search__value").children().val();
 
-	select = $(".search__select option:selected").val();
-	let category = "free";
-	if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
-
-	$.ajax({
-		url: "/board/selectByKeyword",
-		data: {
-			category: category,
-			select: select,
-			keyword: keyword,
-			cpage: cpage
-		},
-		type: "post"
-	}).done(function(result) {
-		console.log(result)
-		$(".board__posts").html("");
-		drawList(result);
-	});
+	if(keyword==""){
+		postLoad(1);
+	}else{
+		select = $(".search__select option:selected").val();
+		let category = "free";
+		if ($(".board__title").text().slice(0, 2) == "질문") category = "question";
+	
+		$.ajax({
+			url: "/board/selectByKeyword",
+			data: {
+				category: category,
+				select: select,
+				keyword: keyword,
+				cpage: cpage
+			},
+			type: "post"
+		}).done(function(result) {
+			$(".board__posts").html("");
+			drawList(result);
+		});
+	}
+	
 }
 
 $(document).on("click", ".search__btn", function() {

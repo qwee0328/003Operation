@@ -40,21 +40,21 @@
         <div class="index_guide">
 			<div class="practice">
                 <div class="practice__title">
-                    카테고리별 연습으로<span>기본부터 튼튼하게</span>
+                    카테고리별 연습으로<span class="title__br">기본부터 튼튼하게</span>
                 </div>
                 <div class="practice__contents">
                     <div class="practice_row">
-                        <a href="">
+                        <a href="/kiosk/viewKiosk/sangmuSushi?is_game=0">
                             <div class="practice__box">
                                 <div class="subtitle">
                                     키오스크 연습
                                 </div>
                                 <div class="title">
-                                    티오더
+                                    상무초밥
                                 </div>
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/kiosk/viewKiosk/lotteria?is_game=0">
                             <div class="practice__box">
                                 <div class="subtitle">
                                     키오스크 연습
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/kiosk/viewKiosk/megaCoffee?is_game=0">
                             <div class="practice__box">
                                 <div class="subtitle">
                                     키오스크 연습
@@ -76,27 +76,7 @@
                         </a>
                     </div>
                     <div class="practice_row">
-                        <a href="">
-                            <div class="practice__box">
-                                <div class="subtitle">
-                                    키오스크 연습
-                                </div>
-                                <div class="title">
-                                    기차
-                                </div>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="practice__box">
-                                <div class="subtitle">
-                                    키오스크 연습
-                                </div>
-                                <div class="title">
-                                    버스
-                                </div>
-                            </div>
-                        </a>
-                        <a href="">
+                        <a href="/kiosk/viewKiosk/cgv?is_game=0">
                             <div class="practice__box">
                                 <div class="subtitle">
                                     키오스크 연습
@@ -106,7 +86,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/kiosk/viewKiosk/emart?is_game=0">
                             <div class="practice__box">
                                 <div class="subtitle">
                                     키오스크 연습
@@ -120,17 +100,17 @@
                 </div>
                 <div class="practice__contents-tab">
                     <div class="practice_row">
-                        <a href="">
+                        <a href="/kiosk/viewKiosk/sangmuSushi?is_game=0">
                             <div class="practice__box">
                                 <div class="subtitle">
                                     키오스크 연습
                                 </div>
                                 <div class="title">
-                                    티오더
+                                    상무초밥
                                 </div>
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/kiosk/viewKiosk/lotteria?is_game=0">
                             <div class="practice__box">
                                 <div class="subtitle">
                                     키오스크 연습
@@ -140,7 +120,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/kiosk/viewKiosk/megeCoffee?is_game=0">
                             <div class="practice__box">
                                 <div class="subtitle">
                                     키오스크 연습
@@ -152,28 +132,7 @@
                         </a>
                     </div>
                     <div class="practice_row">
-
-                        <a href="">
-                            <div class="practice__box">
-                                <div class="subtitle">
-                                    키오스크 연습
-                                </div>
-                                <div class="title">
-                                    기차
-                                </div>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="practice__box">
-                                <div class="subtitle">
-                                    키오스크 연습
-                                </div>
-                                <div class="title">
-                                    버스
-                                </div>
-                            </div>
-                        </a>
-                        <a href="">
+                        <a href="/kiosk/viewKiosk/cgv?is_game=0">
                             <div class="practice__box">
                                 <div class="subtitle">
                                     키오스크 연습
@@ -182,10 +141,8 @@
                                     영화
                                 </div>
                             </div>
-                        </a>
-                    </div>
-                    <div class="practice_row">
-                        <a href="">
+                        </a>  
+                        <a href="/kiosk/viewKiosk/emart?is_game=0">
                             <div class="practice__box">
                                 <div class="subtitle">
                                     키오스크 연습
@@ -196,15 +153,16 @@
                             </div>
                         </a>
                     </div>
+
                 </div>
             </div>
             <div class="popular">
                 <div class="popular__title">
                     실시간 인기 카테고리
-                    <a href=""><button><i class="fa-solid fa-arrow-rotate-right"></i></button></a>
+                   	<button><i class="fa-solid fa-arrow-rotate-right realTimeRanking"></i></button>
                 </div>
                 <div class="popular__contents">
-                    <div class="popular__Box">
+                  <!--   <div class="popular__Box">
                         <div class="Box__left">
                             <div class="popular__rank">1</div>
                             <div class="popular__info">
@@ -281,7 +239,7 @@
                                 <a href=""><button>게임</button></a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

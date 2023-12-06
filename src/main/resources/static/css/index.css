@@ -217,6 +217,14 @@
 	display: none;
 }
 
+.realTimeRanking:hover{
+	cursor: pointer;
+}
+
+.title__br{
+	margin-left:10px;
+}
+
 @media (max-width: 1080px) {
 	img {
 		opacity: 0.4;
@@ -286,6 +294,11 @@
 
 	.practice__title {
 		font-size: 30px;
+	}
+	
+	.title__br{
+		margin-left:0;
+		display:block;
 	}
 
 	.subtitle {

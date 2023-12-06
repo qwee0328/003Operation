@@ -263,6 +263,11 @@
 	cursor: pointer;
 }
 
+.empty{
+	height: 200px;
+	font-size: 20px;
+}
+
 @media (max-width: 786px) {
 	.guide {
 		margin: 100px 10px;
@@ -363,5 +368,9 @@
 		align-items: center;
 		justify-content: center;
 		margin: 0 2.5px;
+	}
+	
+	.empty{
+		height: 100px;
 	}
 }

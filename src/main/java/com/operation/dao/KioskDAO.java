@@ -37,8 +37,13 @@ public class KioskDAO {
 		return db.insert("Kiosk.insert", dto);
 	}
 	
-	// 키오스크 내 최고 기록 불러오기 (게임)
+	// 키오스크 내 최고 기록 불러오기
 	public List<Map<String, Object>> selectBestRecord(Map<String, Object> param){
 		return db.selectList("Kiosk.selectBestRecord", param);
+	}
+	
+	// 키오스크 인기 랭킹 가져오기 (메인)
+	public List<Map<String, Object>> realTimeRank(){
+		return db.selectList("Kiosk.realTimeRank");
 	}
 }
