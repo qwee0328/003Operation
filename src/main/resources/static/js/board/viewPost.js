@@ -7,7 +7,7 @@ $(document).ready(function() {
 		if ($(".postTitle").html().slice(0, 2) == "질문") {
 			url = "/board/goUpdatePost/question";
 		}
-		url += "/" + $(this).attr('data-id');
+		url += "/" + $(this).attr('data-id') + "?select="+$("#select").val()+"&keyword="+$("#keyword").val();
 		location.href = url;
 	})
 

@@ -102,5 +102,13 @@
 	.kioskCategory__selectCover {
 		justify-content: center;
 	}
+	
+	.kioskCategory__kiosk:last-child{
+		margin-left: auto;
+		margin-right: auto;
+	}
 
+	.kiosk__image{
+		width: 70%;	
+	}
 }

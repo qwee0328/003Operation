@@ -1,6 +1,5 @@
 package com.operation.controllers;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.operation.dto.KioskCategoryDTO;
-import com.operation.dto.KioskDTO;
 import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
 
@@ -60,9 +58,10 @@ public class KioskController {
 	@CrossOrigin(origins = "https://pushssun.github.io")
 	@PostMapping("/insertData")
 	public void insert(@RequestBody KioskRecordDTO dto) {
+		System.out.println("insert");
+		System.out.println(dto);
 		String loginID = (String) session.getAttribute("loginID");
 		if(!(loginID==null || loginID.isEmpty())) {
-			System.out.println("로그인중");
 			dto.setMember_id(loginID);
 			dto.setMember_nickname((String) session.getAttribute("loginNickName"));
 			kservice.insert(dto);
@@ -76,6 +75,13 @@ public class KioskController {
 		return kservice.selectBestRecord(kiosk_category_id);
 	}
 	
+	
+	// 키오스크 인기 랭킹 가져오기 (메인)
+	@ResponseBody
+	@RequestMapping("/realTimeRank")
+	public List<Map<String, Object>> realTimeRank(){
+		return kservice.realTimeRank();
+	}
 	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

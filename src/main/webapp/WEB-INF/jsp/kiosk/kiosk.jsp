@@ -15,7 +15,7 @@
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp"%>
 	<div class="container">
         <div class="guide">
-            <div class="kiosk__kioskStep">[ 1단계 ]</div>
+            <div class="kiosk__kioskStep">[ ${info.play_stage}단계 ]</div>
             <div class="kiosk__kioskName" data-id="${info.kiosk_category_id}">${info.name}</div>
             <c:choose>
             	<c:when test="${info.is_game}">
