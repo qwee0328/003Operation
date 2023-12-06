@@ -104,7 +104,7 @@
 					<!-- 질문 게시판의 경우 비밀글 설정 -->
 					<div class="postArea__secret d-flex">
 					<c:choose>
-						<c:when test="${not empty isQuestion}"> 
+						<c:when test="${not empty isQna}"> 
 							<input type="checkbox" class="postArea__secretChk" id="secretChk">
 							<label for="secretChk">비밀글 설정</label>
 						</c:when>
