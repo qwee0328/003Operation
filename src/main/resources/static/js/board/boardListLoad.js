@@ -1,5 +1,6 @@
-let keyword;
-let select;
+let keyword = "";
+let select = "";
+
 $(document).ready(function() {
 	// 글쓰기 버튼
 	$(".board__writeBtn").on("click", function() {
@@ -7,8 +8,8 @@ $(document).ready(function() {
 		else location.href = "/board/goWritePost/free?select="+select+"&keyword="+keyword;
 	})
 	
-	// 게시글에서 목록 나올 때
-	if ($("#keywordFromPost").val() !== "") {
+	// 게시글에서 목록으로 나올 때 검색 결과가 있느 경우
+	if ($("#keywordFromPost").val() != "") {
 		$(".search__value").children().val($("#keywordFromPost").val());
 		$(".search__select").val($("#selectFromPost").val()).prop("selected", true);
 		search(1);
@@ -301,7 +302,6 @@ function search(cpage) {
 			},
 			type: "post"
 		}).done(function(result) {
-			console.log(result)
 			$(".board__posts").html("");
 			drawList(result);
 		});

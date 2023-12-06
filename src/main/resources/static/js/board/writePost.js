@@ -61,6 +61,7 @@ $(document).ready(function(){
 		// 자유 vs 질문
 		let bulletin_category_id = "free";
 		if($(".titleArea").text().slice(0,2)=="질문") bulletin_category_id = "question";
+		else if($(".titleArea").text().slice(0,2)!="자유") bulletin_category_id = "qna";
 		formData.append("bulletin_category_id",bulletin_category_id);
 		
 		for(let i=0; i<$(".postArea__fileInput")[0].files.length; i++){

@@ -1,10 +1,7 @@
-$(document).ready(function(){
-	//답변있으면
-});
+let keyword="";
+let select="";
 
 $(document).ready(function(){
-
-	//답변없으면
     for(let i=0; i<10; i++){
         let board__post = $("<div>").attr("class","board__post d-flex");
         let post__seq = $("<div>").attr("class","post__seq").text("1");
@@ -64,118 +61,124 @@ $(document).on("click",".postAwswer__area",function(){
 });
 
 // pagination
-$(document).ready(function(){
+function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviCountPerPage) {
 
-	function drawPagination() {
-		if(window.innerWidth > 768){
-			pagination(1, 110, 1, 10, 10);
+	let pagination = $(".board__pagination");
+	pagination.html("");
+	if (recordTotalCount == 0) {
+		let empty = $("<div class='empty align-center'>").html("검색 결과가 존재하지 않습니다.");
+		$(".board__posts").append(empty);
+	}
+	else {
+		let pageTotalCount = 0;
+		pageTotalCount = Math.ceil(recordTotalCount / recordCountPerPage);
+
+		// 비정상 접근 차단
+		if (postCurPage < 1) {
+			postCurPage = 1;
+		} else if (postCurPage > pageTotalCount) {
+			postCurPage = pageTotalCount;
 		}
-		else{
-			pagination(1, 110, 1, 5, 5);
+
+		let startNavi = Math.floor((postCurPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+		let endNavi = startNavi + (naviCountPerPage - 1);
+
+
+		if (endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+		let needPrev = true;
+		let needNext = true;
+
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+
+		if (startNavi != 1) {
+			let aTag = $("<a>");
+			let iTag = $("<i class='fa-solid fa-angles-left'></i>");
+			aTag.attr("class", "fontEnglish");
+			aTag.on("click", function() {
+				if (select != "") {
+					search(1);
+				} else {
+					postLoad(1);
+				}
+			});
+			aTag.append(iTag);
+			pagination.append(aTag);
+		}
+
+		if (needPrev) {
+			let aTag = $("<a>");
+			let iTag = $("<i class='fa-solid fa-chevron-left'></i>");
+			aTag.on("click", function() {
+				if (select != "") {
+					search((startNavi - 1));
+				} else {
+					postLoad((startNavi - 1));
+				}
+			});
+			aTag.append(iTag);
+			pagination.append(aTag);
+		}
+
+		for (let i = startNavi; i <= endNavi; i++) {
+			let aTag = $("<a>");
+			aTag.html(i);
+			aTag.attr("class", "fontEnglish");
+			aTag.on("click", function() {
+				if (select != "") {
+					search(i);
+				} else {
+					postLoad(i);
+				}
+			});
+			if (i == postCurPage) {
+				aTag.addClass("colorWhite bColorMainBlue fontEnglish");
+			} else {
+				aTag.addClass("bColorLightBlue fontEnglish");
+			}
+			pagination.append(aTag);
+		}
+
+		if (needNext) {
+			let aTag = $("<a>");
+			let iTag = $("<i class='fa-solid fa-chevron-right'></i>");
+			aTag.on("click", function() {
+				if (select != "") {
+					search(endNavi + 1);
+				} else {
+					postLoad(endNavi + 1);
+				}
+			});
+			aTag.append(iTag);
+			pagination.append(aTag);
+		}
+
+		if (endNavi != pageTotalCount) {
+			let aTag = $("<a>");
+			let iTag = $("<i class='fa-solid fa-angles-right'></i>");
+			aTag.on("click", function() {
+				if (select != "") {
+					search(pageTotalCount);
+				} else {
+					postLoad(pageTotalCount);
+				}
+			});
+			aTag.append(iTag);
+			pagination.append(aTag);
 		}
 	}
-
-    function pagination(postSeq, recordTotalCount, replyCurPage, recordCountPerPage, naviCountPerPage) {
-		if (recordTotalCount != 0) {
-			let pagination = $(".board__pagination");
-			pagination.html("");
-			
-			let pageTotalCount = 0;
-			pageTotalCount = Math.ceil(recordTotalCount / recordCountPerPage);
-
-			// 비정상 접근 차단
-			if (replyCurPage < 1) {
-				replyCurPage = 1;
-			} else if (replyCurPage > pageTotalCount) {
-				replyCurPage = pageTotalCount;
-			}
-
-			let startNavi = Math.floor((replyCurPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
-			let endNavi = startNavi + (naviCountPerPage - 1);
-			
-			
-			if (endNavi > pageTotalCount) {
-				endNavi = pageTotalCount;
-			}
-			let needPrev = true;
-			let needNext = true;
-		
-
-			if (startNavi == 1) {
-				needPrev = false;
-			}
-			if (endNavi == pageTotalCount) {
-				needNext = false;
-			}
+}
 
 
-			if (startNavi != 1) {
-				let aTag = $("<a>");
-				let iTag = $("<i class='fa-solid fa-angles-left'></i>");
-				aTag.attr("class","fontEnglish");
-				aTag.on("click",function(){
-					$("#replys").html("");
-					replyReload(postSeq,1);
-				});
-				aTag.append(iTag);
-				pagination.append(aTag);
-			}
-
-			if (needPrev) {
-				let aTag = $("<a>");
-				let iTag = $("<i class='fa-solid fa-chevron-left'></i>");
-				aTag.on("click",function(){
-					$("#replys").html("");
-					replyReload(postSeq,(startNavi - 1));
-				});
-				aTag.append(iTag);
-				pagination.append(aTag);
-			}
-
-			for (let i = startNavi; i <= endNavi; i++) {
-				let aTag = $("<a>");
-				aTag.html(i);
-				aTag.attr("class","fontEnglish");
-				aTag.on("click",function(){
-					$("#replys").html("");
-					replyReload(postSeq,i);
-				});
-				if (i == replyCurPage) {
-					aTag.addClass("colorWhite bColorMainBlue fontEnglish");
-				}else{
-                    aTag.addClass("bColorLightBlue fontEnglish");
-                }
-				pagination.append(aTag);
-			}
-
-			if (needNext) {
-				let aTag = $("<a>");
-				let iTag = $("<i class='fa-solid fa-chevron-right'></i>");
-				aTag.on("click",function(){
-					$("#replys").html("");
-					replyReload(postSeq,(endNavi + 1));
-				});
-				aTag.append(iTag);
-				pagination.append(aTag);
-			}
-
-			if (endNavi != pageTotalCount) {
-				let aTag = $("<a>");
-				let iTag = $("<i class='fa-solid fa-angles-right'></i>");
-				aTag.on("click",function(){
-					$("#replys").html("");
-					replyReload(postSeq,pageTotalCount);
-				});
-				aTag.append(iTag);
-				pagination.append(aTag);
-			}
-		}
-	}
-    drawPagination();
-
-	window.onresize = function(){
-		// 에이젝스로 값 다시 불러오든가.. 하기..?
-		drawPagination();
-	}
-	
+// 글 쓰기로 이동
+$(document).on("click",".board__writeBtn",function(){
+	location.href= "/board/goWritePost/qna?select="+select+"&keyword="+keyword;
 })

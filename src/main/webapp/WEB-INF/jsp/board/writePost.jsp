@@ -28,27 +28,43 @@
 	<div class="container">
 		<div class="body__guide">
 			<c:choose>
-				<c:when test="${not empty isQuestion}"> 
+				<c:when test="${not empty isQna}">
 					<c:choose>
 						<c:when test="${not empty post.id}">
-							<div class="titleArea">질문 게시글 수정</div>
+							<div class="titleArea">Q&A 게시글 수정</div>
 						</c:when>
 						<c:otherwise>
-							<div class="titleArea">질문 게시글 작성</div>
+							<div class="titleArea">Q&A 게시글 작성</div>
 						</c:otherwise>
 					</c:choose>
 				</c:when>
 				<c:otherwise>
 					<c:choose>
-						<c:when test="${not empty post.id}">
-							<div class="titleArea">자유 게시글 수정</div>
+						<c:when test="${not empty isQuestion}"> 
+							<c:choose>
+								<c:when test="${not empty post.id}">
+									<div class="titleArea">질문 게시글 수정</div>
+								</c:when>
+								<c:otherwise>
+									<div class="titleArea">질문 게시글 작성</div>
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 						<c:otherwise>
-							<div class="titleArea">자유 게시글 작성</div>
+							<c:choose>
+								<c:when test="${not empty post.id}">
+									<div class="titleArea">자유 게시글 수정</div>
+								</c:when>
+								<c:otherwise>
+									<div class="titleArea">자유 게시글 작성</div>
+								</c:otherwise>
+							</c:choose>	
 						</c:otherwise>
-					</c:choose>	
+					</c:choose>
 				</c:otherwise>
 			</c:choose>
+		
+			
 			<div class="postArea">
 				<div class="postArea__title">
 					<input type="text" class="postArea__titleInput" value="${post.title}" placeholder="제목을 입력해주세요">

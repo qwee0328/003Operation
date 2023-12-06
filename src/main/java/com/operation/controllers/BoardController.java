@@ -47,7 +47,7 @@ public class BoardController {
 		else if (catogory.equals("question"))
 			model.addAttribute("isQuestion", true);
 		model.addAttribute("select",select);
-		model.addAttribute("keyword",keyword);
+		model.addAttribute("keyword",keyword);	
 		return "board/writePost";
 	}
 

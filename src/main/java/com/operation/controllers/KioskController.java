@@ -58,6 +58,8 @@ public class KioskController {
 	@CrossOrigin(origins = "https://pushssun.github.io")
 	@PostMapping("/insertData")
 	public void insert(@RequestBody KioskRecordDTO dto) {
+		System.out.println("insert");
+		System.out.println(dto);
 		String loginID = (String) session.getAttribute("loginID");
 		if(!(loginID==null || loginID.isEmpty())) {
 			dto.setMember_id(loginID);
