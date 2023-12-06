@@ -48,7 +48,11 @@ input[type="checkbox"] {
 }
 
 .colorMainBlue{
-  color: #375abb;
+	color: #375abb;
+}
+
+.ColorMainPink{
+	color:#FB8F8A;
 }
 
 .bColorMainBlue {

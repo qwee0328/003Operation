@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
 import com.operation.dto.BoardDTO;
+import com.operation.dto.QnaQuestionDTO;
 import com.operation.services.BoardService;
 import com.operation.services.MemberService;
 
@@ -102,7 +103,7 @@ public class BoardController {
 		dto.setMember_nickname(((String) session.getAttribute("loginNickName")));
 		bservice.insert(dto, attachFiles, deleteFileList);
 	}
-
+	
 	// 게시글 목록으로 이동
 	@RequestMapping("/listBoard/{catogory}")
 	public String listBoard(@PathVariable String catogory,

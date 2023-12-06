@@ -1,50 +1,95 @@
 let keyword="";
 let select="";
 
-$(document).ready(function(){
-    for(let i=0; i<10; i++){
+function loadPost(list, user){
+	for(let i=0; i<list.length; i++){
         let board__post = $("<div>").attr("class","board__post d-flex");
-        let post__seq = $("<div>").attr("class","post__seq").text("1");
+        let post__seq = $("<div>").attr("class","post__seq").text(list[i].id);
 
         let post__cover = $("<div>").attr("class","post__cover");
         
         let post__title = $("<div>").attr("class","post__title d-flex");
 
+		let title__name = $("<div>").attr("class","title__name");
+		
 		// 비밀글이면 넣고 아니면 빼기
-        let title__secret = $("<div>").attr("class","title__secret").html("<i class='fa-solid fa-lock'></i>");
+		if(list[i].is_secret==1){
+			  let title__secret = $("<div>").attr("class","title__secret").html("<i class='fa-solid fa-lock'></i>");
+			  post__title.append(title__secret);
+			  
+			  if(list[i].nickname == user){
+				  title__name.text(list[i].title);
+			  }else{
+				  title__name.text("비공개 Q&A 게시글입니다.");
+			  }
+		}else{
+			title__name.text(list[i].title);
+		}
+      
 
-		let title__name = $("<div>").attr("class","title__name").text("자유게시판 제목인데용ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ");
+		
         let title__answerStateCover = $("<div>").attr("class","title__answerStateCover");
 
 		// 여부에 따라 bColorMainPink colorWhite / bColorLightGray colorGray
-        let title__answerState = $("<div>").attr("class","title__answerState align-center bColorMainPink colorWhite").text("답변여부");
-        post__title.append(title__secret).append(title__name).append(title__answerStateCover.append(title__answerState));
+		let title__answerState = $("<div>");
+		if(list[i].anwser==undefined){
+			title__answerState.attr("class","title__answerState align-center bColorLightGray colorGray").text("답변대기");
+		}else{
+			title__answerState.attr("class","title__answerState align-center bColorMainPink colorWhite").text("답변완료");
+		}
+        
+        post__title.append(title__name).append(title__answerStateCover.append(title__answerState));
 
 		let board__postAwswer = $("<div>").attr("class","board__postAwswer");
         let board__postMini = $("<div>").attr("class","board__postMini d-flex");
-        let postMini__writer = $("<div>").attr("class","postMini__writer").text("작성자");
-        let postMini__writeDate = $("<div>").attr("class","postMini__writeDate").html("<i class='fa-regular fa-calendar-days'></i>"+"2023-11-10");
-        let postMini__file = $("<div>").attr("class","postMini__file").html("<i class='fa-solid fa-paperclip'></i>");
-		board__postMini.append(postMini__writer).append(postMini__writeDate).append(postMini__file);
-
-		let postAwswer__area = $("<div>").attr("class","postAwswer__area colorMainBlue").html("답변 미리보기 <i class='fa-solid fa-chevron-down colorMainBlue'></i>");
-		let postAnswer__content = $("<div>").attr("class","postAnswer__content").text("해당 문제는 오랜 시간 창을 켜둔 채로");
-
-        board__postAwswer.append(board__postMini).append(postAwswer__area).append(postAnswer__content);
-
+        let postMini__writer = $("<div>").attr("class","postMini__writer").text(list[i].member_nickname);
+        let postMini__writeDate = $("<div>").attr("class","postMini__writeDate").html("<i class='fa-regular fa-calendar-days'></i>"+list[i].write_date.slice(0,11));
+        board__postMini.append(postMini__writer).append(postMini__writeDate);
+        if(list[i].file_cnt > 0){
+			let postMini__file = $("<div>").attr("class","postMini__file").html("<i class='fa-solid fa-paperclip'></i>");
+			board__postMini.append(postMini__file);
+		}
+        
+    
+        if(list[i].anwser!=undefined){
+			let postAwswer__area = $("<div>").attr("class","postAwswer__area colorMainBlue").html("답변 미리보기 <i class='fa-solid fa-chevron-down colorMainBlue'></i>");
+			let postAnswer__content = $("<div>").attr("class","postAnswer__content").text(list[i].anwser)
+			board__postAwswer.append(board__postMini).append(postAwswer__area).append(postAnswer__content);
+		}
 	
-
         post__cover.append(post__title).append(board__postAwswer);
+        
+        let post__anwserState = $("<div>");
+		if(list[i].anwser==undefined){
+			post__anwserState.attr("class","post__anwserState").text("답변대기");
+		}else{
+			post__anwserState.attr("class","post__anwserState ColorMainPink").text("답변완료");
+		}
 
-		let post__anwserState = $("<div>").attr("class","post__anwserState").text("답변대기");
-        let post__writer = $("<div>").attr("class","post__writer").text("작성자");
-        let post__writeDate = $("<div>").attr("class","post__writeDate").text("2023-11-10");
-        let post__file = $("<div>").attr("class","post__file").html("<i class='fa-solid fa-paperclip'></i>")
+        let post__writer = $("<div>").attr("class","post__writer").text(list[i].member_nickname);
+        let post__writeDate = $("<div>").attr("class","post__writeDate").text(list[i].write_date.slice(0,11));
         board__post.append(post__seq).append(post__cover);
-        board__post.append(post__anwserState).append(post__writer).append(post__writeDate).append(post__file);
+        board__post.append(post__anwserState).append(post__writer).append(post__writeDate);
+        if(list[i].file_cnt > 0){
+			let post__file = $("<div>").attr("class","post__file").html("<i class='fa-solid fa-paperclip'></i>")
+			board__post.append(post__file);
+		}
+     
 
         $(".board__posts").append(board__post);
     }
+}
+
+$(document).ready(function(){
+	
+	$.ajax({
+		url:"/qna/selectPostAll"
+	}).done(function(resp){
+		console.log(resp);
+		loadPost(resp.list, resp.userNick)
+	});
+	
+    
 
 	
 	
