@@ -275,6 +275,22 @@ public class BoardController {
 		int id=Integer.parseInt(replyId);
 		return bservice.insertReplyRecommend(id);
 	}
+	
+	// 댓글 추천 삭제
+	@ResponseBody
+	@RequestMapping("/deleteReplyRecommend")
+	public int deleteReplyRecommend(@RequestParam String replyId) {
+		int id=Integer.parseInt(replyId);
+		return bservice.deleteReplyRecommend(id);
+	}
+	
+	// 댓글 삭제하기
+	@ResponseBody
+	@RequestMapping("/deleteReply")
+	public int deleteReply(@RequestParam String replyId) {
+		int id=Integer.parseInt(replyId);
+		return bservice.deleteReply(id);
+	}
 
 	// 게시글 작성 페이지로 이동
 	@RequestMapping("/goUpdatePost/{catogory}/{post_id}")

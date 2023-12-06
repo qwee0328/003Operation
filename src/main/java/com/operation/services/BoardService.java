@@ -243,7 +243,7 @@ public class BoardService {
 	public Map<String, Object> selectPostByIdJustView(int id) {
 		dao.updateViewCountById(id);
 		Map<String, Object> board = dao.selectPostById(id);
-		board.put("timeCal",timeCal(board.get("write_date")));
+		board.put("timeCal", timeCal(board.get("write_date")));
 		return board;
 	}
 
@@ -346,6 +346,7 @@ public class BoardService {
 	public Map<String, Object> selectAllReply(int id, int currentPage) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("bulletin_board_id", id);
+		param.put("userId", (String) session.getAttribute("loginID"));
 		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
 		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
 		List<Map<String, Object>> list = dao.selectAllReply(param);
@@ -358,15 +359,28 @@ public class BoardService {
 		result.put("recordTotalCount", recordTotalCount);
 		return result;
 	}
-	
+
 	// 댓글 추천하기
 	public int insertReplyRecommend(int replyId) {
-		Map<String,Object> param = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
 		param.put("replyId", replyId);
-		param.put("userId", (String)session.getAttribute("loginID"));
+		param.put("userId", (String) session.getAttribute("loginID"));
 		System.out.println(replyId);
-		System.out.println((String)session.getAttribute("loginID"));
+		System.out.println((String) session.getAttribute("loginID"));
 		return dao.insertReplyRecommend(param);
+	}
+
+	// 댓글 추천삭제
+	public int deleteReplyRecommend(int replyId) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("replyId", replyId);
+		param.put("userId", (String) session.getAttribute("loginID"));
+		return dao.deleteReplyRecommend(param);
+	}
+	
+	// 댓글 삭제하기
+	public int deleteReply(int replyId) {
+		return dao.deleteReply(replyId);
 	}
 
 	// 게시글 삭제

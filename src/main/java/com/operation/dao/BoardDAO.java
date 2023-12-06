@@ -142,8 +142,18 @@ public class BoardDAO {
 	}
 
 	// 댓글 추천하기
-	public int insertReplyRecommend(Map<String,Object> param) {
+	public int insertReplyRecommend(Map<String, Object> param) {
 		return db.insert("Board.insertReplyRecommend", param);
+	}
+
+	// 댓글 추천 삭제하기
+	public int deleteReplyRecommend(Map<String, Object> param) {
+		return db.delete("Board.deleteReplyRecommend", param);
+	}
+
+	// 댓글 삭제하기
+	public int deleteReply(int replyId) {
+		return db.delete("Board.deleteReply",replyId);
 	}
 
 	// 게시글 삭제

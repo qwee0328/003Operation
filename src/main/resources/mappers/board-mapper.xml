@@ -210,8 +210,17 @@
 	<!-- 게시글 댓글 불러오기 -->
 	<select id="selectAllReply"
 		resultType="com.operation.dto.ReplyDTO">
-		select * from replyInfoList where parent_reply_id is null and
-		bulletin_board_id =#{bulletin_board_id} order by id desc limit #{start},#{count};
+		<!-- select * from replyInfoList where parent_reply_id is null and
+		bulletin_board_id =#{bulletin_board_id} order by id desc limit #{start},#{count}; -->
+		select replyInfoList.*, if(reply_recommend.member_id is not null, true, false) as isrecommend
+                  from replyInfoList
+                  left join
+                  reply_recommend on replyInfoList.member_id = reply_recommend.member_id
+                  and replyInfoList.id=reply_recommend.reply_id
+                  and reply_recommend.member_id=#{userId}
+                  where bulletin_board_id=#{bulletin_board_id}
+                  group by id
+                  order by id desc limit #{start},#{count};
 	</select>
 
 	<!-- 게시글 댓글 총 개수 -->
@@ -224,6 +233,16 @@
 	<insert id="insertReplyRecommend">
 		insert into reply_recommend values (0,#{replyId},#{userId});
 	</insert>
+	
+	<!-- 댓글 추천 삭제 -->
+	<delete id="deleteReplyRecommend">
+		delete from reply_recommend where reply_id=#{replyId} and member_id=#{userId};
+	</delete>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+		delete from reply where id=#{replyId};
+	</delete>
 
 	<!-- 게시글 삭제 -->
 	<delete id="deletePost">

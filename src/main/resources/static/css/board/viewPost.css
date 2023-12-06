@@ -294,6 +294,14 @@
 .writerProfile>span:not(:last-child){
 	margin-right: 20px;
 }
+.replyWriterInfo button{
+	background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.replyWriterInfo button:first-child{
+	margin-right: 20px;
+}
 .time{
 	color: #7d7d7d;
 	font-size: 14px;

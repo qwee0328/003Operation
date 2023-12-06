@@ -17,6 +17,7 @@ public class ReplyDTO {
 	private Timestamp write_date;
 	private String profile_image;
 	private int count;
+	private boolean isrecommend;
 
 	public ReplyDTO() {
 		super();
@@ -36,8 +37,11 @@ public class ReplyDTO {
 		this.write_date = write_date;
 	}
 
+	
+
 	public ReplyDTO(int id, String reply_statement_id, int bulletin_board_id, int parent_reply_id, String member_id,
-			String member_nickname, String content, Timestamp write_date, String profile_image, int count) {
+			String member_nickname, String content, Timestamp write_date, String profile_image, int count,
+			boolean isrecommend) {
 		super();
 		this.id = id;
 		this.reply_statement_id = reply_statement_id;
@@ -49,6 +53,7 @@ public class ReplyDTO {
 		this.write_date = write_date;
 		this.profile_image = profile_image;
 		this.count = count;
+		this.isrecommend = isrecommend;
 	}
 
 	public int getId() {
@@ -129,6 +134,14 @@ public class ReplyDTO {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	public boolean isIsrecommend() {
+		return isrecommend;
+	}
+
+	public void setIsrecommend(boolean isrecommend) {
+		this.isrecommend = isrecommend;
 	}
 
 

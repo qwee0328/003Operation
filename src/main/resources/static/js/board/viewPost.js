@@ -21,7 +21,7 @@ $(document).ready(function() {
 		if ($(".postTitle").html().slice(0, 2) == "질문") {
 			url = "/board/goUpdatePost/question";
 		}
-		url += "/" + $(this).attr('data-id') + "?select="+$("#select").val()+"&keyword="+$("#keyword").val();
+		url += "/" + $(this).attr('data-id') + "?select=" + $("#select").val() + "&keyword=" + $("#keyword").val();
 		location.href = url;
 	})
 
@@ -208,14 +208,39 @@ $(document).ready(function() {
 
 	// 댓글 추천하기
 	$(document).on("click", ".replyRecommendBtn", function() {
-		console.log($(this).attr("data-id"))
-		$.ajax({
-			url: "/board/insertReplyRecommend",
-			data: { replyId: $(this).attr("data-id") },
-			type: "post"
-		}).done(function(resp){
-			selectreplyList(replyCpage);
-		})
+		console.log($(this).attr("isrecommed"))
+		console.log($(this).attr("isrecommed")==="false")
+		if ($(this).attr("isrecommed")==="false") {
+			$.ajax({
+				url: "/board/insertReplyRecommend",
+				data: { replyId: $(this).attr("data-id") },
+				type: "post"
+			}).done(function(resp) {
+				selectreplyList(replyCpage);
+			})
+		}else{
+			$.ajax({
+				url: "/board/deleteReplyRecommend",
+				data: { replyId: $(this).attr("data-id") },
+				type: "post"
+			}).done(function(resp) {
+				selectreplyList(replyCpage);
+			})
+		}
+	});
+	
+	// 댓글 삭제하기
+	$(document).on("click",".replyDeleteBtn", function(){
+		let isdelete = confirm("댓글을 삭제하시겠습니까?\n삭제한 댓글은 되돌릴 수 없습니다.");
+		if(isdelete){
+			$.ajax({
+				url: "/board/deleteReply",
+				data: { replyId: $(this).attr("data-id") },
+				type: "post"
+			}).done(function(resp) {
+				selectreplyList(replyCpage);
+			})
+		}
 	})
 });
 
@@ -329,16 +354,25 @@ function selectreplyList(replyCpage) {
 			writerProfile.append(writeDate);
 
 			let iconDiv = $("<div>");
-			let menuIcon = $("<i>").attr("class", "fa-solid fa-ellipsis-vertical");
-			iconDiv.append(menuIcon);
+			let modifyBtn = $("<button>").html("수정").attr("class","replyModifyBtn").attr("data-id", resp.replyList[i].id);
+			let deleteBtn = $("<button>").html("삭제").attr("class","replyDeleteBtn").attr("data-id", resp.replyList[i].id);
+			iconDiv.append(modifyBtn).append(deleteBtn);
 
-			replyWriterInfo.append(writerProfile).append(iconDiv);
+			replyWriterInfo.append(writerProfile)
+			if (resp.replyList[i].member_id === $("#writerId").val()) {
+				replyWriterInfo.append(iconDiv);
+			}
 
 			let replyConf = $("<div>").attr("class", "replyConf").html(resp.replyList[i].content);
 			let replyInfo = $("<div>").attr("class", "replyInfo");
-			let recommend = $("<span>").attr("data-id", resp.replyList[i].id).attr("class", "replyRecommendBtn");
+			let recommend = $("<span>").attr("data-id", resp.replyList[i].id).attr("class", "replyRecommendBtn").attr("isrecommed", resp.replyList[i].isrecommend);
+
 			let thumbsIcon = $("<i>").attr("class", "fa-regular fa-thumbs-up");
-			recommend.append(thumbsIcon).append("추천수").append(resp.replyList[i].count);
+			if (resp.replyList[i].isrecommend) {
+				recommend.css("color", "#FB8F8A");
+				thumbsIcon.css("color", "#FB8F8A");
+			}
+			recommend.append(thumbsIcon).append(" 추천 ").append(resp.replyList[i].count);
 			let replyBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("답글달기").attr("class", "replyRe");
 			let alterBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("신고하기").attr("class", "replyReport");
 			replyInfo.append(recommend).append(replyBtn).append(alterBtn);
