@@ -209,8 +209,8 @@ $(document).ready(function() {
 	// 댓글 추천하기
 	$(document).on("click", ".replyRecommendBtn", function() {
 		console.log($(this).attr("isrecommed"))
-		console.log($(this).attr("isrecommed")==="false")
-		if ($(this).attr("isrecommed")==="false") {
+		console.log($(this).attr("isrecommed") === "false")
+		if ($(this).attr("isrecommed") === "false") {
 			$.ajax({
 				url: "/board/insertReplyRecommend",
 				data: { replyId: $(this).attr("data-id") },
@@ -218,7 +218,7 @@ $(document).ready(function() {
 			}).done(function(resp) {
 				selectreplyList(replyCpage);
 			})
-		}else{
+		} else {
 			$.ajax({
 				url: "/board/deleteReplyRecommend",
 				data: { replyId: $(this).attr("data-id") },
@@ -228,19 +228,66 @@ $(document).ready(function() {
 			})
 		}
 	});
-	
+
 	// 댓글 삭제하기
-	$(document).on("click",".replyDeleteBtn", function(){
-		let isdelete = confirm("댓글을 삭제하시겠습니까?\n삭제한 댓글은 되돌릴 수 없습니다.");
-		if(isdelete){
-			$.ajax({
-				url: "/board/deleteReply",
-				data: { replyId: $(this).attr("data-id") },
-				type: "post"
-			}).done(function(resp) {
-				selectreplyList(replyCpage);
-			})
+	$(document).on("click", ".replyDeleteBtn", function() {
+		if (replyBackup != null) { // 수정중인 댓글이 있으면?
+			if (confirm("수정중인 댓글이 있습니다.\n댓글 수정을 취소하시겠습니까?")) {
+				replyObj.closest(".replyLine").find(".replyConf").html(replyBackup);
+				replyObj.closest(".replyLine").find(".replyConf").attr("contenteditable", false);
+			}
+		} else {
+
+
+			let isdelete = confirm("댓글을 삭제하시겠습니까?\n삭제한 댓글은 되돌릴 수 없습니다.");
+			if (isdelete) {
+				$.ajax({
+					url: "/board/deleteReply",
+					data: { replyId: $(this).attr("data-id") },
+					type: "post"
+				}).done(function(resp) {
+					selectreplyList(replyCpage);
+				})
+			}
 		}
+	});
+
+	let replyBackup = null; // 수정중인 댓글 원본 내용
+	let replyObj = null; // 수정중이던 댓글
+	// 댓글 수정 눌렀을 때
+	$(document).on("click", ".replyModifyBtn", function() {
+		if (replyBackup != null) { // 수정중인 댓글이 있으면?
+			if (confirm("수정중인 댓글이 있습니다.\n댓글 수정을 취소하시겠습니까?")) {
+				replyObj.closest(".replyLine").find(".replyConf").html(replyBackup);
+				replyObj.closest(".replyLine").find(".replyConf").attr("contenteditable", false);
+			}
+		}
+		$(this).closest(".replyLine").find(".replyConf").attr("contenteditable", true).focus();
+		$(this).parent().find("button").css("display", "none");
+		
+		let modify = $("<button>").attr("class","modifySubmit").attr("data-id",$(this).attr("data-id")).html("수정완료").css("margin-right","20px");
+		let cancle = $("<button>").attr("class","modifyCancle").attr("data-id",$(this).attr("data-id")).html("수정취소");
+		$(this).parent().append(modify).append(cancle)
+		
+		replyBackup =$(this).closest(".replyLine").find(".replyConf").html();
+		replyObj = $(this);
+	});
+	
+	// 댓글 수정 취소
+	$(document).on("click",".modifyCancle",function(){
+		$(this).closest(".replyLine").find(".replyConf").html(replyBackup);
+		$(this).closest(".replyLine").find(".replyConf").attr("contenteditable", false);
+		$(this).parent().find("button").css("display", "none");
+		$(this).parent().find(".replyModifyBtn").css("display", "inline-block");
+		$(this).parent().find(".replyDeleteBtn").css("display", "inline-block");
+		
+		replyBackup = null;
+		replyObj = null;
+	})
+	
+	// 댓글 수정 완료
+	$(document).on("click",".modifySubmit",function(){
+		let replyContents=$(this).closest(".replyLine").find(".replyConf").html();
 	})
 });
 
@@ -354,8 +401,8 @@ function selectreplyList(replyCpage) {
 			writerProfile.append(writeDate);
 
 			let iconDiv = $("<div>");
-			let modifyBtn = $("<button>").html("수정").attr("class","replyModifyBtn").attr("data-id", resp.replyList[i].id);
-			let deleteBtn = $("<button>").html("삭제").attr("class","replyDeleteBtn").attr("data-id", resp.replyList[i].id);
+			let modifyBtn = $("<button>").html("수정").attr("class", "replyModifyBtn").attr("data-id", resp.replyList[i].id);
+			let deleteBtn = $("<button>").html("삭제").attr("class", "replyDeleteBtn").attr("data-id", resp.replyList[i].id);
 			iconDiv.append(modifyBtn).append(deleteBtn);
 
 			replyWriterInfo.append(writerProfile)
