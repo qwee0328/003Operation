@@ -74,6 +74,13 @@ public class KioskController {
 	}
 	
 	
+	// 키오스크 인기 랭킹 가져오기 (메인)
+	@ResponseBody
+	@RequestMapping("/realTimeRank")
+	public List<Map<String, Object>> realTimeRank(){
+		return kservice.realTimeRank();
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();

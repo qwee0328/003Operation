@@ -18,6 +18,15 @@
 		<result property="play_time" column="play_time"/>
 	</resultMap>
 	
+	<resultMap id="kiosk_ranking" type="java.util.Map">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="prac_cnt" column="prac_cnt"/>
+		<result property="game_cnt" column="game_cnt"/>
+		<result property="ranking" column="ranking"/>
+	</resultMap>
+	
+	
 	<!-- 키오스크 카테고리 목록 불러오기 -->
 	<select id="selectAll" resultType="com.operation.dto.KioskCategoryDTO">
 		select * from
@@ -62,4 +71,9 @@
 	<insert id="insert">
 		insert into kiosk_record values(null, #{kiosk_id}, #{member_id}, #{member_nickname}, #{play_date}, #{play_time}, #{play_stage}, #{is_success});
 	</insert>
+	
+	<!-- 실시간 인기 순위 (홈화면) -->
+	<select id="realTimeRank" resultMap="kiosk_ranking">
+		select * from real_time_ranking;
+	</select>
 </mapper>

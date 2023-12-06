@@ -201,10 +201,10 @@
             <div class="popular">
                 <div class="popular__title">
                     실시간 인기 카테고리
-                    <a href=""><button><i class="fa-solid fa-arrow-rotate-right"></i></button></a>
+                   	<button><i class="fa-solid fa-arrow-rotate-right realTimeRanking"></i></button>
                 </div>
                 <div class="popular__contents">
-                    <div class="popular__Box">
+                  <!--   <div class="popular__Box">
                         <div class="Box__left">
                             <div class="popular__rank">1</div>
                             <div class="popular__info">
@@ -281,7 +281,7 @@
                                 <a href=""><button>게임</button></a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

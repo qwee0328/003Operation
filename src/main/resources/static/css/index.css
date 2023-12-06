@@ -217,6 +217,10 @@
 	display: none;
 }
 
+.realTimeRanking:hover{
+	cursor: pointer;
+}
+
 @media (max-width: 1080px) {
 	img {
 		opacity: 0.4;

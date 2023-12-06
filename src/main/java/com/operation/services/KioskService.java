@@ -68,11 +68,16 @@ public class KioskService {
 		return dao.insert(dto);
 	}
 	
-	// 키오스크 내 최고 기록 불러오기 (게임)
+	// 키오스크 내 최고 기록 불러오기
 	public List<Map<String, Object>> selectBestRecord(String kiosk_category_id){
 		Map<String,Object> param = new HashMap<>();
 		param.put("kiosk_category_id", kiosk_category_id);
 		param.put("member_id", (String) session.getAttribute("loginID"));
 		return dao.selectBestRecord(param);
+	}
+	
+	// 키오스크 인기 랭킹 가져오기 (메인)
+	public List<Map<String, Object>> realTimeRank(){
+		return dao.realTimeRank();
 	}
 }
