@@ -90,29 +90,53 @@
 							<div class="postInfo__userInfo">
 								<div class="userInfo__nickName fontEN">${post.member_nickname }</div>
 								<div class="userInfo__writeInfo">
-									<span class="writeInfo__title">작성일</span> <span>${post.write_date }</span>
+									<span class="writeInfo__title">작성일</span> <span>${post.timeCal }</span>
 									<span class="writeInfo__title">조회수</span> <span>${post.view_count }</span>
 								</div>
 							</div>
 						</div>
-						<div class="postInfo__right">
-							
-						</div>
+						<div class="postInfo__right"></div>
 					</div>
-					<div class="postConf">${post.content }</div>	
+					<div class="postConf">${post.content }</div>
 					<div class="pageBtns"></div>
-					<div class="replyBox">
-						<div class="replyBox__title">댓글<span id="replyCount"></span></div>
-						<div class="replyBox__replyInput">
-							<div class="replyInput__userProfile">
-								<img alt="사용자 프로필" src="/images/profileImg.png" id="userProfileImg">
+					<c:if test="${post.bulletin_category_id eq 'free' }">
+						<div class="replyBox">
+							<div class="replyBox__title">
+								댓글 <span id="replyCount"></span>
 							</div>
-							<div class="replyInput__input">
-								<input type="text" id="replyInput" placeholder="댓글을 입력해주세요.">
-								<button id="replyInputSubmit">입력</button>
+							<div class="replyBox__replyInput">
+								<div class="replyInput__userProfile">
+									<img alt="사용자 프로필" src="/images/profileImg.png"
+										id="userProfileImg">
+								</div>
+								<div class="replyInput__input">
+									<input type="text" id="replyInput" placeholder="댓글을 입력해주세요.">
+									<button id="replyInputSubmit">입력</button>
+								</div>
+							</div>
+							<div id="replyList">
+							<!-- 
+								<div class="replyLine">
+									<div class="replyWriterInfo">
+										<div class="writerProfile">
+											<img alt="" src="/images/profileImg.png">
+											<span>닉네임</span></span><span class="writer">글쓴이</span><span class="time">10시간전</span>
+										</div>
+										<div>
+											<i class="fa-solid fa-ellipsis-vertical"></i>
+										</div>
+									</div>
+									<div class="replyConf">
+										댓글 내용
+									</div>
+									<div class="replyInfo">
+										<span><i class="fa-regular fa-thumbs-up"></i> 추천수 1</span><span>답글달기</span><span>신고하기</span>
+									</div>
+								</div>
+								 -->
 							</div>
 						</div>
-					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>

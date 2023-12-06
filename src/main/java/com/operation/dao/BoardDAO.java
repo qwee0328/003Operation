@@ -127,6 +127,25 @@ public class BoardDAO {
 		return result > 0 ? true : false;
 	}
 
+	// 게시글 댓글 불러오기
+	public List<Map<String, Object>> selectAllReply(Map<String, Object> param) {
+		List<Map<String, Object>> result = db.selectList("Board.selectAllReply", param);
+		System.out.println(result);
+		System.out.println(param);
+		return result;
+	}
+
+	// 게시글 댓글 총 개수
+	public int selectTotalReplyCnt(int id) {
+		Integer result = db.selectOne("Board.selectTotalReplyCnt", id);
+		return (result != null) ? result.intValue() : 0;
+	}
+
+	// 댓글 추천하기
+	public int insertReplyRecommend(Map<String,Object> param) {
+		return db.insert("Board.insertReplyRecommend", param);
+	}
+
 	// 게시글 삭제
 	public void deletePost(int id) {
 		db.delete("Board.deletePost", id);

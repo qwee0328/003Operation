@@ -246,6 +246,34 @@ public class BoardController {
 		return bservice.insertPostReply(id,reply);
 	}
 
+	
+	// 게시글 댓글 목록 불러오기
+	@ResponseBody
+	@RequestMapping("/selectPostReplyAll")
+	public Map<String, Object> selectPostReplyAll(@RequestParam String postId, @RequestParam String replyCpage){
+		int id = Integer.parseInt(postId);
+		int currentPage = (replyCpage == null || replyCpage.isEmpty()) ? 1 : Integer.parseInt(replyCpage);
+
+		Map<String, Object> list = bservice.selectAllReply(id, currentPage);
+		Map<String, Object> result = new HashMap<>();
+		result.put("replyList", list.get("replyList"));
+		System.out.println(list.get("replyList"));
+		result.put("replyCpage", currentPage);
+		result.put("recordTotalCount", list.get("recordTotalCount"));
+		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+		
+		return result;
+	}
+	
+	// 댓글 추천하기
+	@ResponseBody
+	@RequestMapping("/insertReplyRecommend")
+	public int insertReplyRecommend(@RequestParam String replyId) {
+		int id=Integer.parseInt(replyId);
+		return bservice.insertReplyRecommend(id);
+	}
+
 	// 게시글 작성 페이지로 이동
 	@RequestMapping("/goUpdatePost/{catogory}/{post_id}")
 	public String goUpdatePost(@PathVariable String catogory, Model model, @PathVariable int post_id) {

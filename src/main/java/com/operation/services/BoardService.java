@@ -4,6 +4,11 @@ import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -213,11 +218,33 @@ public class BoardService {
 		}
 	}
 
+	// 댓글 시간 차이 계산하기
+	public String timeCal(Object object) {
+		long currentTime = System.currentTimeMillis();
+		long writeTime = ((Timestamp) object).getTime();
+		long gapTime = currentTime - writeTime;
+
+		System.out.println(gapTime);
+		if (gapTime < 60000) {
+			return "방금 전";
+		} else if (gapTime < 60000 * 60) {
+			return gapTime / 60000 + " 분 전";
+		} else if (gapTime < 60000 * 60 * 24) {
+			long hour = gapTime / 60000 / 60;
+			return "약 " + hour + "시간 전";
+		} else {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			return sdf.format(writeTime);
+		}
+	}
+
 	// 게시글 정보 불러오기 ( 출력용 )
 	@Transactional
 	public Map<String, Object> selectPostByIdJustView(int id) {
 		dao.updateViewCountById(id);
-		return dao.selectPostById(id);
+		Map<String, Object> board = dao.selectPostById(id);
+		board.put("timeCal",timeCal(board.get("write_date")));
+		return board;
 	}
 
 	// 게시글 관련 정보 불러오기
@@ -273,12 +300,12 @@ public class BoardService {
 	public List<Map<String, Object>> selectFileById(Map<String, Object> param) {
 		return dao.selectFileById(param);
 	}
-	
+
 	// 이전글 다음 글 불러오기
-	public Map<String,Object> selectPrevNextPost(Map<String, Object> param){
+	public Map<String, Object> selectPrevNextPost(Map<String, Object> param) {
 		return dao.selectPrevNextPost(param);
 	}
-	
+
 	// 게시글 댓글 작성하기
 	public boolean insertPostReply(int postId, String reply) {
 		Map<String, Object> param = new HashMap<>();
@@ -287,6 +314,59 @@ public class BoardService {
 		param.put("loginNickName", (String) session.getAttribute("loginNickName"));
 		param.put("reply", reply);
 		return dao.insertPostReply(param);
+	}
+
+	// 댓글 시간 차이 계산하기
+	private String formatTimestamp(Timestamp time) {
+		LocalDateTime currentTime = LocalDateTime.now();
+
+		LocalDateTime sendTime = null;
+		long minutes = 0;
+		long hours = 0;
+		if (time != null) {
+			sendTime = time.toLocalDateTime();
+
+			// 시간 차이 계산
+			Duration duration = Duration.between(sendTime, currentTime);
+			minutes = duration.toMinutes();
+			hours = duration.toHours();
+		}
+		if (minutes < 60) {
+			return minutes + "분 전";
+		} else if (hours < 24) {
+			return hours + "시간 전";
+		} else {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			return sendTime.format(formatter);
+		}
+	}
+
+	// 게시글 댓글 불러오기
+	@Transactional
+	public Map<String, Object> selectAllReply(int id, int currentPage) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("bulletin_board_id", id);
+		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
+		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
+		List<Map<String, Object>> list = dao.selectAllReply(param);
+
+		int recordTotalCount = dao.selectTotalReplyCnt(id);
+
+		Map<String, Object> result = new HashMap<>();
+		result.put("replyList", list);
+		System.out.println(list);
+		result.put("recordTotalCount", recordTotalCount);
+		return result;
+	}
+	
+	// 댓글 추천하기
+	public int insertReplyRecommend(int replyId) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("replyId", replyId);
+		param.put("userId", (String)session.getAttribute("loginID"));
+		System.out.println(replyId);
+		System.out.println((String)session.getAttribute("loginID"));
+		return dao.insertReplyRecommend(param);
 	}
 
 	// 게시글 삭제

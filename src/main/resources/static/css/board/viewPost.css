@@ -215,10 +215,11 @@
 
 #replyCount {
 	color: #375abb;
+	margin-left: 5px;
 }
 
 .replyBox__replyInput {
-	margin-top: 20px;
+	margin: 20px 0 30px 0;
 	display: flex;
 	align-items: center;
 }
@@ -261,6 +262,62 @@
 	width: 9%;
 	background-color: transparent;
 	border: none;
+}
+
+.replyLine{
+	padding-right: 15px;
+}
+.replyLine:not(:last-child){
+	border-bottom: 1px solid #7d7d7d50;
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+}
+
+.replyWriterInfo{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.writerProfile{
+	display: flex;
+	align-items: center;
+}
+
+.writerProfile>img{
+	width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.writerProfile>span:not(:last-child){
+	margin-right: 20px;
+}
+.time{
+	color: #7d7d7d;
+	font-size: 14px;
+}
+.writer{
+	background-color: #e1e6f5;
+	border: none;
+	border-radius: 4px;
+	padding: 4px 8px;
+}
+.replyConf{
+	margin-left: 50px;
+	padding: 20px 0;
+}
+.replyInfo{
+	margin-left: 50px;
+}
+.replyInfo>span{
+	margin-right: 20px;
+	color: #7d7d7d;
+	cursor: pointer;
+}
+.replyInfo>span i{
+	color: #7d7d7d;
 }
 
 @media (max-width: 1050px) {

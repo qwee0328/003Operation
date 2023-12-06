@@ -33,7 +33,7 @@ $(document).ready(function() {
 		}
 		url += "/" + $(this).attr('data-id');
 
-		let check = confirm("게시물을 정말 삭제하시겠습니까?")
+		let check = confirm("게시물을 삭제하시겠습니까?\n삭제한 게시글은 되돌릴 수 없습니다.")
 		if (check) {
 			location.href = url;
 		}
@@ -187,9 +187,14 @@ $(document).ready(function() {
 		location.href = url;
 	})
 
+	// 댓글 목록 불러오기
+	let replyCpage = 1;
+	selectreplyList(replyCpage);
+
 	// 댓글 작성하기
 	$("#replyInputSubmit").on("click", function() {
 		insertReply();
+		selectreplyList(replyCpage);
 	})
 
 	// 댓글 작성중 엔터 누르면 작성 시도
@@ -201,7 +206,17 @@ $(document).ready(function() {
 		}
 	});
 
-
+	// 댓글 추천하기
+	$(document).on("click", ".replyRecommendBtn", function() {
+		console.log($(this).attr("data-id"))
+		$.ajax({
+			url: "/board/insertReplyRecommend",
+			data: { replyId: $(this).attr("data-id") },
+			type: "post"
+		}).done(function(resp){
+			selectreplyList(replyCpage);
+		})
+	})
 });
 
 // 추천 수, 북마크 수, 댓글 수 불러오기
@@ -258,5 +273,78 @@ function insertReply() {
 		alert("댓글 내용을 입력해주세요.");
 		$("#replyInput").focus();
 	}
+}
 
+// 시간 계산
+function timeAgo(timestamp) {
+	const date = new Date(timestamp);
+	const now = new Date();
+
+	const seconds = Math.floor((now - date) / 1000);
+	const minutes = Math.floor(seconds / 60);
+	const hours = Math.floor(minutes / 60);
+	const days = Math.floor(hours / 24);
+
+	if (seconds < 60) {
+		return seconds + "초 전";
+	} else if (minutes < 60) {
+		return minutes + "분 전";
+	} else if (hours < 24) {
+		return hours + "시간 전";
+	} else {
+		const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+		return date.toLocaleDateString('ko-KR', options);
+	}
+}
+
+// 댓글 내용 불러오기
+function selectreplyList(replyCpage) {
+	$.ajax({
+		url: "/board/selectPostReplyAll",
+		data: { postId: $("#postId").val(), replyCpage: replyCpage },
+		type: "post"
+	}).done(function(resp) {
+		console.log(resp)
+		$("#replyList").empty();
+		$("#replyCount").html(resp.recordTotalCount);
+		for (let i = 0; i < resp.replyList.length; i++) {
+			let replyLine = $("<div>").attr("class", "replyLine");
+			let replyWriterInfo = $("<div>").attr("class", "replyWriterInfo");
+
+			let writerProfile = $("<div>").attr("class", "writerProfile");
+			let profileImg = $("<img>");
+			if (resp.replyList[i].profile_image !== null) {
+				profileImg.attr("src", "/profileImgs/" + resp.replyList[i].profile_image);
+			} else {
+				profileImg.attr("src", "/images/profileImg.png");
+			}
+			let nick = $("<span>").html(resp.replyList[i].member_nickname);
+			let isWriter = $("<span>").attr("class", "writer").html("글쓴이");
+			let writeDate = $("<span>").attr("class", "time").html(timeAgo(resp.replyList[i].write_date));
+
+			writerProfile.append(profileImg).append(nick);
+			if (resp.replyList[i].member_id === $("#writerId").val()) {
+				writerProfile.append(isWriter);
+			}
+			writerProfile.append(writeDate);
+
+			let iconDiv = $("<div>");
+			let menuIcon = $("<i>").attr("class", "fa-solid fa-ellipsis-vertical");
+			iconDiv.append(menuIcon);
+
+			replyWriterInfo.append(writerProfile).append(iconDiv);
+
+			let replyConf = $("<div>").attr("class", "replyConf").html(resp.replyList[i].content);
+			let replyInfo = $("<div>").attr("class", "replyInfo");
+			let recommend = $("<span>").attr("data-id", resp.replyList[i].id).attr("class", "replyRecommendBtn");
+			let thumbsIcon = $("<i>").attr("class", "fa-regular fa-thumbs-up");
+			recommend.append(thumbsIcon).append("추천수").append(resp.replyList[i].count);
+			let replyBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("답글달기").attr("class", "replyRe");
+			let alterBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("신고하기").attr("class", "replyReport");
+			replyInfo.append(recommend).append(replyBtn).append(alterBtn);
+
+			replyLine.append(replyWriterInfo).append(replyConf).append(replyInfo);
+			$("#replyList").append(replyLine);
+		}
+	})
 }
