@@ -203,6 +203,7 @@ $(document).ready(function() {
 		if (e.keyCode == 13) {
 			console.log("test")
 			insertReply();
+			selectreplyList(replyCpage);
 		}
 	});
 
@@ -290,11 +291,11 @@ $(document).ready(function() {
 		let replyContents = $(this).closest(".replyLine").find(".replyConf").html();
 		$.ajax({
 			url: "/board/updateReply",
-			data: { replyId: $(this).attr("data-id"), replyContents:replyContents },
+			data: { replyId: $(this).attr("data-id"), replyContents: replyContents },
 			type: "post"
-		}).done(function(resp){
+		}).done(function(resp) {
 			console.log(resp);
-			if(resp!==0){
+			if (resp !== 0) {
 				alert("댓글 수정이 완료되었습니다.")
 			}
 		})
@@ -379,6 +380,103 @@ function timeAgo(timestamp) {
 	}
 }
 
+// 댓글 페이지네이션
+function pagination(postSeq, recordTotalCount, replyCurPage, recordCountPerPage, naviCountPerPage) {
+	if (recordTotalCount != 0) {
+		let pagination = $("#pagination");
+		pagination.html("");
+
+		let pageTotalCount = 0;
+		pageTotalCount = Math.ceil(recordTotalCount / recordCountPerPage);
+		
+		console.log(pageTotalCount)
+
+		// 비정상 접근 차단
+		if (replyCurPage < 1) {
+			replyCurPage = 1;
+		} else if (replyCurPage > pageTotalCount) {
+			replyCurPage = pageTotalCount;
+		}
+
+		let startNavi = Math.floor((replyCurPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+		let endNavi = startNavi + (naviCountPerPage - 1);
+	 	
+
+		if (endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+		let needPrev = true;
+		let needNext = true;
+console.log(startNavi)
+	 	console.log(endNavi)
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		if (startNavi != 1) {
+			let aTag = $("<a>");
+			let iTag = $("<i class='fa-solid fa-angles-left'></i>");
+			aTag.attr("class", "colorBlack fontEnglish");
+			aTag.on("click", function() {
+				$("#replyList").html("");
+				selectreplyList(1);
+			});
+			aTag.append(iTag);
+			pagination.append(aTag);
+		}
+
+		if (needPrev) {
+			let aTag = $("<a>");
+			let iTag = $("<i class='fa-solid fa-chevron-left'></i>");
+			aTag.on("click", function() {
+				$("#replyList").html("");
+				selectreplyList((startNavi - 1));
+			});
+			aTag.append(iTag);
+			pagination.append(aTag);
+		}
+
+		for (let i = startNavi; i <= endNavi; i++) {
+			let aTag = $("<a>");
+			aTag.html(i);
+			aTag.on("click", function() {
+				$("#replyList").html("");
+				selectreplyList(i);
+			});
+			if (i == replyCurPage) {
+			//	aTag.addClass("colorWhite bColorBlue fontEnglish");
+			}
+			pagination.append(aTag);
+		}
+
+		if (needNext) {
+			let aTag = $("<a>");
+			let iTag = $("<i class='fa-solid fa-chevron-right'></i>");
+			aTag.on("click", function() {
+				$("#replyList").html("");
+				selectreplyList((endNavi + 1));
+			});
+			aTag.append(iTag);
+			pagination.append(aTag);
+		}
+
+		if (endNavi != pageTotalCount) {
+			let aTag = $("<a>");
+			let iTag = $("<i class='fa-solid fa-angles-right'></i>");
+			aTag.on("click", function() {
+				$("#replyList").html("");
+				selectreplyList(pageTotalCount);
+			});
+			aTag.append(iTag);
+			pagination.append(aTag);
+		}
+	}
+}
+
 // 댓글 내용 불러오기
 function selectreplyList(replyCpage) {
 	$.ajax({
@@ -430,12 +528,28 @@ function selectreplyList(replyCpage) {
 				thumbsIcon.css("color", "#FB8F8A");
 			}
 			recommend.append(thumbsIcon).append(" 추천 ").append(resp.replyList[i].count);
-			let replyBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("답글달기").attr("class", "replyRe").attr("replyWriter",resp.replyList[i].member_nickname);
+			let replyBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("답글달기").attr("class", "replyRe").attr("replyWriter", resp.replyList[i].member_nickname);
 			//let alterBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("신고하기").attr("class", "replyReport");
 			replyInfo.append(recommend).append(replyBtn);//.append(alterBtn);
 
 			replyLine.append(replyWriterInfo).append(replyConf).append(replyInfo);
 			$("#replyList").append(replyLine);
 		}
+		pagination($("#postId").val(), resp.recordTotalCount, resp.replyCpage, resp.recordCountPerPage, resp.naviCountPerPage);
+		console.log($("#pagination"))
+		for(let i=0;i<$("#pagination").find("a").length;i++){
+
+			console.log($("#pagination").find("a")[i].innerText)
+			console.log(replyCpage)
+			console.log($("#pagination").find("a")[i].innerText==replyCpage)
+			if($("#pagination").find("a")[i].innerText==replyCpage){
+				console.log(replyCpage)
+				$($("#pagination").find("a")[i]).css("background-color", "#375abb").css("color","white");
+			}
+		}
+		if($("#pagination").find("a").html()===replyCpage){
+			console.log($("#pagination").find("a").html())
+		}
+		
 	})
 }

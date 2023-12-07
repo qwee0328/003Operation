@@ -262,7 +262,7 @@ public class BoardController {
 		System.out.println(list.get("replyList"));
 		result.put("replyCpage", currentPage);
 		result.put("recordTotalCount", list.get("recordTotalCount"));
-		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("recordCountPerPage", Constants.REPLY_COUNT_PER_PAGE);
 		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 		
 		return result;

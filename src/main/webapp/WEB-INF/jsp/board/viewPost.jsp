@@ -59,12 +59,6 @@
 									</div>
 									<div class="conf__count replyCount"></div>
 								</div>
-								<div class="navi__conf">
-									<div class="conf__circle">
-										<i class="fa-solid fa-arrow-up-right-from-square"></i>
-										<div>공유</div>
-									</div>
-								</div>
 							</c:if>
 							<div class="navi__conf">
 								<div class="conf__circle" id="boardListBtn">
@@ -135,6 +129,7 @@
 								</div>
 								 -->
 							</div>
+							<div id="pagination"></div>
 						</div>
 					</c:if>
 				</div>

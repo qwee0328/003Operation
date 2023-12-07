@@ -347,8 +347,8 @@ public class BoardService {
 		Map<String, Object> param = new HashMap<>();
 		param.put("bulletin_board_id", id);
 		param.put("userId", (String) session.getAttribute("loginID"));
-		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
-		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
+		param.put("start", currentPage * Constants.REPLY_COUNT_PER_PAGE - (Constants.REPLY_COUNT_PER_PAGE - 1) - 1);
+		param.put("count", Constants.REPLY_COUNT_PER_PAGE);
 		List<Map<String, Object>> list = dao.selectAllReply(param);
 
 		int recordTotalCount = dao.selectTotalReplyCnt(id);
