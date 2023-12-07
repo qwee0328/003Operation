@@ -49,3 +49,45 @@
 	height: 1px;
 	background-color: #7d7d7d50;
 }
+
+.fileNameList{
+	padding: 0 5px;
+	align-items:center;
+	max-width: calc(100% - 80px);
+	overflow-y: auto;
+}
+
+.fileNameTag{
+	padding:0 10px;
+	width: fit-content;
+}
+
+.fileName{
+	cursor:pointer;
+	width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.fileNameList::-webkit-scrollbar {
+    width: 5px;
+    
+}
+.fileNameList::-webkit-scrollbar-thumb{
+    background-color: #7d7d7d20;
+    border-radius: 10px; 
+
+    border: 5px solid #FFFFFF /* 스크롤을 적용할 영역 색깔과 border 색상을 똑같이 맞춘다 */
+}
+.fileNameList::-webkit-scrollbar-track{
+    background-color: #FFFFFF/* 스크롤바 뒷 배경을 투명 처리한다 */
+}
+
+.deleteFileBtn{
+	cursor:pointer;
+}
+
+.ml5{
+	margin-left:5px;
+}
