@@ -3,5 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Qna">
+	<resultMap id="qna_info" type="java.util.Map">
+		<result property="id" column="id" />
+		<result property="member_id" column="member_id" />
+		<result property="member_nickname" column="member_nickname" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="write_date" column="write_date" />
+		<result property="write_date" column="write_date" />
+		<result property="file_cnt" column="file_cnt" />
+		<result property="anwser" column="anwser"/>
+	</resultMap>
+
+	<!-- 게시글 작성 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert into qna_question_board values (null, #{member_id}, #{member_nickname}, #{title}, #{content}, default, #{is_secret});
+	</insert>
 	
+	<!-- 게시글 목록 불러오기 -->
+	<select id="selectAll" resultMap="qna_info">
+		select * from qna_info order by id desc limit #{start},#{count};
+	</select>
+	
+	<!-- 게시글 개수 불러오기 -->
+	<select id="selectTotalCnt" resultType="int">
+		select count(*) from qna_info;
+	</select>
 </mapper>

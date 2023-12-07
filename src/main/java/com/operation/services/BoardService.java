@@ -18,14 +18,15 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
 import com.operation.dao.BoardDAO;
 import com.operation.dao.FileDAO;
+import com.operation.dao.QnADAO;
 import com.operation.dto.BoardDTO;
 import com.operation.dto.FileDTO;
+import com.operation.dto.QnaQuestionDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -36,7 +37,7 @@ public class BoardService {
 
 	@Autowired
 	private FileDAO fdao;
-
+	
 	@Autowired
 	private HttpSession session;
 
@@ -74,6 +75,7 @@ public class BoardService {
 
 		}
 	}
+	
 
 	// 게시글 목록 불러오기
 	public List<Map<String, Object>> selectAll(String bulletin_category_id, int currentPage) {

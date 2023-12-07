@@ -9,7 +9,7 @@ public class QnaQuestionDTO {
 	private String title;
 	private String content;
 	private Timestamp write_date;
-	private boolean isSecret;
+	private boolean is_secret;
 	
 	public QnaQuestionDTO() {
 		super();
@@ -17,7 +17,7 @@ public class QnaQuestionDTO {
 	}
 	
 	public QnaQuestionDTO(int id, String member_id, String member_nickname, String title, String content,
-			Timestamp write_date, boolean isSecret) {
+			Timestamp write_date, boolean is_secret) {
 		super();
 		this.id = id;
 		this.member_id = member_id;
@@ -25,7 +25,7 @@ public class QnaQuestionDTO {
 		this.title = title;
 		this.content = content;
 		this.write_date = write_date;
-		this.isSecret = isSecret;
+		this.is_secret = is_secret;
 	}
 	
 	public int getId() {
@@ -64,10 +64,13 @@ public class QnaQuestionDTO {
 	public void setWrite_date(Timestamp write_date) {
 		this.write_date = write_date;
 	}
-	public boolean isSecret() {
-		return isSecret;
+
+	public boolean isIs_secret() {
+		return is_secret;
 	}
-	public void setSecret(boolean isSecret) {
-		this.isSecret = isSecret;
+
+	public void setIs_secret(boolean is_secret) {
+		this.is_secret = is_secret;
 	}
+	
 }
