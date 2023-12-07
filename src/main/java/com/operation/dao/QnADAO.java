@@ -37,4 +37,9 @@ public class QnADAO {
 	public int selectTotalCnt(){
 		return db.selectOne("Qna.selectTotalCnt");
 	}
+	
+	// qna 게시글 정보 불러오기
+	public Map<String, Object> selectById(int id){
+		return db.selectOne("Qna.selectById",id);
+	}
 }

@@ -109,43 +109,51 @@
             </div>
         </div>
     
-    	<div class="qnaAnswerWrite writeBox_guide">
-    		<div class="qnaAnswerWrite__title">Q&A 게시글 답변 작성</div>
-    		<hr class="qnaAnswerWrite__hr">
-    		<div class="qnaAnswerWrite__file">    		
-	   			<div class="d-flex">
-					<label class="fileInput__label" for="fileInput">파일 첨부</label>
-						<div class="fileNameList d-flex">
-							<c:choose>	
-								<c:when test="${not empty post.file_names}">
-									
-									<script>
-										// 기존 파일 목록
-										let fileNames = `${post.file_names}`.split(",");
-										let fileIds = `${post.file_ids}`.split(",");
+    	<c:choose>
+    		<c:when test="${empty post.answer}">
+    			<div class="qnaAnswerWrite writeBox_guide">
+	    		<div class="qnaAnswerWrite__title">Q&A 게시글 답변 작성</div>
+	    		<hr class="qnaAnswerWrite__hr">
+	    		<div class="qnaAnswerWrite__file">    		
+		   			<div class="d-flex">
+						<label class="fileInput__label" for="fileInput">파일 첨부</label>
+							<div class="fileNameList d-flex">
+								<c:choose>	
+									<c:when test="${not empty post.file_names}">
 										
-										for(let i=0; i<fileNames.length; i++){
-											let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
-											let fileName = $("<div>").attr("class","fileName").text(fileNames[i]);
-											let fileIcon = $("<div>").attr("class","ml5").html("<i class='fa-solid fa-xmark deleteFileBtn' data-seq="+fileIds[i]+"></i>")
-											$(".fileNameList").append(fileNameTag.append(fileName).append(fileIcon))		
-										}
-									</script>
+										<script>
+											// 기존 파일 목록
+											let fileNames = `${post.file_names}`.split(",");
+											let fileIds = `${post.file_ids}`.split(",");
+											
+											for(let i=0; i<fileNames.length; i++){
+												let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
+												let fileName = $("<div>").attr("class","fileName").text(fileNames[i]);
+												let fileIcon = $("<div>").attr("class","ml5").html("<i class='fa-solid fa-xmark deleteFileBtn' data-seq="+fileIds[i]+"></i>")
+												$(".fileNameList").append(fileNameTag.append(fileName).append(fileIcon))		
+											}
+										</script>
+										
+									</c:when>
 									
-								</c:when>
+								</c:choose>
 								
-							</c:choose>
-							
-						</div>
+							</div>
+					</div>
+					<input type="file" class="qnaAnswerWrite__fileInput" id="fileInput" multiple>
 				</div>
-				<input type="file" class="qnaAnswerWrite__fileInput" id="fileInput" multiple>
-			</div>
-    		<%@ include file="/WEB-INF/jsp/commons/summernote.jsp" %>
-    		<div class="qnaAnswerWrite__btns d-flex">
-    			<button class="goList bColorGray colorWhite">목록으로</button>
-    			<button class="write bColorMainPink colorWhite" data-id="${post.id}">작성완료</button>
-    		</div>
-    	</div>
+	    		<%@ include file="/WEB-INF/jsp/commons/summernote.jsp" %>
+	    		<div class="qnaAnswerWrite__btns d-flex">
+	    			<button class="goList bColorGray colorWhite">목록으로</button>
+	    			<button class="write bColorMainPink colorWhite" data-id="${post.id}">작성완료</button>
+	    		</div>
+	    	</div>	
+    		</c:when>
+    		<c:otherwise>
+    			답변 내용
+    		</c:otherwise>
+    	</c:choose>
+    	
     </div>
     
     

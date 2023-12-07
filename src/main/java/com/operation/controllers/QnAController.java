@@ -85,11 +85,10 @@ public class QnAController {
 	@RequestMapping("/viewQnaConf/{dataId}")
 	public String viewPostConf(@PathVariable String dataId, Model model) {
 		int postId = Integer.parseInt(dataId);
-		
-		//Map<String, Object> post = qservice.selectPostByIdJustView(postId);
-		Map<String, Object> post = new HashMap<>();
+		Map<String, Object> post = qservice.selectById(postId);
 		post.put("id", dataId); // 기존처럼 select 쿼리로 값 불러오도록 바꿔 주세용
 		model.addAttribute("post", post);
+		System.out.println(post);
 		return "qna/viewQna";
 	}
 

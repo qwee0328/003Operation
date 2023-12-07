@@ -34,4 +34,10 @@
 	<select id="selectTotalCnt" resultType="int">
 		select count(*) from qna_info;
 	</select>
+	
+	<!-- 게시글 목록 불러오기 -->
+	<select id="selectById" resultMap="qna_info">
+		select * from qna_info where id= #{id};
+	</select>
+	
 </mapper>

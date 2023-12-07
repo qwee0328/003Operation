@@ -36,7 +36,7 @@ function postLoad(result){
 
 		// 여부에 따라 bColorMainPink colorWhite / bColorLightGray colorGray
 		let title__answerState = $("<div>");
-		if(list[i].anwser==undefined){
+		if(list[i].answer==undefined){
 			title__answerState.attr("class","title__answerState align-center bColorLightGray colorGray").text("답변대기");
 		}else{
 			title__answerState.attr("class","title__answerState align-center bColorMainPink colorWhite").text("답변완료");
@@ -57,27 +57,27 @@ function postLoad(result){
     	
 		post__cover.append(post__title);
 		
-        if(list[i].anwser!=undefined){
+        if(list[i].answer!=undefined){
 			if(list[i].is_secret==0 || (list[i].is_secret==1 && list[i].member_nickname==user)){
 				let postAwswer__area = $("<div>").attr("class","postAwswer__area colorMainBlue").html("답변 미리보기 <i class='fa-solid fa-chevron-down colorMainBlue'></i>");
-				let postAnswer__content = $("<div>").attr("class","postAnswer__content").text(list[i].anwser)
+				let postAnswer__content = $("<div>").attr("class","postAnswer__content").text(list[i].answer)
 				board__postAwswer.append(board__postMini).append(postAwswer__area).append(postAnswer__content);
 				post__cover.append(board__postAwswer);
 			}
 		}
 
         
-        let post__anwserState = $("<div>");
-		if(list[i].anwser==undefined){
-			post__anwserState.attr("class","post__anwserState").text("답변대기");
+        let post__answerState = $("<div>");
+		if(list[i].answer==undefined){
+			post__answerState.attr("class","post__answerState").text("답변대기");
 		}else{
-			post__anwserState.attr("class","post__anwserState ColorMainPink").text("답변완료");
+			post__answerState.attr("class","post__answerState ColorMainPink").text("답변완료");
 		}
 
         let post__writer = $("<div>").attr("class","post__writer").text(list[i].member_nickname);
         let post__writeDate = $("<div>").attr("class","post__writeDate").text(list[i].write_date.slice(0,11));
         board__post.append(post__seq).append(post__cover);
-        board__post.append(post__anwserState).append(post__writer).append(post__writeDate);
+        board__post.append(post__answerState).append(post__writer).append(post__writeDate);
         if(list[i].file_cnt > 0){
 			let post__file = $("<div>").attr("class","post__file").html("<i class='fa-solid fa-paperclip'></i>")
 			board__post.append(post__file);

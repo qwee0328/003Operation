@@ -109,4 +109,9 @@ public class QnAService {
 	public int selectTotalCnt(){
 		return dao.selectTotalCnt();
 	}
+	
+	// qna 게시글 정보 불러오기
+	public Map<String, Object> selectById(int id){
+		return dao.selectById(id);
+	}
 }
