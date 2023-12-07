@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.operation.dto.FileDTO;
+import com.operation.dto.QnaQuestionFileDTO;
 
 @Repository
 public class FileDAO {
@@ -19,6 +20,12 @@ public class FileDAO {
 	public int insert(FileDTO dto) {
 		return db.insert("File.insert",dto);
 	}
+	
+	// 파일 삽입
+	public int insert(QnaQuestionFileDTO dto) {
+		return db.insert("File.qnaInsert",dto);
+	}
+		
 	
 	// 파일 삭제
 	public int delete(Integer[] array) {

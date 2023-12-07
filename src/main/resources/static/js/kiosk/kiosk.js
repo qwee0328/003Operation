@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $(".progressBar__fill").css("width","30%");
+/*    $(".progressBar__fill").css("width","30%");*/
     
     $.ajax({
 		url:"/kiosk/getBestRecord",

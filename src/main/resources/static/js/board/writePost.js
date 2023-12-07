@@ -64,6 +64,13 @@ $(document).ready(function(){
 		else if($(".titleArea").text().slice(0,2)!="자유") bulletin_category_id = "qna";
 		formData.append("bulletin_category_id",bulletin_category_id);
 		
+		let url ="/board/writePost";
+		if(bulletin_category_id=="qna"){
+			// 비밀여부
+			formData.append("is_secret",$("#secretChk").is(":checked"));
+			url = "/qna/writePost";
+		}
+		
 		for(let i=0; i<$(".postArea__fileInput")[0].files.length; i++){
 			if(i==5) break;
 			formData.append("attachFiles",$(".postArea__fileInput")[0].files[i]);
@@ -71,21 +78,28 @@ $(document).ready(function(){
 		
 		// 공지글인지도 판단 필요
 		$.ajax({
-			url:"/board/writePost",
+			url:url,
 			type:"post",
 			data:formData,
 			contentType: false,
 			processData: false
 		}).done(function(){
-			location.href="/board/listBoard/"+bulletin_category_id;
+			// 자유/질문
+			if(bulletin_category_id == "qna"){
+				location.href="/qna/listBoard";
+			}else{
+				location.href="/board/listBoard/"+bulletin_category_id;
+			}
 		});
 	});
 	
 	// 수정 완료 버튼
 	$(".update").on("click",function(){
 		// 제목 입력 검사
-		if($(".postArea__titleInput").val()==""){
+		let title = $(".postArea__titleInput").val();
+		if(title==""||title.trim()==""){
 			alert("제목을 입력하세요.");
+			$(".postArea__titleInput").val("");
 			$(".postArea__titleInput").focus();
 			return;
 		}
@@ -122,6 +136,7 @@ $(document).ready(function(){
 		// 자유 vs 질문
 		let bulletin_category_id = "free";
 		if($(".titleArea").text().slice(0,2)=="질문") bulletin_category_id = "question";
+		else if($(".titleArea").text().slice(0,2)!="자유") bulletin_category_id = "qna";
 		
 		for(let i=0; i<$(".postArea__fileInput")[0].files.length; i++){
 			if(i==5) break;
@@ -143,7 +158,8 @@ $(document).ready(function(){
 	// 목록으로 버튼
 	$(".goList").on("click",function(){
 		let bulletin_category_id = "free";
-		if($(".titleArea").text().slice(0,2)=="질문") bulletin_category_id = question;
+		if($(".titleArea").text().slice(0,2)=="질문") bulletin_category_id = "question";
+		else if($(".titleArea").text().slice(0,2)!="자유") bulletin_category_id = "qna";
 		
 		// 수정중이었으면 삽입된 이미지 다시 삭제
 		$.ajax({
@@ -153,13 +169,15 @@ $(document).ready(function(){
 			data: { srcList : insertImgs }
 		});
 		
+		//if(bulletin_category_id=="qna") qna면 다른 링크로 이동
 		location.href="/board/listBoard/"+bulletin_category_id  + "?select=" + $("#select").val()+"&keyword="+$("#keyword").val();
 	});
 	
 	// 수정취소 버튼
 	$(".goPost").on("click",function(){
 		let bulletin_category_id = "free";
-		if($(".titleArea").text().slice(0,2)=="질문") bulletin_category_id = question;
+		if($(".titleArea").text().slice(0,2)=="질문") bulletin_category_id = "question";
+		else if($(".titleArea").text().slice(0,2)!="자유") bulletin_category_id = "qna";
 		
 		// 수정중이었으면 삽입된 이미지 다시 삭제
 		$.ajax({
@@ -169,6 +187,7 @@ $(document).ready(function(){
 			data: { srcList : insertImgs }
 		});
 		
+		//if(bulletin_category_id=="qna") qna면 다른 링크로 이동
 		location.href = "/board/viewPostConf/" + bulletin_category_id + "/" + $("#select").val() + "/" + $(".update").attr("data-id") +"?keyword="+$("#keyword").val();
 	});
 	
