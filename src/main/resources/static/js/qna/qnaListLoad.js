@@ -53,14 +53,19 @@ function postLoad(result){
 			board__postMini.append(postMini__file);
 		}
         
-    
+    	
+		post__cover.append(post__title);
+		
         if(list[i].anwser!=undefined){
-			let postAwswer__area = $("<div>").attr("class","postAwswer__area colorMainBlue").html("답변 미리보기 <i class='fa-solid fa-chevron-down colorMainBlue'></i>");
-			let postAnswer__content = $("<div>").attr("class","postAnswer__content").text(list[i].anwser)
-			board__postAwswer.append(board__postMini).append(postAwswer__area).append(postAnswer__content);
+			if(list[i].is_secret==0 || (list[i].is_secret==1 && list[i].member_id==user)){
+				let postAwswer__area = $("<div>").attr("class","postAwswer__area colorMainBlue").html("답변 미리보기 <i class='fa-solid fa-chevron-down colorMainBlue'></i>");
+				let postAnswer__content = $("<div>").attr("class","postAnswer__content").text(list[i].anwser)
+				board__postAwswer.append(board__postMini).append(postAwswer__area).append(postAnswer__content);
+				post__cover.append(board__postAwswer);
+			}
+			
 		}
-	
-        post__cover.append(post__title).append(board__postAwswer);
+
         
         let post__anwserState = $("<div>");
 		if(list[i].anwser==undefined){
@@ -82,13 +87,19 @@ function postLoad(result){
     drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviCountPerPage);
 }
 
-$(document).ready(function(){
+function getPost(cpage){
 	$.ajax({
-		url:"/qna/selectPostAll"
+		url:"/qna/selectPostAll",
+		data:{cpage:cpage},
+		type:"post"
 	}).done(function(resp){
-		console.log(resp);
+		$(".board__posts").html("");
 		postLoad(resp);
 	});
+}
+
+$(document).ready(function(){
+	getPost(1);
 });
 
 $(document).on("click",".postAwswer__area",function(){		
@@ -146,7 +157,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 			let iTag = $("<i class='fa-solid fa-angles-left'></i>");
 			aTag.attr("class", "fontEnglish");
 			aTag.on("click", function() {
-				postLoad(1);
+				getPost(1);
 			});
 			aTag.append(iTag);
 			pagination.append(aTag);
@@ -156,7 +167,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 			let aTag = $("<a>");
 			let iTag = $("<i class='fa-solid fa-chevron-left'></i>");
 			aTag.on("click", function() {
-				postLoad((startNavi - 1));
+				getPost((startNavi - 1));
 			});
 			aTag.append(iTag);
 			pagination.append(aTag);
@@ -167,7 +178,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 			aTag.html(i);
 			aTag.attr("class", "fontEnglish");
 			aTag.on("click", function() {
-				postLoad(i);
+				getPost(i);
 			});
 			if (i == postCurPage) {
 				aTag.addClass("colorWhite bColorMainBlue fontEnglish");
@@ -181,7 +192,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 			let aTag = $("<a>");
 			let iTag = $("<i class='fa-solid fa-chevron-right'></i>");
 			aTag.on("click", function() {
-				postLoad(endNavi + 1);
+				getPost(endNavi + 1);
 			});
 			aTag.append(iTag);
 			pagination.append(aTag);
@@ -191,7 +202,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 			let aTag = $("<a>");
 			let iTag = $("<i class='fa-solid fa-angles-right'></i>");
 			aTag.on("click", function() {
-				postLoad(pageTotalCount);
+				getPost(pageTotalCount);
 			});
 			aTag.append(iTag);
 			pagination.append(aTag);

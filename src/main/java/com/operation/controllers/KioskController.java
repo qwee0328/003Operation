@@ -104,6 +104,7 @@ public class KioskController {
 		return kservice.realTimeRank();
 	}
 	
+	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();
