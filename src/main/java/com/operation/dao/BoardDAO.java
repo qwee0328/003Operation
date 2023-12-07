@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.operation.dto.BoardDTO;
+import com.operation.dto.ReplyDTO;
 
 @Repository
 public class BoardDAO {
@@ -127,8 +128,8 @@ public class BoardDAO {
 	}
 
 	// 게시글 댓글 불러오기
-	public List<Map<String, Object>> selectAllReply(Map<String, Object> param) {
-		List<Map<String, Object>> result = db.selectList("Board.selectAllReply", param);
+	public List<ReplyDTO> selectAllReply(Map<String, Object> param) {
+		List<ReplyDTO> result = db.selectList("Board.selectAllReply", param);
 		System.out.println(result);
 		System.out.println(param);
 		return result;
@@ -152,12 +153,23 @@ public class BoardDAO {
 
 	// 댓글 삭제하기
 	public int deleteReply(int replyId) {
-		return db.delete("Board.deleteReply",replyId);
+		return db.delete("Board.deleteReply", replyId);
 	}
-	
+
 	// 댓글 업데이트
 	public int updateReply(Map<String, Object> param) {
 		return db.update("Board.updateReply", param);
+	}
+
+	// 대댓글 입력
+	public boolean insertReReply(Map<String, Object> param) {
+		int result = db.insert("Board.insertReReply", param);
+		return result > 0 ? true : false;
+	}
+
+	// 대댓글 불러오기
+	public List<ReplyDTO> selectReReplyAll(Map<String, Object> param) {
+		return db.selectList("Board.selectReReplyAll", param);
 	}
 
 	// 게시글 삭제

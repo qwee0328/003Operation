@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
 import com.operation.dto.BoardDTO;
-import com.operation.dto.QnaQuestionDTO;
+import com.operation.dto.ReplyDTO;
 import com.operation.services.BoardService;
 import com.operation.services.MemberService;
 
@@ -47,8 +47,8 @@ public class BoardController {
 			model.addAttribute("isQna", true);
 		else if (catogory.equals("question"))
 			model.addAttribute("isQuestion", true);
-		model.addAttribute("select",select);
-		model.addAttribute("keyword",keyword);	
+		model.addAttribute("select", select);
+		model.addAttribute("keyword", keyword);
 		return "board/writePost";
 	}
 
@@ -103,7 +103,7 @@ public class BoardController {
 		dto.setMember_nickname(((String) session.getAttribute("loginNickName")));
 		bservice.insert(dto, attachFiles, deleteFileList);
 	}
-	
+
 	// 게시글 목록으로 이동
 	@RequestMapping("/listBoard/{catogory}")
 	public String listBoard(@PathVariable String catogory,
@@ -138,13 +138,13 @@ public class BoardController {
 		model.addAttribute("keyword", keyword);
 		return "board/viewPost";
 	}
-	
+
 	// 본인이 작성한 게시글인지 확인
 	@ResponseBody
 	@RequestMapping("/isMyPost")
-	public boolean isMyPost(@RequestParam String writerId) {
-		String loginID=(String)session.getAttribute("loginID");
-		return writerId.equals(loginID);
+	public boolean isMyPost(@RequestParam String memberNickname) {
+		String loginNicname = (String) session.getAttribute("loginNickName");
+		return loginNicname.equals(memberNickname);
 	}
 
 	// 게시글 관련 정보 불러오기
@@ -240,20 +240,19 @@ public class BoardController {
 		Map<String, Object> result = bservice.selectPrevNextPost(param);
 		return result;
 	}
-	
+
 	// 게시글 댓글 작성하기
 	@ResponseBody
 	@RequestMapping("/insertPostReply")
 	public boolean insertPostReply(@RequestParam String postId, @RequestParam String reply) {
 		int id = Integer.parseInt(postId);
-		return bservice.insertPostReply(id,reply);
+		return bservice.insertPostReply(id, reply);
 	}
 
-	
 	// 게시글 댓글 목록 불러오기
 	@ResponseBody
 	@RequestMapping("/selectPostReplyAll")
-	public Map<String, Object> selectPostReplyAll(@RequestParam String postId, @RequestParam String replyCpage){
+	public Map<String, Object> selectPostReplyAll(@RequestParam String postId, @RequestParam String replyCpage) {
 		int id = Integer.parseInt(postId);
 		int currentPage = (replyCpage == null || replyCpage.isEmpty()) ? 1 : Integer.parseInt(replyCpage);
 
@@ -265,50 +264,69 @@ public class BoardController {
 		result.put("recordTotalCount", list.get("recordTotalCount"));
 		result.put("recordCountPerPage", Constants.REPLY_COUNT_PER_PAGE);
 		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
-		
+
 		return result;
 	}
-	
+
 	// 댓글 추천하기
 	@ResponseBody
 	@RequestMapping("/insertReplyRecommend")
 	public int insertReplyRecommend(@RequestParam String replyId) {
-		int id=Integer.parseInt(replyId);
+		int id = Integer.parseInt(replyId);
 		return bservice.insertReplyRecommend(id);
 	}
-	
+
 	// 댓글 추천 삭제
 	@ResponseBody
 	@RequestMapping("/deleteReplyRecommend")
 	public int deleteReplyRecommend(@RequestParam String replyId) {
-		int id=Integer.parseInt(replyId);
+		int id = Integer.parseInt(replyId);
 		return bservice.deleteReplyRecommend(id);
 	}
-	
+
 	// 댓글 삭제하기
 	@ResponseBody
 	@RequestMapping("/deleteReply")
 	public int deleteReply(@RequestParam String replyId) {
-		int id=Integer.parseInt(replyId);
+		int id = Integer.parseInt(replyId);
 		return bservice.deleteReply(id);
 	}
-	
+
 	// 댓글 업데이트
 	@ResponseBody
 	@RequestMapping("/updateReply")
-	public int updateReply(@RequestParam String replyId,@RequestParam String replyContents) {
-		int id=Integer.parseInt(replyId);
-		return bservice.updateReply(id,replyContents);
+	public int updateReply(@RequestParam String replyId, @RequestParam String replyContents) {
+		int id = Integer.parseInt(replyId);
+		return bservice.updateReply(id, replyContents);
+	}
+
+	// 대댓글 작성하기
+	@ResponseBody
+	@RequestMapping("/insertReReply")
+	public boolean insertReReply(@RequestParam String postId, @RequestParam String parentId,
+			@RequestParam String content) {
+		int postid = Integer.parseInt(postId);
+		int parentid = Integer.parseInt(parentId);
+		return bservice.insertReReply(postid, parentid, content);
+	}
+	
+	// 대댓글 불러오기
+	@ResponseBody
+	@RequestMapping("/selectReReplyAll")
+	public List<ReplyDTO> selectReReplyAll(@RequestParam String parentId) {
+		int parentid = Integer.parseInt(parentId);
+		return bservice.selectReReplyAll(parentid);
 	}
 
 	// 게시글 작성 페이지로 이동
 	@RequestMapping("/goUpdatePost/{catogory}/{post_id}")
-	public String goUpdatePost(@PathVariable String catogory, Model model, @PathVariable int post_id,  String select, String keyword) {
+	public String goUpdatePost(@PathVariable String catogory, Model model, @PathVariable int post_id, String select,
+			String keyword) {
 		if (catogory.equals("question"))
 			model.addAttribute("isQuestion", true);
 		model.addAttribute("post", bservice.selectPostById(post_id));
-		model.addAttribute("select",select);
-		model.addAttribute("keyword",keyword);
+		model.addAttribute("select", select);
+		model.addAttribute("keyword", keyword);
 		return "board/writePost";
 	}
 

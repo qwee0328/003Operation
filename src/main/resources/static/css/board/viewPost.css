@@ -257,6 +257,7 @@
 	width: 9%;
 	background-color: transparent;
 	border: none;
+	cursor: pointer;
 }
 
 .replyLine {
@@ -265,7 +266,6 @@
 
 .replyLine:not(:last-child) {
 	border-bottom: 1px solid #7d7d7d50;
-	margin-bottom: 10px;
 	padding-bottom: 20px;
 }
 
@@ -333,10 +333,58 @@
 	color: #7d7d7d;
 }
 
+.rereplyInput {
+	display: flex;
+	width: calc(100% - 50px);
+	margin-left: 50px;
+	margin-top: 20px;
+}
+
+.rereplyInput #replyInput {
+	width: 80%;
+	border: none;
+	padding: 10px 15px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.rereplyInput #replyInput:focus {
+	outline: none;
+}
+
+.rereplyInput .replyInput__input:focus-within {
+	border: 2px solid black;
+}
+
+#replyInputCancle {
+	width: 9%;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+.RereplyLine {
+	padding: 0 15px 20px 50px;
+	background-color: #e1e6f5;
+	border-bottom: 1px solid #7d7d7d50;
+}
+
+.RereplyLine .replyWriterInfo {
+	margin-top: 0;
+	padding-top: 20px;
+
+}
+
+.RereplyLine .writer {
+	background-color: #375abb;
+	color: white;
+}
+
 #pagination {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-top: 30px;
 }
 
 #pagination a {

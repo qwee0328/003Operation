@@ -187,9 +187,9 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/selectProfileImgByIdBoard")
-	public String selectProfileImgById(String writerId) {
-		return mservice.selectProfileImgById(writerId);
+	@RequestMapping("/selectProfileImgByNickBoard")
+	public String selectProfileImgByNickBoard(String memberNickname) {
+		return mservice.selectProfileImgByNickBoard(memberNickname);
 	}
 	
 //	// 마이페이지 메인 화면 정보 불러오기 (프로필 이미지, 레벨, 포인트) -> goMypage에 model로 추가
@@ -204,6 +204,20 @@ public class MemberController {
 	@RequestMapping("/chkNickname")
 	public boolean chkNickname(String nickname) {
 		return mservice.chkNickname(nickname);
+	}
+	
+	// 내 닉네임 불러오기 -> 게시판에서 본인 확인용
+	@ResponseBody
+	@RequestMapping("/selectUserNick")
+	public String selectUserNick() {
+		return (String)session.getAttribute("loginNickName");
+	}
+	
+	// 세션 아이디 가져오기 -> 유니티로 보내주기 위함
+	@ResponseBody
+	@RequestMapping("/userId")
+	public String selectUserId() {
+		return (String) session.getAttribute("loginID");
 	}
 
 	@ExceptionHandler(Exception.class)

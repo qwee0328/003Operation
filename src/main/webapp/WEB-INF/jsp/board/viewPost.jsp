@@ -78,7 +78,7 @@
 					<div class="postInfo">
 						<div class="postInfo__left">
 							<div class="postInfo__profile">
-								<input type="hidden" value="${post.member_id }" id="writerId">
+								<input type="hidden" value="${post.member_nickname }" id="memberNickname">
 								<img src="" alt="프로필 이미지" id="writer_profile">
 							</div>
 							<div class="postInfo__userInfo">
@@ -109,25 +109,49 @@
 								</div>
 							</div>
 							<div id="replyList">
-							<!-- 
+
 								<div class="replyLine">
 									<div class="replyWriterInfo">
 										<div class="writerProfile">
-											<img alt="" src="/images/profileImg.png">
-											<span>닉네임</span></span><span class="writer">글쓴이</span><span class="time">10시간전</span>
+											<img alt="" src="/images/profileImg.png"> <span>닉네임</span></span><span
+												class="writer">글쓴이</span><span class="time">10시간전</span>
 										</div>
 										<div>
 											<i class="fa-solid fa-ellipsis-vertical"></i>
 										</div>
 									</div>
-									<div class="replyConf">
-										댓글 내용
-									</div>
+									<div class="replyConf">댓글 내용</div>
 									<div class="replyInfo">
 										<span><i class="fa-regular fa-thumbs-up"></i> 추천수 1</span><span>답글달기</span><span>신고하기</span>
 									</div>
+									<!-- 
+									<div class="rereplyInput">
+										<div class="replyInput__userProfile">
+											<img alt="사용자 프로필" src="/images/profileImg.png"
+												id="userProfileImg">
+										</div>
+										<div class="replyInput__input">
+											<input type="text" id="replyInput" placeholder="답글을 입력해주세요.">
+											<button id="replyInputSubmit">입력</button>
+										</div>
+									</div>
+								-->
 								</div>
-								 -->
+								<div class="RereplyLine">
+									<div class="replyWriterInfo">
+										<div class="writerProfile">
+											<img alt="" src="/images/profileImg.png"> <span>닉네임</span></span><span
+												class="writer">글쓴이</span><span class="time">10시간전</span>
+										</div>
+										<div>
+											<i class="fa-solid fa-ellipsis-vertical"></i>
+										</div>
+									</div>
+									<div class="replyConf">댓글 내용</div>
+									<div class="replyInfo">
+										<span><i class="fa-regular fa-thumbs-up"></i> 추천수 1</span>
+									</div>
+								</div>
 							</div>
 							<div id="pagination"></div>
 						</div>
