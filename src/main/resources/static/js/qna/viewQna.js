@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	
 });
 
 let deleteFileList = [];
@@ -38,6 +38,6 @@ $(document).on("click",".write",function(){
 		contentType: false,
 		processData: false
 	}).done(function(){
-		console.log("게시글 등록 ok");
+		location.reload();
 	});
 });

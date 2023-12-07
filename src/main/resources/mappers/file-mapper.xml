@@ -13,7 +13,7 @@
 	</insert>
 	
 	<insert id="qnaAwnserInsert">
-		insert into qna_anwser_board_file values (null, #{qna_answer_board_id}, #{system_name}, #{origin_name});
+		insert into qna_answer_board_file values (null, #{qna_answer_board_id}, #{system_name}, #{origin_name});
 	</insert>
 	
 	

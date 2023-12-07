@@ -87,8 +87,10 @@
 		}
 	});
 	
+	if(`${post.anwser}`=="" && `${post.is_secret}`!=""){
+		$j('#summernote').summernote("code",`${post.content}`);
+	}
 	
-	$j('#summernote').summernote("code",`${post.content}`);
 </script>
 </body>
 </html>
