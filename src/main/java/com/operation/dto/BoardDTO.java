@@ -1,6 +1,7 @@
 package com.operation.dto;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class BoardDTO {
 	private int id;
@@ -103,6 +104,4 @@ public class BoardDTO {
 	public void setIs_fix(boolean is_fix) {
 		this.is_fix = is_fix;
 	}
-
-
 }

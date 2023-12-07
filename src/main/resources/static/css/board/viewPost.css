@@ -10,7 +10,8 @@
 	max-width: 750px;
 	margin: auto;
 }
-.boardPost{
+
+.boardPost {
 	position: relative;
 }
 
@@ -21,19 +22,21 @@
 	padding: 0px 40px;
 	box-sizing: border-box;
 }
-.stickyContainer{
+
+.stickyContainer {
 	position: sticky;
-    top: 183px;
-    transition: top 0.1s ease 0s;
+	top: 183px;
+	transition: top 0.1s ease 0s;
 }
 
 .boardPost__navi {
 	position: relative;
 }
-.navi__conf{
+
+.navi__conf {
 	display: flex;
-    flex-direction: column;
-    align-items: center;
+	flex-direction: column;
+	align-items: center;
 }
 
 .navi__conf:nth-child(even) {
@@ -192,21 +195,144 @@
 	cursor: pointer;
 }
 
-#writer_profile{
+#writer_profile {
 	width: 100%;
-    height: 100%;
-    border-radius: 50%;
+	height: 100%;
+	border-radius: 50%;
 }
 
-.fileDown{
+.fileDown {
 	display: flex;
 	cursor: pointer;
 }
 
+/*댓글*/
+.replyBox__title {
+	margin-top: 80px;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+#replyCount {
+	color: #375abb;
+	margin-left: 5px;
+}
+
+.replyBox__replyInput {
+	margin: 20px 0 30px 0;
+	display: flex;
+	align-items: center;
+}
+
+#userProfileImg {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.replyInput__userProfile {
+	margin-right: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.replyInput__input {
+	width: calc(100% - 50px);
+	border: 1px solid #7d7d7d50;
+	border-radius: 10px;
+}
+
+#replyInput {
+	width: 90%;
+	border: none;
+	padding: 10px 15px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+#replyInput:focus {
+	outline: none;
+}
+
+.replyInput__input:focus-within {
+	border: 2px solid black;
+}
+
+#replyInputSubmit {
+	width: 9%;
+	background-color: transparent;
+	border: none;
+}
+
+.replyLine{
+	padding-right: 15px;
+}
+.replyLine:not(:last-child){
+	border-bottom: 1px solid #7d7d7d50;
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+}
+
+.replyWriterInfo{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.writerProfile{
+	display: flex;
+	align-items: center;
+}
+
+.writerProfile>img{
+	width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.writerProfile>span:not(:last-child){
+	margin-right: 20px;
+}
+.replyWriterInfo button{
+	background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.replyWriterInfo button:first-child{
+	margin-right: 20px;
+}
+.time{
+	color: #7d7d7d;
+	font-size: 14px;
+}
+.writer{
+	background-color: #e1e6f5;
+	border: none;
+	border-radius: 4px;
+	padding: 4px 8px;
+}
+.replyConf{
+	margin-left: 50px;
+	padding: 20px 0;
+}
+.replyInfo{
+	margin-left: 50px;
+}
+.replyInfo>span{
+	margin-right: 20px;
+	color: #7d7d7d;
+	cursor: pointer;
+}
+.replyInfo>span i{
+	color: #7d7d7d;
+}
+
 @media (max-width: 1050px) {
-	.naviBackground{
+	.naviBackground {
 		left: 0px;
 	}
+
 	.boardPost__navi {
 		position: fixed;
 		left: 0px;

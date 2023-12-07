@@ -138,6 +138,14 @@ public class BoardController {
 		model.addAttribute("keyword", keyword);
 		return "board/viewPost";
 	}
+	
+	// 본인이 작성한 게시글인지 확인
+	@ResponseBody
+	@RequestMapping("/isMyPost")
+	public boolean isMyPost(@RequestParam String writerId) {
+		String loginID=(String)session.getAttribute("loginID");
+		return writerId.equals(loginID);
+	}
 
 	// 게시글 관련 정보 불러오기
 	@ResponseBody
@@ -231,6 +239,66 @@ public class BoardController {
 		param.put("select", select);
 		Map<String, Object> result = bservice.selectPrevNextPost(param);
 		return result;
+	}
+	
+	// 게시글 댓글 작성하기
+	@ResponseBody
+	@RequestMapping("/insertPostReply")
+	public boolean insertPostReply(@RequestParam String postId, @RequestParam String reply) {
+		int id = Integer.parseInt(postId);
+		return bservice.insertPostReply(id,reply);
+	}
+
+	
+	// 게시글 댓글 목록 불러오기
+	@ResponseBody
+	@RequestMapping("/selectPostReplyAll")
+	public Map<String, Object> selectPostReplyAll(@RequestParam String postId, @RequestParam String replyCpage){
+		int id = Integer.parseInt(postId);
+		int currentPage = (replyCpage == null || replyCpage.isEmpty()) ? 1 : Integer.parseInt(replyCpage);
+
+		Map<String, Object> list = bservice.selectAllReply(id, currentPage);
+		Map<String, Object> result = new HashMap<>();
+		result.put("replyList", list.get("replyList"));
+		System.out.println(list.get("replyList"));
+		result.put("replyCpage", currentPage);
+		result.put("recordTotalCount", list.get("recordTotalCount"));
+		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+		
+		return result;
+	}
+	
+	// 댓글 추천하기
+	@ResponseBody
+	@RequestMapping("/insertReplyRecommend")
+	public int insertReplyRecommend(@RequestParam String replyId) {
+		int id=Integer.parseInt(replyId);
+		return bservice.insertReplyRecommend(id);
+	}
+	
+	// 댓글 추천 삭제
+	@ResponseBody
+	@RequestMapping("/deleteReplyRecommend")
+	public int deleteReplyRecommend(@RequestParam String replyId) {
+		int id=Integer.parseInt(replyId);
+		return bservice.deleteReplyRecommend(id);
+	}
+	
+	// 댓글 삭제하기
+	@ResponseBody
+	@RequestMapping("/deleteReply")
+	public int deleteReply(@RequestParam String replyId) {
+		int id=Integer.parseInt(replyId);
+		return bservice.deleteReply(id);
+	}
+	
+	// 댓글 업데이트
+	@ResponseBody
+	@RequestMapping("/updateReply")
+	public int updateReply(@RequestParam String replyId,@RequestParam String replyContents) {
+		int id=Integer.parseInt(replyId);
+		return bservice.updateReply(id,replyContents);
 	}
 
 	// 게시글 작성 페이지로 이동

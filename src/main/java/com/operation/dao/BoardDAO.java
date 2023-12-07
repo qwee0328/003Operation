@@ -114,10 +114,50 @@ public class BoardDAO {
 	public List<Map<String, Object>> selectFileById(Map<String, Object> param) {
 		return db.selectList("Board.selectFileById", param);
 	}
-	
+
 	// 이전글 다음글 불러오기
-	public Map<String,Object> selectPrevNextPost(Map<String, Object> param){
+	public Map<String, Object> selectPrevNextPost(Map<String, Object> param) {
 		return db.selectOne("Board.selectPrevNextPost", param);
+	}
+
+	// 게시글 댓글 작성하기
+	public boolean insertPostReply(Map<String, Object> param) {
+		int result = db.insert("Board.insertPostReply", param);
+		return result > 0 ? true : false;
+	}
+
+	// 게시글 댓글 불러오기
+	public List<Map<String, Object>> selectAllReply(Map<String, Object> param) {
+		List<Map<String, Object>> result = db.selectList("Board.selectAllReply", param);
+		System.out.println(result);
+		System.out.println(param);
+		return result;
+	}
+
+	// 게시글 댓글 총 개수
+	public int selectTotalReplyCnt(int id) {
+		Integer result = db.selectOne("Board.selectTotalReplyCnt", id);
+		return (result != null) ? result.intValue() : 0;
+	}
+
+	// 댓글 추천하기
+	public int insertReplyRecommend(Map<String, Object> param) {
+		return db.insert("Board.insertReplyRecommend", param);
+	}
+
+	// 댓글 추천 삭제하기
+	public int deleteReplyRecommend(Map<String, Object> param) {
+		return db.delete("Board.deleteReplyRecommend", param);
+	}
+
+	// 댓글 삭제하기
+	public int deleteReply(int replyId) {
+		return db.delete("Board.deleteReply",replyId);
+	}
+	
+	// 댓글 업데이트
+	public int updateReply(Map<String, Object> param) {
+		return db.update("Board.updateReply", param);
 	}
 
 	// 게시글 삭제
