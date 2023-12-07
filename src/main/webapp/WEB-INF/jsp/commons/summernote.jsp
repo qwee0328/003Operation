@@ -87,7 +87,7 @@
 		}
 	});
 	
-	if(`${post.anwser}`=="" && `${post.is_secret}`!=""){
+	if(!(`${post.anwser}`=="" && `${post.is_secret}`!="")){
 		$j('#summernote').summernote("code",`${post.content}`);
 	}
 	
