@@ -84,7 +84,12 @@ $(document).ready(function(){
 			contentType: false,
 			processData: false
 		}).done(function(){
-			location.href="/board/listBoard/"+bulletin_category_id;
+			// 자유/질문
+			if(bulletin_category_id == "qna"){
+				location.href="/qna/listBoard";
+			}else{
+				location.href="/board/listBoard/"+bulletin_category_id;
+			}
 		});
 	});
 	

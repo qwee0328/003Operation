@@ -1,7 +1,12 @@
-let keyword="";
-let select="";
-
-function loadPost(list, user){
+function postLoad(result){
+	let recordTotalCount = result.recordTotalCount;
+	$(".postCnt__txt").text(recordTotalCount);
+	let recordCountPerPage = result.recordCountPerPage;
+	let naviCountPerPage = result.naviCountPerPage;
+	let postCurPage = result.postCurPage;
+	let list = result.list;
+	let user = result.userNick;
+	
 	for(let i=0; i<list.length; i++){
         let board__post = $("<div>").attr("class","board__post d-flex");
         let post__seq = $("<div>").attr("class","post__seq").text(list[i].id);
@@ -10,14 +15,14 @@ function loadPost(list, user){
         
         let post__title = $("<div>").attr("class","post__title d-flex");
 
-		let title__name = $("<div>").attr("class","title__name");
+		let title__name = $("<div>").attr("class","title__name").attr("data-id", list[i].id);
 		
 		// 비밀글이면 넣고 아니면 빼기
 		if(list[i].is_secret==1){
 			  let title__secret = $("<div>").attr("class","title__secret").html("<i class='fa-solid fa-lock'></i>");
 			  post__title.append(title__secret);
 			  
-			  if(list[i].nickname == user){
+			  if(list[i].member_nickname == user){
 				  title__name.text(list[i].title);
 			  }else{
 				  title__name.text("비공개 Q&A 게시글입니다.");
@@ -25,8 +30,6 @@ function loadPost(list, user){
 		}else{
 			title__name.text(list[i].title);
 		}
-      
-
 		
         let title__answerStateCover = $("<div>").attr("class","title__answerStateCover");
 
@@ -74,26 +77,20 @@ function loadPost(list, user){
 			let post__file = $("<div>").attr("class","post__file").html("<i class='fa-solid fa-paperclip'></i>")
 			board__post.append(post__file);
 		}
-     
-
         $(".board__posts").append(board__post);
     }
+    drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviCountPerPage);
 }
 
 $(document).ready(function(){
-	
 	$.ajax({
 		url:"/qna/selectPostAll"
 	}).done(function(resp){
 		console.log(resp);
-		loadPost(resp.list, resp.userNick)
+		postLoad(resp);
 	});
-	
-    
-
-	
-	
 });
+
 $(document).on("click",".postAwswer__area",function(){		
 	if($(this).next().hasClass("abled")){
 		$(this).next().removeClass("abled");
@@ -149,11 +146,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 			let iTag = $("<i class='fa-solid fa-angles-left'></i>");
 			aTag.attr("class", "fontEnglish");
 			aTag.on("click", function() {
-				if (select != "") {
-					search(1);
-				} else {
-					postLoad(1);
-				}
+				postLoad(1);
 			});
 			aTag.append(iTag);
 			pagination.append(aTag);
@@ -163,11 +156,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 			let aTag = $("<a>");
 			let iTag = $("<i class='fa-solid fa-chevron-left'></i>");
 			aTag.on("click", function() {
-				if (select != "") {
-					search((startNavi - 1));
-				} else {
-					postLoad((startNavi - 1));
-				}
+				postLoad((startNavi - 1));
 			});
 			aTag.append(iTag);
 			pagination.append(aTag);
@@ -178,11 +167,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 			aTag.html(i);
 			aTag.attr("class", "fontEnglish");
 			aTag.on("click", function() {
-				if (select != "") {
-					search(i);
-				} else {
-					postLoad(i);
-				}
+				postLoad(i);
 			});
 			if (i == postCurPage) {
 				aTag.addClass("colorWhite bColorMainBlue fontEnglish");
@@ -196,11 +181,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 			let aTag = $("<a>");
 			let iTag = $("<i class='fa-solid fa-chevron-right'></i>");
 			aTag.on("click", function() {
-				if (select != "") {
-					search(endNavi + 1);
-				} else {
-					postLoad(endNavi + 1);
-				}
+				postLoad(endNavi + 1);
 			});
 			aTag.append(iTag);
 			pagination.append(aTag);
@@ -210,11 +191,7 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 			let aTag = $("<a>");
 			let iTag = $("<i class='fa-solid fa-angles-right'></i>");
 			aTag.on("click", function() {
-				if (select != "") {
-					search(pageTotalCount);
-				} else {
-					postLoad(pageTotalCount);
-				}
+				postLoad(pageTotalCount);
 			});
 			aTag.append(iTag);
 			pagination.append(aTag);
@@ -225,5 +202,17 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 
 // 글 쓰기로 이동
 $(document).on("click",".board__writeBtn",function(){
-	location.href= "/board/goWritePost/qna?select="+select+"&keyword="+keyword;
+	location.href= "/board/goWritePost/qna";
+})
+
+
+
+// 게시글 보기 페이지로 이동
+$(document).on("click", ".title__name", function() {
+	let url = "/qna/viewQnaConf";
+
+	url += "/" + $(this).attr("data-id");
+
+	console.log(url);
+	location.href = url;
 })

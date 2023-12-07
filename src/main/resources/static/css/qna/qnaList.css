@@ -119,6 +119,7 @@
 	background-color: #D1D2D8;
 	border-bottom: 3px solid #375ABB;
 	padding: 10px 0;
+	height: 60px;
 }
 
 .board__postHeader>div,
@@ -268,6 +269,11 @@
 	white-space: nowrap;
 }
 
+.empty{
+	height: 200px;
+	font-size: 20px;
+}
+
 @media (max-width: 786px) {
 	.guide {
 		margin: 100px 10px;
@@ -375,5 +381,9 @@
 		align-items: center;
 		justify-content: center;
 		margin: 0 2.5px;
+	}
+	
+	.empty{
+		height: 100px;
 	}
 }
