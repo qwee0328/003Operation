@@ -23,10 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.operation.constants.Constants;
 import com.operation.dao.BoardDAO;
 import com.operation.dao.FileDAO;
-import com.operation.dao.QnADAO;
 import com.operation.dto.BoardDTO;
 import com.operation.dto.FileDTO;
-import com.operation.dto.QnaQuestionDTO;
+import com.operation.dto.ReplyDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -349,9 +348,9 @@ public class BoardService {
 		Map<String, Object> param = new HashMap<>();
 		param.put("bulletin_board_id", id);
 		param.put("userId", (String) session.getAttribute("loginID"));
-		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
-		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
-		List<Map<String, Object>> list = dao.selectAllReply(param);
+		param.put("start", currentPage * Constants.REPLY_COUNT_PER_PAGE - (Constants.REPLY_COUNT_PER_PAGE - 1) - 1);
+		param.put("count", Constants.REPLY_COUNT_PER_PAGE);
+		List<ReplyDTO> list = dao.selectAllReply(param);
 
 		int recordTotalCount = dao.selectTotalReplyCnt(id);
 
@@ -391,6 +390,25 @@ public class BoardService {
 		param.put("replyId", replyId);
 		param.put("replyContents", replyContents);
 		return dao.updateReply(param);
+	}
+	
+	// 대댓글 작성하기
+	public boolean insertReReply(int postId, int parentId,String content) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("postId", postId);
+		param.put("parentId", parentId);
+		param.put("reply", content);
+		param.put("userId", (String) session.getAttribute("loginID"));
+		param.put("loginNickName", (String) session.getAttribute("loginNickName"));
+		return dao.insertReReply(param);
+	}
+	
+	// 대댓글 불러오기
+	public List<ReplyDTO> selectReReplyAll(int parentId){
+		Map<String, Object> param = new HashMap<>();
+		param.put("parentId", parentId);
+		param.put("userId", (String) session.getAttribute("loginID"));
+		return dao.selectReReplyAll(param);
 	}
 
 	// 게시글 삭제
