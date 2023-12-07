@@ -291,6 +291,14 @@ public class BoardController {
 		int id=Integer.parseInt(replyId);
 		return bservice.deleteReply(id);
 	}
+	
+	// 댓글 업데이트
+	@ResponseBody
+	@RequestMapping("/updateReply")
+	public int updateReply(@RequestParam String replyId,@RequestParam String replyContents) {
+		int id=Integer.parseInt(replyId);
+		return bservice.updateReply(id,replyContents);
+	}
 
 	// 게시글 작성 페이지로 이동
 	@RequestMapping("/goUpdatePost/{catogory}/{post_id}")

@@ -243,6 +243,12 @@
 	<delete id="deleteReply">
 		delete from reply where id=#{replyId};
 	</delete>
+	
+	<!-- 댓글 업데이트 -->
+	<update id="updateReply">
+		update reply set content=#{replyContents}
+		where id=#{replyId};
+	</update>
 
 	<!-- 게시글 삭제 -->
 	<delete id="deletePost">

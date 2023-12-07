@@ -155,6 +155,11 @@ public class BoardDAO {
 	public int deleteReply(int replyId) {
 		return db.delete("Board.deleteReply",replyId);
 	}
+	
+	// 댓글 업데이트
+	public int updateReply(Map<String, Object> param) {
+		return db.update("Board.updateReply", param);
+	}
 
 	// 게시글 삭제
 	public void deletePost(int id) {

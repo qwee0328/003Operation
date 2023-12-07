@@ -382,6 +382,14 @@ public class BoardService {
 	public int deleteReply(int replyId) {
 		return dao.deleteReply(replyId);
 	}
+	
+	// 댓글 업데이트
+	public int updateReply(int replyId,String replyContents) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("replyId", replyId);
+		param.put("replyContents", replyContents);
+		return dao.updateReply(param);
+	}
 
 	// 게시글 삭제
 	public void deletePost(int id) {

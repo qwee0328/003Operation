@@ -264,30 +264,40 @@ $(document).ready(function() {
 		}
 		$(this).closest(".replyLine").find(".replyConf").attr("contenteditable", true).focus();
 		$(this).parent().find("button").css("display", "none");
-		
-		let modify = $("<button>").attr("class","modifySubmit").attr("data-id",$(this).attr("data-id")).html("수정완료").css("margin-right","20px");
-		let cancle = $("<button>").attr("class","modifyCancle").attr("data-id",$(this).attr("data-id")).html("수정취소");
+
+		let modify = $("<button>").attr("class", "modifySubmit").attr("data-id", $(this).attr("data-id")).html("수정완료").css("margin-right", "20px");
+		let cancle = $("<button>").attr("class", "modifyCancle").attr("data-id", $(this).attr("data-id")).html("수정취소");
 		$(this).parent().append(modify).append(cancle)
-		
-		replyBackup =$(this).closest(".replyLine").find(".replyConf").html();
+
+		replyBackup = $(this).closest(".replyLine").find(".replyConf").html();
 		replyObj = $(this);
 	});
-	
+
 	// 댓글 수정 취소
-	$(document).on("click",".modifyCancle",function(){
+	$(document).on("click", ".modifyCancle", function() {
 		$(this).closest(".replyLine").find(".replyConf").html(replyBackup);
 		$(this).closest(".replyLine").find(".replyConf").attr("contenteditable", false);
 		$(this).parent().find("button").css("display", "none");
 		$(this).parent().find(".replyModifyBtn").css("display", "inline-block");
 		$(this).parent().find(".replyDeleteBtn").css("display", "inline-block");
-		
+
 		replyBackup = null;
 		replyObj = null;
 	})
-	
+
 	// 댓글 수정 완료
-	$(document).on("click",".modifySubmit",function(){
-		let replyContents=$(this).closest(".replyLine").find(".replyConf").html();
+	$(document).on("click", ".modifySubmit", function() {
+		let replyContents = $(this).closest(".replyLine").find(".replyConf").html();
+		$.ajax({
+			url: "/board/updateReply",
+			data: { replyId: $(this).attr("data-id"), replyContents:replyContents },
+			type: "post"
+		}).done(function(resp){
+			console.log(resp);
+			if(resp!==0){
+				alert("댓글 수정이 완료되었습니다.")
+			}
+		})
 	})
 });
 
@@ -420,9 +430,9 @@ function selectreplyList(replyCpage) {
 				thumbsIcon.css("color", "#FB8F8A");
 			}
 			recommend.append(thumbsIcon).append(" 추천 ").append(resp.replyList[i].count);
-			let replyBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("답글달기").attr("class", "replyRe");
-			let alterBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("신고하기").attr("class", "replyReport");
-			replyInfo.append(recommend).append(replyBtn).append(alterBtn);
+			let replyBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("답글달기").attr("class", "replyRe").attr("replyWriter",resp.replyList[i].member_nickname);
+			//let alterBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("신고하기").attr("class", "replyReport");
+			replyInfo.append(recommend).append(replyBtn);//.append(alterBtn);
 
 			replyLine.append(replyWriterInfo).append(replyConf).append(replyInfo);
 			$("#replyList").append(replyLine);
