@@ -19,6 +19,8 @@ import com.operation.dto.KioskCategoryDTO;
 import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -53,15 +55,34 @@ public class KioskController {
 		return "kiosk/kiosk";
 	}
 	
+	public String getSessionKeyFromCookie(HttpServletRequest request) {
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	        	System.out.println(cookie.getName()+"cookyname");
+	            if ("JSESSIONID".equals(cookie.getName())) { // 쿠키 이름이 세션 쿠키의 이름이라 가정
+	                return cookie.getValue(); // 세션 키 반환
+	            }
+	        }
+	    }
+	    return null; // 해당하는 세션 쿠키를 찾지 못한 경우
+	}
+	
 	// 키오스크 이용 기록 저장
 	@ResponseBody
-	@CrossOrigin(origins = "https://pushssun.github.io")
+	//@CrossOrigin(origins = "https://pushssun.github.io", allowCredentials = "true")
 	@PostMapping("/insertData")
-	public void insert(@RequestBody KioskRecordDTO dto) {
-		System.out.println("insert");
-		System.out.println(dto);
-		String loginID = (String) session.getAttribute("loginID");
+	public void insert(@RequestBody KioskRecordDTO dto, HttpServletRequest request) {
+		String sessionKey = getSessionKeyFromCookie(request);
+	    if (sessionKey != null) {
+	    	System.out.println("Session Key: " + sessionKey);
+	    } else {
+	    	System.out.println("Session Key not found");
+	    }
+		String loginID = (String)session.getAttribute("loginID");
+		System.out.println(loginID+"test");
 		if(!(loginID==null || loginID.isEmpty())) {
+			System.out.println("durl");
 			dto.setMember_id(loginID);
 			dto.setMember_nickname((String) session.getAttribute("loginNickName"));
 			kservice.insert(dto);
