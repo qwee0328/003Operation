@@ -15,9 +15,14 @@
 		<result property="anwser" column="anwser"/>
 	</resultMap>
 
-	<!-- 게시글 작성 -->
+	<!-- 질문 게시글 작성 -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert into qna_question_board values (null, #{member_id}, #{member_nickname}, #{title}, #{content}, default, #{is_secret});
+	</insert>
+	
+	<!-- 답변 게시글 작성 -->
+	<insert id="insertAnswer" useGeneratedKeys="true" keyProperty="id">
+		insert into qna_answer_board values (null, #{qna_question_board_id}, #{content}, default);
 	</insert>
 	
 	<!-- 게시글 목록 불러오기 -->

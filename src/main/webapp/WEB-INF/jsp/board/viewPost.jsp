@@ -11,9 +11,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
 <!-- 공통 css -->
-<link rel="syplesheet" href="/css/commons/common.css" />
+<link rel="stylesheet" href="/css/commons/common.css" />
 
-<link rel="stylesheet" href="/css/commons/common.css">
 <link rel="stylesheet" href="/css/board/viewPost.css">
 <script type="text/javascript" src="/js/board/viewPost.js"></script>
 </head>

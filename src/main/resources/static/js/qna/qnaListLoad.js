@@ -26,6 +26,7 @@ function postLoad(result){
 				  title__name.text(list[i].title);
 			  }else{
 				  title__name.text("비공개 Q&A 게시글입니다.");
+				  title__name.removeAttr("class","title__name").attr("class","title__scretname");
 			  }
 		}else{
 			title__name.text(list[i].title);
@@ -57,13 +58,12 @@ function postLoad(result){
 		post__cover.append(post__title);
 		
         if(list[i].anwser!=undefined){
-			if(list[i].is_secret==0 || (list[i].is_secret==1 && list[i].member_id==user)){
+			if(list[i].is_secret==0 || (list[i].is_secret==1 && list[i].member_nickname==user)){
 				let postAwswer__area = $("<div>").attr("class","postAwswer__area colorMainBlue").html("답변 미리보기 <i class='fa-solid fa-chevron-down colorMainBlue'></i>");
 				let postAnswer__content = $("<div>").attr("class","postAnswer__content").text(list[i].anwser)
 				board__postAwswer.append(board__postMini).append(postAwswer__area).append(postAnswer__content);
 				post__cover.append(board__postAwswer);
 			}
-			
 		}
 
         
@@ -115,7 +115,6 @@ $(document).on("click",".postAwswer__area",function(){
 
 // pagination
 function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviCountPerPage) {
-
 	let pagination = $(".board__pagination");
 	pagination.html("");
 	if (recordTotalCount == 0) {

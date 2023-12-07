@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.writeBox_guide {
+	max-width: 750px;
+	margin: 150px auto;
+}
+
+.qnaAnswerWrite__btns{
+	justify-content: end;
+	align-items: center;
+}
+
+.qnaAnswerWrite__btns>button {
+	width: 100px;
+	height: 35px;
+	color: #FFFFFF;
+	border-radius: 10px;
+	border: 0;
+}
+
+.write {
+	margin-left: 15px;
+}
+
+.qnaAnswerWrite__file{
+	padding: 20px 0;
+}
+
+.fileInput__label {
+	background-color: #E1E6F5;
+	width: fit-content !important;
+	height: fit-content;
+	padding: 5px 10px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.qnaAnswerWrite__fileInput {
+	display: none !important;
+}
+
+.qnaAnswerWrite__title{
+	font-size: 30px;
+}
+
+.qnaAnswerWrite__hr{
+	margin:0;
+	margin-top:15px;
+	height: 1px;
+	background-color: #7d7d7d50;
+}

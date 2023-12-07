@@ -170,7 +170,7 @@
 	width: 45%;
 }
 
-.title__name {
+.title__name, .title__scretname {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

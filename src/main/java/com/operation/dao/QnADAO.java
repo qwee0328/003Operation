@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.operation.dto.QnaAnswerDTO;
 import com.operation.dto.QnaQuestionDTO;
 
 @Repository
@@ -15,9 +16,15 @@ public class QnADAO {
 	@Autowired
 	private SqlSession db;
 	
-	// 게시글 작성
+	// 질문 게시글 작성
 	public int insert(QnaQuestionDTO dto) {
 		db.insert("Qna.insert", dto);
+		return dto.getId();
+	}
+	
+	// 답변 게시글 작성
+	public int insert(QnaAnswerDTO dto) {
+		db.insert("Qna.insertAnswer", dto);
 		return dto.getId();
 	}
 	

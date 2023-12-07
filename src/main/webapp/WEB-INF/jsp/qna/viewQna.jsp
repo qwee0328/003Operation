@@ -10,15 +10,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
 <!-- 공통 css -->
-<link rel="syplesheet" href="/css/commons/common.css"/>
+<link rel="stylesheet" href="/css/commons/common.css"/>
 
 <link rel="stylesheet" href="/css/board/viewPost.css">
+<link rel="stylesheet" href="/css/qna/qnaAnswerWrite.css"/>
+
+<script src="/js/qna/viewQna.js"></script>
 </head>
 <body>
- <div class="container">
+ <div class="container__body">
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
     <div class="boardPost_guide">
-        <div class="boardType">${type } 게시판</div>
+        <div class="boardType">Q&A 게시판</div>
         <div class="boardPost">
         	<div class="naviBackground">
          	<div class="stickyContainer">
@@ -64,7 +67,7 @@
         	</div>
  
             <div class="boardPost__guide">
-            	<input type="hidden" value="${post.id }" id="postId">
+            	<input type="hidden" value="${post.id}" id="postId">
 
                 <div class="postTitle">
                     ${post.title }
@@ -106,8 +109,42 @@
             </div>
         </div>
     
-    	<div class="qnaAnwser">
-    	
+    	<div class="qnaAnswerWrite writeBox_guide">
+    		<div class="qnaAnswerWrite__title">Q&A 게시글 답변 작성</div>
+    		<hr class="qnaAnswerWrite__hr">
+    		<div class="qnaAnswerWrite__file">    		
+	   			<div class="d-flex">
+					<label class="fileInput__label" for="fileInput">파일 첨부</label>
+						<div class="fileNameList d-flex">
+							<c:choose>	
+								<c:when test="${not empty post.file_names}">
+									
+									<script>
+										// 기존 파일 목록
+										let fileNames = `${post.file_names}`.split(",");
+										let fileIds = `${post.file_ids}`.split(",");
+										
+										for(let i=0; i<fileNames.length; i++){
+											let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
+											let fileName = $("<div>").attr("class","fileName").text(fileNames[i]);
+											let fileIcon = $("<div>").attr("class","ml5").html("<i class='fa-solid fa-xmark deleteFileBtn' data-seq="+fileIds[i]+"></i>")
+											$(".fileNameList").append(fileNameTag.append(fileName).append(fileIcon))		
+										}
+									</script>
+									
+								</c:when>
+								
+							</c:choose>
+							
+						</div>
+				</div>
+				<input type="file" class="qnaAnswerWrite__fileInput" id="fileInput" multiple>
+			</div>
+    		<%@ include file="/WEB-INF/jsp/commons/summernote.jsp" %>
+    		<div class="qnaAnswerWrite__btns d-flex">
+    			<button class="goList bColorGray colorWhite">목록으로</button>
+    			<button class="write bColorMainPink colorWhite" data-id="${post.id}">작성완료</button>
+    		</div>
     	</div>
     </div>
     
