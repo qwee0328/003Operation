@@ -59,17 +59,18 @@ public class BoardController {
 			@RequestParam(value = "cpage", required = false) String cpage) {
 		Map<String, Object> result = new HashMap<>();
 		List<Map<String, Object>> list = new ArrayList<>();
+		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
 		if (category.equals("notice")) {
 			list = bservice.selectAll(category);
 		} else {
-			int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
+			
 			list = bservice.selectAll(category, currentPage);
 			int recordTotalCount = bservice.selectTotalCnt(category);
 			result.put("recordTotalCount", recordTotalCount);
 			result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 			result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 		}
-		result.put("postCurPage", cpage);
+		result.put("postCurPage", currentPage);
 		result.put("list", list);
 		return result;
 	}
@@ -88,7 +89,7 @@ public class BoardController {
 		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 
-		result.put("postCurPage", cpage);
+		result.put("postCurPage", currentPage);
 		result.put("list", list);
 		return result;
 	}

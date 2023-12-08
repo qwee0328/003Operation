@@ -176,4 +176,14 @@ public class BoardDAO {
 	public void deletePost(int id) {
 		db.delete("Board.deletePost", id);
 	}
+	
+	// 내 게시글 불러오기
+	public List<Map<String, Object>> selectMyPost(Map<String, Object> param){
+		return db.selectList("Board.selectMyPost",param);
+	}
+	
+	// 내 게시글 총 개수 불러오기
+	public int selectMyPostTotalCnt(String id){
+		return db.selectOne("Board.selectMyPostTotalCnt",id);
+	}
 }

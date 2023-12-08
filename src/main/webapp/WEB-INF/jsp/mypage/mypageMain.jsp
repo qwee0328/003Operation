@@ -139,7 +139,7 @@
 						</div>
 						<div class="myActivity__menu2 d-flex">
 							<div class="myActivity__game d-flex">
-								<a href="#">
+								<a href="/member/goMyPost">
 									<div class="myActivity__icon">
 										<i class="fa-solid fa-file colorGray"></i>
 									</div>

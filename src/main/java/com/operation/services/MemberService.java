@@ -11,9 +11,12 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.commons.EncryptionUtils;
+import com.operation.constants.Constants;
+import com.operation.dao.BoardDAO;
 import com.operation.dao.MemberDAO;
 import com.operation.dto.MemberDTO;
 
@@ -21,6 +24,9 @@ import com.operation.dto.MemberDTO;
 public class MemberService {
 	@Autowired
 	private MemberDAO dao;
+	
+	@Autowired
+	private BoardDAO bdao;
 
 	// 아이디 중복 체크
 	public boolean idDuplicationCheck(String id) {
@@ -137,5 +143,24 @@ public class MemberService {
 	// 닉네임 중복 확인
 	public boolean chkNickname(String nickname) {
 		return dao.chkNickname(nickname);
+	}
+	
+	// 내 게시글 불러오기
+	public Map<String, Object> selectMyPost(String id, int cpage){
+		Map<String, Object> result = new HashMap<>();
+		
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("member_id", id);
+		param.put("start", cpage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
+		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
+
+		int recordTotalCount = bdao.selectMyPostTotalCnt(id);
+		result.put("recordTotalCount", recordTotalCount);
+		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+		result.put("postCurPage", cpage);
+		result.put("post", bdao.selectMyPost(param));
+		return result;
 	}
 }

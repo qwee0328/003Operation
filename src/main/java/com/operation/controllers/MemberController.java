@@ -1,6 +1,7 @@
 package com.operation.controllers;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -226,6 +227,17 @@ public class MemberController {
 	public String goMyPost() {
 		return "mypage/myPost";
 	}
+	
+	// 내 게시글 불러오기
+	@ResponseBody
+	@RequestMapping("/selectMyPost")
+	public Map<String, Object> selectMyPost(String id, @RequestParam(value = "cpage", required = false) String cpage){
+		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
+		return mservice.selectMyPost((String) session.getAttribute("loginID"), currentPage);
+	}
+	
+	// 마이페이지 내 게시글에서 선택한 게시글 삭제하기
+	
 
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

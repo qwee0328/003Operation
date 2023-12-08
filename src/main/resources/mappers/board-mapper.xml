@@ -31,6 +31,19 @@
 		<result property="file_names" column="file_names" />
 		<result property="file_ids" column="file_ids" />
 	</resultMap>
+	
+	<resultMap id="myPostInfo" type="java.util.Map">
+		<result property="id" column="id"/>
+		<result property="bulletin_category_id" column="bulletin_category_id"/>
+		<result property="member_id" column="member_id"/>
+		<result property="member_nickname" column="member_nickname"/>
+		<result property="title" column="title"/>
+		<result property="write_date" column="write_date"/>
+		<result property="view_count" column="view_count"/>
+		<result property="recom_count" column="recom_count"/>
+		<result property="reply_count" column="reply_count"/>
+		<result property="file_count" column="file_count"/>		
+	</resultMap>
 
 	<!-- 게시글 작성 -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
@@ -300,4 +313,15 @@
 	<delete id="deletePost">
 		delete from bulletin_board where id=#{id};
 	</delete>
+	
+	
+	<!-- 내 게시글 모아보기 -->
+	<select id="selectMyPost" resultMap="myPostInfo">
+		select * from myPost where member_id=#{member_id} limit ${start},${count};
+	</select>
+	
+	<!-- 내 게시글 총 개수 불러오기 -->
+	<select id="selectMyPostTotalCnt" resultType="int">
+		select count(*) from myPost where member_id=#{member_id};
+	</select>
 </mapper>
