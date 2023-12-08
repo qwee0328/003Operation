@@ -348,7 +348,7 @@
 	border-bottom-left-radius: 10px;
 }
 
-.rereplyInput #replyInput:focus {
+#reReplyInputTag:focus {
 	outline: none;
 }
 

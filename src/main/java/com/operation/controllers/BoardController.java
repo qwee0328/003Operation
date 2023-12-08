@@ -314,6 +314,7 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping("/selectReReplyAll")
 	public List<ReplyDTO> selectReReplyAll(@RequestParam String parentId) {
+		System.out.println(parentId+"test");
 		int parentid = Integer.parseInt(parentId);
 		return bservice.selectReReplyAll(parentid);
 	}
