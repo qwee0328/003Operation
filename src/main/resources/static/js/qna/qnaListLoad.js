@@ -219,10 +219,5 @@ $(document).on("click",".board__writeBtn",function(){
 
 // 게시글 보기 페이지로 이동
 $(document).on("click", ".title__name", function() {
-	let url = "/qna/viewQnaConf";
-
-	url += "/" + $(this).attr("data-id");
-
-	console.log(url);
-	location.href = url;
+	location.href = "/qna/viewQnaConf/" + $(this).attr("data-id");
 })

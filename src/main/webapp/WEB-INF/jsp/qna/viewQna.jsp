@@ -20,6 +20,9 @@
 <body>
  <div class="container__body">
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
+	<script>
+		console.log("${post}");
+	</script>
     <div class="boardPost_guide">
         <div class="boardType">Q&A 게시판</div>
         <div class="boardPost">
@@ -67,40 +70,40 @@
         	</div>
  
             <div class="boardPost__guide">
-            	<input type="hidden" value="${post.id}" id="postId">
+            	<input type="hidden" value="${post.question.id}" id="postId">
 
                 <div class="postTitle">
-                    ${post.title }
+                    ${post.question.title }
                 </div>
                 <div class="postInfo">
                     <div class="postInfo__left">
                         <div class="postInfo__profile">
-                        	<input type="hidden" value="${post.member_id }" id="writerId">
+                        	<input type="hidden" value="${post.question.member_id }" id="writerId">
                             <img src="" alt="프로필 이미지" id="writer_profile">
                         </div>
                         <div class="postInfo__userInfo">
-                            <div class="userInfo__nickName fontEN">${post.member_nickname }</div>
+                            <div class="userInfo__nickName fontEN">${post.question.member_nickname }</div>
                             <div class="userInfo__writeInfo">
                                 <span class="writeInfo__title">작성일</span>
-                                <span>${post.write_date }</span>
+                                <span>${post.question.write_date }</span>
                                 <span class="writeInfo__title">조회수</span>
-                                <span>${post.view_count }</span>
+                                <span>${post.question.view_count }</span>
                             </div>
                         </div>
                     </div>
                     <div class="postInfo__right">
-                        <button id="postUpdate" data-id="${post.id }">수정</button>
-                        <button id="postDelete" data-id="${post.id }">삭제</button>
+                        <button id="questionUpdate" data-id="${post.question.id }">수정</button>
+                        <button id="postDelete" data-id="${post.question.id }">삭제</button>
                     </div>
                 </div>
-                <div class="postConf">${post.content }
+                <div class="postConf">${post.question.content }
                 </div>
                 <div class="files">
                     <div class="files__title">
                         첨부파일
                     </div>
                     <div class="files__conf">
-                        
+						post.question.file_names, post.question.file_ids 에 ,로 구분되어 파일 목록 불러오니 참고해서 사용 !
                     </div>
                 </div>
                 <div class="pageBtns">
@@ -112,45 +115,43 @@
     	<c:choose>
     		<c:when test="${empty post.answer}">
     			<div class="qnaAnswerWrite writeBox_guide">
-	    		<div class="qnaAnswerWrite__title">Q&A 게시글 답변 작성</div>
+	    		<div class="qnaAnswerWrite__title"><b>Q&A 게시글 답변 작성</b></div>
 	    		<hr class="qnaAnswerWrite__hr">
 	    		<div class="qnaAnswerWrite__file">    		
 		   			<div class="d-flex">
 						<label class="fileInput__label" for="fileInput">파일 첨부</label>
-							<div class="fileNameList d-flex">
-								<c:choose>	
-									<c:when test="${not empty post.file_names}">
+						<div class="fileNameList d-flex">
+							<c:choose>	
+								<c:when test="${not empty post.answer.file_names}">										
+									<script>
+										// 기존 파일 목록
+										let fileNames = `${post.answer.file_names}`.split(",");
+										let fileIds = `${post.answer.file_ids}`.split(",");
 										
-										<script>
-											// 기존 파일 목록
-											let fileNames = `${post.file_names}`.split(",");
-											let fileIds = `${post.file_ids}`.split(",");
-											
-											for(let i=0; i<fileNames.length; i++){
-												let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
-												let fileName = $("<div>").attr("class","fileName").text(fileNames[i]);
-												let fileIcon = $("<div>").attr("class","ml5").html("<i class='fa-solid fa-xmark deleteFileBtn' data-seq="+fileIds[i]+"></i>")
-												$(".fileNameList").append(fileNameTag.append(fileName).append(fileIcon))		
-											}
-										</script>
-										
-									</c:when>
-									
-								</c:choose>
-								
-							</div>
+										for(let i=0; i<fileNames.length; i++){
+											let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
+											let fileName = $("<div>").attr("class","fileName").text(fileNames[i]);
+											let fileIcon = $("<div>").attr("class","ml5").html("<i class='fa-solid fa-xmark deleteFileBtn' data-seq="+fileIds[i]+"></i>")
+											$(".fileNameList").append(fileNameTag.append(fileName).append(fileIcon))		
+										}
+									</script>								
+								</c:when>								
+							</c:choose>							
+						</div>
 					</div>
 					<input type="file" class="qnaAnswerWrite__fileInput" id="fileInput" multiple>
 				</div>
 	    		<%@ include file="/WEB-INF/jsp/commons/summernote.jsp" %>
 	    		<div class="qnaAnswerWrite__btns d-flex">
 	    			<button class="goList bColorGray colorWhite">목록으로</button>
-	    			<button class="write bColorMainPink colorWhite" data-id="${post.id}">작성완료</button>
+	    			<button class="write bColorMainPink colorWhite" data-id="${post.question.id}">작성완료</button>
 	    		</div>
 	    	</div>	
     		</c:when>
     		<c:otherwise>
-    			답변 내용
+			답변내용
+            <button id="answerUpdate" data-id="${post.answer.id}">수정</button>
+                  
     		</c:otherwise>
     	</c:choose>
     	

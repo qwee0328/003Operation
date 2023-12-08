@@ -21,6 +21,10 @@
 		select origin_name from bulletin_board_file where bulletin_board_id = ${bulletin_board_id}; 
 	</select>
 	
+	<select id="selectAllByQnaQId" resultType="String">
+		select origin_name from qna_question_board_file where qna_question_board_id = ${qna_question_board_id}; 
+	</select>
+	
 	<select id="selectByIds" resultType="String">
 		select origin_name from bulletin_board_file where id in
 		 <foreach collection="array" item="id" open="(" separator="," close=");">
