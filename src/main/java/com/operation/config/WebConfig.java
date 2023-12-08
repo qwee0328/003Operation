@@ -13,8 +13,8 @@ public class WebConfig implements WebMvcConfigurer{
 		registry.addResourceHandler("/profileImgs/**").addResourceLocations("file:C:/003Operation/profileImgs/");
 	}
 	
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/kiosk/**").allowedOrigins("https://pushssun.github.io").allowCredentials(true);
-	}
+//	@Override
+//	public void addCorsMappings(CorsRegistry registry) {
+//		registry.addMapping("/kiosk/**").allowedOrigins("https://pushssun.github.io").allowCredentials(true);
+//	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import com.operation.services.KioskService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -68,17 +70,37 @@ public class KioskController {
 	    return null; // 해당하는 세션 쿠키를 찾지 못한 경우
 	}
 	
+	// 쿠키를 생성할 수 있는 코드
+	@ResponseBody
+	@CrossOrigin(origins = "https://kiosk003.github.io", allowCredentials = "true")
+	@GetMapping("/getCookie")
+	public String getCookie(HttpServletResponse response) {
+		String userId = (String)session.getAttribute("loginID");
+        // 서버에서 쿠키 생성
+        Cookie cookie = new Cookie("member_id", userId);
+        cookie.setHttpOnly(true);
+
+        // 응답 헤더에 쿠키 추가
+        response.addCookie(cookie);
+
+        return "Cookie has been set!";
+    } 
+	
 	// 키오스크 이용 기록 저장
 	@ResponseBody
-	//@CrossOrigin(origins = "https://pushssun.github.io", allowCredentials = "true")
+	@CrossOrigin(origins = "https://kiosk003.github.io", allowCredentials = "true")
 	@PostMapping("/insertData")
 	public void insert(@RequestBody KioskRecordDTO dto, HttpServletRequest request) {
-		String sessionKey = getSessionKeyFromCookie(request);
-	    if (sessionKey != null) {
-	    	System.out.println("Session Key: " + sessionKey);
-	    } else {
-	    	System.out.println("Session Key not found");
-	    }
+		System.out.println("insert");
+		System.out.println(dto);
+		System.out.println(session.getId()+"세션아이디");
+		//String sessionKey = getSessionKeyFromCookie(request);
+		//String sessionKey = r
+//	    if (sessionKey != null) {
+//	    	System.out.println("Session Key: " + sessionKey);
+//	    } else {
+//	    	System.out.println("Session Key not found");
+//	    }
 		String loginID = (String)session.getAttribute("loginID");
 		System.out.println(loginID+"test");
 		if(!(loginID==null || loginID.isEmpty())) {

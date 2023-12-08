@@ -48,7 +48,7 @@ public class MemberController {
 	public boolean emailDuplicationCheck(@RequestParam("email") String email) {
 		return mservice.emailDuplicationCheck(email);
 	}
-	
+
 	// 전화번호 중복 체크
 	@ResponseBody
 	@RequestMapping("/phoneDuplicationCheck")
@@ -73,11 +73,11 @@ public class MemberController {
 			@RequestParam("email") String email, @RequestParam("recommender") String recommender) throws Exception {
 		return mservice.signupUser(id, pw, name, phoneFirst, phone, birth, gender, nickName, email, recommender);
 	}
-	
+
 	// 회원가입한 이름 불러오기
 	@ResponseBody
 	@RequestMapping("/selectUserName")
-	public MemberDTO selectUserName(@RequestParam("id") String id){
+	public MemberDTO selectUserName(@RequestParam("id") String id) {
 		return mservice.selectInfoById(id);
 	}
 
@@ -114,7 +114,7 @@ public class MemberController {
 	// 마이페이지로 이동
 	@RequestMapping("/goMypage")
 	public String goMapage(Model model) {
-		model.addAttribute("info",mservice.selectMainMypageInfoById((String) session.getAttribute("loginID")));
+		model.addAttribute("info", mservice.selectMainMypageInfoById((String) session.getAttribute("loginID")));
 		return "mypage/mypageMain";
 	}
 
@@ -153,18 +153,18 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("/updateInfo")
 	public int updateInfo(String key, String value) {
-		if(key.equals("pw")) {
+		if (key.equals("pw")) {
 			value = EncryptionUtils.getSHA512(value);
 		}
-		
+
 		int result = mservice.updateInfo((String) session.getAttribute("loginID"), key, value);
-		if(key.equals("nickname") && result == 1) {
+		if (key.equals("nickname") && result == 1) {
 			session.setAttribute("loginNickName", value); // 닉네임
 		}
-		
+
 		return result;
 	}
-	
+
 	// 프로필 이미지 변경
 	@ResponseBody
 	@RequestMapping("/updateProfileImg")
@@ -178,32 +178,39 @@ public class MemberController {
 //		return mservice.updateInfo((String) session.getAttribute("loginID"), "profile_image", sysName);
 		return mservice.updateInfo((String) session.getAttribute("loginID"), profileImg);
 	}
-	
+
 	// 프로필 이미지 불러오기
 	@ResponseBody
 	@RequestMapping("/selectProfileImgById")
 	public String selectProfileImgById() {
 		return mservice.selectProfileImgById((String) session.getAttribute("loginID"));
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/selectProfileImgByIdBoard")
 	public String selectProfileImgById(String writerId) {
 		return mservice.selectProfileImgById(writerId);
 	}
-	
+
 //	// 마이페이지 메인 화면 정보 불러오기 (프로필 이미지, 레벨, 포인트) -> goMypage에 model로 추가
 //	@ResponseBody
 //	@RequestMapping("/selectMainMypageInfoById")
 //	public Map<String, Object> selectMainMypageInfoById() {
 //		return mservice.selectMainMypageInfoById((String) session.getAttribute("loginID"));
 //	}
-	
+
 	// 닉네임 중복 확인
 	@ResponseBody
 	@RequestMapping("/chkNickname")
 	public boolean chkNickname(String nickname) {
 		return mservice.chkNickname(nickname);
+	}
+
+	// 세션 아이디 가져오기 -> 유니티로 보내주기 위함
+	@ResponseBody
+	@RequestMapping("/userId")
+	public String selectUserId() {
+		return (String) session.getAttribute("loginID");
 	}
 
 	@ExceptionHandler(Exception.class)
