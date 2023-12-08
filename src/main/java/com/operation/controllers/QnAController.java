@@ -53,7 +53,7 @@ public class QnAController {
 	// qna 게시글 목록으로 이동
 	@RequestMapping("/listBoard")
 	public String listBoard() {
-		return "/qna/qnaList";
+		return "qna/qnaList";
 	}
 
 	// qna 게시글 불러오기

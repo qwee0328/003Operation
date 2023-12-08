@@ -1,17 +1,4 @@
 $(document).ready(function() {
-	/*    $(".progressBar__fill").css("width","30%");*/
-
-	$('#myIframe').on('load', function() {
-		$.ajax({
-			url: "/member/userId",
-			type: "post"
-		}).done(function(resp) {
-			console.log(resp);
-			var iframe = document.querySelector('iframe');
-			iframe.contentWindow.postMessage(resp, 'https://kiosk003.github.io/', "*");
-		})
-	});
-
 
 	$.ajax({
 		url: "/kiosk/getBestRecord",

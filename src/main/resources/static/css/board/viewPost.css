@@ -408,6 +408,10 @@
     font-size: 25px;
     font-weight: 600;
 }
+.answerConf{
+	padding: 50px 0;
+}
+
 
 @media (max-width: 1050px) {
 	.naviBackground {

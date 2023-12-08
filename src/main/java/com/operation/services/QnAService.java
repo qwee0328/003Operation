@@ -166,6 +166,7 @@ public class QnAService {
 			if(answer!=null) {
 				answer.put("timeCal", timeCal(answer.get("write_date")));
 			}
+
 			result.put("answer", answer);
 		}
 
