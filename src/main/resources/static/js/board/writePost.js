@@ -169,8 +169,8 @@ $(document).ready(function(){
 			data: { srcList : insertImgs }
 		});
 		
-		//if(bulletin_category_id=="qna") qna면 다른 링크로 이동
-		location.href="/board/listBoard/"+bulletin_category_id  + "?select=" + $("#select").val()+"&keyword="+$("#keyword").val();
+		if(bulletin_category_id=="qna") location.href="/qna/listBoard";
+		else location.href="/board/listBoard/"+bulletin_category_id  + "?select=" + $("#select").val()+"&keyword="+$("#keyword").val();
 	});
 	
 	// 수정취소 버튼
@@ -187,8 +187,10 @@ $(document).ready(function(){
 			data: { srcList : insertImgs }
 		});
 		
-		//if(bulletin_category_id=="qna") qna면 다른 링크로 이동
-		location.href = "/board/viewPostConf/" + bulletin_category_id + "/" + $("#select").val() + "/" + $(".update").attr("data-id") +"?keyword="+$("#keyword").val();
+		if(bulletin_category_id=="qna") location.href="/qna/listBoard";
+		else location.href = "/board/viewPostConf/" + bulletin_category_id + "/" + $("#select").val() + "/" + $(".update").attr("data-id") +"?keyword="+$("#keyword").val();
+		
+		
 	});
 	
 });

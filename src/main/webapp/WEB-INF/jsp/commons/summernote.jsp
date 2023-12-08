@@ -43,7 +43,7 @@
 					img.attr("src", data[i]);
 					$j("#summernote").summernote("insertNode", img[0]);
 				
-					if('${post}'!=''){ // 수정 중이면
+					if('${post}'!='' || (`${post.is_secret}`!="" && `${post.anwser}`!="")){ // 수정 중이면
 						insertImgs.push(data[i]);
 					}
 				}
@@ -72,7 +72,7 @@
 				uploadImg(files);			
 			},
 			onMediaDelete: function($target, editor, $editable) {     
-				if('${post}'==''){
+				if('${post}'=='' || (`${post.is_secret}`!="" && `${post.anwser}`=="")){
 					// 수정이 아닌 새 글일 때
 					$.ajax({
 		    			url: "/board/deleteImage",
@@ -87,8 +87,10 @@
 		}
 	});
 	
+	if(!(`${post.anwser}`=="" && `${post.is_secret}`!="")){
+		$j('#summernote').summernote("code",`${post.content}`);
+	}
 	
-	$j('#summernote').summernote("code",`${post.content}`);
 </script>
 </body>
 </html>

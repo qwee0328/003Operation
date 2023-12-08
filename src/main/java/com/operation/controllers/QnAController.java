@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
+import com.operation.dto.QnaAnswerDTO;
 import com.operation.dto.QnaQuestionDTO;
 import com.operation.services.QnAService;
 
@@ -37,6 +38,15 @@ public class QnAController {
 			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList) throws Exception {
 		dto.setMember_id(((String) session.getAttribute("loginID")));
 		dto.setMember_nickname(((String) session.getAttribute("loginNickName")));
+		qservice.insert(dto, attachFiles, deleteFileList);
+	}
+	
+	// QNA 답글작성
+	@ResponseBody
+	@RequestMapping("/writeAnswer")
+	public void writeAnswer(QnaAnswerDTO dto,
+			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
+			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList) throws Exception {
 		qservice.insert(dto, attachFiles, deleteFileList);
 	}
 
@@ -75,8 +85,10 @@ public class QnAController {
 	@RequestMapping("/viewQnaConf/{dataId}")
 	public String viewPostConf(@PathVariable String dataId, Model model) {
 		int postId = Integer.parseInt(dataId);
-		//Map<String, Object> post = qservice.selectPostByIdJustView(postId);
-		//model.addAttribute("post", post);
+		Map<String, Object> post = qservice.selectById(postId);
+		post.put("id", dataId); // 기존처럼 select 쿼리로 값 불러오도록 바꿔 주세용
+		model.addAttribute("post", post);
+		System.out.println(post);
 		return "qna/viewQna";
 	}
 
