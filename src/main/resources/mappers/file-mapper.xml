@@ -7,6 +7,15 @@
 	<insert id="insert">
 		insert into bulletin_board_file values (null, #{bulletin_board_id}, #{system_name}, #{origin_name});
 	</insert>
+
+	<insert id="qnaInsert">
+		insert into qna_question_board_file values (null, #{qna_question_board_id}, #{system_name}, #{origin_name});
+	</insert>
+	
+	<insert id="qnaAwnserInsert">
+		insert into qna_answer_board_file values (null, #{qna_answer_board_id}, #{system_name}, #{origin_name});
+	</insert>
+	
 	
 	<select id="selectAllByPostId" resultType="String">
 		select origin_name from bulletin_board_file where bulletin_board_id = ${bulletin_board_id}; 

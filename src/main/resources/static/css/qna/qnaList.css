@@ -119,6 +119,7 @@
 	background-color: #D1D2D8;
 	border-bottom: 3px solid #375ABB;
 	padding: 10px 0;
+	min-height: 60px;
 }
 
 .board__postHeader>div,
@@ -169,7 +170,7 @@
 	width: 45%;
 }
 
-.title__name {
+.title__name, .title__scretname {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -193,7 +194,7 @@
 	display: none;
 }
 
-.post__anwserState {
+.post__answerState {
 	color: #375ABB;
 }
 .title__answerStateCover {
@@ -266,6 +267,15 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.empty{
+	height: 200px;
+	font-size: 20px;
+}
+
+.board__pagination>a:hover{
+	cursor:pointer;
 }
 
 @media (max-width: 786px) {
@@ -375,5 +385,9 @@
 		align-items: center;
 		justify-content: center;
 		margin: 0 2.5px;
+	}
+	
+	.empty{
+		height: 100px;
 	}
 }

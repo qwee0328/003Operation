@@ -39,11 +39,6 @@
 	align-items: center;
 }
 
-.navi__conf:nth-child(even) {
-	border-bottom: 1px solid #7d7d7d50;
-	padding-bottom: 15px;
-}
-
 .navi__conf:not(:last-child) {
 	margin-bottom: 15px;
 }
@@ -262,70 +257,149 @@
 	width: 9%;
 	background-color: transparent;
 	border: none;
+	cursor: pointer;
 }
 
-.replyLine{
+.replyLine {
 	padding-right: 15px;
 }
-.replyLine:not(:last-child){
+
+.replyLine:not(:last-child) {
 	border-bottom: 1px solid #7d7d7d50;
-	margin-bottom: 10px;
 	padding-bottom: 20px;
 }
 
-.replyWriterInfo{
+.replyWriterInfo {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-top: 20px;
 }
 
-.writerProfile{
+.writerProfile {
 	display: flex;
 	align-items: center;
 }
 
-.writerProfile>img{
+.writerProfile>img {
 	width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 20px;
-}
-.writerProfile>span:not(:last-child){
+	height: 30px;
+	border-radius: 50%;
 	margin-right: 20px;
 }
-.replyWriterInfo button{
+
+.writerProfile>span:not(:last-child) {
+	margin-right: 20px;
+}
+
+.replyWriterInfo button {
 	background-color: transparent;
-    border: none;
-    cursor: pointer;
+	border: none;
+	cursor: pointer;
 }
-.replyWriterInfo button:first-child{
+
+.replyWriterInfo button:first-child {
 	margin-right: 20px;
 }
-.time{
+
+.time {
 	color: #7d7d7d;
 	font-size: 14px;
 }
-.writer{
+
+.writer {
 	background-color: #e1e6f5;
 	border: none;
 	border-radius: 4px;
 	padding: 4px 8px;
 }
-.replyConf{
+
+.replyConf {
 	margin-left: 50px;
 	padding: 20px 0;
 }
-.replyInfo{
+
+.replyInfo {
 	margin-left: 50px;
 }
-.replyInfo>span{
+
+.replyInfo>span {
 	margin-right: 20px;
 	color: #7d7d7d;
 	cursor: pointer;
 }
-.replyInfo>span i{
+
+.replyInfo>span i {
 	color: #7d7d7d;
+}
+
+.rereplyInput {
+	display: flex;
+	width: calc(100% - 50px);
+	margin-left: 50px;
+	margin-top: 20px;
+}
+
+.rereplyInput #reReplyInputTag {
+	width: 80%;
+	border: none;
+	padding: 10px 15px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.rereplyInput #replyInput:focus {
+	outline: none;
+}
+
+.rereplyInput .replyInput__input:focus-within {
+	border: 2px solid black;
+}
+
+#replyInputCancle {
+	width: 9%;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+.RereplyLine {
+	padding: 0 15px 20px 50px;
+	background-color: #e1e6f5;
+	border-bottom: 1px solid #7d7d7d50;
+}
+
+.RereplyLine .replyWriterInfo {
+	margin-top: 0;
+	padding-top: 20px;
+
+}
+
+.RereplyLine .writer {
+	background-color: #375abb;
+	color: white;
+}
+
+
+#pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+}
+
+#pagination a {
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	font-size: 20px;
+	border-radius: 50px;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 5px;
+	background-color: #e1e6f5;
 }
 
 @media (max-width: 1050px) {

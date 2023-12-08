@@ -18,27 +18,9 @@
         <div class="guide">
             <div class="board__header">
                 <div class="board__title align-center">Q&A 게시판</div>
-                <div class="board__serach align-center">
-                    <div class="search__key align-center">
-                        <div class="search__selectCover">
-                            <select class="search__select">
-                                <option value="title">제목</option>
-                                <option value="content">내용</option>
-                                <option value="writer">작성자</option>
-                            </select>
-                            <span class="search__arrow"><i class="fa-solid fa-chevron-down"></i></span>
-                        </div>
-                    </div>
-                    <div class="search__value align-center">
-                        <input type="text" placeholder="검색어를 입력해주세요.">
-                    </div>
-                    <div class="search__btnCover  align-center">
-                        <button class="search__btn bColorMainPink colorWhite">검색</button>
-                    </div>
-                </div>
             </div>
             <div class="board__body">
-                <div class="board__postCnt">전체 <span class="postCnt__txt colorMainBlue">20</span>건</div>
+                <div class="board__postCnt">전체 <span class="postCnt__txt colorMainBlue"></span>건</div>
                 <div class="board__postHeader align-center">
                     <div class="postHeader__seq">번호</div>
                     <div class="postHeader__title">제목</div>
