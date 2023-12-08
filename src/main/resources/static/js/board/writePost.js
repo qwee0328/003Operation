@@ -3,7 +3,7 @@ $(document).ready(function(){
 	let deleteExisingFileList = [];
 	
 	// 파일 삽입 시 목록 출력
-	$("#fileInput").on("change",function(e){
+	$(document).on("change","#fileInput",function(e){
 		$(".fileNameList").html("");
 		deleteFileList = [];
 		deleteExisingFileList = [-1];

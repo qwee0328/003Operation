@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <!-- include summernote css/js -->
 <!-- include libraries(jQuery, bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -19,7 +20,6 @@
 <body>
 <div id="summernote"></div>
 <script>
-	var $j = jQuery.noConflict();
 	let deleteImgs = [];
 	let insertImgs = [];
 	
@@ -41,7 +41,7 @@
 					let img = $("<img>");
 					img.css('width', '100%');
 					img.attr("src", data[i]);
-					$j("#summernote").summernote("insertNode", img[0]);		
+					$("#summernote").summernote("insertNode", img[0]);		
 					insertImgs.push(data[i]);
 				}
 			}
@@ -49,7 +49,7 @@
 	}
 
 
-	$j('#summernote').summernote({
+	$('#summernote').summernote({
 	    placeholder:"내용을 입력해주세요",
 	    height:500,
 	    disableResizeEditor: true,
@@ -85,7 +85,7 @@
 	});
 	
 
-	$j('#summernote').summernote("code",`${post.content}`);
+	$('#summernote').summernote("code",`${post.content}`);
 	
 	
 </script>

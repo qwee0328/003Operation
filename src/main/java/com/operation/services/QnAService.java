@@ -163,7 +163,9 @@ public class QnAService {
 		} else {
 			result.put("question", question);
 			Map<String, Object> answer = dao.selectAnswerById(id);
-			answer.put("timeCal", timeCal(answer.get("write_date")));
+			if(answer!=null) {
+				answer.put("timeCal", timeCal(answer.get("write_date")));
+			}
 			result.put("answer", answer);
 		}
 
@@ -253,6 +255,72 @@ public class QnAService {
 
 		}
 	}
+	
+	
+	// 답변 게시글 수정
+	@Transactional
+	public void update(QnaAnswerDTO dto, MultipartFile[] files, Integer[] deleteFileList,
+			Integer[] deleteExisingFileList, String[] deleteImgsSrc) throws Exception {
+		dao.update(dto);
+
+		// 기존 파일 삭제
+		if (deleteExisingFileList != null && deleteExisingFileList.length >= 1) {
+			List<String> deleteFileNameList = new ArrayList<>();
+			if (deleteExisingFileList[0] == -1) {
+				deleteFileNameList = fdao.selectAllByQnaAId(dto.getId());
+				fdao.deleteAllByQnaAId(dto.getId());
+			} else {
+				deleteFileNameList = fdao.selectByQnaAIds(deleteExisingFileList);
+				fdao.deleteQnaA(deleteExisingFileList);
+			}
+
+			for (String src : deleteFileNameList) {
+				Path path = FileSystems.getDefault().getPath("c:/003Operation/uploads/" + src);
+				Files.deleteIfExists(path);
+			}
+		}
+
+		// 기존 이미지 삭제
+		if (deleteImgsSrc != null && deleteImgsSrc.length >= 1) {
+			for (String src : deleteImgsSrc) {
+				Path path = FileSystems.getDefault().getPath("c:/003Operation" + src);
+				Files.deleteIfExists(path);
+			}
+		}
+
+		// 새로운 파일 삽입
+		if (files != null && files.length >= 1) {
+			String path = "c:/003Operation/uploads";
+			File uploadPath = new File(path);
+			if (!uploadPath.exists())
+				uploadPath.mkdir();
+
+			// 삽입했다가 취소한 파일 제외
+			if (deleteFileList != null && deleteFileList.length >= 1) {
+				int idx = 0;
+				for (int i = 0; i < files.length; i++) {
+					System.out.println(deleteFileList[idx]);
+					if (idx < deleteFileList.length && deleteFileList[idx] == i) {
+						idx++;
+						continue;
+					}
+					String oriName = files[i].getOriginalFilename();
+					String sysName = UUID.randomUUID() + "_" + oriName;
+					files[i].transferTo(new File(uploadPath, sysName));
+					fdao.insert(new QnaAnswerFileDTO(0, dto.getId(), sysName, oriName));
+				}
+			} else {
+				for (int i = 0; i < files.length; i++) {
+					String oriName = files[i].getOriginalFilename();
+					String sysName = UUID.randomUUID() + "_" + oriName;
+					files[i].transferTo(new File(uploadPath, sysName));
+					fdao.insert(new QnaAnswerFileDTO(0, dto.getId(), sysName, oriName));
+				}
+			}
+
+		}
+	}
+
 
 	// 게시글 삭제
 	public void deletePost(int id) {

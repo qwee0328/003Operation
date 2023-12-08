@@ -65,9 +65,14 @@
 		select * from qnaAnswerInfo where qna_question_board_id= #{id};
 	</select>
 	
-	<!-- 게시글 수정 -->
+	<!-- 질문 게시글 수정 -->
 	<update id="updateQuestion">
 		update qna_question_board set title=#{title}, content=#{content}, is_secret = #{is_secret} where id=#{id};
+	</update>
+	
+	<!-- 답변 게시글 수정 -->
+	<update id="updateAnswer">
+		update qna_answer_board set content=#{content} where id=#{id};
 	</update>
 	
 	<!-- 게시글 삭제 -->

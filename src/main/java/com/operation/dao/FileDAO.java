@@ -32,25 +32,36 @@ public class FileDAO {
 		return db.insert("File.qnaAwnserInsert",dto);
 	}
 		
-	// 파일 삭제
+	// 자유 or 질문 파일 삭제
 	public int delete(Integer[] array) {
 		return db.delete("File.delete",array);
 	}
 	
-	// 파일 삭제
+	// qna 질문 파일 삭제
 	public int deleteQnaQ(Integer[] array) {
 		return db.delete("File.deleteQnaQ",array);
 	}
 	
-	// 삭제할 파일 origin_name 가져오기 (서버 컴퓨터에서 삭제하기 위함.)
+	// qna 답변 파일 삭제
+	public int deleteQnaA(Integer[] array) {
+		return db.delete("File.deleteQnaA",array);
+	}
+	
+	// 자유 or 질문 게시글 삭제할 파일 origin_name 가져오기 (서버 컴퓨터에서 삭제하기 위함.)
 	public List<String> selectByIds(Integer[] array) {
 		List<String> result = db.selectList("File.selectByIds",array);
 		return result;
 	}
 	
-	// 삭제할 파일 origin_name 가져오기 (서버 컴퓨터에서 삭제하기 위함.)
+	// qna 질문 게시굴 삭제할 파일 origin_name 가져오기 (서버 컴퓨터에서 삭제하기 위함.)
 	public List<String> selectByQnaQIds(Integer[] array) {
 		List<String> result = db.selectList("File.selectByQnaQIds",array);
+		return result;
+	}
+	
+	// qna 답변 게시굴 삭제할 파일 origin_name 가져오기 (서버 컴퓨터에서 삭제하기 위함.)
+	public List<String> selectByQnaAIds(Integer[] array) {
+		List<String> result = db.selectList("File.selectByQnaAIds",array);
 		return result;
 	}
 		
@@ -64,6 +75,11 @@ public class FileDAO {
 		return db.delete("File.deleteAllByQnaQId",qna_question_board_id);
 	}
 	
+	// qna 답변 기존 파일 전체 삭제
+	public int deleteAllByQnaAId(int qna_awswer_board_id) {
+		return db.delete("File.deleteAllByQnaAId",qna_awswer_board_id);
+	}
+	
 	// 자유 or 질문 게시글 삭제할 파일 origin_name 가져오기 (서버 컴퓨터에서 삭제하기 위함.)
 	public List<String> selectAllByPostId(int bulletin_board_id) {
 		return db.selectList("File.selectAllByPostId",bulletin_board_id);
@@ -73,4 +89,10 @@ public class FileDAO {
 	public List<String> selectAllByQnaQId(int qna_question_board_id) {
 		return db.selectList("File.selectAllByQnaQId",qna_question_board_id);
 	}
+	
+	// qna 답변 게시글 삭제할 파일 origin_name 가져오기 (서버 컴퓨터에서 삭제하기 위함.)
+	public List<String> selectAllByQnaAId(int qna_awswer_board_id) {
+		return db.selectList("File.selectAllByQnaAId",qna_awswer_board_id);
+	}
+	
 }

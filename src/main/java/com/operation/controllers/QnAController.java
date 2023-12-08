@@ -127,7 +127,6 @@ public class QnAController {
 	@RequestMapping("/goUpdateAnswer/{post_id}")
 	public Map<String, Object> goUpdateAnswer(@PathVariable int post_id) {
 		Map<String, Object> data = qservice.selectAnswerById(post_id);
-		System.out.println(data);
 		return data;
 	}
 
@@ -135,6 +134,18 @@ public class QnAController {
 	@ResponseBody
 	@RequestMapping("/updateQuestionPost")
 	public void updatePost(QnaQuestionDTO dto,
+			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
+			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList,
+			@RequestParam(value = "deleteExisingFileList", required = false) Integer[] deleteExisingFileList,
+			@RequestParam(value = "deleteImgs", required = false) String[] deleteImgs) throws Exception {
+
+		qservice.update(dto, attachFiles, deleteFileList, deleteExisingFileList, deleteImgs);
+	}
+	
+	// 답글 수정
+	@ResponseBody
+	@RequestMapping("/updateAnswerPost")
+	public void updatePost(QnaAnswerDTO dto,
 			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
 			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList,
 			@RequestParam(value = "deleteExisingFileList", required = false) Integer[] deleteExisingFileList,
