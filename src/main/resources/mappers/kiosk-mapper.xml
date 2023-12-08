@@ -76,4 +76,9 @@
 	<select id="realTimeRank" resultMap="kiosk_ranking">
 		select * from real_time_ranking;
 	</select>
+	
+	<!-- 키오스크 삽입을 위한 아이디 불러오기 -->
+	<select id="selectId" resultType="int">
+		select id from kiosk where kiosk_category_id=#{kiosk_category_id} and play_stage=#{play_stage};
+	</select>
 </mapper>

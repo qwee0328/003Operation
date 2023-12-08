@@ -64,7 +64,12 @@ public class KioskService {
 	}
 	
 	// 키오스크 기록 추가
-	public int insert(KioskRecordDTO dto) {
+	public int insert(KioskRecordDTO dto, String play_stage) {
+		int playStage = Integer.parseInt(play_stage);
+		Map<String,Object> param = new HashMap<>();
+		param.put("kiosk_category_id", dto.getKiosk_id());
+		param.put("play_stage", playStage);
+		dto.setKiosk_id(dao.selectId(param));
 		return dao.insert(dto);
 	}
 	

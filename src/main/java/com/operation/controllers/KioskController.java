@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.operation.dto.KioskCategoryDTO;
 import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
+import com.operation.services.MemberService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,6 +31,9 @@ import jakarta.servlet.http.HttpSession;
 public class KioskController {
 	@Autowired
 	private	KioskService kservice;
+	
+	@Autowired
+	private MemberService mservice;
 	
 	@Autowired
 	private HttpSession session;
@@ -90,24 +94,12 @@ public class KioskController {
 	@ResponseBody
 	@CrossOrigin(origins = "https://kiosk003.github.io", allowCredentials = "true")
 	@PostMapping("/insertData")
-	public void insert(@RequestBody KioskRecordDTO dto, HttpServletRequest request) {
-		System.out.println("insert");
+	public void insert(@RequestBody KioskRecordDTO dto, String play_stage, HttpServletRequest request) {
 		System.out.println(dto);
-		System.out.println(session.getId()+"세션아이디");
-		//String sessionKey = getSessionKeyFromCookie(request);
-		//String sessionKey = r
-//	    if (sessionKey != null) {
-//	    	System.out.println("Session Key: " + sessionKey);
-//	    } else {
-//	    	System.out.println("Session Key not found");
-//	    }
-		String loginID = (String)session.getAttribute("loginID");
-		System.out.println(loginID+"test");
-		if(!(loginID==null || loginID.isEmpty())) {
-			System.out.println("durl");
-			dto.setMember_id(loginID);
-			dto.setMember_nickname((String) session.getAttribute("loginNickName"));
-			kservice.insert(dto);
+		String id = dto.getMember_id().substring(1,dto.getMember_id().length()-1);
+		if(!(id==null || id.isEmpty())) {
+			dto.setMember_nickname(mservice.selectNickNameById(id));
+			kservice.insert(dto, play_stage);
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package com.operation.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,5 +46,10 @@ public class KioskDAO {
 	// 키오스크 인기 랭킹 가져오기 (메인)
 	public List<Map<String, Object>> realTimeRank(){
 		return db.selectList("Kiosk.realTimeRank");
+	}
+	
+	// 키오스크 아이디 구하기 ( 기록 삽입용 )
+	public int selectId(Map<String, Object> param) {
+		return db.selectOne("Kiosk.selectId",param);
 	}
 }

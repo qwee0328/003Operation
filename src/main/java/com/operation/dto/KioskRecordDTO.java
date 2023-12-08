@@ -4,7 +4,7 @@ import java.time.Instant;
 
 public class KioskRecordDTO {
 	private int id;
-	private String kiosk_id;
+	private int kiosk_id;
 	private String member_id;
 	private String member_nickname;
 	private Instant play_date;
@@ -13,7 +13,7 @@ public class KioskRecordDTO {
 	
 	public KioskRecordDTO() {}
 
-	public KioskRecordDTO(int id, String kiosk_id, String member_id, String member_nickname, Instant play_date,
+	public KioskRecordDTO(int id, int kiosk_id, String member_id, String member_nickname, Instant play_date,
 			int play_time, boolean is_success) {
 		this.id = id;
 		this.kiosk_id = kiosk_id;
@@ -32,11 +32,11 @@ public class KioskRecordDTO {
 		this.id = id;
 	}
 
-	public String getKiosk_id() {
+	public int getKiosk_id() {
 		return kiosk_id;
 	}
 
-	public void setKiosk_id(String kiosk_id) {
+	public void setKiosk_id(int kiosk_id) {
 		this.kiosk_id = kiosk_id;
 	}
 
