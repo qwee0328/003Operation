@@ -138,6 +138,12 @@ $(document).ready(function(){
 		if($(".titleArea").text().slice(0,2)=="질문") bulletin_category_id = "question";
 		else if($(".titleArea").text().slice(0,2)!="자유") bulletin_category_id = "qna";
 		
+		if(bulletin_category_id=="qna"){
+			// 비밀여부
+			formData.append("is_secret",$("#secretChk").is(":checked"));
+			url = "/qna/updatePost";
+		}
+		
 		for(let i=0; i<$(".postArea__fileInput")[0].files.length; i++){
 			if(i==5) break;
 			formData.append("attachFiles",$(".postArea__fileInput")[0].files[i]);

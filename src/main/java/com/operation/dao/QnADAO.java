@@ -38,8 +38,18 @@ public class QnADAO {
 		return db.selectOne("Qna.selectTotalCnt");
 	}
 	
-	// qna 게시글 정보 불러오기
-	public Map<String, Object> selectById(int id){
-		return db.selectOne("Qna.selectById",id);
+//	// qna 질문 게시글 수정용 정보 불러오기
+//	public Map<String, Object> selectQuestionUpdateById(int id){
+//		return db.selectOne("Qna.selectQuestionUpdateById",id);
+//	}
+	
+	// qna 특정 게시글 질문 정보 불러오기
+	public Map<String, Object> selectQustionById(int id){
+		return db.selectOne("Qna.selectQustionById",id);
+	}
+	
+	// qna 특정 게시글 답변 정보 불러오기
+	public Map<String, Object> selectAnswerById(int id){
+		return db.selectOne("Qna.selectAnswerById",id);
 	}
 }

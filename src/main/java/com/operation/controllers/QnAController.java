@@ -86,9 +86,19 @@ public class QnAController {
 	public String viewPostConf(@PathVariable String dataId, Model model) {
 		int postId = Integer.parseInt(dataId);
 		Map<String, Object> post = qservice.selectById(postId);
+		System.out.println("Q&A 게시글 정보");
+		System.out.println("질문: "+post.get("question"));
+		System.out.println("답변: "+post.get("answer"));
+
 		post.put("id", dataId); // 기존처럼 select 쿼리로 값 불러오도록 바꿔 주세용
-		model.addAttribute("post", post);
-		return "qna/viewQna";
+		if(post.get("permission") == null) {
+			model.addAttribute("post", post);
+			model.addAttribute("isQna", true);
+			return "qna/viewQna";
+		}else {
+			// 에러 페이지로 이동
+			return "accessDenied";
+		}
 	}
 
 	
@@ -96,9 +106,17 @@ public class QnAController {
 	@RequestMapping("/goUpdateQuestion/{post_id}")
 	public String goUpdateQuestion(Model model, @PathVariable String post_id) {
 		int postId = Integer.parseInt(post_id);
-		model.addAttribute("post", qservice.selectById(postId));
-		model.addAttribute("isQna", true);
-		return "board/writePost";
+		Map<String, Object> post = qservice.selectQuestionById(postId);
+		if(post.get("permission") == null) {
+			model.addAttribute("post", post);
+			model.addAttribute("isQna", true);
+			return "board/writePost";
+		}else {
+			// 에러 페이지로 이동
+			return "accessDenied";
+		}
+		
+		
 	}
 
 //	// 답변 게시글 수정 페이지

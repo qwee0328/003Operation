@@ -19,6 +19,8 @@ import com.operation.dto.QnaAnswerFileDTO;
 import com.operation.dto.QnaQuestionDTO;
 import com.operation.dto.QnaQuestionFileDTO;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class QnAService {
 	@Autowired
@@ -26,6 +28,9 @@ public class QnAService {
 
 	@Autowired
 	private FileDAO fdao;
+	
+	@Autowired
+	private HttpSession session;
 	
 	// qna 업로드 (+ 파일 업로드)
 	@Transactional
@@ -110,8 +115,43 @@ public class QnAService {
 		return dao.selectTotalCnt();
 	}
 	
-	// qna 게시글 정보 불러오기
+	// qna 게시글 질문 + 답글 정보 불러오기 (출력용)
 	public Map<String, Object> selectById(int id){
-		return dao.selectById(id);
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> question = dao.selectQustionById(id);
+
+		String loginID = (String)session.getAttribute("loginID");
+		if(Integer.parseInt(question.get("is_secret").toString())==1 && !question.get("member_id").toString().equals(loginID)){
+			// 권한이 없는 게시글에 접근 (비밀글인데 작성자가 아닌 경우)
+			// 관리자는 접근이 가능하도록 role 설정 추가필요!!!
+			//
+			//
+			//
+			//
+			//
+			//
+			//
+			//
+			result.put("permission", "no");
+		}else {
+			result.put("question", question);
+			result.put("answer", dao.selectAnswerById(id));
+		}
+		return result;
 	}
+	
+	// qna 게시글 질문 정보 불러오기 (수정용)
+	public Map<String, Object> selectQuestionById(int id){
+		Map<String, Object> question = dao.selectQustionById(id);
+		String loginID = (String)session.getAttribute("loginID");
+		if(Integer.parseInt(question.get("is_secret").toString())==1 && !question.get("member_id").toString().equals(loginID)){
+			// 권한이 없는 게시글에 접근 (비밀글인데 작성자가 아닌 경우)
+			question.put("permission", "no");
+			return question;
+		}else {
+			return question;
+		}
+	}
+	
+	
 }

@@ -9,10 +9,40 @@
 		<result property="member_nickname" column="member_nickname" />
 		<result property="title" column="title" />
 		<result property="content" column="content" />
-		<result property="write_date" column="write_date" />
+		<result property="is_secret" column="is_secret"/>
 		<result property="write_date" column="write_date" />
 		<result property="file_cnt" column="file_cnt" />
 		<result property="anwser" column="anwser"/>
+	</resultMap>
+	
+<!-- 	<resultMap id="qna_questionUpdateInfo" type="java.util.Map">
+		<result property="id" column="id" />
+		<result property="member_id" column="member_id" />
+		<result property="member_nickname" column="member_nickname" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="is_secret" column="is_secret"/>
+		<result property="write_date" column="write_date" />
+		<result property="anwser" column="anwser"/>
+	</resultMap> -->
+	
+	<resultMap id="qna_questionInfo" type="java.util.Map">
+		<result property="id" column="id" />
+		<result property="member_id" column="member_id" />
+		<result property="member_nickname" column="member_nickname" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="is_secret" column="is_secret"/>
+		<result property="write_date" column="write_date"/>
+		<result property="file_names" column="file_names"/>
+		<result property="file_ids" column="file_ids"/>
+	</resultMap>
+	
+	<resultMap id="qna_answerInfo" type="java.util.Map">
+		<result property="id" column="id" />
+		<result property="content" column="content" />
+		<result property="file_names" column="file_names"/>
+		<result property="file_ids" column="file_ids"/>
 	</resultMap>
 
 	<!-- 질문 게시글 작성 -->
@@ -35,9 +65,19 @@
 		select count(*) from qna_info;
 	</select>
 	
-	<!-- 게시글 목록 불러오기 -->
-	<select id="selectById" resultMap="qna_info">
-		select * from qna_info where id= #{id};
+<!-- 질문 게시글 수정용 정보 가져오기
+	<select id="qna_questionUpdateInfo">
+		select * from updateQuestionInfo where id=#{id};
+	</select> -->
+	
+	<!-- 특정 질문 게시글 불러오기 -->
+	<select id="selectQustionById" resultMap="qna_questionInfo">
+		select * from qnaQuestionInfo where id= #{id};
+	</select>
+	
+	<!-- 특정 질문 게시글에 대한 답변 불러오기 -->
+	<select id="selectAnswerById" resultMap="qna_answerInfo">
+		select * from qnaAnswerInfo where qna_question_board_id= #{id};
 	</select>
 	
 </mapper>
