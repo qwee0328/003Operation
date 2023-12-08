@@ -64,11 +64,7 @@
 	<select id="selectTotalCnt" resultType="int">
 		select count(*) from qna_info;
 	</select>
-	
-<!-- 질문 게시글 수정용 정보 가져오기
-	<select id="qna_questionUpdateInfo">
-		select * from updateQuestionInfo where id=#{id};
-	</select> -->
+
 	
 	<!-- 특정 질문 게시글 불러오기 -->
 	<select id="selectQustionById" resultMap="qna_questionInfo">
@@ -79,5 +75,10 @@
 	<select id="selectAnswerById" resultMap="qna_answerInfo">
 		select * from qnaAnswerInfo where qna_question_board_id= #{id};
 	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateQuestion">
+		update qna_question_board set title=#{title}, content=#{content}, is_secret = #{is_secret} where id=#{id};
+	</update>
 	
 </mapper>

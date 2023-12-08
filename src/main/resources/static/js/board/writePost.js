@@ -138,10 +138,12 @@ $(document).ready(function(){
 		if($(".titleArea").text().slice(0,2)=="질문") bulletin_category_id = "question";
 		else if($(".titleArea").text().slice(0,2)!="자유") bulletin_category_id = "qna";
 		
+		let url = "/board/updatePost";
+		
 		if(bulletin_category_id=="qna"){
 			// 비밀여부
 			formData.append("is_secret",$("#secretChk").is(":checked"));
-			url = "/qna/updatePost";
+			url = "/qna/updateQuestionPost";
 		}
 		
 		for(let i=0; i<$(".postArea__fileInput")[0].files.length; i++){
@@ -151,13 +153,14 @@ $(document).ready(function(){
 		
 		// 공지글인지도 판단 
 		$.ajax({
-			url:"/board/updatePost",
+			url:url,
 			type:"post",
 			data:formData,
 			contentType: false,
 			processData: false
 		}).done(function(){
-			location.href = "/board/viewPostConf/" + bulletin_category_id + "/" + $("#select").val() + "/" + id+"?keyword="+$("#keyword").val();
+			if(bulletin_category_id=="qna") location.href = "/qna/viewQnaConf/" + id;
+			else location.href = "/board/viewPostConf/" + bulletin_category_id + "/" + $("#select").val() + "/" + id+"?keyword="+$("#keyword").val();
 		});
 	});
 	

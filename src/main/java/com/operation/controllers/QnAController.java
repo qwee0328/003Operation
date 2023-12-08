@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
+import com.operation.dto.BoardDTO;
 import com.operation.dto.QnaAnswerDTO;
 import com.operation.dto.QnaQuestionDTO;
 import com.operation.services.QnAService;
@@ -115,8 +116,6 @@ public class QnAController {
 			// 에러 페이지로 이동
 			return "accessDenied";
 		}
-		
-		
 	}
 
 //	// 답변 게시글 수정 페이지
@@ -126,9 +125,16 @@ public class QnAController {
 //		return qservice.selectAnswerById(post_id);
 //	}
 	
-	@RequestMapping("/updatePost")
-	public void updatePost() {
-		// 질문글 수정
+	// 질문글 수정
+	@ResponseBody
+	@RequestMapping("/updateQuestionPost")
+	public void updatePost(QnaQuestionDTO dto,
+			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
+			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList,
+			@RequestParam(value = "deleteExisingFileList", required = false) Integer[] deleteExisingFileList,
+			@RequestParam(value = "deleteImgs", required = false) String[] deleteImgs) throws Exception {
+		
+		qservice.update(dto, attachFiles, deleteFileList, deleteExisingFileList, deleteImgs);
 	}
 	
 	@RequestMapping("/deletePost")
