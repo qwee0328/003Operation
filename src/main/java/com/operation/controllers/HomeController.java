@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 public class HomeController {
 	@Autowired
 	private HttpSession session;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
 		System.out.println(request.getRemoteAddr());
@@ -19,6 +20,9 @@ public class HomeController {
 		System.out.println((String)session.getAttribute("loginID")+"home");
 		return "home";
 	}
+	
+	@RequestMapping(value = "/denied", method = RequestMethod.GET)
+	public void denied() {}
 	
 	@RequestMapping(value = "/test")
 	public String test() {

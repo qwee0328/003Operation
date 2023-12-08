@@ -165,7 +165,10 @@ public class QnAService {
 		} else {
 			result.put("question", question);
 			Map<String, Object> answer = dao.selectAnswerById(id);
-			answer.put("timeCal", timeCal(answer.get("write_date")));
+			if(answer!=null) {
+				answer.put("timeCal", timeCal(answer.get("write_date")));
+			}
+			
 			result.put("answer", answer);
 		}
 

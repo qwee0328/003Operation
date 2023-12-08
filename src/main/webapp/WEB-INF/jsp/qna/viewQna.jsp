@@ -147,7 +147,7 @@
 								</div>
 								<div class="postInfo__right"></div>
 							</div>
-							<div class="postConf">${post.answer.content }</div>
+							<div class="answerConf">${post.answer.content }</div>
 						</div>
 					</div>
 			답변내용
