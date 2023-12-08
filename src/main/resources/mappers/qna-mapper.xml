@@ -15,17 +15,6 @@
 		<result property="anwser" column="anwser"/>
 	</resultMap>
 	
-<!-- 	<resultMap id="qna_questionUpdateInfo" type="java.util.Map">
-		<result property="id" column="id" />
-		<result property="member_id" column="member_id" />
-		<result property="member_nickname" column="member_nickname" />
-		<result property="title" column="title" />
-		<result property="content" column="content" />
-		<result property="is_secret" column="is_secret"/>
-		<result property="write_date" column="write_date" />
-		<result property="anwser" column="anwser"/>
-	</resultMap> -->
-	
 	<resultMap id="qna_questionInfo" type="java.util.Map">
 		<result property="id" column="id" />
 		<result property="member_id" column="member_id" />

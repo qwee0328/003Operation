@@ -98,8 +98,37 @@ $(document).on("click",".write",function(){
 $(document).on("click",".answerUpdate",function(){
 	$.ajax({
 		url:"/qna/goUpdateAnswer/"+parseInt($(this).attr("data-id"))
-	}).done(function(){
+	}).done(function(answer){
+		console.log(answer);
 		
+		let qnaAnswerWrite__title = $("<div>").attr("class","qnaAnswerWrite__title").html(`<b>Q&A 게시글 답변 수정</b>`);
+		let qnaAnswerWrite__hr = $("<hr>").attr("class","qnaAnswerWrite__hr");
+		let qnaAnswerWrite__file = $("<div>").attr("class","qnaAnswerWrite__file");
+		let dflex = $("<div>").attr("class","d-flex");
+		let fileInput__label = $("<label>").attr("class","fileInput__label").attr("for","fileInput").text("파일 첨부");
+		let fileNameList = $("<div>").attr("class","fileNameList d-flex");
+
+		if(answer.file_names!=""){			
+			let fileNames = answer.file_names.split(",");
+			let fileIds = answer.file_ids.split(",");
+			for(let i=0; i<fileNames.length; i++){
+				let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
+				let fileName = $("<div>").attr("class","fileName").text(fileNames[i]);
+				let fileIcon = $("<div>").attr("class","ml5").html("<i class='fa-solid fa-xmark deleteFileBtn' data-seq="+fileIds[i]+"></i>")
+				fileNameList.append(fileNameTag.append(fileName).append(fileIcon))		
+			}
+		}
+		
+		let qnaAnswerWrite__fileInput = $("<input>").attr("type","file").attr("class","qnaAnswerWrite__fileInput").attr("id","fileInput").prop("multiple","true");
+		let summernote = $("<div>").html(`<%@ include file="/WEB-INF/jsp/commons/summernote.jsp" %>`);
+		qnaAnswerWrite__file.append(dflex.append(fileInput__label).append(fileNameList).append(qnaAnswerWrite__fileInput));
+		let qnaAnswerWrite__btns = $("<div>").attr("class","qnaAnswerWrite__btns d-flex");
+		let goList = $("<button>").attr("class","goList bColorGray colorWhite").text("목록으로");
+		let write = $("<button>").attr("class","write bColorMainPink colorWhite").text("수정완료").attr("data-id",answer.id);
+		qnaAnswerWrite__btns.append(goList).append(write);
+		
+		$(".qnaAnswerWrite").append(qnaAnswerWrite__title).append(qnaAnswerWrite__hr).append(qnaAnswerWrite__file).append(summernote).append(qnaAnswerWrite__btns);
+
 	});
 
 });

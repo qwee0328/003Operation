@@ -118,12 +118,15 @@ public class QnAController {
 		}
 	}
 
-//	// 답변 게시글 수정 페이지
-//	@ResponseBody
-//	@RequestMapping("/goUpdateAnswer/{post_id}")
-//	public QnaAnswerDTO goUpdateAnswer(@PathVariable int post_id) {
-//		return qservice.selectAnswerById(post_id);
-//	}
+	// 답변 게시글 수정 페이지
+	@ResponseBody
+	@RequestMapping("/goUpdateAnswer/{post_id}")
+	public Map<String, Object> goUpdateAnswer(@PathVariable int post_id) {
+		
+		Map<String, Object> data = qservice.selectAnswerById(post_id);
+		System.out.println(data);
+		return data;
+	}
 	
 	// 질문글 수정
 	@ResponseBody

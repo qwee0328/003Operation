@@ -160,6 +160,12 @@ public class QnAService {
 	}
 	
 	
+	// qna 게시글 답변 정보 불러오기 (수정용)
+	public Map<String, Object> selectAnswerById(int id){
+		Map<String, Object> answer = dao.selectAnswerById(id);
+		return answer;
+	}
+	
 	// 질문 게시글 수정
 	@Transactional
 	public void update(QnaQuestionDTO dto, MultipartFile[] files, Integer[] deleteFileList, Integer[] deleteExisingFileList,

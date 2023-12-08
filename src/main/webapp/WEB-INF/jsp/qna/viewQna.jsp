@@ -20,9 +20,6 @@
 <body>
  <div class="container__body">
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
-	<script>
-		console.log("${post}");
-	</script>
     <div class="boardPost_guide">
         <div class="boardType">Q&A 게시판</div>
         <div class="boardPost">
@@ -111,10 +108,9 @@
                 </div>
             </div>
         </div>
-    
+    	<div class="qnaAnswerWrite writeBox_guide">
     	<c:choose>
     		<c:when test="${empty post.answer}">
-    			<div class="qnaAnswerWrite writeBox_guide">
 	    		<div class="qnaAnswerWrite__title"><b>Q&A 게시글 답변 작성</b></div>
 	    		<hr class="qnaAnswerWrite__hr">
 	    		<div class="qnaAnswerWrite__file">    		
@@ -146,15 +142,16 @@
 	    			<button class="goList bColorGray colorWhite">목록으로</button>
 	    			<button class="write bColorMainPink colorWhite" data-id="${post.question.id}">작성완료</button>
 	    		</div>
-	    	</div>	
-    		</c:when>
+	    	
+   			</c:when>
+    		
     		<c:otherwise>
-			답변내용
-            <button id="answerUpdate" data-id="${post.answer.id}">수정</button>
+				답변내용
+            <button class="answerUpdate" data-id="${post.question.id}">수정</button>
                   
     		</c:otherwise>
     	</c:choose>
-    	
+    	</div>
     </div>
     
     
