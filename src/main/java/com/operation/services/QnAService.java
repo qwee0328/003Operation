@@ -4,6 +4,8 @@ import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,10 +36,10 @@ public class QnAService {
 
 	@Autowired
 	private FileDAO fdao;
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
 	// qna 업로드 (+ 파일 업로드)
 	@Transactional
 	public void insert(QnaQuestionDTO dto, MultipartFile[] files, Integer[] deleteFileList) throws Exception {
@@ -72,7 +74,7 @@ public class QnAService {
 
 		}
 	}
-	
+
 	// qna 답변 업로드 (+ 파일 업로드)
 	@Transactional
 	public void insert(QnaAnswerDTO dto, MultipartFile[] files, Integer[] deleteFileList) throws Exception {
@@ -107,27 +109,48 @@ public class QnAService {
 
 		}
 	}
-	
-	// qna 게시글 목록 불러오기 
-	public List<Map<String,Object>> selectAll(int currentPage){
+
+	// qna 게시글 목록 불러오기
+	public List<Map<String, Object>> selectAll(int currentPage) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
 		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
 		return dao.selectAll(param);
 	}
-	
+
 	// qna 게시글 총 개수 불러오기
-	public int selectTotalCnt(){
+	public int selectTotalCnt() {
 		return dao.selectTotalCnt();
 	}
-	
+
+	// 댓글 시간 차이 계산하기
+	public String timeCal(Object object) {
+		long currentTime = System.currentTimeMillis();
+		long writeTime = ((Timestamp) object).getTime();
+		long gapTime = currentTime - writeTime;
+
+		System.out.println(gapTime);
+		if (gapTime < 60000) {
+			return "방금 전";
+		} else if (gapTime < 60000 * 60) {
+			return gapTime / 60000 + " 분 전";
+		} else if (gapTime < 60000 * 60 * 24) {
+			long hour = gapTime / 60000 / 60;
+			return "약 " + hour + "시간 전";
+		} else {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			return sdf.format(writeTime);
+		}
+	}
+
 	// qna 게시글 질문 + 답글 정보 불러오기 (출력용)
-	public Map<String, Object> selectById(int id){
+	public Map<String, Object> selectById(int id) {
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> question = dao.selectQustionById(id);
-
-		String loginID = (String)session.getAttribute("loginID");
-		if(Integer.parseInt(question.get("is_secret").toString())==1 && !question.get("member_id").toString().equals(loginID)){
+		question.put("timeCal", timeCal(question.get("write_date")));
+		String loginID = (String) session.getAttribute("loginID");
+		if (Integer.parseInt(question.get("is_secret").toString()) == 1
+				&& !question.get("member_id").toString().equals(loginID)) {
 			// 권한이 없는 게시글에 접근 (비밀글인데 작성자가 아닌 경우)
 			// 관리자는 접근이 가능하도록 role 설정 추가필요!!!
 			//
@@ -139,32 +162,35 @@ public class QnAService {
 			//
 			//
 			result.put("permission", "no");
-		}else {
+		} else {
 			result.put("question", question);
-			result.put("answer", dao.selectAnswerById(id));
+			Map<String, Object> answer = dao.selectAnswerById(id);
+			answer.put("timeCal", timeCal(answer.get("write_date")));
+			result.put("answer", answer);
 		}
+
 		return result;
 	}
-	
+
 	// qna 게시글 질문 정보 불러오기 (수정용)
-	public Map<String, Object> selectQuestionById(int id){
+	public Map<String, Object> selectQuestionById(int id) {
 		Map<String, Object> question = dao.selectQustionById(id);
-		String loginID = (String)session.getAttribute("loginID");
-		if(Integer.parseInt(question.get("is_secret").toString())==1 && !question.get("member_id").toString().equals(loginID)){
+		String loginID = (String) session.getAttribute("loginID");
+		if (Integer.parseInt(question.get("is_secret").toString()) == 1
+				&& !question.get("member_id").toString().equals(loginID)) {
 			// 권한이 없는 게시글에 접근 (비밀글인데 작성자가 아닌 경우)
 			question.put("permission", "no");
 			return question;
-		}else {
+		} else {
 			return question;
 		}
 	}
-	
-	
+
 	// 질문 게시글 수정
 	// 게시글 정보 수정
 	@Transactional
-	public void update(QnaQuestionDTO dto, MultipartFile[] files, Integer[] deleteFileList, Integer[] deleteExisingFileList,
-			String[] deleteImgsSrc) throws Exception {
+	public void update(QnaQuestionDTO dto, MultipartFile[] files, Integer[] deleteFileList,
+			Integer[] deleteExisingFileList, String[] deleteImgsSrc) throws Exception {
 		dao.update(dto);
 
 		// 기존 파일 삭제
@@ -223,5 +249,15 @@ public class QnAService {
 
 		}
 	}
-	
+
+	// 게시글 삭제
+	public void deletePost(int id) {
+		dao.deletePost(id);
+	}
+
+	// 파일 불러오기
+	public List<Map<String, Object>> selectFileById(String postId) {
+		return dao.selectFileById(postId);
+	}
+
 }

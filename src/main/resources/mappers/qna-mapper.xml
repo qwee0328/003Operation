@@ -81,4 +81,13 @@
 		update qna_question_board set title=#{title}, content=#{content}, is_secret = #{is_secret} where id=#{id};
 	</update>
 	
+	<!-- 게시글 삭제 -->
+	<delete id="deletePost">
+		delete from qna_question_board where id=#{id};
+	</delete>
+	
+	<select id="selectFileById" resultType="map">
+		select * from qna_question_board_file where qna_question_board_id=#{postId};
+	</select>
+	
 </mapper>

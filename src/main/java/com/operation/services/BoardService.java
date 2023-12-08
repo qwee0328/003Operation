@@ -219,7 +219,7 @@ public class BoardService {
 		}
 	}
 
-	// 댓글 시간 차이 계산하기
+	// 게시글 시간 차이 계산하기
 	public String timeCal(Object object) {
 		long currentTime = System.currentTimeMillis();
 		long writeTime = ((Timestamp) object).getTime();

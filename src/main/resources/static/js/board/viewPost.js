@@ -25,6 +25,19 @@ $(document).ready(function() {
 			$(".postInfo__right").append(postUpdate).append(postDelete);
 		}
 	});
+	
+	// 프로필 이미지 불러오기
+	$.ajax({
+		url: "/member/selectProfileImgByNickBoard",
+		data: { memberNickname: $("#memberNickname").val() },
+		type: "post"
+	}).done(function(resp) {
+		if (resp !== "") {
+			$("#writer_profile").attr("src", "/profileImgs/" + resp);
+		} else {
+			$("#writer_profile").attr("src", "/images/profileImg.png");
+		}
+	});
 
 	// 게시글 수정
 	$(document).on("click", "#postUpdate", function() {
@@ -50,18 +63,7 @@ $(document).ready(function() {
 		}
 	});
 
-	// 프로필 이미지 불러오기
-	$.ajax({
-		url: "/member/selectProfileImgByNickBoard",
-		data: { memberNickname: $("#memberNickname").val() },
-		type: "post"
-	}).done(function(resp) {
-		if (resp !== "") {
-			$("#writer_profile").attr("src", "/profileImgs/" + resp);
-		} else {
-			$("#writer_profile").attr("src", "/images/profileImg.png");
-		}
-	});
+	
 
 	// 추천 수, 북마크 수, 댓글 수 불러오기
 	postInfo();
