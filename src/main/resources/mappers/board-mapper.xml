@@ -215,16 +215,31 @@
 		resultType="com.operation.dto.ReplyDTO">
 		<!-- select * from replyInfoList where parent_reply_id is null and bulletin_board_id 
 			=#{bulletin_board_id} order by id desc limit #{start},#{count}; -->
-		select replyInfoList.*, if(reply_recommend.member_id is not null,
-		true, false) as isrecommend
+		select replyInfoList.*, count(reply_recommend.id) > 0 as isrecommend
+		from replyInfoList
+		left join reply_recommend on replyInfoList.id = reply_recommend.reply_id
+		and reply_recommend.member_id = #{userId}
+		where
+		replyInfoList.bulletin_board_id = #{bulletin_board_id}
+		and replyInfoList.parent_reply_id is null
+		group by replyInfoList.id
+		order by replyInfoList.id desc limit #{start},#{count};;
+
+		<!--select replyInfoList.*, if(reply_recommend.member_id is not null,
+		true,
+		false) as isrecommend
 		from replyInfoList
 		left join
-		reply_recommend on replyInfoList.member_id = reply_recommend.member_id
-		and replyInfoList.id=reply_recommend.reply_id
-		and reply_recommend.member_id=#{userId}
-		where bulletin_board_id=#{bulletin_board_id} and parent_reply_id is null
+		reply_recommend on
+		replyInfoList.member_id = reply_recommend.member_id
+		and
+		replyInfoList.id=reply_recommend.reply_id
+		and
+		reply_recommend.member_id=#{userId}
+		where
+		bulletin_board_id=#{bulletin_board_id} and parent_reply_id is null
 		group by id
-		order by id desc limit #{start},#{count};
+		order by id desc limit #{start},#{count};-->
 	</select>
 
 	<!-- 게시글 댓글 총 개수 -->
@@ -269,14 +284,17 @@
 	<!-- 게시글 댓글 불러오기 -->
 	<select id="selectReReplyAll"
 		resultType="com.operation.dto.ReplyDTO">
-		select replyInfoList.*, if(reply_recommend.member_id is not null,
+		select replyInfoList.*, if(reply_recommend.member_id is not
+		null,
 		true, false) as isrecommend
 		from replyInfoList
 		left join
 		reply_recommend on replyInfoList.member_id = reply_recommend.member_id
 		and replyInfoList.id=reply_recommend.reply_id
-		and reply_recommend.member_id=#{userId}
-		where parent_reply_id=#{parentId} and parent_reply_id is not null
+		and
+		reply_recommend.member_id=#{userId}
+		where parent_reply_id=#{parentId}
+		and parent_reply_id is not null
 		group by id;
 	</select>
 

@@ -136,6 +136,7 @@ public class BoardController {
 		model.addAttribute("type", type);
 		model.addAttribute("select", select);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("profile",mservice.selectProfileImgById((String)session.getAttribute("loginID")));
 		return "board/viewPost";
 	}
 
@@ -245,6 +246,7 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping("/insertPostReply")
 	public boolean insertPostReply(@RequestParam String postId, @RequestParam String reply) {
+		System.out.println(postId);
 		int id = Integer.parseInt(postId);
 		return bservice.insertPostReply(id, reply);
 	}
@@ -305,6 +307,7 @@ public class BoardController {
 	@RequestMapping("/insertReReply")
 	public boolean insertReReply(@RequestParam String postId, @RequestParam String parentId,
 			@RequestParam String content) {
+		System.out.println(("대댓글 작성"));
 		int postid = Integer.parseInt(postId);
 		int parentid = Integer.parseInt(parentId);
 		return bservice.insertReReply(postid, parentid, content);

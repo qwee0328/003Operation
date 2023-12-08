@@ -356,7 +356,7 @@
 	border: 2px solid black;
 }
 
-#replyInputCancle {
+#reReplyInputSubmit,#replyInputCancle {
 	width: 9%;
 	background-color: transparent;
 	border: none;

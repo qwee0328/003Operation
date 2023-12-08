@@ -4,7 +4,7 @@ $(document).ready(function() {
 	let category = "free";
 	if ($(".boardType").text().slice(0, 2) == "질문") category = "question";
 
-
+	// 현재 접속중인 사용자 닉네임 불러오기
 	$.ajax({
 		url: "/member/selectUserNick",
 		type: "post"
@@ -12,6 +12,7 @@ $(document).ready(function() {
 		userNick = resp;
 	})
 
+	// 내가 쓴 게시물인지 확인
 	$.ajax({
 		url: "/board/isMyPost",
 		data: { memberNickname: $("#memberNickname").val() },
@@ -100,50 +101,61 @@ $(document).ready(function() {
 
 	// 게시글 추천, 북마크
 	$("#recommendBtn, #bookmarkBtn").on("click", function() {
+		console.log(userNick)
+		console.log($(this).attr("writerNick"))
+		if (userNick !== $(this).attr("writerNick")) {
+			// 추천 혹은 북마크 하기
+			if (($("#myRecommendRecord").val() === "false" && $(this).attr("id") === "recommendBtn") || ($("#myBookmarkRecord").val() === "false" && $(this).attr("id") === "bookmarkBtn")) {
+				let url = "/board/insertPostInfoById";
+				console.log($(this).attr("id") === "recommendBtn")
+				if ($(this).attr("id") === "recommendBtn") {
+					url = url + "/recommend";
+				} else {
+					url = url + "/bookmark";
+				}
 
-		// 추천 혹은 북마크 하기
-		if (($("#myRecommendRecord").val() === "false" && $(this).attr("id") === "recommendBtn") || ($("#myBookmarkRecord").val() === "false" && $(this).attr("id") === "bookmarkBtn")) {
-			let url = "/board/insertPostInfoById";
-			console.log($(this).attr("id") === "recommendBtn")
-			if ($(this).attr("id") === "recommendBtn") {
-				url = url + "/recommend";
-			} else {
-				url = url + "/bookmark";
+				let icon = $(this).find("i");
+
+				$.ajax({
+					url: url,
+					data: { postId: $("#postId").val() },
+					type: "post"
+				}).done(function(resp) {
+					// 추천 수, 북마크 수, 댓글 수 불러오기
+					postInfo();
+					console.log($(this))
+					icon.css("color", "#FB8F8A");
+				})
 			}
+			// 취소하기
+			if (($("#myRecommendRecord").val() === "true" && $(this).attr("id") === "recommendBtn") || ($("#myBookmarkRecord").val() === "true" && $(this).attr("id") === "bookmarkBtn")) {
+				let url = "/board/deletePostInfoById";
+				if ($(this).attr("id") === "recommendBtn") {
+					url = url + "/recommend";
+				} else {
+					url = url + "/bookmark";
+				}
 
-			let icon = $(this).find("i");
+				let icon = $(this).find("i");
 
-			$.ajax({
-				url: url,
-				data: { postId: $("#postId").val() },
-				type: "post"
-			}).done(function(resp) {
-				// 추천 수, 북마크 수, 댓글 수 불러오기
-				postInfo();
-				console.log($(this))
-				icon.css("color", "#FB8F8A");
-			})
-		}
-		if (($("#myRecommendRecord").val() === "true" && $(this).attr("id") === "recommendBtn") || ($("#myBookmarkRecord").val() === "true" && $(this).attr("id") === "bookmarkBtn")) {
-			let url = "/board/deletePostInfoById";
-			if ($(this).attr("id") === "recommendBtn") {
-				url = url + "/recommend";
-			} else {
-				url = url + "/bookmark";
+				$.ajax({
+					url: url,
+					data: { postId: $("#postId").val() },
+					type: "post"
+				}).done(function(resp) {
+					// 추천 수, 북마크 수, 댓글 수 불러오기
+					postInfo();
+					icon.css("color", "black");
+				})
 			}
-
-			let icon = $(this).find("i");
-
-			$.ajax({
-				url: url,
-				data: { postId: $("#postId").val() },
-				type: "post"
-			}).done(function(resp) {
-				// 추천 수, 북마크 수, 댓글 수 불러오기
-				postInfo();
-				icon.css("color", "black");
-			})
+		} else {
+			if ($(this).attr("id") === "recommendBtn") {
+				alert("본인이 작성한 게시물은 추천할 수 없습니다.");
+			} else {
+				alert("본인이 작성한 게시물은 북마크할 수 없습니다.");
+			}
 		}
+
 
 	});
 
@@ -206,7 +218,6 @@ $(document).ready(function() {
 	// 댓글 작성하기
 	$("#replyInputSubmit").on("click", function() {
 		insertReply();
-		replyIndex = 0;
 		selectreplyList(replyCpage);
 	});
 
@@ -215,7 +226,6 @@ $(document).ready(function() {
 		console.log("enter")
 		if (e.keyCode == 13) {
 			insertReply();
-			replyIndex = 0;
 			selectreplyList(replyCpage);
 		}
 	});
@@ -226,25 +236,30 @@ $(document).ready(function() {
 	$(document).on("click", ".replyRecommendBtn", function() {
 		console.log($(this).attr("isrecommed"))
 		console.log($(this).attr("isrecommed") === "false")
-		if ($(this).attr("isrecommed") === "false") {
-			$.ajax({
-				url: "/board/insertReplyRecommend",
-				data: { replyId: $(this).attr("data-id") },
-				type: "post"
-			}).done(function(resp) {
-				replyIndex = 0;
-				selectreplyList(replyCpage);
-			})
-		} else {
-			$.ajax({
-				url: "/board/deleteReplyRecommend",
-				data: { replyId: $(this).attr("data-id") },
-				type: "post"
-			}).done(function(resp) {
-				replyIndex = 0;
-				selectreplyList(replyCpage);
-			})
+		if (userNick !== $(this).attr("replywriter")) {
+			if ($(this).attr("isrecommed") === "false") {
+				$.ajax({
+					url: "/board/insertReplyRecommend",
+					data: { replyId: $(this).attr("data-id") },
+					type: "post"
+				}).done(function(resp) {
+					replyIndex = 0;
+					selectreplyList(replyCpage);
+				})
+			} else {
+				$.ajax({
+					url: "/board/deleteReplyRecommend",
+					data: { replyId: $(this).attr("data-id") },
+					type: "post"
+				}).done(function(resp) {
+					replyIndex = 0;
+					selectreplyList(replyCpage);
+				})
+			}
+		}else{
+			alert("본인이 작성한 댓글은 추천할 수 없습니다.");
 		}
+
 	});
 
 	// 댓글 삭제하기
@@ -301,7 +316,7 @@ $(document).ready(function() {
 		if (nestedReplyObj != null) {
 			if ($(this).attr("parent-id") !== nestedReplyParentSeq) {
 				if (confirm("수정중인 답글이 있습니다.\n답글 수정을 취소하시겠습니가?")) {
-		
+
 					nestedReplyObj.closest(".RereplyLine").find(".replyConf").html(replyBackup);
 					nestedReplyObj.closest(".RereplyLine").find(".replyConf").attr("contenteditable", false);
 					nestedReplyObj.closest(".RereplyLine").find(".modifySubmit").css("display", "none");
@@ -330,10 +345,10 @@ $(document).ready(function() {
 		if ($(this).parent().parent().parent().attr("class") === "replyLine") {
 			replyBackup = $(this).closest(".replyLine").find(".replyConf").html();
 			replyObj = $(this);
-		} else { 
-			replyBackup= $(this).closest(".RereplyLine").find(".replyConf").html();
-			nestedReplyParentSeq=$(this).attr("data-id");
-			nestedReplyObj=$(this);
+		} else {
+			replyBackup = $(this).closest(".RereplyLine").find(".replyConf").html();
+			nestedReplyParentSeq = $(this).attr("data-id");
+			nestedReplyObj = $(this);
 		}
 	});
 
@@ -373,6 +388,7 @@ $(document).ready(function() {
 			url: "/member/selectProfileImgById",
 			type: "post"
 		}).done(function(resp) {
+
 			if (resp !== null) {
 				userProfileImg.attr("src", "/profileImgs/" + resp);
 			} else {
@@ -382,7 +398,7 @@ $(document).ready(function() {
 
 		let replyInput__input = $("<div>").attr("class", "replyInput__input");
 		let replyInput = $("<input>").attr("type", "text").attr("id", "reReplyInputTag").attr("placeholder", "답글을 입력해주세요.");
-		let replyInputSubmit = $("<button>").attr("id", "replyInputSubmit").html("입력").attr("parent-id", $(this).attr("data-id"));
+		let replyInputSubmit = $("<button>").attr("id", "reReplyInputSubmit").html("입력").attr("parent-id", $(this).attr("data-id"));
 		let replyInputCancle = $("<button>").attr("id", "replyInputCancle").html("취소");
 
 		replyInput__userProfile.append(userProfileImg);
@@ -393,13 +409,15 @@ $(document).ready(function() {
 	})
 
 	// 답글 작성 완료
-	$(document).on("click", "#replyInputSubmit", function() {
-		let content = $(this).parent().find("#replyInput").val();
+	$(document).on("click", "#reReplyInputSubmit", function() {
+		console.log("답글")
+		let content = $(this).parent().find("#reReplyInputTag").val();
 		let thisDiv = $(this);
-		console.log(content)
+		console.log("답글 입력눌렀을 때" + $(this).attr("parent-id"))
+		let replyParent = $(this).attr("parent-id");
 		$.ajax({
 			url: "/board/insertReReply",
-			data: { postId: $("#postId").val(), parentId: $(this).attr("parent-id"), content: content },
+			data: { postId: $("#postId").val(), parentId: replyParent, content: content },
 			type: "post"
 		}).done(function(resp) {
 			if (resp) {
@@ -413,9 +431,9 @@ $(document).ready(function() {
 	})
 
 	// 답글 작성중 엔터 누르면 작성 시도
-	$(document).on("keydown","#reReplyInputTag", function(e) {
+	$(document).on("keydown", "#reReplyInputTag", function(e) {
 		console.log("enter")
-		if (e.keyCode == 13 ) {
+		if (e.keyCode == 13) {
 			let content = $(this).val();
 			let thisDiv = $(this);
 			console.log(content)
@@ -481,11 +499,12 @@ function myPostInfo() {
 
 // 댓글 작성
 function insertReply() {
-
+	let postIdNum = $("#postId").val();
+	console.log("댓 작성중" + $("#postId").val())
 	if ($("#replyInput").val() !== "") {
 		$.ajax({
 			url: "/board/insertPostReply",
-			data: { postId: $("#postId").val(), reply: $("#replyInput").val() },
+			data: { postId: postIdNum, reply: $("#replyInput").val() },
 			type: "post"
 		}).done(function(resp) {
 			if (resp) {
@@ -680,10 +699,11 @@ function selectreplyList(replyCpage) {
 
 				let replyConf = $("<div>").attr("class", "replyConf").html(resp.replyList[replyIndex].content);
 				let replyInfo = $("<div>").attr("class", "replyInfo");
-				let recommend = $("<span>").attr("data-id", resp.replyList[replyIndex].id).attr("class", "replyRecommendBtn").attr("isrecommed", resp.replyList[replyIndex].isrecommend);
+				let recommend = $("<span>").attr("data-id", resp.replyList[replyIndex].id).attr("class", "replyRecommendBtn").attr("isrecommed", resp.replyList[replyIndex].isrecommend).attr("replyWriter", resp.replyList[replyIndex].member_nickname);
 
 				let thumbsIcon = $("<i>").attr("class", "fa-regular fa-thumbs-up");
-				if (resp.replyList[i].isrecommend) {
+				
+				if (resp.replyList[replyIndex].isrecommend) {
 					recommend.css("color", "#FB8F8A");
 					thumbsIcon.css("color", "#FB8F8A");
 				}

@@ -350,6 +350,7 @@ public class BoardService {
 		param.put("userId", (String) session.getAttribute("loginID"));
 		param.put("start", currentPage * Constants.REPLY_COUNT_PER_PAGE - (Constants.REPLY_COUNT_PER_PAGE - 1) - 1);
 		param.put("count", Constants.REPLY_COUNT_PER_PAGE);
+		System.out.println(Constants.REPLY_COUNT_PER_PAGE+"댓글 몇개 가져올꺼양?ㄴ");
 		List<ReplyDTO> list = dao.selectAllReply(param);
 
 		int recordTotalCount = dao.selectTotalReplyCnt(id);
