@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.operation.dto.FileDTO;
+import com.operation.dto.QnaAnswerFileDTO;
 import com.operation.dto.QnaQuestionFileDTO;
 
 @Repository
@@ -16,14 +17,19 @@ public class FileDAO {
 	private SqlSession db;
 	
 	
-	// 파일 삽입
+	// 자유/질문 게시판 파일 삽입
 	public int insert(FileDTO dto) {
 		return db.insert("File.insert",dto);
 	}
 	
-	// 파일 삽입
+	// qna 질문 게시글 파일 삽입
 	public int insert(QnaQuestionFileDTO dto) {
 		return db.insert("File.qnaInsert",dto);
+	}
+	
+	// qna 답변 게시글 파일 삽입
+	public int insert(QnaAnswerFileDTO dto) {
+		return db.insert("File.qnaAwnserInsert",dto);
 	}
 		
 	

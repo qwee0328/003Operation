@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.operation.constants.Constants;
 import com.operation.dao.FileDAO;
 import com.operation.dao.QnADAO;
+import com.operation.dto.QnaAnswerDTO;
+import com.operation.dto.QnaAnswerFileDTO;
 import com.operation.dto.QnaQuestionDTO;
 import com.operation.dto.QnaQuestionFileDTO;
 
@@ -60,7 +62,42 @@ public class QnAService {
 		}
 	}
 	
-	// qna 게시글 불러오기 
+	// qna 답변 업로드 (+ 파일 업로드)
+	@Transactional
+	public void insert(QnaAnswerDTO dto, MultipartFile[] files, Integer[] deleteFileList) throws Exception {
+		int qna_question_board_id = dao.insert(dto);
+		if (files != null && files.length >= 1) {
+			String path = "c:/003Operation/uploads";
+			File uploadPath = new File(path);
+			if (!uploadPath.exists())
+				uploadPath.mkdir();
+
+			if (deleteFileList != null && deleteFileList.length >= 1) {
+				int idx = 0;
+				System.out.println("길이: :" + deleteFileList.length);
+				for (int i = 0; i < files.length; i++) {
+					if (idx < deleteFileList.length && deleteFileList[idx] == i) {
+						idx++;
+						continue;
+					}
+					String oriName = files[i].getOriginalFilename();
+					String sysName = UUID.randomUUID() + "_" + oriName;
+					files[i].transferTo(new File(uploadPath, sysName));
+					fdao.insert(new QnaAnswerFileDTO(0, qna_question_board_id, sysName, oriName));
+				}
+			} else {
+				for (int i = 0; i < files.length; i++) {
+					String oriName = files[i].getOriginalFilename();
+					String sysName = UUID.randomUUID() + "_" + oriName;
+					files[i].transferTo(new File(uploadPath, sysName));
+					fdao.insert(new QnaAnswerFileDTO(0, qna_question_board_id, sysName, oriName));
+				}
+			}
+
+		}
+	}
+	
+	// qna 게시글 목록 불러오기 
 	public List<Map<String,Object>> selectAll(int currentPage){
 		Map<String, Object> param = new HashMap<>();
 		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
@@ -71,5 +108,10 @@ public class QnAService {
 	// qna 게시글 총 개수 불러오기
 	public int selectTotalCnt(){
 		return dao.selectTotalCnt();
+	}
+	
+	// qna 게시글 정보 불러오기
+	public Map<String, Object> selectById(int id){
+		return dao.selectById(id);
 	}
 }

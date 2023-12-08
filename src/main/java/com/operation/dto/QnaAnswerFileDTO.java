@@ -1,24 +1,22 @@
 package com.operation.dto;
 
-public class QnaAnswerFile {
+public class QnaAnswerFileDTO {
 	private int id;
 	private int qna_answer_board_id;
 	private String system_name;
 	private String origin_name;
-	private boolean img;
 	
-	public QnaAnswerFile() {
+	public QnaAnswerFileDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public QnaAnswerFile(int id, int qna_answer_board_id, String system_name, String origin_name, boolean img) {
+	public QnaAnswerFileDTO(int id, int qna_answer_board_id, String system_name, String origin_name) {
 		super();
 		this.id = id;
 		this.qna_answer_board_id = qna_answer_board_id;
 		this.system_name = system_name;
 		this.origin_name = origin_name;
-		this.img = img;
 	}
 	
 	public int getId() {
@@ -44,11 +42,5 @@ public class QnaAnswerFile {
 	}
 	public void setOrigin_name(String origin_name) {
 		this.origin_name = origin_name;
-	}
-	public boolean isImg() {
-		return img;
-	}
-	public void setImg(boolean img) {
-		this.img = img;
 	}
 }

@@ -113,8 +113,8 @@
 					<div class="postArea__btns d-flex">
 						<c:choose>
 							<c:when test="${not empty post}">
-								<button class="goPost bColorGray">수정취소</button>
-								<button class="update bColorMainPink" data-id="${post.id}">수정완료</button>
+								<button class="goPost bColorGray colorWhite">수정취소</button>
+								<button class="update bColorMainPink colorWhite" data-id="${post.id}">수정완료</button>
 							</c:when>
 							<c:otherwise>
 								<button class="goList bColorGray">목록으로</button>
