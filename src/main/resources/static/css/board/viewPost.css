@@ -340,7 +340,7 @@
 	margin-top: 20px;
 }
 
-.rereplyInput #replyInput {
+.rereplyInput #reReplyInputTag {
 	width: 80%;
 	border: none;
 	padding: 10px 15px;
@@ -379,6 +379,7 @@
 	background-color: #375abb;
 	color: white;
 }
+
 
 #pagination {
 	display: flex;

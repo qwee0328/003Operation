@@ -1,4 +1,4 @@
-	let userNick;
+let userNick;
 $(document).ready(function() {
 	let category = "free";
 	if ($(".boardType").text().slice(0, 2) == "질문") category = "question";
@@ -7,8 +7,8 @@ $(document).ready(function() {
 	$.ajax({
 		url: "/member/selectUserNick",
 		type: "post"
-	}).done(function(resp){
-		userNick=resp;
+	}).done(function(resp) {
+		userNick = resp;
 	})
 
 	$.ajax({
@@ -210,8 +210,8 @@ $(document).ready(function() {
 	// 댓글 작성중 엔터 누르면 작성 시도
 	$("#replyInput").on("keydown", function(e) {
 		console.log("enter")
-		if (e.keyCode == 13) {
-			console.log("test")
+		if (e.keyCode == 13&&$(this)) {
+			
 			insertReply();
 			selectreplyList(replyCpage);
 		}
@@ -247,7 +247,7 @@ $(document).ready(function() {
 				replyObj.closest(".replyLine").find(".replyConf").html(replyBackup);
 				replyObj.closest(".replyLine").find(".replyConf").attr("contenteditable", false);
 			}
-		}else if(nestedReplyObj != null){
+		} else if (nestedReplyObj != null) {
 			if (confirm("답글 작성을 취소하시겠습니가?")) {
 				nestedReplyObj.remove();
 				nestedReplyParentSeq = null;
@@ -271,9 +271,9 @@ $(document).ready(function() {
 
 	let replyBackup = null; // 수정중인 댓글 원본 내용
 	let replyObj = null; // 수정중이던 댓글
-	let nestedReplyParentSeq = null; // 수정중이던 답글 내용
+	let nestedReplyParentSeq = null; // 수정중이던 답글의 부모 댓글 번호
 	let nestedReplyObj = null; // 수정중이던 답글
-	
+
 	// 댓글 수정 눌렀을 때
 	$(document).on("click", ".replyModifyBtn", function() {
 		if (replyBackup != null) { // 수정중인 댓글이 있으면?
@@ -282,12 +282,18 @@ $(document).ready(function() {
 				replyObj.closest(".replyLine").find(".replyConf").attr("contenteditable", false);
 			}
 		}
-		
+
 		// 수정중인 답글이 있으면?
-		if(nestedReplyObj!=null){
-			
+		if (nestedReplyObj != null) {
+			if ($(this).attr("parent-id") !== nestedReplyParentSeq) {
+				if (confirm("작성중인 답글이 있습니다.\n답글 수정을 취소하시겠습니가?")) {
+					nestedReplyObj.remove();
+					nestedReplyParentSeq = null;
+					nestedReplyObj = null;
+				}
+			}
 		}
-		
+
 		$(this).closest(".replyLine").find(".replyConf").attr("contenteditable", true).focus();
 		$(this).parent().find("button").css("display", "none");
 
@@ -343,7 +349,7 @@ $(document).ready(function() {
 		})
 
 		let replyInput__input = $("<div>").attr("class", "replyInput__input");
-		let replyInput = $("<input>").attr("type", "text").attr("id", "replyInput").attr("placeholder", "답글을 입력해주세요.");
+		let replyInput = $("<input>").attr("type", "text").attr("id", "reReplyInputTag").attr("placeholder", "답글을 입력해주세요.");
 		let replyInputSubmit = $("<button>").attr("id", "replyInputSubmit").html("입력").attr("parent-id", $(this).attr("data-id"));
 		let replyInputCancle = $("<button>").attr("id", "replyInputCancle").html("취소");
 
@@ -372,6 +378,8 @@ $(document).ready(function() {
 			}
 		})
 	})
+	
+	
 
 	// 답글 작성 취소
 	$(document).on("click", "#replyInputCancle", function() {
@@ -618,55 +626,55 @@ function selectreplyList(replyCpage) {
 				type: "post"
 			}).done(function(data) {
 				console.log(data)
-				console.log("test"+i)
-				
+				console.log("test" + i)
+
 				let replyLine = $("<div>").attr("class", "replyLine");
-			let replyWriterInfo = $("<div>").attr("class", "replyWriterInfo");
+				let replyWriterInfo = $("<div>").attr("class", "replyWriterInfo");
 
-			let writerProfile = $("<div>").attr("class", "writerProfile");
-			let profileImg = $("<img>");
-			if (resp.replyList[i].profile_image !== null) {
-				profileImg.attr("src", "/profileImgs/" + resp.replyList[i].profile_image);
-			} else {
-				profileImg.attr("src", "/images/profileImg.png");
-			}
-			let nick = $("<span>").html(resp.replyList[i].member_nickname);
-			let isWriter = $("<span>").attr("class", "writer").html("글쓴이");
-			let writeDate = $("<span>").attr("class", "time").html(timeAgo(resp.replyList[i].write_date));
+				let writerProfile = $("<div>").attr("class", "writerProfile");
+				let profileImg = $("<img>");
+				if (resp.replyList[i].profile_image !== null) {
+					profileImg.attr("src", "/profileImgs/" + resp.replyList[i].profile_image);
+				} else {
+					profileImg.attr("src", "/images/profileImg.png");
+				}
+				let nick = $("<span>").html(resp.replyList[i].member_nickname);
+				let isWriter = $("<span>").attr("class", "writer").html("글쓴이");
+				let writeDate = $("<span>").attr("class", "time").html(timeAgo(resp.replyList[i].write_date));
 
-			writerProfile.append(profileImg).append(nick);
-			if (resp.replyList[i].member_nickname === $("#memberNickname").val()) {
-				writerProfile.append(isWriter);
-			}
-			writerProfile.append(writeDate);
+				writerProfile.append(profileImg).append(nick);
+				if (resp.replyList[i].member_nickname === $("#memberNickname").val()) {
+					writerProfile.append(isWriter);
+				}
+				writerProfile.append(writeDate);
 
-			let iconDiv = $("<div>");
-			let modifyBtn = $("<button>").html("수정").attr("class", "replyModifyBtn").attr("data-id", resp.replyList[i].id);
-			let deleteBtn = $("<button>").html("삭제").attr("class", "replyDeleteBtn").attr("data-id", resp.replyList[i].id);
-			iconDiv.append(modifyBtn).append(deleteBtn);
+				let iconDiv = $("<div>");
+				let modifyBtn = $("<button>").html("수정").attr("class", "replyModifyBtn").attr("data-id", resp.replyList[i].id);
+				let deleteBtn = $("<button>").html("삭제").attr("class", "replyDeleteBtn").attr("data-id", resp.replyList[i].id);
+				iconDiv.append(modifyBtn).append(deleteBtn);
 
-			replyWriterInfo.append(writerProfile)
-			if (resp.replyList[i].member_nickname === userNick) {
-				replyWriterInfo.append(iconDiv);
-			}
+				replyWriterInfo.append(writerProfile)
+				if (resp.replyList[i].member_nickname === userNick) {
+					replyWriterInfo.append(iconDiv);
+				}
 
-			let replyConf = $("<div>").attr("class", "replyConf").html(resp.replyList[i].content);
-			let replyInfo = $("<div>").attr("class", "replyInfo");
-			let recommend = $("<span>").attr("data-id", resp.replyList[i].id).attr("class", "replyRecommendBtn").attr("isrecommed", resp.replyList[i].isrecommend);
+				let replyConf = $("<div>").attr("class", "replyConf").html(resp.replyList[i].content);
+				let replyInfo = $("<div>").attr("class", "replyInfo");
+				let recommend = $("<span>").attr("data-id", resp.replyList[i].id).attr("class", "replyRecommendBtn").attr("isrecommed", resp.replyList[i].isrecommend);
 
-			let thumbsIcon = $("<i>").attr("class", "fa-regular fa-thumbs-up");
-			if (resp.replyList[i].isrecommend) {
-				recommend.css("color", "#FB8F8A");
-				thumbsIcon.css("color", "#FB8F8A");
-			}
-			recommend.append(thumbsIcon).append(" 추천 ").append(resp.replyList[i].count);
-			let replyBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("답글달기").attr("class", "replyRe").attr("replyWriter", resp.replyList[i].member_nickname);
-			replyInfo.append(recommend).append(replyBtn);
+				let thumbsIcon = $("<i>").attr("class", "fa-regular fa-thumbs-up");
+				if (resp.replyList[i].isrecommend) {
+					recommend.css("color", "#FB8F8A");
+					thumbsIcon.css("color", "#FB8F8A");
+				}
+				recommend.append(thumbsIcon).append(" 추천 ").append(resp.replyList[i].count);
+				let replyBtn = $("<span>").attr("data-id", resp.replyList[i].id).html("답글달기").attr("class", "replyRe").attr("replyWriter", resp.replyList[i].member_nickname);
+				replyInfo.append(recommend).append(replyBtn);
 
-			replyLine.append(replyWriterInfo).append(replyConf).append(replyInfo);
-			$("#replyList").append(replyLine);
+				replyLine.append(replyWriterInfo).append(replyConf).append(replyInfo);
+				$("#replyList").append(replyLine);
 
-				
+
 				for (let j = 0; j < data.length; j++) {
 					let replyLine = $("<div>").attr("class", "RereplyLine");
 					let replyWriterInfo = $("<div>").attr("class", "replyWriterInfo");
@@ -712,7 +720,7 @@ function selectreplyList(replyCpage) {
 
 					replyLine.append(replyWriterInfo).append(replyConf).append(replyInfo);
 					$("#replyList").append(replyLine);
-					console.log("j"+i)
+					console.log("j" + i)
 				}
 			})
 		}

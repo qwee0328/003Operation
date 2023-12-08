@@ -14,10 +14,13 @@
 <link rel="syplesheet" href="/css/commons/common.css" />
 </head>
 <body>
+	<div>테스트 창</div>
 	<script>
-        setTimeout(()=>{
-            alert(document.cookie);
-        },5000);
+        // b.com/b.html
+        window.addEventListener('message', function (event) {
+            var receivedData = event.data;
+            alert(receivedData);
+        });
     </script>
 </body>
 </html>
