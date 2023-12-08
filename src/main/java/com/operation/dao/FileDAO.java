@@ -49,8 +49,13 @@ public class FileDAO {
 		return db.delete("File.deleteAllByPostId",bulletin_board_id);
 	}
 	
-	// 삭제할 파일 origin_name 가져오기 (서버 컴퓨터에서 삭제하기 위함.)
+	// 자유 or 질문 게시글 삭제할 파일 origin_name 가져오기 (서버 컴퓨터에서 삭제하기 위함.)
 	public List<String> selectAllByPostId(int bulletin_board_id) {
-		return db.selectList("File.AllByPostId",bulletin_board_id);
+		return db.selectList("File.selectAllByPostId",bulletin_board_id);
+	}
+	
+	// qna 질문 게시글 삭제할 파일 origin_name 가져오기 (서버 컴퓨터에서 삭제하기 위함.)
+	public List<String> selectAllByQnaQId(int qna_question_board_id) {
+		return db.selectList("File.selectAllByQnaQId",qna_question_board_id);
 	}
 }
