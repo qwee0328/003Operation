@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="postInfo__right">
-                        <button id="postUpdate" data-id="${post.id }">수정</button>
+                        <button id="questionUpdate" data-id="${post.id }">수정</button>
                         <button id="postDelete" data-id="${post.id }">삭제</button>
                     </div>
                 </div>
@@ -150,7 +150,9 @@
 	    	</div>	
     		</c:when>
     		<c:otherwise>
-    			답변 내용
+			답변내용
+            <button id="answerUpdate" data-id="${post.id}">수정</button>
+                  
     		</c:otherwise>
     	</c:choose>
     	

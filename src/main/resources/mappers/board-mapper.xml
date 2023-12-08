@@ -5,8 +5,7 @@
 <mapper namespace="Board">
 	<resultMap id="postInfo" type="java.util.Map">
 		<result property="id" column="id" />
-		<result property="bulletin_category_id"
-			column="bulletin_category_id" />
+		<result property="bulletin_category_id" column="bulletin_category_id" />
 		<result property="member_id" column="member_id" />
 		<result property="member_nickname" column="member_nickname" />
 		<result property="title" column="title" />
@@ -21,8 +20,7 @@
 
 	<resultMap id="updatePostInfo" type="java.util.Map">
 		<result property="id" column="id" />
-		<result property="bulletin_category_id"
-			column="bulletin_category_id" />
+		<result property="bulletin_category_id" column="bulletin_category_id" />
 		<result property="member_id" column="member_id" />
 		<result property="member_nickname" column="member_nickname" />
 		<result property="title" column="title" />

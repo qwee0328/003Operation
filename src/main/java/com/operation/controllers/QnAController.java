@@ -88,10 +88,25 @@ public class QnAController {
 		Map<String, Object> post = qservice.selectById(postId);
 		post.put("id", dataId); // 기존처럼 select 쿼리로 값 불러오도록 바꿔 주세용
 		model.addAttribute("post", post);
-		System.out.println(post);
 		return "qna/viewQna";
 	}
 
+	
+	// 질문 게시글 수정 페이지
+	@RequestMapping("/goUpdateQuestion/{post_id}")
+	public String goUpdateQuestion(Model model, @PathVariable String post_id) {
+		int postId = Integer.parseInt(post_id);
+		model.addAttribute("post", qservice.selectById(postId));
+		model.addAttribute("isQna", true);
+		return "board/writePost";
+	}
+
+//	// 답변 게시글 수정 페이지
+//	@ResponseBody
+//	@RequestMapping("/goUpdateAnswer/{post_id}")
+//	public QnaAnswerDTO goUpdateAnswer(@PathVariable int post_id) {
+//		return qservice.selectAnswerById(post_id);
+//	}
 	
 	@RequestMapping("/updatePost")
 	public void updatePost() {
