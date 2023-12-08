@@ -30,7 +30,23 @@
             <div class="kiosk__area">
             	<iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://kiosk003.github.io/${info.url}"></iframe>
             </div>
-
+			<script type="text/javascript">
+	        	$(document).ready(function() {
+	        		let userId = "";
+	        		$('#kioskFrame').on('load', function() {
+					$.ajax({
+							url: "/member/userId",
+							type: "post",
+							async:"false"
+						}).done(function(resp) {
+							alert("ajax")
+							userId=resp;
+							var iframe = document.querySelector('iframe');
+							iframe.contentWindow.postMessage(JSON.stringify(resp), 'https://kiosk003.github.io/');
+						})
+					});
+				})
+            </script>
             <!-- 기록 영역 ( 게임용 ) -->
             <c:choose>
             	<c:when test="${info.is_game}">
