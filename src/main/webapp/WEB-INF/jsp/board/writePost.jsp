@@ -108,7 +108,7 @@
 							<input type="checkbox" class="postArea__secretChk" id="secretChk">
 							<label for="secretChk">비밀글 설정</label>
 							<script>
-								if(${post.is_secret} == 1) $("#secretChk").prop("checked",true);
+								if(`${post.is_secret}` == 1) $("#secretChk").prop("checked",true);
 							</script>
 						</c:when>
 					</c:choose>		

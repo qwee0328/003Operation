@@ -50,9 +50,13 @@ public class QnADAO {
 	}
 
 	// 질문 게시글 수정
-	// 게시글 수정
 	public int update(QnaQuestionDTO dto) {
 		return db.update("Qna.updateQuestion", dto);
+	}
+	
+	// 답변게시글 수정
+	public int update(QnaAnswerDTO dto) {
+		return db.update("Qna.updateAnswer", dto);
 	}
 
 	// 게시글 삭제

@@ -3,7 +3,7 @@ $(document).ready(function(){
 	let deleteExisingFileList = [];
 	
 	// 파일 삽입 시 목록 출력
-	$("#fileInput").on("change",function(e){
+	$(document).on("change","#fileInput",function(e){
 		$(".fileNameList").html("");
 		deleteFileList = [];
 		deleteExisingFileList = [-1];
@@ -170,7 +170,7 @@ $(document).ready(function(){
 		if($(".titleArea").text().slice(0,2)=="질문") bulletin_category_id = "question";
 		else if($(".titleArea").text().slice(0,2)!="자유") bulletin_category_id = "qna";
 		
-		// 수정중이었으면 삽입된 이미지 다시 삭제
+		// 삽입된 이미지 다 삭제
 		$.ajax({
 			url: "/board/deleteImage",
 			type: "POST",
@@ -198,8 +198,6 @@ $(document).ready(function(){
 		
 		if(bulletin_category_id=="qna") location.href="/qna/listBoard";
 		else location.href = "/board/viewPostConf/" + bulletin_category_id + "/" + $("#select").val() + "/" + $(".update").attr("data-id") +"?keyword="+$("#keyword").val();
-		
-		
 	});
 	
 });

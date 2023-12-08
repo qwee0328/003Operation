@@ -52,7 +52,7 @@ public class BoardService {
 
 			if (deleteFileList != null && deleteFileList.length >= 1) {
 				int idx = 0;
-				System.out.println("길이: :" + deleteFileList.length);
+				
 				for (int i = 0; i < files.length; i++) {
 					if (idx < deleteFileList.length && deleteFileList[idx] == i) {
 						idx++;
@@ -138,7 +138,8 @@ public class BoardService {
 	// 이미지 삭제
 	@Transactional
 	public void deleteImage(String src) throws Exception {
-		Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
+		System.out.println(src);
+		Path path = FileSystems.getDefault().getPath("c:/003Operation" + src);
 		Files.deleteIfExists(path);
 	}
 
@@ -146,7 +147,7 @@ public class BoardService {
 	@Transactional
 	public void deleteImage(String[] srcList) throws Exception {
 		for (String src : srcList) {
-			Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
+			Path path = FileSystems.getDefault().getPath("c:/003Operation" + src);
 			Files.deleteIfExists(path);
 		}
 	}
@@ -174,7 +175,7 @@ public class BoardService {
 			}
 
 			for (String src : deleteFileNameList) {
-				Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
+				Path path = FileSystems.getDefault().getPath("c:/003Operation/uploads/" + src);
 				Files.deleteIfExists(path);
 			}
 		}
@@ -182,7 +183,7 @@ public class BoardService {
 		// 기존 이미지 삭제
 		if (deleteImgsSrc != null && deleteImgsSrc.length >= 1) {
 			for (String src : deleteImgsSrc) {
-				Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
+				Path path = FileSystems.getDefault().getPath("c:/003Operation" + src);
 				Files.deleteIfExists(path);
 			}
 		}

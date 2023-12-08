@@ -15,17 +15,6 @@
 		<result property="anwser" column="anwser"/>
 	</resultMap>
 	
-<!-- 	<resultMap id="qna_questionUpdateInfo" type="java.util.Map">
-		<result property="id" column="id" />
-		<result property="member_id" column="member_id" />
-		<result property="member_nickname" column="member_nickname" />
-		<result property="title" column="title" />
-		<result property="content" column="content" />
-		<result property="is_secret" column="is_secret"/>
-		<result property="write_date" column="write_date" />
-		<result property="anwser" column="anwser"/>
-	</resultMap> -->
-	
 	<resultMap id="qna_questionInfo" type="java.util.Map">
 		<result property="id" column="id" />
 		<result property="member_id" column="member_id" />
@@ -76,9 +65,14 @@
 		select * from qnaAnswerInfo where qna_question_board_id= #{id};
 	</select>
 	
-	<!-- 게시글 수정 -->
+	<!-- 질문 게시글 수정 -->
 	<update id="updateQuestion">
 		update qna_question_board set title=#{title}, content=#{content}, is_secret = #{is_secret} where id=#{id};
+	</update>
+	
+	<!-- 답변 게시글 수정 -->
+	<update id="updateAnswer">
+		update qna_answer_board set content=#{content} where id=#{id};
 	</update>
 	
 	<!-- 게시글 삭제 -->

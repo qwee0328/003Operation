@@ -35,10 +35,10 @@ public class BoardController {
 	private BoardService bservice;
 
 	@Autowired
-	private HttpSession session;
-
-	@Autowired
 	private MemberService mservice;
+	
+	@Autowired
+	private HttpSession session;
 
 	// 게시글 작성 페이지로 이동
 	@RequestMapping("/goWritePost/{catogory}")
@@ -367,10 +367,8 @@ public class BoardController {
 	public void deleteImage(@RequestParam(value = "src", required = false) String src,
 			@RequestParam(value = "srcList", required = false) String[] srcList) throws Exception {
 		if (src != null && !src.isBlank()) {
-			System.out.println("여기아님");
 			bservice.deleteImage(src);
 		} else if (srcList != null && srcList.length >= 1) {
-			System.out.println(srcList[0]);
 			bservice.deleteImage(srcList);
 		}
 	}

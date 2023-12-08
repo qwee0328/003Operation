@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
-import com.operation.dto.BoardDTO;
 import com.operation.dto.QnaAnswerDTO;
 import com.operation.dto.QnaQuestionDTO;
 import com.operation.services.QnAService;
@@ -123,17 +122,30 @@ public class QnAController {
 		}
 	}
 
-//	// 답변 게시글 수정 페이지
-//	@ResponseBody
-//	@RequestMapping("/goUpdateAnswer/{post_id}")
-//	public QnaAnswerDTO goUpdateAnswer(@PathVariable int post_id) {
-//		return qservice.selectAnswerById(post_id);
-//	}
+	// 답변 게시글 수정 페이지
+	@ResponseBody
+	@RequestMapping("/goUpdateAnswer/{post_id}")
+	public Map<String, Object> goUpdateAnswer(@PathVariable int post_id) {
+		Map<String, Object> data = qservice.selectAnswerById(post_id);
+		return data;
+	}
 
 	// 질문글 수정
 	@ResponseBody
 	@RequestMapping("/updateQuestionPost")
 	public void updatePost(QnaQuestionDTO dto,
+			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
+			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList,
+			@RequestParam(value = "deleteExisingFileList", required = false) Integer[] deleteExisingFileList,
+			@RequestParam(value = "deleteImgs", required = false) String[] deleteImgs) throws Exception {
+
+		qservice.update(dto, attachFiles, deleteFileList, deleteExisingFileList, deleteImgs);
+	}
+	
+	// 답글 수정
+	@ResponseBody
+	@RequestMapping("/updateAnswerPost")
+	public void updatePost(QnaAnswerDTO dto,
 			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
 			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList,
 			@RequestParam(value = "deleteExisingFileList", required = false) Integer[] deleteExisingFileList,

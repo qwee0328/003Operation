@@ -1,5 +1,7 @@
 let deleteFileList = [];
 let deleteExisingFileList = [];
+deleteImgs = [];
+insertImgs = [];
 
 $(document).ready(function() {
 	// 내가쓴 QNA인지 확인
@@ -78,7 +80,7 @@ $(document).ready(function() {
 	});
 
 	// 답변 작성 시에 파일 삽입 시 목록 출력
-	$("#fileInput").on("change", function(e) {
+	$(document).on("change","#fileInput", function(e) {
 		$(".fileNameList").html("");
 		deleteFileList = [];
 		deleteExisingFileList = [-1];
@@ -171,11 +173,75 @@ $(document).on("click", ".write", function() {
 // 답변 수정
 $(document).on("click", ".answerUpdate", function() {
 	$.ajax({
-		url: "/qna/goUpdateAnswer/" + parseInt($(this).attr("data-id"))
-	}).done(function() {
+		url:"/qna/goUpdateAnswer/"+parseInt($(this).attr("data-id"))
+	}).done(function(answer){	
+		$(".answerContents").css("display","none");
+		$(".answerUpdate").css("display","none");
+		
+		let qnaAnswerWrite__title = $("<div>").attr("class","qnaAnswerWrite__title").html(`<b>Q&A 게시글 답변 수정</b>`);
+		let qnaAnswerWrite__hr = $("<hr>").attr("class","qnaAnswerWrite__hr");
+		let qnaAnswerWrite__file = $("<div>").attr("class","qnaAnswerWrite__file");
+		let dflex = $("<div>").attr("class","d-flex");
+		let fileInput__label = $("<label>").attr("class","fileInput__label").attr("for","fileInput").text("파일 첨부");
+		let fileNameList = $("<div>").attr("class","fileNameList d-flex");
 
+		if(answer.file_names != undefined){
+			let fileNames = answer.file_names.split(",");
+			let fileIds = answer.file_ids.split(",");
+			for(let i=0; i<fileNames.length; i++){
+				let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
+				let fileName = $("<div>").attr("class","fileName").text(fileNames[i]);
+				let fileIcon = $("<div>").attr("class","ml5").html("<i class='fa-solid fa-xmark deleteFileBtn' data-seq="+fileIds[i]+"></i>")
+				fileNameList.append(fileNameTag.append(fileName).append(fileIcon))		
+			}
+		}
+		
+		let qnaAnswerWrite__fileInput = $("<input>").attr("type","file").attr("class","qnaAnswerWrite__fileInput").attr("id","fileInput").prop("multiple","true");
+		qnaAnswerWrite__file.append(dflex.append(fileInput__label).append(fileNameList).append(qnaAnswerWrite__fileInput));
+		let qnaAnswerWrite__btns = $("<div>").attr("class","qnaAnswerWrite__btns d-flex");
+		let goList = $("<button>").attr("class","updateCancel bColorGray colorWhite").text("수정취소");
+		let write = $("<button>").attr("class","updateAnswer bColorMainPink colorWhite").text("수정완료").attr("data-id",answer.id);
+		qnaAnswerWrite__btns.append(goList).append(write);
+	
+		let summernote = $("<div>").attr("id","summernote");
+
+		$(".qnaAnswerWrite").append(qnaAnswerWrite__title).append(qnaAnswerWrite__hr).append(qnaAnswerWrite__file).append(summernote).append(qnaAnswerWrite__btns);
+		$('#summernote').summernote({
+		    placeholder:"내용을 입력해주세요",
+		    height:500,
+		    disableResizeEditor: true,
+		    lang: 'ko-KR',
+		    maximumFileSize: 10485760,
+		    toolbar: [
+		        ['style', ['style']],
+		        ['font', ['bold', 'underline', 'clear']],
+		        ['color', ['color']],
+		        ['para', ['ul', 'ol', 'paragraph']],
+		        ['table', ['table']],
+		        ['insert', ['picture']],
+		        ['view', ['help']]
+		    ],
+			callbacks: {
+				onImageUpload: function(files) {
+					uploadImg(files);			
+				},
+				onMediaDelete: function($target, editor, $editable) {     
+					if('${post}'==''){
+						// 수정이 아닌 새 글일 때
+						$.ajax({
+			    			url: "/board/deleteImage",
+			    			type: "POST",
+			    			data: { src : $target.attr("src") }
+			    		});
+					}else{
+						// 수정 중
+						deleteImgs.push($target.attr("src"));
+					}
+				}
+			}
+		});
+		$('#summernote').summernote("code",answer.content);
 	});
-
 });
 
 
@@ -183,3 +249,94 @@ $(document).on("click", ".answerUpdate", function() {
 $(document).on("click", "#questionUpdate", function() {
 	location.href = "/qna/goUpdateQuestion/" + parseInt($(this).attr("data-id"));
 });
+
+
+
+// summernote 이미지 업로드
+function uploadImg(imgs){
+	let formData = new FormData();
+	
+	for (let i = 0; i < imgs.length; i++) {
+        formData.append("imgs", imgs[i]);
+    }
+	
+	$.ajax({
+		url: "/board/uploadImage",
+		type: "POST",
+		data: formData,
+		contentType: false,
+    	processData: false,
+    	success: function(data) {
+			for (let i = 0; i < data.length; i++) {
+				let img = $("<img>");
+				img.css('width', '100%');
+				img.attr("src", data[i]);
+				$("#summernote").summernote("insertNode", img[0]);		
+				insertImgs.push(data[i]);
+			}
+		}
+	})
+}
+
+
+// 답변 수정
+$(document).on("click",".updateAnswer",function(){
+	// 내용 입력 검사
+	if($(".note-editable").html()==""){
+		alert("내용을 입력하세요.");
+		$(".note-editable").focus();
+		return;
+	}
+	
+	let id = $(this).attr("data-id");
+		
+	let formData = new FormData();
+	formData.append("id", id)
+	formData.append("content",$(".note-editable").html());
+	
+	// 새로 등록한 파일 중 삭제한 파일
+	for(let i=0; i<deleteFileList.length; i++){
+		formData.append("deleteFileList",deleteFileList[i]);
+	}
+	
+	// 기존 파일 중 삭제한 파일
+	for(let i=0; i<deleteExisingFileList.length; i++){
+		formData.append("deleteExisingFileList",deleteExisingFileList[i]);
+	};
+	
+	// 기존 이미지 중 삭제한 이미지
+	for(let i=0; i<deleteImgs.length; i++){
+		formData.append("deleteImgs",deleteImgs[i]);
+	}
+	
+	
+	for(let i=0; i<$(".qnaAnswerWrite__fileInput")[0].files.length; i++){
+		if(i==5) break;
+		formData.append("attachFiles",$(".qnaAnswerWrite__fileInput")[0].files[i]);
+		console.log($(".qnaAnswerWrite__fileInput")[0].files[i]);
+	}
+		
+	$.ajax({
+		url:"/qna/updateAnswerPost",
+		type:"post",
+		data:formData,
+		contentType: false,
+		processData: false
+	}).done(function(){
+		location.reload();
+	});
+});
+
+$(document).on("click",".updateCancel",function(){
+	$(".answerContents").css("display","block");
+	$(".answerUpdate").css("display","block");
+	$(".qnaAnswerWrite").html("");
+	
+	// 수정중이었으면 삽입된 이미지 다시 삭제
+	$.ajax({
+		url: "/board/deleteImage",
+		type: "POST",
+		traditional: true,
+		data: { srcList : insertImgs }
+	});
+})
