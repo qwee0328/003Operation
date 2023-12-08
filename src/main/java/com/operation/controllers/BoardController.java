@@ -35,10 +35,10 @@ public class BoardController {
 	private BoardService bservice;
 
 	@Autowired
-	private MemberService mservice;
+	private HttpSession session;
 
 	@Autowired
-	private HttpSession session;
+	private MemberService mservice;
 
 	// 게시글 작성 페이지로 이동
 	@RequestMapping("/goWritePost/{catogory}")
@@ -136,6 +136,7 @@ public class BoardController {
 		model.addAttribute("type", type);
 		model.addAttribute("select", select);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("profile", mservice.selectProfileImgById((String) session.getAttribute("loginID")));
 		return "board/viewPost";
 	}
 
@@ -245,6 +246,7 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping("/insertPostReply")
 	public boolean insertPostReply(@RequestParam String postId, @RequestParam String reply) {
+		System.out.println(postId);
 		int id = Integer.parseInt(postId);
 		return bservice.insertPostReply(id, reply);
 	}
@@ -305,15 +307,17 @@ public class BoardController {
 	@RequestMapping("/insertReReply")
 	public boolean insertReReply(@RequestParam String postId, @RequestParam String parentId,
 			@RequestParam String content) {
+		System.out.println(("대댓글 작성"));
 		int postid = Integer.parseInt(postId);
 		int parentid = Integer.parseInt(parentId);
 		return bservice.insertReReply(postid, parentid, content);
 	}
-	
+
 	// 대댓글 불러오기
 	@ResponseBody
 	@RequestMapping("/selectReReplyAll")
 	public List<ReplyDTO> selectReReplyAll(@RequestParam String parentId) {
+		System.out.println(parentId + "test");
 		int parentid = Integer.parseInt(parentId);
 		return bservice.selectReReplyAll(parentid);
 	}
@@ -345,7 +349,6 @@ public class BoardController {
 	@RequestMapping("/deletePost/{category}/{dataId}")
 	public String deletePost(@PathVariable String category, @PathVariable String dataId) {
 		int postId = Integer.parseInt(dataId);
-		System.out.println(category + dataId);
 		bservice.deletePost(postId);
 		return "redirect:/board/listBoard/" + category;
 	}

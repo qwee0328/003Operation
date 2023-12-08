@@ -348,7 +348,7 @@
 	border-bottom-left-radius: 10px;
 }
 
-.rereplyInput #replyInput:focus {
+#reReplyInputTag:focus {
 	outline: none;
 }
 
@@ -356,7 +356,7 @@
 	border: 2px solid black;
 }
 
-#replyInputCancle {
+#reReplyInputSubmit,#replyInputCancle {
 	width: 9%;
 	background-color: transparent;
 	border: none;
@@ -401,6 +401,17 @@
 	margin: 0 5px;
 	background-color: #e1e6f5;
 }
+
+/* QNA */
+.answerTitle{
+	margin: 100px 0 20px 0;
+    font-size: 25px;
+    font-weight: 600;
+}
+.answerConf{
+	padding: 50px 0;
+}
+
 
 @media (max-width: 1050px) {
 	.naviBackground {

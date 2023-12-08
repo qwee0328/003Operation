@@ -1,6 +1,4 @@
 $(document).ready(function() {
-	
-
 
 	$.ajax({
 		url: "/kiosk/getBestRecord",
