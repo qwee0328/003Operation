@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
+import com.operation.dto.BoardDTO;
 import com.operation.dto.QnaAnswerDTO;
 import com.operation.dto.QnaQuestionDTO;
 import com.operation.services.QnAService;
@@ -86,16 +87,54 @@ public class QnAController {
 	public String viewPostConf(@PathVariable String dataId, Model model) {
 		int postId = Integer.parseInt(dataId);
 		Map<String, Object> post = qservice.selectById(postId);
+		System.out.println("Q&A 게시글 정보");
+		System.out.println("질문: "+post.get("question"));
+		System.out.println("답변: "+post.get("answer"));
+
 		post.put("id", dataId); // 기존처럼 select 쿼리로 값 불러오도록 바꿔 주세용
-		model.addAttribute("post", post);
-		System.out.println(post);
-		return "qna/viewQna";
+		if(post.get("permission") == null) {
+			model.addAttribute("post", post);
+			model.addAttribute("isQna", true);
+			return "qna/viewQna";
+		}else {
+			// 에러 페이지로 이동
+			return "accessDenied";
+		}
 	}
 
 	
-	@RequestMapping("/updatePost")
-	public void updatePost() {
-		// 질문글 수정
+	// 질문 게시글 수정 페이지
+	@RequestMapping("/goUpdateQuestion/{post_id}")
+	public String goUpdateQuestion(Model model, @PathVariable String post_id) {
+		int postId = Integer.parseInt(post_id);
+		Map<String, Object> post = qservice.selectQuestionById(postId);
+		if(post.get("permission") == null) {
+			model.addAttribute("post", post);
+			model.addAttribute("isQna", true);
+			return "board/writePost";
+		}else {
+			// 에러 페이지로 이동
+			return "accessDenied";
+		}
+	}
+
+//	// 답변 게시글 수정 페이지
+//	@ResponseBody
+//	@RequestMapping("/goUpdateAnswer/{post_id}")
+//	public QnaAnswerDTO goUpdateAnswer(@PathVariable int post_id) {
+//		return qservice.selectAnswerById(post_id);
+//	}
+	
+	// 질문글 수정
+	@ResponseBody
+	@RequestMapping("/updateQuestionPost")
+	public void updatePost(QnaQuestionDTO dto,
+			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
+			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList,
+			@RequestParam(value = "deleteExisingFileList", required = false) Integer[] deleteExisingFileList,
+			@RequestParam(value = "deleteImgs", required = false) String[] deleteImgs) throws Exception {
+		
+		qservice.update(dto, attachFiles, deleteFileList, deleteExisingFileList, deleteImgs);
 	}
 	
 	@RequestMapping("/deletePost")

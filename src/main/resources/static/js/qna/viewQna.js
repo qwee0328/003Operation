@@ -80,5 +80,32 @@ $(document).on("click",".write",function(){
 		processData: false
 	}).done(function(){
 		location.reload();
+		// 내용 불러오는 기능 구현하면 reload 보다는 직접 요소 뿌려주는 게 나을 것 같아요
+		//
+		//
+		//
+		//
+		//
+		//
+		//
+		// 이렇게 하면 확인하겠지...?
+		//
 	});
+});
+
+
+// 답변 수정
+$(document).on("click",".answerUpdate",function(){
+	$.ajax({
+		url:"/qna/goUpdateAnswer/"+parseInt($(this).attr("data-id"))
+	}).done(function(){
+		
+	});
+
+});
+
+
+// 질문 수정
+$(document).on("click","#questionUpdate",function(){
+	location.href="/qna/goUpdateQuestion/"+parseInt($(this).attr("data-id"));
 });

@@ -35,9 +35,6 @@ public class BoardController {
 	private BoardService bservice;
 
 	@Autowired
-	private MemberService mservice;
-
-	@Autowired
 	private HttpSession session;
 
 	// 게시글 작성 페이지로 이동

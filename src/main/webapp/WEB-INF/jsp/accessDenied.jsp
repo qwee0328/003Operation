@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Error</title>
+<title>접근 제한</title>
 </head>
 <body>
-	문제가 발생했습니다.<br>
-	계속해서 같은 문제가 발생하면 관리자에게 문의하세요.<br>
-	0qwee0328@gmail.com<br>
+	접근 권한이 없습니다.<br>
 	<br>
 	<a href="/">메인 화면으로 이동</a>
 </body>
