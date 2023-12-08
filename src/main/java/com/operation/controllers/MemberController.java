@@ -221,6 +221,11 @@ public class MemberController {
 	}
 
 
+	// 마이페이지 내 게시글 내역
+	@RequestMapping("/goMyPost")
+	public String goMyPost() {
+		return "mypage/myPost";
+	}
 
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

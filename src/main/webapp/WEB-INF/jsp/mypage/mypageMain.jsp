@@ -113,56 +113,66 @@
 				<div class="mypageMenu__myActivity">
 					<div class="myActivity__title">나의 활동</div>
 					<div class="myActivity__menu">
-						<div class="myActivity__menu1 d-flex">
+						<div class="myActivity__menu1 d-flex">					
 							<div class="myActivity__game d-flex">
-								<div class="myActivity__icon">
-									<i class="fa-solid fa-gamepad colorGray"></i>
-								</div>
-								<div class="myActivity__txt colorGray">키오스크 게임 이용 내역</div>
-								<div class="myActivity__move">
-									<i class="fa-solid fa-chevron-right colorGray"></i>
-								</div>
+								<a href="#">
+									<div class="myActivity__icon">
+										<i class="fa-solid fa-gamepad colorGray"></i>
+									</div>
+									<div class="myActivity__txt colorGray">키오스크 게임 이용 내역</div>
+									<div class="myActivity__move">
+										<i class="fa-solid fa-chevron-right colorGray"></i>
+									</div>
+								</a>
 							</div>
 							<div class="myActivity__point d-flex">
-								<div class="myActivity__icon">
-									<i class="fa-solid fa-coins colorGray"></i>
-								</div>
-								<div class="myActivity__txt colorGray">포인트 적립 내역</div>
-								<div class="myActivity__move">
-									<i class="fa-solid fa-chevron-right colorGray"></i>
-								</div>
-							</div>
+								<a href="#">
+									<div class="myActivity__icon">
+										<i class="fa-solid fa-coins colorGray"></i>
+									</div>
+									<div class="myActivity__txt colorGray">포인트 적립 내역</div>
+									<div class="myActivity__move">
+										<i class="fa-solid fa-chevron-right colorGray"></i>
+									</div>
+								</a>
+							</div>				
 						</div>
 						<div class="myActivity__menu2 d-flex">
 							<div class="myActivity__game d-flex">
-								<div class="myActivity__icon">
-									<i class="fa-solid fa-file colorGray"></i>
-								</div>
-								<div class="myActivity__txt colorGray">작성한 게시글 내역</div>
-								<div class="myActivity__move">
-									<i class="fa-solid fa-chevron-right colorGray"></i>
-								</div>
-							</div>
-							<div class="myActivity__point d-flex">
-								<div class="myActivity__icon">
-									<i class="fa-solid fa-bookmark colorGray"></i>
-								</div>
-								<div class="myActivity__txt colorGray">게시글 북마크 내역</div>
-								<div class="myActivity__move">
-									<i class="fa-solid fa-chevron-right colorGray"></i>
-								</div>
-							</div>
+								<a href="#">
+									<div class="myActivity__icon">
+										<i class="fa-solid fa-file colorGray"></i>
+									</div>
+									<div class="myActivity__txt colorGray">작성한 게시글 내역</div>
+									<div class="myActivity__move">
+										<i class="fa-solid fa-chevron-right colorGray"></i>
+									</div>
+								</a>
+							</div>						
+							<div class="myActivity__point d-flex">	
+								<a href="#">
+									<div class="myActivity__icon">
+										<i class="fa-solid fa-bookmark colorGray"></i>
+									</div>
+									<div class="myActivity__txt colorGray">게시글 북마크 내역</div>
+									<div class="myActivity__move">
+										<i class="fa-solid fa-chevron-right colorGray"></i>
+									</div>		
+								</a>						
+							</div>					
 						</div>
 						<div class="myActivity__menu3 d-flex">
 							<div class="myActivity__game d-flex">
-								<div class="myActivity__icon">
-									<i class="fa-solid fa-comment-dots colorGray"></i>
-								</div>
-								<div class="myActivity__txt colorGray">작성한 댓글 내역</div>
-								<div class="myActivity__move">
-									<i class="fa-solid fa-chevron-right colorGray"></i>
-								</div>
-							</div>
+								<a href="#">
+									<div class="myActivity__icon">
+										<i class="fa-solid fa-comment-dots colorGray"></i>
+									</div>
+									<div class="myActivity__txt colorGray">작성한 댓글 내역</div>
+									<div class="myActivity__move">
+										<i class="fa-solid fa-chevron-right colorGray"></i>
+									</div>
+								</a>
+							</div>						
 						</div>
 					</div>
 				</div>
@@ -170,17 +180,19 @@
 				<div class="mypageMenu__myAsk">
 					<div class="myAsk__title">나의 문의 내역</div>
 					<div class="myAsk__menu">
-						<div class="myAsk__menu1 d-flex">
+						<div class="myAsk__menu1 d-flex">					
 							<div class="myAsk__qna d-flex">
-								<div class="myAsk__icon">
-									<i class="fa-solid fa-circle-question colorGray"></i>
-								</div>
-								<!-- <div class="myAsk__txt colorGray">Q&A 문의 내역</div> -->
-								<div class="myAsk__txt"><a href="#" class="colorGray">Q&A 문의 내역</a></div>
-								<div class="myAsk__move">
-									<i class="fa-solid fa-chevron-right colorGray"></i>
-								</div>
-							</div>
+								<a href="#">
+									<div class="myAsk__icon">
+										<i class="fa-solid fa-circle-question colorGray"></i>
+									</div>
+									<!-- <div class="myAsk__txt colorGray">Q&A 문의 내역</div> -->
+									<div class="myAsk__txt colorGray">Q&A 문의 내역</div>
+									<div class="myAsk__move">
+										<i class="fa-solid fa-chevron-right colorGray"></i>
+									</div>
+								</a>
+							</div>						
 						</div>
 					</div>
 				</div>
@@ -190,14 +202,16 @@
 					<div class="myInfo__menu">
 						<div class="myInfo__menu1 d-flex">
 							<div class="myInfo__setting d-flex">
-								<div class="myInfo__icon">
-									<i class="fa-solid fa-gear colorGray"></i>
-								</div>
-								<div class="myInfo__txt"><a href="/member/viewMypage" class="colorGray">개인 정보 확인 및 수정</a></div>
-								<div class="myInfo__move">
-									<i class="fa-solid fa-chevron-right colorGray"></i>
-								</div>
-							</div>
+								<a href="/member/viewMypage">
+									<div class="myInfo__icon">
+										<i class="fa-solid fa-gear colorGray"></i>
+									</div>
+									<div class="myInfo__txt colorGray">개인 정보 확인 및 수정</div>
+									<div class="myInfo__move">
+										<i class="fa-solid fa-chevron-right colorGray"></i>
+									</div>		
+								</a>						
+							</div>							
 						</div>
 					</div>
 				</div>
