@@ -41,11 +41,8 @@
 					let img = $("<img>");
 					img.css('width', '100%');
 					img.attr("src", data[i]);
-					$j("#summernote").summernote("insertNode", img[0]);
-				
-					if('${post}'!=''){ // 수정 중이면
-						insertImgs.push(data[i]);
-					}
+					$j("#summernote").summernote("insertNode", img[0]);		
+					insertImgs.push(data[i]);
 				}
 			}
 		})

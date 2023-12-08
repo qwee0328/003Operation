@@ -161,7 +161,6 @@ public class QnAService {
 	
 	
 	// 질문 게시글 수정
-	// 게시글 정보 수정
 	@Transactional
 	public void update(QnaQuestionDTO dto, MultipartFile[] files, Integer[] deleteFileList, Integer[] deleteExisingFileList,
 			String[] deleteImgsSrc) throws Exception {
@@ -171,15 +170,16 @@ public class QnAService {
 		if (deleteExisingFileList != null && deleteExisingFileList.length >= 1) {
 			List<String> deleteFileNameList = new ArrayList<>();
 			if (deleteExisingFileList[0] == -1) {
-				deleteFileNameList = fdao.selectAllByPostId(dto.getId());
-				fdao.deleteAllByPostId(dto.getId());
+				deleteFileNameList = fdao.selectAllByQnaQId(dto.getId());
+				fdao.deleteAllByQnaQId(dto.getId());
 			} else {
-				deleteFileNameList = fdao.selectByIds(deleteExisingFileList);
-				fdao.delete(deleteExisingFileList);
+				deleteFileNameList = fdao.selectByQnaQIds(deleteExisingFileList);
+				fdao.deleteQnaQ(deleteExisingFileList);
 			}
 
 			for (String src : deleteFileNameList) {
-				Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
+				System.out.println(src);
+				Path path = FileSystems.getDefault().getPath("c:/003Operation/uploads/" + src);
 				Files.deleteIfExists(path);
 			}
 		}
@@ -187,7 +187,7 @@ public class QnAService {
 		// 기존 이미지 삭제
 		if (deleteImgsSrc != null && deleteImgsSrc.length >= 1) {
 			for (String src : deleteImgsSrc) {
-				Path path = FileSystems.getDefault().getPath("c:/003Operation/" + src);
+				Path path = FileSystems.getDefault().getPath("c:/003Operation" + src);
 				Files.deleteIfExists(path);
 			}
 		}

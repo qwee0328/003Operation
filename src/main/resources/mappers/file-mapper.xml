@@ -18,15 +18,22 @@
 	
 	
 	<select id="selectAllByPostId" resultType="String">
-		select origin_name from bulletin_board_file where bulletin_board_id = ${bulletin_board_id}; 
+		select system_name from bulletin_board_file where bulletin_board_id = ${bulletin_board_id}; 
 	</select>
 	
 	<select id="selectAllByQnaQId" resultType="String">
-		select origin_name from qna_question_board_file where qna_question_board_id = ${qna_question_board_id}; 
+		select system_name from qna_question_board_file where qna_question_board_id = ${qna_question_board_id}; 
 	</select>
 	
 	<select id="selectByIds" resultType="String">
-		select origin_name from bulletin_board_file where id in
+		select system_name from bulletin_board_file where id in
+		 <foreach collection="array" item="id" open="(" separator="," close=");">
+			#{id}
+		</foreach>
+	</select>
+	
+	<select id="selectByQnaQIds" resultType="String">
+		select system_name from qna_question_board_file where id in
 		 <foreach collection="array" item="id" open="(" separator="," close=");">
 			#{id}
 		</foreach>
@@ -39,7 +46,18 @@
 		</foreach>
 	</delete>
 	
+	<delete id="deleteQnaQ">
+		delete from qna_question_board_file where id in 
+		<foreach collection="array" item="id" open="(" separator="," close=");">
+			#{id}
+		</foreach>
+	</delete>
+	
 	<delete id="deleteAllByPostId">
 		delete from bulletin_board_file where bulletin_board_id = #{bulletin_board_id};
+	</delete>
+	
+	<delete id="deleteAllByQnaQId">
+		delete from qna_question_board_file where qna_question_board_id = #{qna_question_board_id};
 	</delete>
 </mapper>
