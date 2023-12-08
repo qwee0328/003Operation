@@ -136,7 +136,7 @@ public class BoardController {
 		model.addAttribute("type", type);
 		model.addAttribute("select", select);
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("profile",mservice.selectProfileImgById((String)session.getAttribute("loginID")));
+		model.addAttribute("profile", mservice.selectProfileImgById((String) session.getAttribute("loginID")));
 		return "board/viewPost";
 	}
 
@@ -312,12 +312,12 @@ public class BoardController {
 		int parentid = Integer.parseInt(parentId);
 		return bservice.insertReReply(postid, parentid, content);
 	}
-	
+
 	// 대댓글 불러오기
 	@ResponseBody
 	@RequestMapping("/selectReReplyAll")
 	public List<ReplyDTO> selectReReplyAll(@RequestParam String parentId) {
-		System.out.println(parentId+"test");
+		System.out.println(parentId + "test");
 		int parentid = Integer.parseInt(parentId);
 		return bservice.selectReReplyAll(parentid);
 	}
@@ -349,7 +349,6 @@ public class BoardController {
 	@RequestMapping("/deletePost/{category}/{dataId}")
 	public String deletePost(@PathVariable String category, @PathVariable String dataId) {
 		int postId = Integer.parseInt(dataId);
-		System.out.println(category + dataId);
 		bservice.deletePost(postId);
 		return "redirect:/board/listBoard/" + category;
 	}
