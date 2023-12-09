@@ -30,7 +30,6 @@
 						<ul class="bColorLightBlue" id="boradMenu">
 							<li><a href="/board/listBoard/free">자유게시판</a></li>
 							<li><a href="/board/listBoard/question">질문게시판</a></li>
-					<!-- 		<li><a href="#">자주 묻는 질문</a></li> -->
 							<li><a href="/qna/listBoard">Q&A</a></li>
 						</ul>
 					</div>
@@ -43,7 +42,7 @@
 									<li><a href="/member/viewMypage">내 정보</a></li>
 									<li><a href="#">게임 기록</a></li>
 									<li><a href="#">포인트 적립 내역</a></li>
-									<li><a href="#">내 게시글</a></li>
+									<li><a href="/member/goMyPost">내 게시글</a></li>
 								</ul>
 							</div>
 						</c:when>
@@ -94,7 +93,6 @@
 						<div class="ham-board"><a href="/board/listBoard/free">게시판</a></div>
 						<div class="ham-board-sub"><a href="/board/listBoard/free">자유게시판</a></div>
 						<div class="ham-board-sub"><a href="/board/listBoard/question">질문게시판</a></div>
-<!-- 						<div class="ham-board-sub"><a href="#">자주 묻는 질문</a></div> -->
 						<div class="ham-board-sub"><a href="/qna/listBoard">Q&A</a></div>
 						
 						<c:choose>
@@ -103,7 +101,7 @@
 								<div class="ham-mypage-sub"><a href="/member/viewMypage">내 정보</a></div>
 								<div class="ham-mypage-sub"><a href="#">게임 기록</a></div>
 								<div class="ham-mypage-sub"><a href="#">포인트 적립 내역</a></div>
-								<div class="ham-mypage-sub"><a href="#">내 게시글</a></div>
+								<div class="ham-mypage-sub"><a href="/member/goMyPost">내 게시글</a></div>
 							</c:when>
 						</c:choose>	
 						

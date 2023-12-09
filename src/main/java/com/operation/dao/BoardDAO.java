@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.operation.constants.Constants;
 import com.operation.dto.BoardDTO;
 import com.operation.dto.ReplyDTO;
 
@@ -202,5 +203,25 @@ public class BoardDAO {
 	// 마이페이지 > 내 게시글 검색 총 개수
 	public int selectSearchMyPostCnt(Map<String, Object> param){
 		return db.selectOne("Board.selectSearchMyPostCnt",param);
+	}
+	
+	// 마이페이지 > 내 북마크 불러오기
+	public List<Map<String, Object>> selectMyBookmark(Map<String, Object> param){
+		return db.selectList("Board.selectMyBookmark",param);
+	}
+	
+	// 마이페이지 > 내 북마크 게시글 수 불러오기
+	public int selectMyBookmarkTotalCnt(String id){
+		return db.selectOne("Board.selectMyBookmarkTotalCnt",id);
+	}
+	
+	// 마이페이지 > 내 북마크 게시글 검색
+	public List<Map<String, Object>> searchMyBookmark(Map<String, Object> param){
+		return db.selectList("Board.searchMyBookmark",param);
+	}
+	
+	// 마이페이지 > 내 북마크 게시글 검색 총 개수
+	public int selectSearchMyBookmarkCnt(Map<String, Object> param){
+		return db.selectOne("Board.selectSearchMyBookmarkCnt",param);
 	}
 }

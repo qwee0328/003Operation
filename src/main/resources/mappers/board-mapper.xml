@@ -345,4 +345,25 @@
 		select count(*) from myPost where member_id=#{member_id} and ${select} like #{keyword};
 	</select>
 	
+	<!-- 북마크 불러오기 -->
+	<select id="selectMyBookmark" resultMap="postInfo">
+		select * from myBookmark where board_bookmark_mamber_id = #{member_id}
+		order by board_bookmark_id desc limit #{start},#{count};
+	</select>
+	
+	<!-- 내 북마크 게시글 수 불러오기 -->
+	<select id="selectMyBookmarkTotalCnt" resultType="int">
+		select count(*) from myBookmark where board_bookmark_mamber_id = #{member_id};
+	</select>
+	
+	<!-- 검색한 북마크 불러오기 -->
+	<select id="searchMyBookmark" resultMap="postInfo">
+		select * from myBookmark where board_bookmark_mamber_id = #{member_id} and ${select} like #{keyword}
+		order by board_bookmark_id desc limit #{start},#{count};
+	</select>
+	
+	<!-- 검색한 내 북마크 게시글 수 불러오기 -->
+	<select id="selectSearchMyBookmarkCnt" resultType="int">
+		select count(*) from myBookmark where board_bookmark_mamber_id = #{member_id} and ${select} like #{keyword};
+	</select>
 </mapper>

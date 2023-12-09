@@ -224,24 +224,6 @@
 
 }
 
-.board__writeBtnCover {
-	position: absolute;
-	right: 0;
-}
-
-.board__writeBtn {
-	width: 100px;
-	height: 50px;
-	border-radius: 10px;
-	font-size: 20px;
-	border: 0;
-}
-
-.board__writeBtn:hover{
-	cursor: pointer;
-}
-
-
 .board__pagination a {
 	width: 40px;
 	height: 40px;
@@ -297,9 +279,11 @@
 	background-color: #D1D2D8;
 	padding:5px 10px;
 	font-size: 18px;
-	color:#7d7d7d;
 	border: 1px solid #7d7d7d;
 	cursor: pointer;
+}
+.mypage__tap>div>a{
+	color:#7d7d7d;
 }
 
 .mypage__tap>div.active{

@@ -1,9 +1,6 @@
 package com.operation.controllers;
 
-import java.io.File;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.commons.EncryptionUtils;
 import com.operation.dto.MemberDTO;
+import com.operation.services.BoardService;
 import com.operation.services.MemberService;
 
 import jakarta.servlet.http.HttpSession;
@@ -27,6 +25,9 @@ public class MemberController {
 	@Autowired
 	private MemberService mservice;
 
+	@Autowired
+	private BoardService bservice;
+	
 	@Autowired
 	private HttpSession session;
 
@@ -222,7 +223,7 @@ public class MemberController {
 	}
 
 
-	// 마이페이지 내 게시글 내역
+	// 마이페이지 내 게시글 내역으로 이동
 	@RequestMapping("/goMyPost")
 	public String goMyPost() {
 		return "mypage/myPost";
@@ -233,11 +234,23 @@ public class MemberController {
 	@RequestMapping("/selectMyPost")
 	public Map<String, Object> selectMyPost(String id, @RequestParam(value = "cpage", required = false) String cpage){
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
-		return mservice.selectMyPost((String) session.getAttribute("loginID"), currentPage);
+		return bservice.selectMyPost((String) session.getAttribute("loginID"), currentPage);
 	}
 	
-	// 마이페이지 내 게시글에서 선택한 게시글 삭제하기
 	
+	// 마이페이지 내 북마크 내역으로 이동
+	@RequestMapping("/goMyBookmark")
+	public String goMyBookmark() {
+		return "mypage/myBookmark";
+	}
+		
+	// 내 북마크 불러오기
+	@ResponseBody
+	@RequestMapping("/selectMyBookmark")
+	public Map<String, Object> selectMyBookmark(String id, @RequestParam(value = "cpage", required = false) String cpage){
+		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
+		return bservice.selectMyBookmark(currentPage);
+	}
 
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

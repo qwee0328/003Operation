@@ -15,46 +15,6 @@ function postLoad(cpage){
 		postPrint(result);
 		select ="";
 		keyword="";
-		/*$(".board__posts").html("");	
-
-		for(let i=0; i<post.length; i++){
-			let board__post = $("<div>").attr("class","board__post d-flex");
-			let post__chkBox = $("<div>").attr("class","post__chkBox");
-			let chkBox = $("<input>").attr("type","checkbox").attr("class","postChk");
-			let post__seq = $("<div>").attr("class","post__seq").text(post[i].id);
-			let post__tacCover = $("<div>").attr("class","post__tacCover d-flex");
-			let post__titleAndCategory = $("<div>").attr("class","post__titleAndCategory");
-			let post__titleAndReply = $("<div>").attr("class","post__titleAndReply d-flex");
-			let post__title = $("<div>").attr("class","post__title").text(post[i].title).attr("data-id",post[i].id).attr("data-category",post[i].bulletin_category_id);
-			post__titleAndReply.append(post__title);
-			if(post[i].bulletin_category_id == "free"){
-				let post__reply = $("<div>").attr("class","post__reply").text("댓글 "+post[i].reply_count);
-				let post__replyMini = $("<div>").attr("class","post__replyMini").html(`<i class='fa-regular fa-comment align-center'></i>`+post[i].reply_count);
-				post__titleAndReply.append(post__reply).append(post__replyMini);
-			}
-			let post__category = $("<div>").attr("class","post__category");
-			if(post[i].bulletin_category_id == "free"){
-				post__category.text("게시판: 자유게시판");
-			}else{
-				post__category.text("게시판: 질문게시판");
-			}
-			post__tacCover.append(post__titleAndCategory.append(post__titleAndReply).append(post__category));
-			let post__writeDate = $("<div>").attr("class","post__writeDate").text(post[i].write_date.slice(0,10));
-			let post__viewCount = $("<div>").attr("class","post__viewCount").text(post[i].view_count);
-			let post__recomCount = $("<div>").attr("class","post__recomCount").text(post[i].recom_count);
-			
-			board__post.append(post__chkBox.append(chkBox)).append(post__seq).append(post__tacCover).append(post__writeDate).append(post__viewCount).append(post__recomCount);
-			if(post[i].file_count>0){
-				let post__isFile = $("<div>").attr("class","post__isFile").html(`<i class='fa-solid fa-paperclip'></i>`);
-				board__post.append(post__isFile);
-			}
-			
-			$(".board__posts").append(board__post);	
-		}
-		
-		$(".postCnt__txt").text(result.recordTotalCount);
-		$(".pagination").html("");
-		drawPagination(result.recordTotalCount, result.postCurPage, result.recordCountPerPage, result.naviCountPerPage)*/
 	})
 }
 

@@ -24,9 +24,6 @@ import com.operation.dto.MemberDTO;
 public class MemberService {
 	@Autowired
 	private MemberDAO dao;
-	
-	@Autowired
-	private BoardDAO bdao;
 
 	// 아이디 중복 체크
 	public boolean idDuplicationCheck(String id) {
@@ -145,22 +142,4 @@ public class MemberService {
 		return dao.chkNickname(nickname);
 	}
 	
-	// 내 게시글 불러오기
-	public Map<String, Object> selectMyPost(String id, int cpage){
-		Map<String, Object> result = new HashMap<>();
-		
-		
-		Map<String, Object> param = new HashMap<>();
-		param.put("member_id", id);
-		param.put("start", cpage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
-		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
-
-		int recordTotalCount = bdao.selectMyPostTotalCnt(id);
-		result.put("recordTotalCount", recordTotalCount);
-		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
-		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
-		result.put("postCurPage", cpage);
-		result.put("post", bdao.selectMyPost(param));
-		return result;
-	}
 }

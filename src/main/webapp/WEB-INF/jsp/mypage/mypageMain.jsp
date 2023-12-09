@@ -59,19 +59,6 @@
 						</div>
 					</div>
 				</div>
-			<%-- 	<div class="profile__mini">
-					<div class="profile__cover">
-						<div class="profile__img align-center">
-							<img src="/images/profileImg.png">
-						</div>
-						<div class="profile__nickname align-center">
-							${loginNickName}&nbsp;&nbsp;<i class="fa-solid fa-chevron-right colorGray"></i>
-						</div>
-						<div class="profile__logoutBtnCover align-center">
-							<button class="profile__logoutBtn bColorWhite">로그아웃</button>
-						</div>
-					</div>
-				</div> --%>
 				<div class="mypageMenu__top">
 					<div class="mypageMenu__topLeft">
 						<div class="topLeft__cover">
@@ -150,7 +137,7 @@
 								</a>
 							</div>						
 							<div class="myActivity__point d-flex">	
-								<a href="#">
+								<a href="/member/goMyBookmark">
 									<div class="myActivity__icon">
 										<i class="fa-solid fa-bookmark colorGray"></i>
 									</div>
@@ -186,7 +173,6 @@
 									<div class="myAsk__icon">
 										<i class="fa-solid fa-circle-question colorGray"></i>
 									</div>
-									<!-- <div class="myAsk__txt colorGray">Q&A 문의 내역</div> -->
 									<div class="myAsk__txt colorGray">Q&A 문의 내역</div>
 									<div class="myAsk__move">
 										<i class="fa-solid fa-chevron-right colorGray"></i>

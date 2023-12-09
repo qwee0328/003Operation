@@ -268,7 +268,23 @@
 	font-size: 20px;
 }
 
+.mypage__tap{
+	height: 40px;
+}
+.mypage__tap>div{
+	background-color: #D1D2D8;
+	padding:5px 10px;
+	font-size: 18px;
+	border: 1px solid #7d7d7d;
+	cursor: pointer;
+}
+.mypage__tap>div>a{
+	color:#7d7d7d;
+}
 
+.mypage__tap>div.active{
+	background-color: #ffffff;
+}
 
 @media (max-width: 786px) {
 	.guide {
