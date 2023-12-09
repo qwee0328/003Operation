@@ -94,13 +94,12 @@ public class KioskController {
 	@PostMapping("/insertData")
 	public void insert(@RequestBody KioskInfoDTO kiosk) { 
 		System.out.println(kiosk);
-//		System.out.println(record);
-//		String id = record.getMember_id();
-//		id = id.substring(1,id.length()-1);
-//		if(!(id==null || id.isEmpty())) {
-//			record.setMember_id(id);
-//			kservice.insert(kiosk, record);
-//		}
+		String id = kiosk.getMember_id();
+		id = id.substring(1,id.length()-1);
+		if(!(id==null || id.isEmpty())) {
+			kiosk.setMember_id(id);
+			kservice.insert(kiosk);
+		}
 	}
 	
 	// 키오스크 내 최고 기록 불러오기 (게임)
@@ -119,20 +118,18 @@ public class KioskController {
 	}
 	
 	
-//	// test
-//	@ResponseBody
-//	@RequestMapping("/test")
-//	public void test(@RequestBody KioskInfoDTO kiosk) {
-//		System.out.println(kiosk);
-////		System.out.println(record);
-////		System.out.println(record);
-////		String id = record.getMember_id();
-////		id = id.substring(1,id.length()-1);
-////		if(!(id==null || id.isEmpty())) {
-////			record.setMember_id(id);
-////			kservice.insert(kiosk, record);
-////		}
-//	}
+	// test
+	@ResponseBody
+	@RequestMapping("/test")
+	public void test(@RequestBody KioskInfoDTO kiosk) {
+		System.out.println(kiosk);
+		String id = kiosk.getMember_id();
+		id = id.substring(1,id.length()-1);
+		if(!(id==null || id.isEmpty())) {
+			kiosk.setMember_id(id);
+			kservice.insert(kiosk);
+		}
+	}
 	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

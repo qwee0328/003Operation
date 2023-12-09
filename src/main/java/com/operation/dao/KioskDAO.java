@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.operation.dto.KioskCategoryDTO;
-import com.operation.dto.KioskDTO;
+import com.operation.dto.KioskInfoDTO;
 import com.operation.dto.KioskRecordDTO;
 
 @Repository
@@ -49,7 +49,7 @@ public class KioskDAO {
 	}
 	
 	// 키오스크 아이디 구하기 ( 기록 삽입용 )
-	public int selectId(KioskDTO kiosk) {
+	public int selectId(KioskInfoDTO kiosk) {
 		return db.selectOne("Kiosk.selectId",kiosk);
 	}
 	

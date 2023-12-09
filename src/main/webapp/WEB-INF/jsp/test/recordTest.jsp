@@ -19,7 +19,7 @@
 					is_game:1,
 					is_sucess:1,
 					kiosk_category_id:"TOrder",
-					member_id:"id",
+					member_id:"\"1\"",
 					play_date:"2023-12-09T08:29:32Z",
 					play_stage:1,
 					play_time:5

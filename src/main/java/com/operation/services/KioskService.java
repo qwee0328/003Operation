@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.operation.dao.KioskDAO;
 import com.operation.dao.MemberDAO;
 import com.operation.dto.KioskCategoryDTO;
-import com.operation.dto.KioskDTO;
+import com.operation.dto.KioskInfoDTO;
 import com.operation.dto.KioskRecordDTO;
 
 import jakarta.servlet.http.HttpSession;
@@ -69,9 +69,14 @@ public class KioskService {
 	}
 	
 	// 키오스크 기록 추가
-	public int insert(KioskDTO kiosk, KioskRecordDTO record) {
+	public int insert(KioskInfoDTO kiosk) {
+		KioskRecordDTO record = new KioskRecordDTO();
 		record.setKiosk_id(dao.selectId(kiosk));
+		record.setMember_id(kiosk.getMember_id());
 		record.setMember_nickname(mdao.selectNickNameById(record.getMember_id()));
+		record.setPlay_date(kiosk.getPlay_date());
+		record.setPlay_time(kiosk.getPlay_time());
+		record.setIs_success(kiosk.isIs_success());
 		return dao.insert(record);
 	}
 	

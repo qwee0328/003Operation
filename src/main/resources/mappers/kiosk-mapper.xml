@@ -79,6 +79,6 @@
 	
 	<!-- 키오스크 삽입을 위한 아이디 불러오기 -->
 	<select id="selectId" resultType="int">
-		select id from kiosk where kiosk_category_id=#{kiosk_category_id} and play_stage=#{play_stage} and is_game=#{is_game};
+		select id from kiosk where kiosk_category_id="emart" and play_stage=#{play_stage} and is_game=#{is_game};
 	</select>
 </mapper>
