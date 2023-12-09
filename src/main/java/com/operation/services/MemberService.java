@@ -154,5 +154,10 @@ public class MemberService {
 	public String selectNick(String id) {
 		return dao.selectNick(id);
 	}
+	
+	// 비밀번호 가져오기
+	public String getPw(String id) {
+		return dao.getPw(id);
+	}
 
 }

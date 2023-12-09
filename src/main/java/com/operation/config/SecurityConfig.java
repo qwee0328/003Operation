@@ -44,7 +44,6 @@ public class SecurityConfig {
 		.successHandler((request, response, authentication) -> {
 			// 성공했을 때
 			System.out.println("로그인 성공");
-			
 			 // 인증 객체에서 사용자 정보 가져오기
 	        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 	        String loginID = userDetails.getUsername(); // 아이디

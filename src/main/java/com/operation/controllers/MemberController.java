@@ -147,8 +147,10 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("/chkInfo")
 	public boolean chkInfo(String pw) {
-		pw = EncryptionUtils.getSHA512(pw);
-		return mservice.chkInfo((String) session.getAttribute("loginID"), pw);
+//		boolean re = PasswordEncoder.matches(pw, mservice.getPw((String)session.getAttribute("loginID")));
+//		System.out.println(re);
+//		return mservice.chkInfo((String) session.getAttribute("loginID"), pw);
+		return PasswordEncoder.matches(pw, mservice.getPw((String)session.getAttribute("loginID")));
 	}
 
 	// 마이페이지 정보 수정 페이지로 이동
@@ -165,7 +167,7 @@ public class MemberController {
 	@RequestMapping("/updateInfo")
 	public int updateInfo(String key, String value) {
 		if (key.equals("pw")) {
-			value = EncryptionUtils.getSHA512(value);
+			value = PasswordEncoder.encode(value);
 		}
 
 		int result = mservice.updateInfo((String) session.getAttribute("loginID"), key, value);

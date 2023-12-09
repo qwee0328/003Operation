@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import com.operation.services.MemberService;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -19,6 +21,7 @@ public class HomeController {
 	private MemberService mServ;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+
 	public String home(HttpServletRequest request) {
 		String loginID = (String)session.getAttribute("loginID");
 		if(loginID!=null) {

@@ -74,42 +74,46 @@
 				<div class="qnaAnswerWrite writeBox_guide"></div>
 				<c:choose>
 					<c:when test="${empty post.answer}">
-						<div class="qnaAnswerWrite writeBox_guide">
-							<div class="qnaAnswerWrite__title">
-								<b>Q&A 게시글 답변 작성</b>
-							</div>
-							<hr class="qnaAnswerWrite__hr">
-							<div class="qnaAnswerWrite__file">
-								<div class="d-flex">
-									<label class="fileInput__label" for="fileInput">파일 첨부</label>
-									<div class="fileNameList d-flex">
-										<c:choose>
-											<c:when test="${not empty post.answer.file_names}">
-												<script>
-			                                    // 기존 파일 목록
-			                                    let fileNames = `${post.answer.file_names}`.split(",");
-			                                    let fileIds = `${post.answer.file_ids}`.split(",");
-			
-			                                    for (let i = 0; i < fileNames.length; i++) {
-			                                       let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
-			                                       let fileName = $("<div>").attr("class", "fileName").text(fileNames[i]);
-			                                       let fileIcon = $("<div>").attr("class", "ml5").html("<i class='fa-solid fa-xmark deleteFileBtn' data-seq="+fileIds[i]+"></i>")
-			                                       $(".fileNameList").append(fileNameTag.append(fileName).append(fileIcon))
-			                                    }
-	                                 			</script>
-											</c:when>
-										</c:choose>
+						  <c:choose>
+		                   	<c:when test="${pageContext.request.userPrincipal.authorities eq '[ROLE_ADMIN]'}">
+								<div class="qnaAnswerWrite writeBox_guide">
+									<div class="qnaAnswerWrite__title">
+										<b>Q&A 게시글 답변 작성</b>
+									</div>
+									<hr class="qnaAnswerWrite__hr">
+									<div class="qnaAnswerWrite__file">
+										<div class="d-flex">
+											<label class="fileInput__label" for="fileInput">파일 첨부</label>
+											<div class="fileNameList d-flex">
+												<c:choose>
+													<c:when test="${not empty post.answer.file_names}">
+														<script>
+					                                    // 기존 파일 목록
+					                                    let fileNames = `${post.answer.file_names}`.split(",");
+					                                    let fileIds = `${post.answer.file_ids}`.split(",");
+					
+					                                    for (let i = 0; i < fileNames.length; i++) {
+					                                       let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
+					                                       let fileName = $("<div>").attr("class", "fileName").text(fileNames[i]);
+					                                       let fileIcon = $("<div>").attr("class", "ml5").html("<i class='fa-solid fa-xmark deleteFileBtn' data-seq="+fileIds[i]+"></i>")
+					                                       $(".fileNameList").append(fileNameTag.append(fileName).append(fileIcon))
+					                                    }
+			                                 			</script>
+													</c:when>
+												</c:choose>
+											</div>
+										</div>
+										<input type="file" class="qnaAnswerWrite__fileInput" id="fileInput" multiple>
+		
+										<%@ include file="/WEB-INF/jsp/commons/summernote.jsp"%>
+										<div class="qnaAnswerWrite__btns d-flex">
+											<button class="goList bColorGray colorWhite">목록으로</button>
+											<button class="write bColorMainPink colorWhite" data-id="${post.question.id}">작성완료</button>
+										</div>
 									</div>
 								</div>
-								<input type="file" class="qnaAnswerWrite__fileInput" id="fileInput" multiple>
-
-								<%@ include file="/WEB-INF/jsp/commons/summernote.jsp"%>
-								<div class="qnaAnswerWrite__btns d-flex">
-									<button class="goList bColorGray colorWhite">목록으로</button>
-									<button class="write bColorMainPink colorWhite" data-id="${post.question.id}">작성완료</button>
-								</div>
-							</div>
-						</div>
+						   	</c:when>
+		                </c:choose>
 					</c:when>
 					<c:otherwise>
 						<div class="answerContents">
@@ -132,7 +136,12 @@
 								<div class="answerConf">${post.answer.content }</div>
 							</div>
 						</div>
-					<button class="answerUpdate" data-id="${post.question.id}">수정</button>
+						<c:choose>
+		                   	<c:when test="${pageContext.request.userPrincipal.authorities eq '[ROLE_ADMIN]'}">
+								<button class="answerUpdate" data-id="${post.question.id}">수정</button>
+		                   	</c:when>
+		                </c:choose>
+				
 					</c:otherwise>
 				</c:choose>
 			</div>

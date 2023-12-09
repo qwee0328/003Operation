@@ -92,5 +92,14 @@ public class MemberDAO {
 	public String selectNick(String id) {
 		return db.selectOne("Member.selectNick",id);
 	}
+	// 비밀번호 가져오기
+	public String getPw(String id) {
+		return db.selectOne("Member.getPw",id);
+	}
+	
+	// 권한 가져오기
+	public String getRole(String id) {
+		return db.selectOne("Member.getRole",id);
+	}
 
 }

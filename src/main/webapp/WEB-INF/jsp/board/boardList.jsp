@@ -69,9 +69,20 @@
                 <div class="board__posts"></div>
             </div>
             <div class="board__footer d-flex">
-                <div class="board__pagination align-center">
-                </div>
-                <div class="board__writeBtnCover"><button class="board__writeBtn bColorMainPink colorWhite">글쓰기</button></div>
+                <div class="board__pagination align-center"></div>
+                <c:choose>
+                	<c:when test="${pageContext.request.userPrincipal.authorities eq '[ROLE_MEMBER]'}">
+                		<div class="board__writeBtnCover"><button class="board__writeBtn bColorMainPink colorWhite">글쓰기</button></div>
+                	</c:when>
+                	<c:when test="${pageContext.request.userPrincipal.authorities eq '[ROLE_ADMIN]'}">
+                		<c:choose>
+		                	<c:when test="${empty isQuestion }">
+		                		<div class="board__writeBtnCover"><button class="board__writeBtn bColorMainPink colorWhite">글쓰기</button></div>
+		                	</c:when>
+		                </c:choose>
+                	</c:when>
+                </c:choose>
+               
             </div>
         </div>
     </div>
