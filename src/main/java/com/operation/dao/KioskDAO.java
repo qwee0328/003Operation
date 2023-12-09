@@ -1,6 +1,5 @@
 package com.operation.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.operation.dto.KioskCategoryDTO;
+import com.operation.dto.KioskDTO;
 import com.operation.dto.KioskRecordDTO;
 
 @Repository
@@ -49,12 +49,12 @@ public class KioskDAO {
 	}
 	
 	// 키오스크 아이디 구하기 ( 기록 삽입용 )
-	public int selectId(Map<String, Object> param) {
-		return db.selectOne("Kiosk.selectId",param);
+	public int selectId(KioskDTO kiosk) {
+		return db.selectOne("Kiosk.selectId",kiosk);
 	}
 	
 	// 키오스크 기록 추가
-	public int insert(Map<String, Object> param) {
-		return db.insert("Kiosk.insert", param);
+	public int insert(KioskRecordDTO record) {
+		return db.insert("Kiosk.insert", record);
 	}
 }

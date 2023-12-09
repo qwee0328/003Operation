@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.operation.dao.KioskDAO;
 import com.operation.dao.MemberDAO;
 import com.operation.dto.KioskCategoryDTO;
+import com.operation.dto.KioskDTO;
+import com.operation.dto.KioskRecordDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -67,14 +69,10 @@ public class KioskService {
 	}
 	
 	// 키오스크 기록 추가
-	public int insert(Map<String, Object> param) {
-		Map<String,Object> kiosk = new HashMap<>();
-		kiosk.put("kiosk_category_id", param.get("kiosk_id"));
-		kiosk.put("play_stage", param.get("play_stage"));
-		int kiosk_id = dao.selectId(kiosk);
-		kiosk.put("kiosk_id", kiosk_id);
-		kiosk.put("member_nickname", mdao.selectNickNameById(param.get("member_id").toString()));
-		return dao.insert(param);
+	public int insert(KioskDTO kiosk, KioskRecordDTO record) {
+		record.setKiosk_id(dao.selectId(kiosk));
+		record.setMember_nickname(mdao.selectNickNameById(record.getMember_id()));
+		return dao.insert(record);
 	}
 	
 	// 키오스크 내 최고 기록 불러오기

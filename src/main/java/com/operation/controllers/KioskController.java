@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.operation.dto.KioskCategoryDTO;
+import com.operation.dto.KioskDTO;
 import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
-import com.operation.services.MemberService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -91,19 +91,15 @@ public class KioskController {
 	@ResponseBody
 	@CrossOrigin(origins = "https://kiosk003.github.io", allowCredentials = "true")
 	@PostMapping("/insertData")
-	public void insert(@RequestBody Map<String, Object> param, HttpServletRequest request) {
-		System.out.println(param);
-		String id = param.get("member_id").toString();
-		param.put("member_id", id);
+	public void insert(@RequestBody KioskDTO kiosk, @RequestBody KioskRecordDTO record, HttpServletRequest request) {
+		System.out.println(kiosk);
+		System.out.println(record);
+		String id = record.getMember_id();
 		id = id.substring(1,id.length()-1);
 		if(!(id==null || id.isEmpty())) {
-			kservice.insert(param);
+			record.setMember_id(id);
+			kservice.insert(kiosk, record);
 		}
-//		String id = dto.getMember_id().substring(1,dto.getMember_id().length()-1);
-//		if(!(id==null || id.isEmpty())) {
-//			dto.setMember_nickname(mservice.selectNickNameById(id));
-//			kservice.insert(dto, play_stage);
-//		}
 	}
 	
 	// 키오스크 내 최고 기록 불러오기 (게임)
