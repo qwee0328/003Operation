@@ -35,7 +35,7 @@
 							type: "post",
 							async:"false"
 						}).done(function(resp) {
-							alert("ajax")
+							/* alert("ajax") */
 							userId=resp;
 							var iframe = document.querySelector('iframe');
 							iframe.contentWindow.postMessage(JSON.stringify(resp), 'https://kiosk003.github.io/');
