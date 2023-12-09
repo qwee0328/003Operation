@@ -136,7 +136,12 @@
 								<div class="answerConf">${post.answer.content }</div>
 							</div>
 						</div>
-					<button class="answerUpdate" data-id="${post.question.id}">수정</button>
+						<c:choose>
+		                   	<c:when test="${pageContext.request.userPrincipal.authorities eq '[ROLE_ADMIN]'}">
+								<button class="answerUpdate" data-id="${post.question.id}">수정</button>
+		                   	</c:when>
+		                </c:choose>
+				
 					</c:otherwise>
 				</c:choose>
 			</div>
