@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.operation.dto.KioskCategoryDTO;
 import com.operation.dto.KioskDTO;
+import com.operation.dto.KioskInfoDTO;
 import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
 
@@ -71,27 +72,27 @@ public class KioskController {
 	    return null; // 해당하는 세션 쿠키를 찾지 못한 경우
 	}
 	
-//	// 쿠키를 생성할 수 있는 코드
-//	@ResponseBody
-//	@CrossOrigin(origins = "https://kiosk003.github.io", allowCredentials = "true")
-//	@GetMapping("/getCookie")
-//	public String getCookie(HttpServletResponse response) {
-//		String userId = (String)session.getAttribute("loginID");
-//        // 서버에서 쿠키 생성
-//        Cookie cookie = new Cookie("member_id", userId);
-//        cookie.setHttpOnly(true);
-//
-//        // 응답 헤더에 쿠키 추가
-//        response.addCookie(cookie);
-//
-//        return "Cookie has been set!";
-//    } 
+	// 쿠키를 생성할 수 있는 코드
+	@ResponseBody
+	@CrossOrigin(origins = "https://kiosk003.github.io", allowCredentials = "true")
+	@GetMapping("/getCookie")
+	public String getCookie(HttpServletResponse response) {
+		String userId = (String)session.getAttribute("loginID");
+        // 서버에서 쿠키 생성
+        Cookie cookie = new Cookie("member_id", userId);
+        cookie.setHttpOnly(true);
+
+        // 응답 헤더에 쿠키 추가
+        response.addCookie(cookie);
+
+        return "Cookie has been set!";
+    } 
 	
 	// 키오스크 이용 기록 저장
 	@ResponseBody
 	@CrossOrigin(origins = "https://kiosk003.github.io", allowCredentials = "true")
 	@PostMapping("/insertData")
-	public void insert(@RequestBody KioskDTO kiosk, @RequestBody KioskRecordDTO record, HttpServletRequest request) {
+	public void insert(@RequestBody KioskDTO kiosk, @RequestBody KioskRecordDTO record, HttpServletRequest request) { 
 		System.out.println(kiosk);
 		System.out.println(record);
 		String id = record.getMember_id();
@@ -117,6 +118,21 @@ public class KioskController {
 		return kservice.realTimeRank();
 	}
 	
+	
+	// test
+	@ResponseBody
+	@RequestMapping("/test")
+	public void test(@RequestBody KioskInfoDTO kiosk) {
+		System.out.println(kiosk);
+//		System.out.println(record);
+//		System.out.println(record);
+//		String id = record.getMember_id();
+//		id = id.substring(1,id.length()-1);
+//		if(!(id==null || id.isEmpty())) {
+//			record.setMember_id(id);
+//			kservice.insert(kiosk, record);
+//		}
+	}
 	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
