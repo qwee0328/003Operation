@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	// 아이디 입력란에 숫자, 영문자만 입력 가능하도록
-	$(".login__inputId").on("input",function(){
+	/*$(".login__inputId").on("input",function(){
 		$(this).val($(this).val().replace(/[^[a-z\dA-Z]/g,""));
 	});
 	
@@ -15,7 +15,7 @@ $(document).ready(function(){
 	// 로그인 버튼 클릭 시 로그인 시도
 	$(".login__btn").on("click",function(){
 		login();
-	});
+	});*/
 	
 	// login 함수
 	function login(){

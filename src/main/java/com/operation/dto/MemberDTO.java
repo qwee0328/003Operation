@@ -17,6 +17,8 @@ public class MemberDTO {
 	private int level_id;
 	private Timestamp signup_date;
 	private String recommender_id;
+	private String role_id;
+	private boolean enabled;
 	
 	public MemberDTO() {
 		super();
@@ -24,8 +26,8 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(String id, String pw, String name, String nickname, String phone, String email, Timestamp birthday,
-			String gender, String profile_image, int point, int level_id, Timestamp signup_date,
-			String recommender_id) {
+			String gender, String profile_image, int point, int level_id, Timestamp signup_date, String recommender_id,
+			String role_id, boolean enabled) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -40,6 +42,8 @@ public class MemberDTO {
 		this.level_id = level_id;
 		this.signup_date = signup_date;
 		this.recommender_id = recommender_id;
+		this.role_id = role_id;
+		this.enabled = enabled;
 	}
 
 	public String getId() {
@@ -146,6 +150,21 @@ public class MemberDTO {
 		this.recommender_id = recommender_id;
 	}
 
+	public String getRole_id() {
+		return role_id;
+	}
+
+	public void setRole_id(String role_id) {
+		this.role_id = role_id;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	public String getFormedGender() {
 		if(this.gender.equals("여"))
