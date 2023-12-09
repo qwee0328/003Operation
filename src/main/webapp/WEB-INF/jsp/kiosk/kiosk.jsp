@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,10 +23,18 @@
             <div class="kiosk__area">
             	<iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://kiosk003.github.io/${info.url}"></iframe>
             </div>
+            <c:choose>
+            	<c:when test="${info.is_game == true}">
+            		<c:choose>
+		            	<c:when test="${not empty loginID}">
+		            		<script>getBestRecord();</script>
+		            	</c:when>
+		            </c:choose>
+            	</c:when>
+            </c:choose>
 			<script type="text/javascript">
 	        	$(document).ready(function() {
-	        		if(`${info.is_game}`=="1" && `${loginID}` !=``) getBestRecord();
-	        		
+	        			        		
 	        		$(".kiosk__area").css({"width":(${info.width}+20+"px"),"height":(${info.height}+60+"px")});
 	        		
 	        		let userId = "";
