@@ -18,7 +18,7 @@ public class HomeController {
 		System.out.println(request.getRemoteAddr());
 		System.out.println(request.getRequestURL());
 		System.out.println((String)session.getAttribute("loginID")+"home");
-		return "test/recordTest";
+		return "home";
 	}
 	
 	@RequestMapping(value = "/denied", method = RequestMethod.GET)
