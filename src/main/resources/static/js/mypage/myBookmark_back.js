@@ -32,23 +32,15 @@ function postPrint(result){
 		let post__seq = $("<div>").attr("class", "post__seq");
 		post__seq.text(postList[i].id);
 
-		let post__titleAndCategory = $("<div>").attr("class","post__titleAndCategory");
+
 		let post__cover = $("<div>").attr("class", "post__cover");
-	
+
 		let post__title = $("<div>").attr("class", "post__title d-flex");
-		let title__name = $("<div>").attr("class", "title__name").text(postList[i].title).attr("data-id", postList[i].id).attr("data-category",postList[i].bulletin_category_id);
+		let title__name = $("<div>").attr("class", "title__name").text(postList[i].title).attr("data-id", postList[i].id);
 		let title_replyCntMini = $("<div>").attr("class", "title__replyCntMini align-center").html("<i class='fa-regular fa-comment align-center'></i>&nbsp" + postList[i].reply_cnt);
 		let title__replyCnt = $("<div>").attr("class", "title__replyCnt align-center").text("댓글 " + postList[i].reply_cnt);
-		
-
-		let post__category = $("<div>").attr("class","post__category");
-		if(postList[i].bulletin_category_id == "free"){
-			post__category.text("게시판: 자유게시판");
-		}else{
-			post__category.text("게시판: 질문게시판");
-		}
 		post__title.append(title__name).append(title_replyCntMini).append(title__replyCnt);
-		post__titleAndCategory.append(post__title).append(post__category)
+
 		let board__postMini = $("<div>").attr("class", "board__postMini d-flex");
 		let postMini__writer = $("<div>").attr("class", "postMini__writer").text(postList[i].member_nickname);
 		let postMini__writeDate = $("<div>").attr("class", "postMini__writeDate").html("<i class='fa-regular fa-calendar-days'></i>" + postList[i].write_date.slice(0, 11));
@@ -61,7 +53,7 @@ function postPrint(result){
 			board__postMini.append(postMini__file);
 		}
 
-		post__cover.append(post__titleAndCategory).append(board__postMini);
+		post__cover.append(post__title).append(board__postMini);
 
 		let post__writer = $("<div>").attr("class", "post__writer").text(postList[i].member_nickname);
 		let post__writeDate = $("<div>").attr("class", "post__writeDate").text(postList[i].write_date.slice(0, 11));
@@ -223,16 +215,4 @@ $(document).on("keydown", function(e) {
 	if (e.keyCode == 13) {
 		search(1);
 	}
-});
-
-// 게시글 보기 페이지로 이동
-$(document).on("click", ".title__name", function() {
-	let url = "/board/viewPostConf";
-	let category = $(this).attr("data-category");
-	
-	keyword = $(".search__value").children().val() !== "" ? $(".search__value").children().val() : "";
-	select = $(".search__select option:selected").val() != +"" ? $(".search__select option:selected").val() : "";
-	
-	url += "/" + category + "/" + select + "/" + $(this).attr("data-id")+"?keyword="+keyword;
-	location.href = url;
 });

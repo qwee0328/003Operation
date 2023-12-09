@@ -192,6 +192,7 @@
 }
 .title__answerStateCover {
 	display: none;
+	margin-left: 5px;
 }
 
 .board__footer {

@@ -32,11 +32,11 @@ function postPrint(result){
 		let post__titleAndReply = $("<div>").attr("class","post__titleAndReply d-flex");
 		let post__title = $("<div>").attr("class","post__title").text(post[i].title).attr("data-id",post[i].id).attr("data-category",post[i].bulletin_category_id);
 		post__titleAndReply.append(post__title);
-		if(post[i].bulletin_category_id == "free"){
-			let post__reply = $("<div>").attr("class","post__reply").text("댓글 "+post[i].reply_count);
-			let post__replyMini = $("<div>").attr("class","post__replyMini").html(`<i class='fa-regular fa-comment align-center'></i>`+post[i].reply_count);
-			post__titleAndReply.append(post__reply).append(post__replyMini);
-		}
+		
+		let post__reply = $("<div>").attr("class","post__reply align-center").text("댓글 "+post[i].reply_count);
+		let post__replyMini = $("<div>").attr("class","post__replyMini").html(`<i class='fa-regular fa-comment align-center'></i>`+post[i].reply_count);
+		post__titleAndReply.append(post__reply).append(post__replyMini);
+		
 		let post__category = $("<div>").attr("class","post__category");
 		if(post[i].bulletin_category_id == "free"){
 			post__category.text("게시판: 자유게시판");
@@ -189,7 +189,7 @@ $(document).on("click", ".post__title", function() {
 	
 	url += "/" + category + "/" + select + "/" + $(this).attr("data-id")+"?keyword="+keyword;
 	location.href = url;
-})
+});
 
 
 // 전체 선택
