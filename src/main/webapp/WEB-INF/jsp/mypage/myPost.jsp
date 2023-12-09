@@ -22,7 +22,7 @@
             		<div class="tap__myReply"><a href="/member/goMyReply">내가 작성한 댓글</a></div>
             		<div class="tap__myBookmark"><a href="/member/goMyBookmark">내가 북마크한 글</a></div>
             	</div>
-                <div class="board__serach align-center">
+                <div class="board__search align-center">
                     <div class="search__key align-center">
   	                	<div class="search__selectCover">
                             <select class="search__select">

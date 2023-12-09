@@ -251,6 +251,18 @@ public class MemberController {
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
 		return bservice.selectMyBookmark(currentPage);
 	}
+	
+	// 마이페이지 내 작성한 댓글 내역으로 이동
+	@RequestMapping("/goMyReply")
+	public String goMyReply() {
+		return "mypage/myReply";
+	}
+	
+	// 마이페이지 내 작성한 댓글 내역으로 이동
+	@RequestMapping("/goMyQna")
+	public String goMyQna() {
+		return "mypage/myQna";
+	}
 
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

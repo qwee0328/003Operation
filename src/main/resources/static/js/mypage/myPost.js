@@ -206,7 +206,7 @@ $(document).on("click",".board__allSelect",function(){
 	
 });
 
-// 전체 선택
+// 낱개 선택 시 전체 선택 중이면 취소
 $(document).on("click",".postChk",function(){
 	if($(".board__allSelect").hasClass("allSelect")){
 		$(".board__allSelect").removeClass("allSelect");

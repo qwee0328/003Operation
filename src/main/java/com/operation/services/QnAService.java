@@ -332,5 +332,27 @@ public class QnAService {
 	public List<Map<String, Object>> selectFileById(String postId) {
 		return dao.selectFileById(postId);
 	}
+	
+	
+	// 내 qna 게시글 목록 불러오기
+	public List<Map<String, Object>> selectMyQnaAll(int currentPage) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("member_id",(String) session.getAttribute("loginID"));
+		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
+		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
+		return dao.selectMyQnaAll(param);
+	}
 
+	// 내 qna 게시글 총 개수 불러오기
+	public int selectMyQnaCnt() {
+		return dao.selectMyQnaCnt((String) session.getAttribute("loginID"));
+	}
+
+	// 마이페이지 > 내 게시글에서 선택한 게시글 일괄 삭제
+	public void deleteSelectQna(String[] ids) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("array", ids);
+		param.put("member_id", (String) session.getAttribute("loginID"));
+		dao.deleteSelectQna(param);
+	}
 }

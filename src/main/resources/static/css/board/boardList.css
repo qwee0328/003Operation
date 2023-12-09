@@ -15,7 +15,7 @@
 	margin-bottom: 50px;
 }
 
-.board__serach {
+.board__search {
 	background-color: #D1D2D8;
 	width: 100%;
 	height: 100px;
@@ -336,11 +336,11 @@
 		margin-right: 25px;
 	}
 
-	.board__serach {
+	.board__search {
 		padding: 20px;
 	}
 
-	.board__serach>div {
+	.board__search>div {
 		padding-right: 10px;
 	}
 

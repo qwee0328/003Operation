@@ -9,6 +9,8 @@ function postLoad(result){
 	
 	for(let i=0; i<list.length; i++){
         let board__post = $("<div>").attr("class","board__post d-flex");
+        let post__chkBox = $("<div>").attr("class","post__chkBox");
+		let chkBox = $("<input>").attr("type","checkbox").attr("class","postChk");
         let post__seq = $("<div>").attr("class","post__seq").text(list[i].id);
 
         let post__cover = $("<div>").attr("class","post__cover");
@@ -21,17 +23,9 @@ function postLoad(result){
 		if(list[i].is_secret==1){
 			  let title__secret = $("<div>").attr("class","title__secret").html("<i class='fa-solid fa-lock'></i>");
 			  post__title.append(title__secret);
-			  
-			  if(list[i].member_nickname == user){
-				  title__name.text(list[i].title);
-			  }else{
-				  title__name.text("비공개 Q&A 게시글입니다.");
-				  title__name.removeAttr("class","title__name").attr("class","title__scretname");
-			  }
-		}else{
-			title__name.text(list[i].title);
 		}
 		
+		title__name.text(list[i].title);
         let title__answerStateCover = $("<div>").attr("class","title__answerStateCover");
 
 		// 여부에 따라 bColorMainPink colorWhite / bColorLightGray colorGray
@@ -46,9 +40,9 @@ function postLoad(result){
 
 		let board__postAwswer = $("<div>").attr("class","board__postAwswer");
         let board__postMini = $("<div>").attr("class","board__postMini d-flex");
-        let postMini__writer = $("<div>").attr("class","postMini__writer").text(list[i].member_nickname);
+       
         let postMini__writeDate = $("<div>").attr("class","postMini__writeDate").html("<i class='fa-regular fa-calendar-days'></i>"+list[i].write_date.slice(0,11));
-        board__postMini.append(postMini__writer).append(postMini__writeDate);
+        board__postMini.append(postMini__writeDate);
         if(list[i].file_cnt > 0){
 			let postMini__file = $("<div>").attr("class","postMini__file").html("<i class='fa-solid fa-paperclip'></i>");
 			board__postMini.append(postMini__file);
@@ -77,10 +71,9 @@ function postLoad(result){
 			post__answerState.attr("class","post__answerState ColorMainPink").text("답변완료");
 		}
 
-        let post__writer = $("<div>").attr("class","post__writer").text(list[i].member_nickname);
         let post__writeDate = $("<div>").attr("class","post__writeDate").text(list[i].write_date.slice(0,11));
-        board__post.append(post__seq).append(post__cover);
-        board__post.append(post__answerState).append(post__writer).append(post__writeDate);
+        board__post.append(post__chkBox.append(chkBox)).append(post__seq).append(post__cover);
+        board__post.append(post__answerState).append(post__writeDate);
         if(list[i].file_cnt > 0){
 			let post__file = $("<div>").attr("class","post__file").html("<i class='fa-solid fa-paperclip'></i>")
 			board__post.append(post__file);
@@ -92,7 +85,7 @@ function postLoad(result){
 
 function getPost(cpage){
 	$.ajax({
-		url:"/qna/selectPostAll",
+		url:"/qna/selectMyQnaAll",
 		data:{cpage:cpage},
 		type:"post"
 	}).done(function(resp){
@@ -213,14 +206,48 @@ function drawPagination(recordTotalCount, postCurPage, recordCountPerPage, naviC
 }
 
 
-// 글 쓰기로 이동
-$(document).on("click",".board__writeBtn",function(){
-	location.href= "/board/goWritePost/qna";
-})
-
-
-
 // 게시글 보기 페이지로 이동
 $(document).on("click", ".title__name", function() {
 	location.href = "/qna/viewQnaConf/" + $(this).attr("data-id");
+})
+
+// 낱개 선택 시 전체 선택 중이면 취소
+$(document).on("click",".postChk",function(){
+	if($(".board__allSelect").hasClass("allSelect")){
+		$(".board__allSelect").removeClass("allSelect");
+		$(".board__allSelect").text("전체선택");
+	}
+});
+
+// 전체 선택
+$(document).on("click",".board__allSelect",function(){
+	if($(this).hasClass("allSelect")){
+		$(".postChk").prop("checked",false);
+		$(".board__allSelect").removeClass("allSelect");
+		$(".board__allSelect").text("전체선택");
+	}else{	
+		$(".postChk").prop("checked",true);
+		$(this).addClass("allSelect");
+		$(this).text("취소");
+	}
+	
+});
+
+// 선택된 게시글 삭제
+$(document).on("click",".board__selectDelete",function(){
+	if(confirm("정말로 삭제하시겠습니까?")){
+		let formData = new FormData();
+		$(".postChk:checked").map((i,e)=>{
+			formData.append("deleteIds",$(e).closest(".board__post").find(".post__seq").text());
+		})
+		$.ajax({
+			url:"/qna/deleteSelectQna",
+			type:"post",
+            data: formData,
+			contentType: false,
+			processData: false
+		}).done(function(){
+			location.reload();
+		});
+	}
 })

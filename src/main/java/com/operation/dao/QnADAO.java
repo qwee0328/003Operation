@@ -1,5 +1,6 @@
 package com.operation.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.operation.constants.Constants;
 import com.operation.dto.BoardDTO;
 import com.operation.dto.QnaAnswerDTO;
 import com.operation.dto.QnaQuestionDTO;
@@ -67,5 +69,20 @@ public class QnADAO {
 	// 파일 불러오기
 	public List<Map<String, Object>> selectFileById(String postId) {
 		return db.selectList("Qna.selectFileById", postId);
+	}
+	
+	// 내 qna 게시글 목록 불러오기
+	public List<Map<String, Object>> selectMyQnaAll(Map<String, Object> param) {
+		return db.selectList("Qna.selectMyQnaAll", param);
+	}
+
+	// 내 qna 게시글 총 개수 불러오기
+	public int selectMyQnaCnt(String member_id) {
+		return db.selectOne("Qna.selectMyQnaCnt",member_id);
+	}
+	
+	// 마이페이지 > 내 게시글에서 선택한 게시글 일괄 삭제
+	public void deleteSelectQna(Map<String, Object> param) {
+		db.delete("Qna.deleteSelectQna",param);
 	}
 }

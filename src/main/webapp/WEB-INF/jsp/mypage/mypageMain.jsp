@@ -150,7 +150,7 @@
 						</div>
 						<div class="myActivity__menu3 d-flex">
 							<div class="myActivity__game d-flex">
-								<a href="#">
+								<a href="/member/goMyReply">
 									<div class="myActivity__icon">
 										<i class="fa-solid fa-comment-dots colorGray"></i>
 									</div>
@@ -169,7 +169,7 @@
 					<div class="myAsk__menu">
 						<div class="myAsk__menu1 d-flex">					
 							<div class="myAsk__qna d-flex">
-								<a href="#">
+								<a href="/member/goMyQna">
 									<div class="myAsk__icon">
 										<i class="fa-solid fa-circle-question colorGray"></i>
 									</div>

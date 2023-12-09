@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내가 작성한 글</title>
+<title>내가 북마크한 글</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="stylesheet" href="/css/mypage/myBookmark.css"/>
@@ -22,7 +22,7 @@
             		<div class="tap__myReply"><a href="/member/goMyReply">내가 작성한 댓글</a></div>
             		<div class="tap__myBookmark active"><a href="/member/goMyBookmark">내가 북마크한 글</a></div>
             	</div>
-                <div class="board__serach align-center">
+                <div class="board__search align-center">
                     <div class="search__key align-center">
   	                	<div class="search__selectCover">
                             <select class="search__select">

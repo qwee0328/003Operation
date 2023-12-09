@@ -36,7 +36,7 @@
 					</c:otherwise>
 				</c:choose>
                 
-                <div class="board__serach align-center">
+                <div class="board__search align-center">
                     <div class="search__key align-center">
                         <div class="search__selectCover">
                             <select class="search__select">
