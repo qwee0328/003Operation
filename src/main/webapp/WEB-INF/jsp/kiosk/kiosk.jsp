@@ -24,7 +24,7 @@
             </div>
 			<script type="text/javascript">
 	        	$(document).ready(function() {
-	        		if(${info.is_game}=="1") getBestRecord();
+	        		if(${info.is_game}=="1" && ${loginID}) getBestRecord();
 	        		
 	        		$(".kiosk__area").css({"width":(${info.width}+20+"px"),"height":(${info.height}+60+"px")});
 	        		
@@ -46,26 +46,30 @@
             <!-- 기록 영역 ( 게임용 ) -->
             <c:choose>
             	<c:when test="${info.is_game}">
-           			<div class="kiosk__myRecord">
-		                <div class="kiosk__recordName">내 최고 기록</div>
-		                <div class="myRecord__cover">
-		                    <div class="myRecord__record d-flex">
-		                        <div class="myRecord__step align-center">1단계</div>
-		                        <div class="myRecord__time step1 align-center">-</div>
-		                        <div class="myRecord__ranking step1 align-center">-</div>
-		                    </div>
-		                    <div class="myRecord__record d-flex">
-		                        <div class="myRecord__step align-center">2단계</div>
-		                        <div class="myRecord__time step2 align-center">-</div>
-		                        <div class="myRecord__ranking step2 align-center">-</div>
-		                    </div>
-		                    <div class="myRecord__record d-flex">
-		                        <div class="myRecord__step align-center">3단계</div>
-		                        <div class="myRecord__time step3 align-center">-</div>
-		                        <div class="myRecord__ranking step3 align-center">-</div>
-		                    </div>
-		                </div>
-		            </div>
+            		<c:choose>
+            			<c:when test="${not empty loginID}">
+		           			<div class="kiosk__myRecord">
+				                <div class="kiosk__recordName">내 최고 기록</div>
+				                <div class="myRecord__cover">
+				                    <div class="myRecord__record d-flex">
+				                        <div class="myRecord__step align-center">1단계</div>
+				                        <div class="myRecord__time step1 align-center">-</div>
+				                        <div class="myRecord__ranking step1 align-center">-</div>
+				                    </div>
+				                    <div class="myRecord__record d-flex">
+				                        <div class="myRecord__step align-center">2단계</div>
+				                        <div class="myRecord__time step2 align-center">-</div>
+				                        <div class="myRecord__ranking step2 align-center">-</div>
+				                    </div>
+				                    <div class="myRecord__record d-flex">
+				                        <div class="myRecord__step align-center">3단계</div>
+				                        <div class="myRecord__time step3 align-center">-</div>
+				                        <div class="myRecord__ranking step3 align-center">-</div>
+				                    </div>
+				                </div>
+			            	</div>
+		            	</c:when>
+		            </c:choose>
             	</c:when>
             </c:choose>
           
