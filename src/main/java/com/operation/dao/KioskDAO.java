@@ -33,10 +33,10 @@ public class KioskDAO {
 		return db.selectOne("Kiosk.selectByCategoryAndStage",param);
 	}
 	
-	// 키오스크 기록 추가
-	public int insert(KioskRecordDTO dto) {
-		return db.insert("Kiosk.insert", dto);
-	}
+//	// 키오스크 기록 추가
+//	public int insert(KioskRecordDTO dto) {
+//		return db.insert("Kiosk.insert", dto);
+//	}
 	
 	// 키오스크 내 최고 기록 불러오기
 	public List<Map<String, Object>> selectBestRecord(Map<String, Object> param){
@@ -51,5 +51,10 @@ public class KioskDAO {
 	// 키오스크 아이디 구하기 ( 기록 삽입용 )
 	public int selectId(Map<String, Object> param) {
 		return db.selectOne("Kiosk.selectId",param);
+	}
+	
+	// 키오스크 기록 추가
+	public int insert(Map<String, Object> param) {
+		return db.insert("Kiosk.insert", param);
 	}
 }

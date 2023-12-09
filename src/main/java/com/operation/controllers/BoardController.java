@@ -373,6 +373,16 @@ public class BoardController {
 			bservice.deleteImage(srcList);
 		}
 	}
+	
+	// 마이페이지 > 내 게시글에서 선택한 게시글 일괄 삭제
+	@ResponseBody
+	@RequestMapping("/deleteSelectPost")
+	public void deleteSelectPost(@RequestParam(value = "deleteIds", required = false) String[] deleteIds) {
+		System.out.println(deleteIds.length);
+		if (deleteIds != null && deleteIds.length>=1) {
+			bservice.deleteSelectPost(deleteIds);
+		}
+	}
 
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

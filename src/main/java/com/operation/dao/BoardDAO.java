@@ -186,4 +186,10 @@ public class BoardDAO {
 	public int selectMyPostTotalCnt(String id){
 		return db.selectOne("Board.selectMyPostTotalCnt",id);
 	}
+	
+
+	// 마이페이지 > 내 게시글에서 선택한 게시글 일괄 삭제
+	public void deleteSelectPost(Map<String, Object> param) {
+		db.delete("Board.deleteSelectPost",param);
+	}
 }

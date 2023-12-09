@@ -18,6 +18,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
@@ -416,5 +419,13 @@ public class BoardService {
 	// 게시글 삭제
 	public void deletePost(int id) {
 		dao.deletePost(id);
+	}
+	
+	// 마이페이지 > 내 게시글에서 선택한 게시글 일괄 삭제
+	public void deleteSelectPost(String[] ids) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("array", ids);
+		param.put("member_id", (String) session.getAttribute("loginID"));
+		dao.deleteSelectPost(param);
 	}
 }

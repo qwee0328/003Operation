@@ -33,9 +33,6 @@ public class KioskController {
 	private	KioskService kservice;
 	
 	@Autowired
-	private MemberService mservice;
-	
-	@Autowired
 	private HttpSession session;
 	
 	// 키오스크 목록으로 이동
@@ -94,13 +91,19 @@ public class KioskController {
 	@ResponseBody
 	@CrossOrigin(origins = "https://kiosk003.github.io", allowCredentials = "true")
 	@PostMapping("/insertData")
-	public void insert(@RequestBody KioskRecordDTO dto, String play_stage, HttpServletRequest request) {
-		System.out.println(dto);
-		String id = dto.getMember_id().substring(1,dto.getMember_id().length()-1);
+	public void insert(@RequestBody Map<String, Object> param, HttpServletRequest request) {
+		System.out.println(param);
+		String id = param.get("member_id").toString();
+		param.put("member_id", id);
+		id = id.substring(1,id.length()-1);
 		if(!(id==null || id.isEmpty())) {
-			dto.setMember_nickname(mservice.selectNickNameById(id));
-			kservice.insert(dto, play_stage);
+			kservice.insert(param);
 		}
+//		String id = dto.getMember_id().substring(1,dto.getMember_id().length()-1);
+//		if(!(id==null || id.isEmpty())) {
+//			dto.setMember_nickname(mservice.selectNickNameById(id));
+//			kservice.insert(dto, play_stage);
+//		}
 	}
 	
 	// 키오스크 내 최고 기록 불러오기 (게임)

@@ -185,3 +185,26 @@ $(document).on("click", ".post__title", function() {
 	url += "/" + category + "/" + select + "/" + $(this).attr("data-id")+"?keyword="+keyword;
 	location.href = url;
 })
+
+
+// 전체 선택
+$(document).on("click",".board__allSelect",function(){
+	$(".postChk").prop("checked",true);
+});
+
+
+// 선택된 게시글 삭제
+$(document).on("click",".board__selectDelete",function(){
+	if(confirm("정말로 삭제하시겠습니까?")){
+		let ids = $(".postChk:checked").map((i,e)=>{return $(e).closest(".board__post").find(".post__seq").text()}).toArray();
+		console.log(ids);
+		
+		$.ajax({
+			url:"/board/deleteSelectPost",
+			type:"post",
+            data: {deleteIds:ids}
+		}).done(function(){
+			location.reload();
+		});
+	}
+})

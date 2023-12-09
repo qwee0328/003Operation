@@ -12,6 +12,13 @@ public class KioskDTO {
 	public KioskDTO() {
 		super();
 	}	
+	
+	public KioskDTO(int id, String kiosk_category_id, int play_stage, boolean is_game) {
+		this.id = id;
+		this.kiosk_category_id = kiosk_category_id;
+		this.play_stage = play_stage;		
+		this.is_game = is_game;
+	}
 
 	public KioskDTO(int id, String kiosk_category_id, String url, int play_stage, int width, int height,
 			boolean is_game) {

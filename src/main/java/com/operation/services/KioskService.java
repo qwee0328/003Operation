@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.operation.dao.KioskDAO;
+import com.operation.dao.MemberDAO;
 import com.operation.dto.KioskCategoryDTO;
-import com.operation.dto.KioskRecordDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -17,6 +17,9 @@ import jakarta.servlet.http.HttpSession;
 public class KioskService {
 	@Autowired
 	private KioskDAO dao;
+	
+	@Autowired
+	private MemberDAO mdao;
 	
 	@Autowired
 	private HttpSession session;
@@ -64,13 +67,14 @@ public class KioskService {
 	}
 	
 	// 키오스크 기록 추가
-	public int insert(KioskRecordDTO dto, String play_stage) {
-		int playStage = Integer.parseInt(play_stage);
-		Map<String,Object> param = new HashMap<>();
-		param.put("kiosk_category_id", dto.getKiosk_id());
-		param.put("play_stage", playStage);
-		dto.setKiosk_id(dao.selectId(param));
-		return dao.insert(dto);
+	public int insert(Map<String, Object> param) {
+		Map<String,Object> kiosk = new HashMap<>();
+		kiosk.put("kiosk_category_id", param.get("kiosk_id"));
+		kiosk.put("play_stage", param.get("play_stage"));
+		int kiosk_id = dao.selectId(kiosk);
+		kiosk.put("kiosk_id", kiosk_id);
+		kiosk.put("member_nickname", mdao.selectNickNameById(param.get("member_id").toString()));
+		return dao.insert(param);
 	}
 	
 	// 키오스크 내 최고 기록 불러오기
