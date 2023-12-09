@@ -1,5 +1,5 @@
 $(document).ready(function(){
 	$(".footerBtn__modify").on("click",function(){
-		location.href="/member/goChkInfo";
+		location.href="/member/mypage/goChkInfo";
 	});
 });

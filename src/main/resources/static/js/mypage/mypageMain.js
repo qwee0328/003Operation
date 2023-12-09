@@ -4,7 +4,7 @@ $(document).ready(function(){
 	});
 	
 	$(".goMypage").on("click",function(){
-		location.href="/member/viewMypage";
+		location.href="/member/mypage/viewMypage";
 	});
 	
 	// 마이페이지 메인 화면 정보 불러오기 (프로필 이미지, 레벨, 포인트)

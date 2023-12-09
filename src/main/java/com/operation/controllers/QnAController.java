@@ -170,7 +170,7 @@ public class QnAController {
 
 	// 내 Qna 불러오기
 	@ResponseBody
-	@RequestMapping("/selectMyQnaAll")
+	@RequestMapping("/mypage/selectMyQnaAll")
 	public Map<String, Object> selectMyQnaAll(@RequestParam(value = "cpage", required = false) String cpage) {
 		Map<String, Object> result = new HashMap<>();
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
@@ -187,7 +187,7 @@ public class QnAController {
 	
 	// 마이페이지 > 내 Qna에서 선택한 게시글 일괄 삭제
 	@ResponseBody
-	@RequestMapping("/deleteSelectQna")
+	@RequestMapping("/mypage/deleteSelectQna")
 	public void deleteSelectPost(@RequestParam(value = "deleteIds", required = false) String[] deleteIds) {
 		if (deleteIds != null && deleteIds.length>=1) {
 			qservice.deleteSelectQna(deleteIds);

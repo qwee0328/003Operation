@@ -28,9 +28,15 @@ public class SecurityConfig {
 		// 스프링 시큐리티를 커스터 마이징 해주는 내용을 넣어주면 됨
 		http.csrf().disable();
 		http.authorizeHttpRequests()
-		.requestMatchers(new AntPathRequestMatcher("/board/goWritePost/**")).authenticated()
-		.requestMatchers(new AntPathRequestMatcher("/board/viewPostConf/**")).authenticated()
-		.requestMatchers(new AntPathRequestMatcher("/qna/viewQnaConf/**")).authenticated()
+		.requestMatchers(new AntPathRequestMatcher("/board/goWritePost/**")).authenticated() // 자유 or 질문 or qna 게시글 작성
+		.requestMatchers(new AntPathRequestMatcher("/board/viewPostConf/**")).authenticated() // 자유 or 질문 게시글로 이동
+		.requestMatchers(new AntPathRequestMatcher("/qna/viewQnaConf/**")).authenticated() // qna 게시글로 이동
+		.requestMatchers(new AntPathRequestMatcher("/member/mypage/**")).authenticated() // 마이페이지 내에서 사용되는 모든 url
+		.requestMatchers(new AntPathRequestMatcher("/qna/mypage/**")).authenticated() // 마이페이지 내 QNA 게시글 관리
+		.requestMatchers(new AntPathRequestMatcher("/board/mypage/**")).authenticated() // 마이페이지 내 게시글 관리
+		.requestMatchers(new AntPathRequestMatcher("/qna/writeAnswer/**")).hasRole("ADMIN") // 관리자 Q*A 답글 작성
+		.requestMatchers(new AntPathRequestMatcher("/qna/goUpdateAnswer/**")).hasRole("ADMIN") // 관리자 Q*A 답글 수정란 불러오기
+		.requestMatchers(new AntPathRequestMatcher("/qna/updateAnswerPost/**")).hasRole("ADMIN") // 관리자 Q*A 답글 수정
 		.requestMatchers(new AntPathRequestMatcher("/**")).permitAll();
 		//http.formLogin();
 		http.formLogin().loginPage("/member/goLogin").defaultSuccessUrl("/");
