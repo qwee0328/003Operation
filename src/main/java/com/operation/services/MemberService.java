@@ -150,4 +150,8 @@ public class MemberService {
 		return dao.chkNickname(nickname);
 	}
 	
+	// 비밀번호 가져오기
+	public String getPw(String id) {
+		return dao.getPw(id);
+	}
 }

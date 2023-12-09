@@ -31,7 +31,7 @@
 							<input type="hidden" id="myRecommendRecord"> <input
 								type="hidden" id="myBookmarkRecord">
 							<c:if
-								test="${post.bulletin_category_id eq 'free' or post.bulletin_category_id eq 'question'}">
+								test="${post.bulletin_category_id eq 'free' or post.bulletin_category_id eq 'question' or post.bulletin_category_id eq 'notice'}">
 								<div class="navi__conf">
 									<div class="conf__circle" id="recommendBtn"
 										writerNick="${post.member_nickname }">

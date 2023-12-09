@@ -27,42 +27,57 @@
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp" %>
 	<div class="container">
 		<div class="body__guide">
+		
 			<c:choose>
-				<c:when test="${not empty isQna}">
-					<c:choose>
+            	<c:when test="${pageContext.request.userPrincipal.authorities eq '[ROLE_ADMIN]'}">
+           			<c:choose>
 						<c:when test="${not empty post.id}">
-							<div class="titleArea">Q&A 게시글 수정</div>
+							<div class="titleArea">자유게시판 공지 게시글 수정</div>
 						</c:when>
 						<c:otherwise>
-							<div class="titleArea">Q&A 게시글 작성</div>
+							<div class="titleArea">자유게시판 공지 게시글 작성</div>
 						</c:otherwise>
 					</c:choose>
-				</c:when>
-				<c:otherwise>
+            	</c:when>
+            	<c:otherwise>
 					<c:choose>
-						<c:when test="${not empty isQuestion}"> 
+						<c:when test="${not empty isQna}">
 							<c:choose>
 								<c:when test="${not empty post.id}">
-									<div class="titleArea">질문 게시글 수정</div>
+									<div class="titleArea">Q&A 게시글 수정</div>
 								</c:when>
 								<c:otherwise>
-									<div class="titleArea">질문 게시글 작성</div>
+									<div class="titleArea">Q&A 게시글 작성</div>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
 						<c:otherwise>
 							<c:choose>
-								<c:when test="${not empty post.id}">
-									<div class="titleArea">자유 게시글 수정</div>
+								<c:when test="${not empty isQuestion}"> 
+									<c:choose>
+										<c:when test="${not empty post.id}">
+											<div class="titleArea">질문 게시글 수정</div>
+										</c:when>
+										<c:otherwise>
+											<div class="titleArea">질문 게시글 작성</div>
+										</c:otherwise>
+									</c:choose>
 								</c:when>
 								<c:otherwise>
-									<div class="titleArea">자유 게시글 작성</div>
+									<c:choose>
+										<c:when test="${not empty post.id}">
+											<div class="titleArea">자유 게시글 수정</div>
+										</c:when>
+										<c:otherwise>
+											<div class="titleArea">자유 게시글 작성</div>
+										</c:otherwise>
+									</c:choose>	
 								</c:otherwise>
-							</c:choose>	
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 				</c:otherwise>
-			</c:choose>
+            </c:choose>
 		
 			
 			<div class="postArea">

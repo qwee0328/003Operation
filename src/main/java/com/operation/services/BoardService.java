@@ -18,14 +18,12 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
 import com.operation.dao.BoardDAO;
 import com.operation.dao.FileDAO;
+import com.operation.dao.MemberDAO;
 import com.operation.dto.BoardDTO;
 import com.operation.dto.FileDTO;
 import com.operation.dto.ReplyDTO;
@@ -41,11 +39,19 @@ public class BoardService {
 	private FileDAO fdao;
 	
 	@Autowired
+	private MemberDAO mdao;
+	
+	@Autowired
 	private HttpSession session;
 
 	// 게시글 업로드 (+ 파일 업로드)
 	@Transactional
 	public void insert(BoardDTO dto, MultipartFile[] files, Integer[] deleteFileList) throws Exception {
+		String role = mdao.getRole(dto.getMember_id());
+		
+		// 관리자면 공지게시글로 작성
+		if(role.equals("ROLE_ADMIN")) {dto.setBulletin_category_id("notice"); dto.setIs_fix(true);}
+	
 		int bulletin_board_id = dao.insert(dto);
 		if (files != null && files.length >= 1) {
 			String path = "c:/003Operation/uploads";

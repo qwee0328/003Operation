@@ -1,5 +1,6 @@
 package com.operation.services;
 
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +75,7 @@ public class KioskService {
 		record.setKiosk_id(dao.selectId(kiosk));
 		record.setMember_id(kiosk.getMember_id());
 		record.setMember_nickname(mdao.selectNickNameById(record.getMember_id()));
-		record.setPlay_date(kiosk.getPlay_date());
+		record.setPlay_date(kiosk.getPlay_date().plus(9,ChronoUnit.HOURS));
 		record.setPlay_time(kiosk.getPlay_time());
 		record.setIs_success(kiosk.isIs_success());
 		return dao.insert(record);

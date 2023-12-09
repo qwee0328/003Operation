@@ -46,7 +46,8 @@ public class KioskController {
 	// 키오스크 카테고리 목록 가져오기
 	@ResponseBody
 	@RequestMapping("/getKioskList")
-	public List<KioskCategoryDTO> getKioskList (@RequestParam(value="order", required=false) String order, int is_game) {
+	public List<KioskCategoryDTO> getKioskList(@RequestParam(value="order", required=false) String order, int is_game) {
+		System.out.println(is_game);
 		order = (order == null || order.isEmpty()) ? "name"  : order;
 		return kservice.selectAll(order, is_game);
 	}
@@ -58,35 +59,6 @@ public class KioskController {
 		model.addAttribute("info",info);
 		return "kiosk/kiosk";
 	}
-	
-	public String getSessionKeyFromCookie(HttpServletRequest request) {
-	    Cookie[] cookies = request.getCookies();
-	    if (cookies != null) {
-	        for (Cookie cookie : cookies) {
-	        	System.out.println(cookie.getName()+"cookyname");
-	            if ("JSESSIONID".equals(cookie.getName())) { // 쿠키 이름이 세션 쿠키의 이름이라 가정
-	                return cookie.getValue(); // 세션 키 반환
-	            }
-	        }
-	    }
-	    return null; // 해당하는 세션 쿠키를 찾지 못한 경우
-	}
-	
-	// 쿠키를 생성할 수 있는 코드
-	@ResponseBody
-	@CrossOrigin(origins = "https://kiosk003.github.io", allowCredentials = "true")
-	@GetMapping("/getCookie")
-	public String getCookie(HttpServletResponse response) {
-		String userId = (String)session.getAttribute("loginID");
-        // 서버에서 쿠키 생성
-        Cookie cookie = new Cookie("member_id", userId);
-        cookie.setHttpOnly(true);
-
-        // 응답 헤더에 쿠키 추가
-        response.addCookie(cookie);
-
-        return "Cookie has been set!";
-    } 
 	
 	// 키오스크 이용 기록 저장
 	@ResponseBody
@@ -116,7 +88,6 @@ public class KioskController {
 	public List<Map<String, Object>> realTimeRank(){
 		return kservice.realTimeRank();
 	}
-	
 	
 	// test
 	@ResponseBody
