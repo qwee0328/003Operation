@@ -43,7 +43,7 @@ public class QnAController {
 
 	// QNA 답글작성
 	@ResponseBody
-	@RequestMapping("/writeAnswer")
+	@RequestMapping("/admin/writeAnswer")
 	public void writeAnswer(QnaAnswerDTO dto,
 			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
 			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList) throws Exception {
@@ -121,7 +121,7 @@ public class QnAController {
 
 	// 답변 게시글 수정 페이지
 	@ResponseBody
-	@RequestMapping("/goUpdateAnswer/{post_id}")
+	@RequestMapping("/admin/goUpdateAnswer/{post_id}")
 	public Map<String, Object> goUpdateAnswer(@PathVariable int post_id) {
 		Map<String, Object> data = qservice.selectAnswerById(post_id);
 		return data;
@@ -141,7 +141,7 @@ public class QnAController {
 	
 	// 답글 수정
 	@ResponseBody
-	@RequestMapping("/updateAnswerPost")
+	@RequestMapping("/admin/updateAnswerPost")
 	public void updatePost(QnaAnswerDTO dto,
 			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
 			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList,

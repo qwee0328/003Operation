@@ -41,9 +41,7 @@ public class SecurityConfig {
 		.requestMatchers(new AntPathRequestMatcher("/member/mypage/**")).authenticated() // 마이페이지 내에서 사용되는 모든 url
 		.requestMatchers(new AntPathRequestMatcher("/qna/mypage/**")).authenticated() // 마이페이지 내 QNA 게시글 관리
 		.requestMatchers(new AntPathRequestMatcher("/board/mypage/**")).authenticated() // 마이페이지 내 게시글 관리
-		.requestMatchers(new AntPathRequestMatcher("/qna/writeAnswer/**")).hasRole("ADMIN") // 관리자 Q*A 답글 작성
-		.requestMatchers(new AntPathRequestMatcher("/qna/goUpdateAnswer/**")).hasRole("ADMIN") // 관리자 Q*A 답글 수정란 불러오기
-		.requestMatchers(new AntPathRequestMatcher("/qna/updateAnswerPost/**")).hasRole("ADMIN") // 관리자 Q*A 답글 수정
+		.requestMatchers(new AntPathRequestMatcher("/qna/admin/**")).hasRole("ADMIN") // 관리자 Q&A 답글 작성/수정/수정내용 불러오기 관리자만 가능
 		.requestMatchers(new AntPathRequestMatcher("/**")).permitAll();
 		//http.formLogin();
 		http.formLogin().loginPage("/member/goLogin").defaultSuccessUrl("/")

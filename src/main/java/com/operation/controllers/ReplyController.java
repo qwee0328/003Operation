@@ -41,7 +41,7 @@ public class ReplyController {
 	
 	// 내가 작성한 댓글 불러오기
 	@ResponseBody
-	@RequestMapping("/selectMyReply")
+	@RequestMapping("/mypage/selectMyReply")
 	public Map<String, Object> selectMyReply(@RequestParam(value = "cpage", required = false) String cpage){
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
 		return rservice.selectMyReply(currentPage);
@@ -49,7 +49,7 @@ public class ReplyController {
 	
 	// 내가 작성한 댓글 중 검색 내역 불러오기
 	@ResponseBody
-	@RequestMapping("/searchMyReply")
+	@RequestMapping("/mypage/searchMyReply")
 	public Map<String, Object> selectMyReply(@RequestParam(value = "cpage", required = false) String cpage, String select, String keyword){
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
 		return rservice.searchMyReply(currentPage, select, keyword);
@@ -58,7 +58,7 @@ public class ReplyController {
 
 	// 마이페이지 > 내 게시글에서 선택한 댓글 일괄 삭제
 	@ResponseBody
-	@RequestMapping("/deleteSelectReply")
+	@RequestMapping("/mypage/deleteSelectReply")
 	public void deleteSelectReply(@RequestParam(value = "deleteIds", required = false) String[] deleteIds) {
 		if (deleteIds != null && deleteIds.length>=1) {
 			rservice.deleteSelectReply(deleteIds);
