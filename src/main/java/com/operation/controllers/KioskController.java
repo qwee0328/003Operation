@@ -117,6 +117,13 @@ public class KioskController {
 		return kservice.realTimeRank();
 	}
 	
+//	// 키오스크 전체 목록 불러오기
+//	@ResponseBody
+//	@RequestMapping("/getKioskList")
+//	public List<KioskDTO> getKioskList(){
+//		return kservice.getKioskList();
+//	}
+//	
 	
 	// test
 	@ResponseBody

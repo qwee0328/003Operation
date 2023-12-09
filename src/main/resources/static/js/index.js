@@ -47,6 +47,36 @@ $(document).ready(function() {
 	$(".realTimeRanking").on("click",function(){
 		realTimeRanking();
 	});
+	
+	// 키오스크 전체목록 불러오기
+	$.ajax({
+		url:"/kiosk/getKioskList",
+		data:{is_game:0},
+		type:"post"
+	}).done(function(kioskList){	
+		let practice_row = $("<div>").attr("class","practice_row");
+		let practice_row_clone;
+		let practice_row_tab_clone;	
+		
+		for(let i=0; i<kioskList.length; i++){
+			
+			if(i%3==0){
+				practice_row_clone = practice_row.clone()
+				practice_row_tab_clone = practice_row.clone();
+				
+				$(".practice__contents").append(practice_row_clone);
+				$(".practice__contents-tab").append(practice_row_tab_clone);		
+			}			
+			let aTag = $("<a>").attr("href",`/kiosk/viewKiosk/${kioskList[i].id}?is_game=0`);
+			let practice__box = $("<div>").attr("class","practice__box");
+			let subtitle = $("<div>").attr("class","subtitle").text("키오스크 연습");
+			let title = $("<div>").attr("class","title").text(kioskList[i].name);
+			aTag.append(practice__box.append(subtitle).append(title));
+			practice_row_clone.append(aTag.clone());
+			practice_row_tab_clone.append(aTag.clone());
+		}
+
+	})
 });
 
 $(document).on("click",".popularGoKiosk",function(){

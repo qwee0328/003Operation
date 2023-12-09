@@ -24,7 +24,7 @@
             </div>
 			<script type="text/javascript">
 	        	$(document).ready(function() {
-	        		if(${info.is_game}=="1" && ${loginID}) getBestRecord();
+	        		if(`${info.is_game}`=="1" && `${loginID}` !=``) getBestRecord();
 	        		
 	        		$(".kiosk__area").css({"width":(${info.width}+20+"px"),"height":(${info.height}+60+"px")});
 	        		
