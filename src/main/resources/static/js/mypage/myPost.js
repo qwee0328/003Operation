@@ -189,22 +189,44 @@ $(document).on("click", ".post__title", function() {
 
 // 전체 선택
 $(document).on("click",".board__allSelect",function(){
-	$(".postChk").prop("checked",true);
+	if($(this).hasClass("allSelect")){
+		$(".postChk").prop("checked",false);
+		$(".board__allSelect").removeClass("allSelect");
+		$(".board__allSelect").text("전체선택");
+	}else{	
+		$(".postChk").prop("checked",true);
+		$(this).addClass("allSelect");
+		$(this).text("취소");
+	}
+	
 });
+
+// 전체 선택
+$(document).on("click",".postChk",function(){
+	if($(".board__allSelect").hasClass("allSelect")){
+		$(".board__allSelect").removeClass("allSelect");
+		$(".board__allSelect").text("전체선택");
+	}
+});
+
 
 
 // 선택된 게시글 삭제
 $(document).on("click",".board__selectDelete",function(){
 	if(confirm("정말로 삭제하시겠습니까?")){
-		let ids = $(".postChk:checked").map((i,e)=>{return $(e).closest(".board__post").find(".post__seq").text()}).toArray();
-		console.log(ids);
-		
+		let formData = new FormData();
+		$(".postChk:checked").map((i,e)=>{
+			formData.append("deleteIds",$(e).closest(".board__post").find(".post__seq").text());
+		})
 		$.ajax({
 			url:"/board/deleteSelectPost",
 			type:"post",
-            data: {deleteIds:ids}
+            data: formData,
+			contentType: false,
+			processData: false
 		}).done(function(){
 			location.reload();
 		});
+		
 	}
 })

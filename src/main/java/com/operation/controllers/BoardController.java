@@ -378,7 +378,6 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping("/deleteSelectPost")
 	public void deleteSelectPost(@RequestParam(value = "deleteIds", required = false) String[] deleteIds) {
-		System.out.println(deleteIds.length);
 		if (deleteIds != null && deleteIds.length>=1) {
 			bservice.deleteSelectPost(deleteIds);
 		}
