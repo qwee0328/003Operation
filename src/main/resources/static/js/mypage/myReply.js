@@ -20,7 +20,7 @@ function postLoad(cpage){
 
 function postPrint(result){
 	$(".board__posts").html("");	
-	let post = result.post;
+	let post = result.list;
 
 	for(let i=0; i<post.length; i++){
 		let board__post = $("<div>").attr("class","board__post d-flex");
@@ -30,14 +30,14 @@ function postPrint(result){
 		let post__tacCover = $("<div>").attr("class","post__tacCover d-flex");
 		let post__titleAndCategory = $("<div>").attr("class","post__titleAndCategory");
 		let post__titleAndReply = $("<div>").attr("class","post__titleAndReply d-flex");
-		let post__title = $("<div>").attr("class","post__title").text(post[i].title).attr("data-id",post[i].id).attr("data-category",post[i].bulletin_category_id);
+		let post__title = $("<div>").attr("class","post__title").text(post[i].content).attr("data-id",post[i].bulletin_board_id).attr("data-category",post[i].bulletin_category_id);
 		post__titleAndReply.append(post__title);
 		
 		let post__category = $("<div>").attr("class","post__category");
 		if(post[i].bulletin_category_id == "free"){
-			post__category.text("게시판: 자유게시판");
+			post__category.text("원문 제목: "+post[i].title+" (자유 게시판)");
 		}else{
-			post__category.text("게시판: 질문게시판");
+			post__category.text("원문 제목: "+post[i].title+ "(질문 게시판)");
 		}
 		post__tacCover.append(post__titleAndCategory.append(post__titleAndReply).append(post__category));
 		let post__writeDate = $("<div>").attr("class","post__writeDate").text(post[i].write_date.slice(0,10)+" "+post[i].write_date.slice(11,16));
@@ -214,7 +214,7 @@ $(document).on("click",".board__selectDelete",function(){
 			formData.append("deleteIds",$(e).closest(".board__post").find(".post__seq").text());
 		})
 		$.ajax({
-			url:"/board/deleteSelectPost",
+			url:"/reply/deleteSelectReply",
 			type:"post",
             data: formData,
 			contentType: false,
@@ -231,12 +231,13 @@ function search(cpage){
 	select = $(".search__select option:selected").val() != +"" ? $(".search__select option:selected").val() : "";
 
 	$.ajax({
-		url:"/board/searchMyPost",
+		url:"/reply/searchMyReply",
 		data:{
 			select:select,
 			keyword:keyword,
 			cpage:cpage
-		}
+		},
+		type:"post"
 	}).done(function(result){
 		postPrint(result);
 	});
