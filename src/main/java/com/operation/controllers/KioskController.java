@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.operation.dto.KioskCategoryDTO;
+import com.operation.dto.KioskDTO;
+import com.operation.dto.KioskInfoDTO;
 import com.operation.dto.KioskRecordDTO;
 import com.operation.services.KioskService;
 
@@ -90,24 +92,13 @@ public class KioskController {
 	@ResponseBody
 	@CrossOrigin(origins = "https://kiosk003.github.io", allowCredentials = "true")
 	@PostMapping("/insertData")
-	public void insert(@RequestBody KioskRecordDTO dto, HttpServletRequest request) {
-		System.out.println("insert");
-		System.out.println(dto);
-		System.out.println(session.getId()+"세션아이디");
-		//String sessionKey = getSessionKeyFromCookie(request);
-		//String sessionKey = r
-//	    if (sessionKey != null) {
-//	    	System.out.println("Session Key: " + sessionKey);
-//	    } else {
-//	    	System.out.println("Session Key not found");
-//	    }
-		String loginID = (String)session.getAttribute("loginID");
-		System.out.println(loginID+"test");
-		if(!(loginID==null || loginID.isEmpty())) {
-			System.out.println("durl");
-			dto.setMember_id(loginID);
-			dto.setMember_nickname((String) session.getAttribute("loginNickName"));
-			kservice.insert(dto);
+	public void insert(@RequestBody KioskInfoDTO kiosk) { 
+		System.out.println(kiosk);
+		String id = kiosk.getMember_id();
+		id = id.substring(1,id.length()-1);
+		if(!(id==null || id.isEmpty())) {
+			kiosk.setMember_id(id);
+			kservice.insert(kiosk);
 		}
 	}
 	
@@ -126,6 +117,19 @@ public class KioskController {
 		return kservice.realTimeRank();
 	}
 	
+	
+	// test
+	@ResponseBody
+	@RequestMapping("/test")
+	public void test(@RequestBody KioskInfoDTO kiosk) {
+		System.out.println(kiosk);
+		String id = kiosk.getMember_id();
+		id = id.substring(1,id.length()-1);
+		if(!(id==null || id.isEmpty())) {
+			kiosk.setMember_id(id);
+			kservice.insert(kiosk);
+		}
+	}
 	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

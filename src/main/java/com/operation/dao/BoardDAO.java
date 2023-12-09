@@ -176,4 +176,50 @@ public class BoardDAO {
 	public void deletePost(int id) {
 		db.delete("Board.deletePost", id);
 	}
+	
+	// 내 게시글 불러오기
+	public List<Map<String, Object>> selectMyPost(Map<String, Object> param){
+		return db.selectList("Board.selectMyPost",param);
+	}
+	
+	// 내 게시글 총 개수 불러오기
+	public int selectMyPostTotalCnt(String id){
+		return db.selectOne("Board.selectMyPostTotalCnt",id);
+	}
+	
+
+	// 마이페이지 > 내 게시글에서 선택한 게시글 일괄 삭제
+	public void deleteSelectPost(Map<String, Object> param) {
+		db.delete("Board.deleteSelectPost",param);
+	}
+	
+	// 마이페이지 > 내 게시글 검색
+	public List<Map<String, Object>> searchMyPost(Map<String, Object> param){
+		return db.selectList("Board.searchMyPost",param);
+	}
+	
+	// 마이페이지 > 내 게시글 검색 총 개수
+	public int selectSearchMyPostCnt(Map<String, Object> param){
+		return db.selectOne("Board.selectSearchMyPostCnt",param);
+	}
+	
+	// 마이페이지 > 내 북마크 불러오기
+	public List<Map<String, Object>> selectMyBookmark(Map<String, Object> param){
+		return db.selectList("Board.selectMyBookmark",param);
+	}
+	
+	// 마이페이지 > 내 북마크 게시글 수 불러오기
+	public int selectMyBookmarkTotalCnt(String id){
+		return db.selectOne("Board.selectMyBookmarkTotalCnt",id);
+	}
+	
+	// 마이페이지 > 내 북마크 게시글 검색
+	public List<Map<String, Object>> searchMyBookmark(Map<String, Object> param){
+		return db.selectList("Board.searchMyBookmark",param);
+	}
+	
+	// 마이페이지 > 내 북마크 게시글 검색 총 개수
+	public int selectSearchMyBookmarkCnt(Map<String, Object> param){
+		return db.selectOne("Board.selectSearchMyBookmarkCnt",param);
+	}
 }

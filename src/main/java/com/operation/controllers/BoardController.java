@@ -59,17 +59,18 @@ public class BoardController {
 			@RequestParam(value = "cpage", required = false) String cpage) {
 		Map<String, Object> result = new HashMap<>();
 		List<Map<String, Object>> list = new ArrayList<>();
+		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
 		if (category.equals("notice")) {
 			list = bservice.selectAll(category);
 		} else {
-			int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
+			
 			list = bservice.selectAll(category, currentPage);
 			int recordTotalCount = bservice.selectTotalCnt(category);
 			result.put("recordTotalCount", recordTotalCount);
 			result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 			result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 		}
-		result.put("postCurPage", cpage);
+		result.put("postCurPage", currentPage);
 		result.put("list", list);
 		return result;
 	}
@@ -88,7 +89,7 @@ public class BoardController {
 		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
 		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
 
-		result.put("postCurPage", cpage);
+		result.put("postCurPage", currentPage);
 		result.put("list", list);
 		return result;
 	}
@@ -371,6 +372,49 @@ public class BoardController {
 		} else if (srcList != null && srcList.length >= 1) {
 			bservice.deleteImage(srcList);
 		}
+	}
+	
+	// 마이페이지 > 내 게시글에서 선택한 게시글 일괄 삭제
+	@ResponseBody
+	@RequestMapping("/deleteSelectPost")
+	public void deleteSelectPost(@RequestParam(value = "deleteIds", required = false) String[] deleteIds) {
+		if (deleteIds != null && deleteIds.length>=1) {
+			bservice.deleteSelectPost(deleteIds);
+		}
+	}
+	
+	// 마이페이지 > 내 게시글 검색
+	@ResponseBody
+	@RequestMapping("/searchMyPost")
+	public Map<String, Object> searchMyPost(@RequestParam(value = "cpage", required = false) String cpage, String select, String keyword){
+		Map<String, Object> result = new HashMap<>();
+		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
+		List<Map<String, Object>> list = bservice.searchMyPost(select, keyword, (String) session.getAttribute("loginID"), currentPage);
+		int recordTotalCount = bservice.selectSearchMyPostCnt(select, keyword, (String) session.getAttribute("loginID"));
+
+		result.put("recordTotalCount", recordTotalCount);
+		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+		result.put("postCurPage", currentPage);
+		result.put("post", list);
+		return result;
+	}
+	
+	// 마이페이지 > 내 북마크 게시글 검색
+	@ResponseBody
+	@RequestMapping("/searchMyBookmark")
+	public Map<String, Object> searchMyBookmark(@RequestParam(value = "cpage", required = false) String cpage, String select, String keyword){
+		Map<String, Object> result = new HashMap<>();
+		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
+		List<Map<String, Object>> list = bservice.searchMyBookmark(select, keyword, (String) session.getAttribute("loginID"), currentPage);
+		int recordTotalCount = bservice.selectSearchMyBookmarkCnt(select, keyword, (String) session.getAttribute("loginID"));
+		
+		result.put("recordTotalCount", recordTotalCount);
+		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+		result.put("postCurPage", currentPage);
+		result.put("post", list);
+		return result;
 	}
 
 	@ExceptionHandler(Exception.class)

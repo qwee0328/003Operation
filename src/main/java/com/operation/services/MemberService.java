@@ -11,9 +11,12 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.commons.EncryptionUtils;
+import com.operation.constants.Constants;
+import com.operation.dao.BoardDAO;
 import com.operation.dao.MemberDAO;
 import com.operation.dto.MemberDTO;
 
@@ -138,4 +141,5 @@ public class MemberService {
 	public boolean chkNickname(String nickname) {
 		return dao.chkNickname(nickname);
 	}
+	
 }

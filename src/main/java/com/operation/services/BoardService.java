@@ -18,6 +18,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
@@ -416,5 +419,91 @@ public class BoardService {
 	// 게시글 삭제
 	public void deletePost(int id) {
 		dao.deletePost(id);
+	}
+	
+	// 내 게시글 불러오기
+	public Map<String, Object> selectMyPost(String id, int cpage){
+		Map<String, Object> result = new HashMap<>();
+		
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("member_id", id);
+		param.put("start", cpage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
+		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
+
+		int recordTotalCount = dao.selectMyPostTotalCnt(id);
+		result.put("recordTotalCount", recordTotalCount);
+		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+		result.put("postCurPage", cpage);
+		result.put("post", dao.selectMyPost(param));
+		return result;
+	}
+	
+	// 마이페이지 > 내 게시글에서 선택한 게시글 일괄 삭제
+	public void deleteSelectPost(String[] ids) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("array", ids);
+		param.put("member_id", (String) session.getAttribute("loginID"));
+		dao.deleteSelectPost(param);
+	}
+	
+	// 마이페이지 > 내 게시글 검색
+	public List<Map<String, Object>> searchMyPost(String select, String keyword, String loginID, int cpage){
+		Map<String, Object> param = new HashMap<>();
+		param.put("select", select);
+		param.put("keyword", "%"+keyword+"%");
+		param.put("member_id", (String) session.getAttribute("loginID"));
+		param.put("start", cpage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
+		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
+		return dao.searchMyPost(param);
+	}
+	
+	// 마이페이지 > 내 게시글 검색 총 개수
+	public int selectSearchMyPostCnt(String select, String keyword, String loginID){
+		Map<String, Object> param = new HashMap<>();
+		param.put("select", select);
+		param.put("keyword", "%"+keyword+"%");
+		param.put("member_id", (String) session.getAttribute("loginID"));
+		return dao.selectSearchMyPostCnt(param);
+	}
+	
+	// 마이페이지 > 북마크 불러오기
+	public Map<String, Object> selectMyBookmark(int cpage){
+		Map<String, Object> result = new HashMap<>();
+		
+		String id =  (String) session.getAttribute("loginID");
+		Map<String, Object> param = new HashMap<>();
+		param.put("member_id", id);
+		param.put("start", cpage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
+		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
+
+		int recordTotalCount = dao.selectMyBookmarkTotalCnt(id);
+		result.put("recordTotalCount", recordTotalCount);
+		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+		result.put("postCurPage", cpage);
+		result.put("post", dao.selectMyBookmark(param));
+		return result;
+	}
+	
+	// 마이페이지 > 내 북마크 게시글 검색
+	public List<Map<String, Object>> searchMyBookmark(String select, String keyword, String loginID, int cpage){
+		Map<String, Object> param = new HashMap<>();
+		param.put("select", select);
+		param.put("keyword", "%"+keyword+"%");
+		param.put("member_id", (String) session.getAttribute("loginID"));
+		param.put("start", cpage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
+		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
+		return dao.searchMyBookmark(param);
+	}
+	
+	// 마이페이지 > 내 북마크 게시글 검색 총 개수
+	public int selectSearchMyBookmarkCnt(String select, String keyword, String loginID){
+		Map<String, Object> param = new HashMap<>();
+		param.put("select", select);
+		param.put("keyword", "%"+keyword+"%");
+		param.put("member_id", (String) session.getAttribute("loginID"));
+		return dao.selectSearchMyBookmarkCnt(param);
 	}
 }

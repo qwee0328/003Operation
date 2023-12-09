@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-* {
-	box-sizing: border-box;
-}
-
 .guide {
 	max-width: 1300px;
 	margin: 100px auto 150px auto;
@@ -15,7 +11,7 @@
 	margin-bottom: 50px;
 }
 
-.board__search {
+.board__serach {
 	background-color: #D1D2D8;
 	width: 100%;
 	height: 100px;
@@ -120,15 +116,15 @@
 .board__postHeader,
 .board__post {
 	width: 100%;
-	height: 60px;
 	background-color: #D1D2D8;
 	border-bottom: 3px solid #375ABB;
+	padding: 10px 0;
+	min-height: 60px;
 }
 
 .board__postHeader>div,
 .board__post>div {
 	width: 10%;
-	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -140,22 +136,16 @@
 	font-weight: 400;
 }
 
-
-.board__post .post__writer {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+.board__postHeader .postHeader__chk{
+	width: 5%;
+}
+.board__post .post__chkBox{
+	width: 5%;
 }
 
 .board__postHeader .postHeader__title {
-	width: 35%;
+	width: 50%;
 	justify-content: start;
-}
-
-.post__cover .post__title {
-	width: 100%;
-	justify-content: start;
-	font-weight: 500;
 }
 
 .board__postHeader .postHeader__writeDate,
@@ -169,55 +159,41 @@
 	border-bottom: 1px solid #7D7D7D50;
 }
 
-.board__noticePost {
-	background-color: #D1D2D850;
-}
-
-.noticePost__seq {
-	border: 1px solid #375ABB;
-	color: #375ABB;
-	width: 60px;
-	height: 40px;
-}
-
 .board__post .post__cover {
-	width: 35%;
+	width: 50%;
 }
-	
 
-.title__name {
-	width: fit-content;
+.title__name, .title__scretname {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	cursor: pointer;
 }
 
-.title__replyCnt {
-	width: 25%;
+.title__secret>i {
+	color: #7d7d7d;
+	margin-right: 10px;
 }
 
-.title__replyCntMini {
+.title__answerState {
 	width: 15%;
-	display: none !important;
+	display: none;
 }
 
-.title__replyCnt,
-.title__replyCntMini>i,
-.title__replyCntMini {
-	color: #FB8F8A;
-	font-size: 16px;
+.postAnswer__content{
+	display: none;
 }
-
-.title__replyCntMini>i {
-	padding-top: 4px;
-}
-
 
 .board__post .post__cover .board__postMini {
 	display: none;
 }
 
+.post__answerState {
+	color: #375ABB;
+}
+.title__answerStateCover {
+	display: none;
+	margin-left: 5px;
+}
 
 .board__footer {
 	margin-top: 40px;
@@ -226,7 +202,6 @@
 
 .board__pagination {
 	width: 100%;
-
 }
 
 .board__writeBtnCover {
@@ -246,7 +221,6 @@
 	cursor: pointer;
 }
 
-
 .board__pagination a {
 	width: 40px;
 	height: 40px;
@@ -259,8 +233,34 @@
 	margin: 0 5px;
 }
 
-.board__pagination a:hover{
+.board__post .post__cover {
+	display: block;
+}
+
+.title__name:hover {
 	cursor: pointer;
+}
+
+.postAwswer__area {
+	margin-top: 25px;
+}
+
+.postAwswer__area:hover{
+	cursor: pointer;
+}
+
+.postAwswer__area>i {
+	font-size: 15px;
+}
+
+.abled {
+	display: block;
+	font-size: 15px;
+	font-weight: 400;
+	margin-top: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .empty{
@@ -268,7 +268,33 @@
 	font-size: 20px;
 }
 
+.board__pagination>a:hover{
+	cursor:pointer;
+}
 
+
+.board__selectAndTotalCnt{
+	width: 100%;
+	margin-bottom: 10px;
+	align-items: center;
+	justify-content:space-between
+}
+
+.board__selectBtns>button{
+	border: 3px solid #FB8F8A;
+	font-weight: bold;
+	border-radius: 10px;
+	padding: 5px 10px;
+	background-color: #ffffff;
+	margin-right: 5px;
+	transition-duration: 0.5s;
+}
+
+.board__selectBtns>button:hover{
+	background-color: #FB8F8A;
+	color:#ffffff;
+	cursor: pointer;
+}
 
 @media (max-width: 786px) {
 	.guide {
@@ -285,10 +311,16 @@
 		width: 20%;
 		display: flex;
 	}
+	
+	.board__postHeader .postHeader__chk,
+	.board__post .post__chkBox {
+		width: 20%;
+		display: flex;
+	}
 
 	.board__postHeader .postHeader__title,
 	.board__post .post__title {
-		width: 80%;
+		width: 60%;
 		display: flex;
 	}
 
@@ -298,27 +330,34 @@
 		font-size: 15px;
 	}
 
+	.board__post .post__title {
+		width: 100%;
+	}
+
 	.title__name {
-		width: fit-content;
+		width: auto;
 	}
 
 	.title__replyCnt {
-		display: none !important;
+		display: none;
 	}
 
-	.title__replyCntMini {
-		width: 15%;
-		display: flex !important;
+	.title__answerState {
+		justify-content: center;
+		display: flex;
+		font-size: 15px;
+		width: 80px;
+		border-radius: 15px;
 	}
 
-	.board__post {
-		height: 90px;
-		padding: 10px 0px;
+	.title__answerStateCover {
+		display: flex;
+		justify-content: start;
 	}
 
 	.board__post .post__cover {
 		display: block;
-		width: 80%;
+		width: 60%;
 	}
 
 	.board__post .post__cover .board__postMini {
@@ -336,11 +375,11 @@
 		margin-right: 25px;
 	}
 
-	.board__search {
+	.board__serach {
 		padding: 20px;
 	}
 
-	.board__search>div {
+	.board__serach>div {
 		padding-right: 10px;
 	}
 

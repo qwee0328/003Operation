@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.operation.dto.KioskCategoryDTO;
+import com.operation.dto.KioskInfoDTO;
 import com.operation.dto.KioskRecordDTO;
 
 @Repository
@@ -32,10 +33,10 @@ public class KioskDAO {
 		return db.selectOne("Kiosk.selectByCategoryAndStage",param);
 	}
 	
-	// 키오스크 기록 추가
-	public int insert(KioskRecordDTO dto) {
-		return db.insert("Kiosk.insert", dto);
-	}
+//	// 키오스크 기록 추가
+//	public int insert(KioskRecordDTO dto) {
+//		return db.insert("Kiosk.insert", dto);
+//	}
 	
 	// 키오스크 내 최고 기록 불러오기
 	public List<Map<String, Object>> selectBestRecord(Map<String, Object> param){
@@ -45,5 +46,15 @@ public class KioskDAO {
 	// 키오스크 인기 랭킹 가져오기 (메인)
 	public List<Map<String, Object>> realTimeRank(){
 		return db.selectList("Kiosk.realTimeRank");
+	}
+	
+	// 키오스크 아이디 구하기 ( 기록 삽입용 )
+	public int selectId(KioskInfoDTO kiosk) {
+		return db.selectOne("Kiosk.selectId",kiosk);
+	}
+	
+	// 키오스크 기록 추가
+	public int insert(KioskRecordDTO record) {
+		return db.insert("Kiosk.insert", record);
 	}
 }

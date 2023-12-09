@@ -43,12 +43,12 @@
 .mypageMenu__bottom { width: 100%; border: 1px solid #D1D2D8; margin-top: 50px; border-radius: 20px; padding: 40px 30px;}
 .mypageMenu__myActivity, .mypageMenu__myAsk {margin-bottom: 70px;}
 .mypageMenu__bottom>div>div[class*="title"] {font-size: 25px; font-weight: bold; padding-left: 10px; margin-bottom: 30px;}
-
-.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div { width: 50%; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid #D2D2D8; }
-.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div>div[class*="icon"] { width: 10%;}
-.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div>div[class*="icon"]>i { font-size: 20px; margin-top: 4px;}
-.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div>div[class*="txt"] {width: 80%; font-size: 18px; font-weight: bold;}
-.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div>div[class*="move"] { width: 10%; }
+.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div{width: 50%; margin-bottom: 20px;  padding-bottom: 20px; border-bottom: 1px solid #D2D2D8}
+.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div>a{width: 100%; display: flex;}
+.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div>a>div[class*="icon"] { width: 10%;}
+.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div>a>div[class*="icon"]>i { font-size: 20px; margin-top: 4px;}
+.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div>a>div[class*="txt"] {width: 80%; font-size: 18px; font-weight: bold;}
+.mypageMenu__bottom>div>div[class*="menu"]>div[class*="menu"]>div>a>div[class*="move"] { width: 10%; }
 .goMypage:hover{cursor: pointer;}
 @media (max-width: 1000px) {
 	.profile,.profile__mini {display: none;}

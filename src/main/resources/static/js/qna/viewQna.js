@@ -89,10 +89,17 @@ $(document).ready(function() {
 		}
 		for (let i = 0; i < e.target.files.length; i++) {
 			if (i == 5) break;
-			let fileNameTag = $("<div>").attr("class", "fileNameTag d-flex");
-			let fileName = $("<div>").attr("class", "fileName").text(e.target.files[i].name);
-			let fileIcon = $("<div>").attr("class", "ml5").html(`<i class='fa-solid fa-xmark deleteFileBtn' data-id=${i}></i>`)
-			$(".fileNameList").append(fileNameTag.append(fileName).append(fileIcon))
+			if(e.target.files[i].size >= 10 * 1024 * 1024){
+				alert("파일은 10MB까지만 업로드할 수 있습니다.");
+				$("#fileInput").remove();
+				$(".fileInput__label").parent().after($("<input>").attr("type","file").attr("class","postArea__fileInput").attr("id","fileInput").attr("multiple",true));
+				break;
+			}else{
+				let fileNameTag = $("<div>").attr("class","fileNameTag d-flex");
+				let fileName = $("<div>").attr("class","fileName").text(e.target.files[i].name);
+				let fileIcon = $("<div>").attr("class","ml5").html(`<i class='fa-solid fa-xmark deleteFileBtn' data-id=${i}></i>`)
+				$(".fileNameList").append(fileNameTag.append(fileName).append(fileIcon));
+			}	
 		}
 	});
 

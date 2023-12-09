@@ -1,5 +1,6 @@
 package com.operation.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -83,4 +84,5 @@ public class MemberDAO {
 	public Map<String, Object> selectMainMypageInfoById(String id) {
 		return db.selectOne("Member.selectMainMypageInfoById", id);
 	}
+
 }

@@ -84,9 +84,6 @@ public class QnAController {
 	public String viewPostConf(@PathVariable String dataId, Model model) {
 		int postId = Integer.parseInt(dataId);
 		Map<String, Object> post = qservice.selectById(postId);
-		System.out.println("Q&A 게시글 정보");
-		System.out.println("질문: " + post.get("question"));
-		System.out.println("답변: " + post.get("answer"));
 
 		post.put("id", dataId); // 기존처럼 select 쿼리로 값 불러오도록 바꿔 주세용
 		if (post.get("permission") == null) {
@@ -171,6 +168,33 @@ public class QnAController {
 		return result;
 	}
 
+	// 내 Qna 불러오기
+	@ResponseBody
+	@RequestMapping("/selectMyQnaAll")
+	public Map<String, Object> selectMyQnaAll(@RequestParam(value = "cpage", required = false) String cpage) {
+		Map<String, Object> result = new HashMap<>();
+		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
+		List<Map<String, Object>> list = qservice.selectMyQnaAll(currentPage);
+		int recordTotalCount = qservice.selectMyQnaCnt();
+		result.put("recordTotalCount", recordTotalCount);
+		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+		result.put("postCurPage", currentPage);
+		result.put("list", list);
+
+		return result;
+	}
+	
+	// 마이페이지 > 내 Qna에서 선택한 게시글 일괄 삭제
+	@ResponseBody
+	@RequestMapping("/deleteSelectQna")
+	public void deleteSelectPost(@RequestParam(value = "deleteIds", required = false) String[] deleteIds) {
+		if (deleteIds != null && deleteIds.length>=1) {
+			qservice.deleteSelectQna(deleteIds);
+		}
+	}
+		
+	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();

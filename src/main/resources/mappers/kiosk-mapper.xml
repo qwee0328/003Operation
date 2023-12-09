@@ -69,11 +69,16 @@
 	
 	<!-- 키오스크 기록 추가 -->
 	<insert id="insert">
-		insert into kiosk_record values(null, #{kiosk_id}, #{member_id}, #{member_nickname}, #{play_date}, #{play_time}, #{play_stage}, #{is_success});
+		insert into kiosk_record values(null, #{kiosk_id}, #{member_id}, #{member_nickname}, #{play_date}, #{play_time}, #{is_success});
 	</insert>
 	
 	<!-- 실시간 인기 순위 (홈화면) -->
 	<select id="realTimeRank" resultMap="kiosk_ranking">
 		select * from real_time_ranking;
+	</select>
+	
+	<!-- 키오스크 삽입을 위한 아이디 불러오기 -->
+	<select id="selectId" resultType="int">
+		select id from kiosk where kiosk_category_id="emart" and play_stage=#{play_stage} and is_game=#{is_game};
 	</select>
 </mapper>

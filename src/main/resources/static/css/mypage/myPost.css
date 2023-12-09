@@ -9,11 +9,6 @@
 	margin: 100px auto 150px auto;
 }
 
-.board__title {
-	font-size: 40px;
-	font-weight: bold;
-	margin-bottom: 50px;
-}
 
 .board__search {
 	background-color: #D1D2D8;
@@ -112,10 +107,6 @@
 
 
 
-.board__postCnt {
-	padding-left: 2px;
-	margin-bottom: 10px;
-}
 
 .board__postHeader,
 .board__post {
@@ -124,6 +115,8 @@
 	background-color: #D1D2D8;
 	border-bottom: 3px solid #375ABB;
 }
+
+
 
 .board__postHeader>div,
 .board__post>div {
@@ -140,23 +133,22 @@
 	font-weight: 400;
 }
 
+.board__postHeader .postHeader__chk{
+	width: 5%;
+}
 
-.board__post .post__writer {
+.board__post {
+	height: 80px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
 .board__postHeader .postHeader__title {
-	width: 35%;
+	width: 40%;
 	justify-content: start;
 }
 
-.post__cover .post__title {
-	width: 100%;
-	justify-content: start;
-	font-weight: 500;
-}
 
 .board__postHeader .postHeader__writeDate,
 .board__post .post__writeDate {
@@ -168,24 +160,26 @@
 	border-top: 1px solid #7D7D7D50;
 	border-bottom: 1px solid #7D7D7D50;
 }
-
-.board__noticePost {
-	background-color: #D1D2D850;
+.board__post .post__chkBox{
+	width: 5%;
+}
+.board__post .post__tacCover {
+	display: flex;
+	width: 40%;
+	align-items: center;
+	justify-content: start;
 }
 
-.noticePost__seq {
-	border: 1px solid #375ABB;
-	color: #375ABB;
-	width: 60px;
-	height: 40px;
-}
-
-.board__post .post__cover {
-	width: 35%;
+.post__titleAndCategory{
+	width: 100%;
 }
 	
+.post__category{
+	color:#7d7d7d;
+	font-size: 16px;
+}
 
-.title__name {
+.post__title {
 	width: fit-content;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -193,30 +187,32 @@
 	cursor: pointer;
 }
 
-.title__replyCnt {
+.post__reply{
 	width: 25%;
+	margin-left: 5px;
+	font-weight: 500;
 }
 
-.title__replyCntMini {
+.post__replyMini {
 	width: 15%;
+	margin-left: 5px;
 	display: none !important;
 }
 
-.title__replyCnt,
-.title__replyCntMini>i,
-.title__replyCntMini {
+.post__replyMini>i{
+	margin-right: 3px;
+}
+
+.post__reply,
+.post__replyMini>i,
+.post__replyMini {
 	color: #FB8F8A;
 	font-size: 16px;
-}
-
-.title__replyCntMini>i {
-	padding-top: 4px;
+	display: flex;
+	align-items: center;
 }
 
 
-.board__post .post__cover .board__postMini {
-	display: none;
-}
 
 
 .board__footer {
@@ -228,24 +224,6 @@
 	width: 100%;
 
 }
-
-.board__writeBtnCover {
-	position: absolute;
-	right: 0;
-}
-
-.board__writeBtn {
-	width: 100px;
-	height: 50px;
-	border-radius: 10px;
-	font-size: 20px;
-	border: 0;
-}
-
-.board__writeBtn:hover{
-	cursor: pointer;
-}
-
 
 .board__pagination a {
 	width: 40px;
@@ -268,7 +246,50 @@
 	font-size: 20px;
 }
 
+.board__selectAndTotalCnt{
+	width: 100%;
+	margin-bottom: 10px;
+	align-items: center;
+	justify-content:space-between
+}
 
+.board__selectBtns>button{
+	border: 3px solid #FB8F8A;
+	font-weight: bold;
+	border-radius: 10px;
+	padding: 5px 10px;
+	background-color: #ffffff;
+	margin-right: 5px;
+	transition-duration: 0.5s;
+}
+
+.board__selectBtns>button:hover{
+	background-color: #FB8F8A;
+	color:#ffffff;
+	cursor: pointer;
+}
+
+.board__postCnt{
+	align-items: center;
+}
+
+.mypage__tap{
+	height: 40px;
+}
+.mypage__tap>div{
+	background-color: #D1D2D8;
+	padding:5px 10px;
+	font-size: 18px;
+	border: 1px solid #7d7d7d;
+	cursor: pointer;
+}
+.mypage__tap>div>a{
+	color:#7d7d7d;
+}
+
+.mypage__tap>div.active{
+	background-color: #ffffff;
+}
 
 @media (max-width: 786px) {
 	.guide {
@@ -279,6 +300,12 @@
 	.board__post>div {
 		display: none;
 	}
+	
+	.board__postHeader .postHeader__chk,
+	.board__post .post__chkBox {
+		width: 20%;
+		display: flex;
+	}
 
 	.board__postHeader .postHeader__seq,
 	.board__post .post__seq {
@@ -287,26 +314,17 @@
 	}
 
 	.board__postHeader .postHeader__title,
-	.board__post .post__title {
-		width: 80%;
+	.board__post .post__tacCover {
+		width: 60%;
 		display: flex;
 	}
 
-	.noticePost__seq {
-		width: 50px;
-		height: 30px;
-		font-size: 15px;
-	}
-
-	.title__name {
-		width: fit-content;
-	}
-
-	.title__replyCnt {
+	
+	.post__reply{
 		display: none !important;
 	}
 
-	.title__replyCntMini {
+	.post__replyMini {
 		width: 15%;
 		display: flex !important;
 	}
