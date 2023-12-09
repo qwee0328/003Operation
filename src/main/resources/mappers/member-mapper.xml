@@ -12,7 +12,7 @@
 		select count(*)
 		from member where email = #{email};
 	</select>
-	
+
 	<select id="phoneDuplicationCheck" resultType="Boolean">
 		select count(*)
 		from member where phone = #{phone};
@@ -56,48 +56,59 @@
 		</if>
 		);
 	</insert>
-	
+
 	<!-- 마이페이지 정보 불러오기 -->
 	<select id="selectInfoById"
 		resultType="com.operation.dto.MemberDTO">
 		select * from member where id = #{id};
 	</select>
-	
-	
+
+
 	<!-- 닉네임 중복 확인 -->
 	<select id="selectByNickname" resultType="Boolean">
-		select count(*) from member where nickname = #{nickname};
+		select count(*) from
+		member where nickname = #{nickname};
 	</select>
-	
+
 	<!-- 닉네임 가져오기 -->
 	<select id="selectNickNameById" resultType="String">
-		select nickname from member where id = #{id};
+		select nickname from
+		member where id = #{id};
 	</select>
-	
+
 	<!-- 개인정보 수정 -->
 	<update id="updateInfo">
 		update member set ${key} = #{value} where id = #{id};
 	</update>
-	
+
 	<!-- 프로필 이미지 불러오기 -->
 	<select id="selectProfileImgById" resultType="String">
-		select profile_image from member where id = #{id};
+		select
+		profile_image from member where id = #{id};
 	</select>
-	
+
 	<!-- 프로필 이미지 불러오기 -->
 	<select id="selectProfileImgByNickBoard" resultType="String">
-		select profile_image from member where nickname = #{memberNickname};
+		select
+		profile_image from member where nickname = #{memberNickname};
 	</select>
-	
+
 	<!-- 마이페이지 메인 화면 정보 불러오기 ( 프로필 이미지 , 레벨 , 포인트 정보 ) -->
 	<resultMap id="MainMypageInfo" type="java.util.HashMap">
-		<result property="profile_image" column="profile_image"/>
-		<result property="point" column="point"/>
-		<result property="level_id" column="level_id"/>
+		<result property="profile_image" column="profile_image" />
+		<result property="point" column="point" />
+		<result property="level_id" column="level_id" />
 	</resultMap>
-	
+
 	<select id="selectMainMypageInfoById" resultMap="MainMypageInfo">
-		select profile_image, level_id, point from member where id = #{id};
+		select
+		profile_image, level_id, point from member where id = #{id};
 	</select>
-	
+
+	<!-- // 세션 저장용 닉네임 -->
+	<select id="selectNick" resultType="String">
+		select nickname from member
+		where id=#{id};
+	</select>
+
 </mapper>

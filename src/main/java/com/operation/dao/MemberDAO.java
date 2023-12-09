@@ -87,5 +87,10 @@ public class MemberDAO {
 	public Map<String, Object> selectMainMypageInfoById(String id) {
 		return db.selectOne("Member.selectMainMypageInfoById", id);
 	}
+	
+	// 세션 저장용 닉네임
+	public String selectNick(String id) {
+		return db.selectOne("Member.selectNick",id);
+	}
 
 }

@@ -18,6 +18,7 @@ import com.operation.dto.MemberDTO;
 import com.operation.services.BoardService;
 import com.operation.services.MemberService;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -98,7 +99,7 @@ public class MemberController {
 	// 로그인
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public boolean login(String id, String pw) {
+	public boolean login(String id, String pw, HttpServletResponse response) {
 		// 비번 암호화
 		//pw = EncryptionUtils.getSHA512(pw);
 		pw = PasswordEncoder.encode(pw);

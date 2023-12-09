@@ -10,6 +10,7 @@ public class SecurityUser extends User{
 	
 	public SecurityUser(MemberDTO user) {
 		super(user.getId(), user.getPw(), AuthorityUtils.createAuthorityList(user.getRole_id()));
+		this.loginNicname = user.getNickname();
 	}
 
 	public String getLoginNicname() {
