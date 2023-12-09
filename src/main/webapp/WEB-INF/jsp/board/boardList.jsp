@@ -75,7 +75,11 @@
                 		<div class="board__writeBtnCover"><button class="board__writeBtn bColorMainPink colorWhite">글쓰기</button></div>
                 	</c:when>
                 	<c:when test="${pageContext.request.userPrincipal.authorities eq '[ROLE_ADMIN]'}">
-                		<div class="board__writeBtnCover"><button class="board__writeBtn bColorMainPink colorWhite">글쓰기</button></div>
+                		<c:choose>
+		                	<c:when test="${empty isQuestion }">
+		                		<div class="board__writeBtnCover"><button class="board__writeBtn bColorMainPink colorWhite">글쓰기</button></div>
+		                	</c:when>
+		                </c:choose>
                 	</c:when>
                 </c:choose>
                
