@@ -13,25 +13,21 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/commons/header.jsp"%>
+	<input type="hidden" class="is_game" value="${info.is_game}">
 	<div class="container">
         <div class="guide">
             <div class="kiosk__kioskStep">[ ${info.play_stage}단계 ]</div>
             <div class="kiosk__kioskName" data-id="${info.kiosk_category_id}">${info.name}</div>
-<%--             <c:choose>
-            	<c:when test="${info.is_game}">
-           			<div class="kiosk__progressBar d-flex">
-		                <div class="progressBar__name">진행도</div>
-		                <div class="progressBar__bar"><div class="progressBar__fill"></div></div>
-		                <div class="progressBar__per">100%</div>
-		            </div>
-            	</c:when>
-            </c:choose> --%>
             <hr class="kiosk__line">
             <div class="kiosk__area">
             	<iframe id="kioskFrame" title="kiosk frame" width="100%" height="100%" src="https://kiosk003.github.io/${info.url}"></iframe>
             </div>
 			<script type="text/javascript">
 	        	$(document).ready(function() {
+	        		if(${info.is_game}=="1") getBestRecord();
+	        		
+	        		$(".kiosk__area").css({"width":(${info.width}+20+"px"),"height":(${info.height}+60+"px")});
+	        		
 	        		let userId = "";
 	        		$('#kioskFrame').on('load', function() {
 					$.ajax({
