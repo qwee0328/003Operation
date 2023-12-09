@@ -1,5 +1,6 @@
 package com.operation.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -191,5 +192,15 @@ public class BoardDAO {
 	// 마이페이지 > 내 게시글에서 선택한 게시글 일괄 삭제
 	public void deleteSelectPost(Map<String, Object> param) {
 		db.delete("Board.deleteSelectPost",param);
+	}
+	
+	// 마이페이지 > 내 게시글 검색
+	public List<Map<String, Object>> searchMyPost(Map<String, Object> param){
+		return db.selectList("Board.searchMyPost",param);
+	}
+	
+	// 마이페이지 > 내 게시글 검색 총 개수
+	public int selectSearchMyPostCnt(Map<String, Object> param){
+		return db.selectOne("Board.selectSearchMyPostCnt",param);
 	}
 }

@@ -382,6 +382,25 @@ public class BoardController {
 			bservice.deleteSelectPost(deleteIds);
 		}
 	}
+	
+	// 마이페이지 > 내 게시글 검색
+	@ResponseBody
+	@RequestMapping("/searchMyPost")
+	public Map<String, Object> searchMyPost(@RequestParam(value = "cpage", required = false) String cpage, String select, String keyword){
+		Map<String, Object> result = new HashMap<>();
+		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
+		List<Map<String, Object>> list = bservice.searchMyPost(select, keyword, (String) session.getAttribute("loginID"), currentPage);
+		int recordTotalCount = bservice.selectSearchMyPostCnt(select, keyword, (String) session.getAttribute("loginID"));
+		
+		System.out.println(list);
+		System.out.println(recordTotalCount);
+		result.put("recordTotalCount", recordTotalCount);
+		result.put("recordCountPerPage", Constants.RECORD_COUNT_PER_PAGE);
+		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
+		result.put("postCurPage", currentPage);
+		result.put("post", list);
+		return result;
+	}
 
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {

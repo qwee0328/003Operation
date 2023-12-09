@@ -333,4 +333,16 @@
 		</foreach>
 		and member_id=#{member_id};
 	</delete>
+	
+	<!-- 게시글 검색 결과 불러오기 -->
+	<select id="searchMyPost" resultMap="myPostInfo">
+		select * from myPost where member_id=#{member_id} and ${select} like #{keyword}
+		order by id desc limit ${start},${count};
+	</select>
+	
+	<!-- 검색 게시글 총 개수 불러오기 -->
+	<select id="selectSearchMyPostCnt" resultType="int">
+		select count(*) from myPost where member_id=#{member_id} and ${select} like #{keyword};
+	</select>
+	
 </mapper>

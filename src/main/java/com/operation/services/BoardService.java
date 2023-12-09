@@ -428,4 +428,24 @@ public class BoardService {
 		param.put("member_id", (String) session.getAttribute("loginID"));
 		dao.deleteSelectPost(param);
 	}
+	
+	// 마이페이지 > 내 게시글 검색
+	public List<Map<String, Object>> searchMyPost(String select, String keyword, String loginID, int cpage){
+		Map<String, Object> param = new HashMap<>();
+		param.put("select", select);
+		param.put("keyword", "%"+keyword+"%");
+		param.put("member_id", (String) session.getAttribute("loginID"));
+		param.put("start", cpage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
+		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
+		return dao.searchMyPost(param);
+	}
+	
+	// 마이페이지 > 내 게시글 검색 총 개수
+	public int selectSearchMyPostCnt(String select, String keyword, String loginID){
+		Map<String, Object> param = new HashMap<>();
+		param.put("select", select);
+		param.put("keyword", "%"+keyword+"%");
+		param.put("member_id", (String) session.getAttribute("loginID"));
+		return dao.selectSearchMyPostCnt(param);
+	}
 }
