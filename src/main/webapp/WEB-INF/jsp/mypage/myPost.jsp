@@ -28,7 +28,6 @@
                             <select class="search__select">
                                 <option value="title">제목</option>
                                 <option value="content">내용</option>
-                                <option value="member_nickname">작성자</option>
                             </select>
                             <span class="search__arrow"><i class="fa-solid fa-chevron-down"></i></span>
                         </div>
