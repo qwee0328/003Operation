@@ -8,7 +8,7 @@ $(document).ready(function(){
 // 게시글 목록 불러오기
 function postLoad(cpage){
 	$.ajax({
-		url:"/member/selectMyReply",
+		url:"/reply/selectMyReply",
 		type:"post",
 		data:{cpage:cpage}
 	}).done(function(result){
