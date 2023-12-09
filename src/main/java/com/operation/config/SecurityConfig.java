@@ -53,7 +53,7 @@ public class SecurityConfig {
 	
 	@Autowired // 매개변수의 자료형에 자동으로 탑제
 	private void auth(AuthenticationManagerBuilder auth) throws Exception {
-		String getUsers = "select id, password, enabled  from member where id = ?";
+		String getUsers = "select id, pw, enabled  from member where id = ?";
 		String getPrivs = "select id, role_id from member where id = ?";
 		
 		auth.jdbcAuthentication() // jdbc를 통해 인증 하겠다.
