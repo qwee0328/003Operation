@@ -88,6 +88,10 @@ public class MemberDAO {
 		return db.selectOne("Member.selectMainMypageInfoById", id);
 	}
 	
+	// 세션 저장용 닉네임
+	public String selectNick(String id) {
+		return db.selectOne("Member.selectNick",id);
+	}
 	// 비밀번호 가져오기
 	public String getPw(String id) {
 		return db.selectOne("Member.getPw",id);

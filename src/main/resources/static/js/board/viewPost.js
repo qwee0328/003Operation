@@ -25,7 +25,7 @@ $(document).ready(function() {
 			$(".postInfo__right").append(postUpdate).append(postDelete);
 		}
 	});
-	
+
 	// 프로필 이미지 불러오기
 	$.ajax({
 		url: "/member/selectProfileImgByNickBoard",
@@ -63,7 +63,7 @@ $(document).ready(function() {
 		}
 	});
 
-	
+
 
 	// 추천 수, 북마크 수, 댓글 수 불러오기
 	postInfo();
@@ -258,7 +258,7 @@ $(document).ready(function() {
 					selectreplyList(replyCpage);
 				})
 			}
-		}else{
+		} else {
 			alert("본인이 작성한 댓글은 추천할 수 없습니다.");
 		}
 
@@ -386,12 +386,13 @@ $(document).ready(function() {
 		let rereplyInput = $("<div>").attr("class", "rereplyInput");
 		let replyInput__userProfile = $("<div>").attr("class", "replyInput__userProfile");
 		let userProfileImg = $("<img>").attr("id", "userProfileImg");
+
 		$.ajax({
 			url: "/member/selectProfileImgById",
 			type: "post"
 		}).done(function(resp) {
 
-			if (resp !== null) {
+			if (resp !== "") {
 				userProfileImg.attr("src", "/profileImgs/" + resp);
 			} else {
 				userProfileImg.attr("src", "/images/profileImg.png");
@@ -452,8 +453,8 @@ $(document).ready(function() {
 					selectreplyList(replyCpage);
 				}
 			})
-			replyIndex = 0;
-			selectreplyList(replyCpage);
+			//replyIndex = 0;
+			//selectreplyList(replyCpage);
 		}
 	});
 
@@ -661,7 +662,7 @@ function selectreplyList(replyCpage) {
 
 			$.ajax({
 				url: "/board/selectReReplyAll",
-				data: { parentId: resp.replyList[i].id },
+				data: { parentId: resp.replyList[replyIndex].id },
 				type: "post",
 				async: "false"
 			}).done(function(data) {
@@ -704,7 +705,7 @@ function selectreplyList(replyCpage) {
 				let recommend = $("<span>").attr("data-id", resp.replyList[replyIndex].id).attr("class", "replyRecommendBtn").attr("isrecommed", resp.replyList[replyIndex].isrecommend).attr("replyWriter", resp.replyList[replyIndex].member_nickname);
 
 				let thumbsIcon = $("<i>").attr("class", "fa-regular fa-thumbs-up");
-				
+
 				if (resp.replyList[replyIndex].isrecommend) {
 					recommend.css("color", "#FB8F8A");
 					thumbsIcon.css("color", "#FB8F8A");
@@ -716,8 +717,9 @@ function selectreplyList(replyCpage) {
 				replyLine.append(replyWriterInfo).append(replyConf).append(replyInfo);
 				$("#replyList").append(replyLine);
 
-				replyIndex++;
+
 				for (let j = 0; j < data.length; j++) {
+					console.log(resp.replyList[replyIndex].id)
 					let replyLine = $("<div>").attr("class", "RereplyLine");
 					let replyWriterInfo = $("<div>").attr("class", "replyWriterInfo");
 
@@ -761,9 +763,14 @@ function selectreplyList(replyCpage) {
 					replyInfo.append(recommend)
 
 					replyLine.append(replyWriterInfo).append(replyConf).append(replyInfo);
-					$("#replyList").append(replyLine);
+					if (resp.replyList[replyIndex].id === data[j].parent_reply_id) {
+						console.log("부모 맘ㅈ아요")
+						$("#replyList").append(replyLine);
+					}
+					
 					console.log("j" + i)
 				}
+				replyIndex++;
 			})
 		}
 		pagination($("#postId").val(), resp.recordTotalCount, resp.replyCpage, resp.recordCountPerPage, resp.naviCountPerPage);

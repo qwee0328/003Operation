@@ -36,6 +36,7 @@ $(document).ready(function(){
 			},
 			type:"post"
 		}).done(function(loginResult){
+			
 			if(loginResult){
 				location.href="/";
 			}else{

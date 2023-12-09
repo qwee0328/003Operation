@@ -26,7 +26,7 @@ import com.operation.dto.MemberDTO;
 public class MemberService {
 	@Autowired
 	private MemberDAO dao;
-	
+
 	@Autowired
 	private PasswordEncoder PasswordEncoder;
 
@@ -55,8 +55,8 @@ public class MemberService {
 			String gender, String nickName, String email, String recommender) throws Exception {
 		MemberDTO user = new MemberDTO();
 		user.setId(id);
-		//user.setPw(EncryptionUtils.getSHA512(pw));
-		//user.setPw(PasswordEncoder.encode(pw));
+		// user.setPw(EncryptionUtils.getSHA512(pw));
+		// user.setPw(PasswordEncoder.encode(pw));
 		user.setPw(pw);
 		System.out.println(user.getPw());
 		user.setName(name);
@@ -149,9 +149,15 @@ public class MemberService {
 	public boolean chkNickname(String nickname) {
 		return dao.chkNickname(nickname);
 	}
+
+	// 세션 저장용 닉네임
+	public String selectNick(String id) {
+		return dao.selectNick(id);
+	}
 	
 	// 비밀번호 가져오기
 	public String getPw(String id) {
 		return dao.getPw(id);
 	}
+
 }
