@@ -3,6 +3,7 @@ package com.operation.controllers;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,6 +31,9 @@ public class MemberController {
 	
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private PasswordEncoder PasswordEncoder;
 
 	@RequestMapping("/signup")
 	public String signup() {
@@ -41,6 +45,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("/idDuplicationCheck")
 	public boolean idDuplicationCheck(@RequestParam("id") String id) {
+		System.out.println("아이디 중복체크 : "+id);
 		return mservice.idDuplicationCheck(id);
 	}
 
@@ -73,7 +78,8 @@ public class MemberController {
 			@RequestParam("phone") String phone, @RequestParam("birth") String birth,
 			@RequestParam("gender") String gender, @RequestParam("nickName") String nickName,
 			@RequestParam("email") String email, @RequestParam("recommender") String recommender) throws Exception {
-		return mservice.signupUser(id, pw, name, phoneFirst, phone, birth, gender, nickName, email, recommender);
+		System.out.println(PasswordEncoder.encode(pw));
+		return mservice.signupUser(id, PasswordEncoder.encode(pw), name, phoneFirst, phone, birth, gender, nickName, email, recommender);
 	}
 
 	// 회원가입한 이름 불러오기
@@ -94,7 +100,9 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public boolean login(String id, String pw) {
 		// 비번 암호화
-		pw = EncryptionUtils.getSHA512(pw);
+		//pw = EncryptionUtils.getSHA512(pw);
+		pw = PasswordEncoder.encode(pw);
+		System.out.println(pw);
 
 		boolean loginResult = mservice.chkInfo(id, pw);
 		if (loginResult) {

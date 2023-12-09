@@ -10,17 +10,26 @@ import com.operation.dao.MemberDAO;
 import com.operation.dto.MemberDTO;
 import com.operation.security.SecurityUser;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class UserSecurityService implements UserDetailsService{
 	@Autowired
 	private MemberDAO dao;
 	
+	@Autowired
+	private HttpSession session;
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
+		System.out.println(username+"UserSecurityService");
 		MemberDTO user = dao.selectInfoById(username);
 		SecurityUser su = new SecurityUser(user);
-		su.setName(user.getName());
+		su.setLoginNicname(user.getNickname());
+		
+		session.setAttribute("loginID", user.getId());
+		session.setAttribute("loginNickName", user.getNickname()); // 닉네임
 		return su;
 	}
 }

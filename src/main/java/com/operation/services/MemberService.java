@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,10 +26,13 @@ import com.operation.dto.MemberDTO;
 public class MemberService {
 	@Autowired
 	private MemberDAO dao;
+	
+	@Autowired
+	private PasswordEncoder PasswordEncoder;
 
 	// 아이디 중복 체크
 	public boolean idDuplicationCheck(String id) {
-		return dao.idDuplicationCheck("%" + id + "%");
+		return dao.idDuplicationCheck(id);
 	}
 
 	// 이메일 중복 체크
@@ -50,7 +55,10 @@ public class MemberService {
 			String gender, String nickName, String email, String recommender) throws Exception {
 		MemberDTO user = new MemberDTO();
 		user.setId(id);
-		user.setPw(EncryptionUtils.getSHA512(pw));
+		//user.setPw(EncryptionUtils.getSHA512(pw));
+		//user.setPw(PasswordEncoder.encode(pw));
+		user.setPw(pw);
+		System.out.println(user.getPw());
 		user.setName(name);
 		user.setPhone(phoneFirst + phone);
 

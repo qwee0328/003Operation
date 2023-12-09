@@ -16,7 +16,10 @@ public class MemberDAO {
 
 	// 아이디 중복 체크
 	public boolean idDuplicationCheck(String id) {
-		return db.selectOne("Member.idDuplicationCheck", id);
+		System.out.println(id);
+		boolean result = db.selectOne("Member.idDuplicationCheck", id);
+		System.out.println(result);
+		return result;
 	}
 
 	// 이메일 중복 체크

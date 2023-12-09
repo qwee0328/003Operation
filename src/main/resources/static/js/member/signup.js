@@ -156,7 +156,7 @@ $(document).ready(function() {
 
 	// 아이디 input 입력 시 중복 확인
 
-	$("#idInput").on("keyup", function() {
+	$("#idInput").on("input", function() {
 		if ($(this).val() === "") {
 			$("#id_check").html("");
 			$("#id_check").css("color", "black");
@@ -166,7 +166,11 @@ $(document).ready(function() {
 				type: "POST",
 				data: { id: $(this).val() }
 			}).done(function(resp) {
-				if (resp === "true") {
+				console.log(resp === "true")
+				console.log(resp === true)
+				console.log(resp == "true")
+				if (resp === true) {
+					console.log("1")
 					$("#id_check").html("사용 불가능한 아이디 입니다.");
 					$("#id_check").css("color", "#fb8f8a");
 					idValidation = false;
@@ -176,11 +180,13 @@ $(document).ready(function() {
 					let resultId = regexId.test($("#idInput").val());
 					if (!resultId) {
 						if ($("#idInput").val() === "") {
+							console.log("2")
 							$("#id_check").html("");
 							$("#id_check").css("color", "black");
 							idValidation = false;
 							checkStepTwoVariables();
 						} else {
+							console.log("3")
 							$("#id_check").html("아이디 형식이 맞지 않습니다. (영어 대소문자, 숫자, _로 구성된 8~14자)");
 							$("#id_check").css("color", "#fb8f8a");
 							idValidation = false;
@@ -188,6 +194,7 @@ $(document).ready(function() {
 						}
 
 					} else {
+						console.log("4")
 						$("#id_check").html("사용 가능한 아이디 입니다.");
 						$("#id_check").css("color", "forestgreen");
 						idValidation = true;
@@ -403,9 +410,14 @@ $(document).ready(function() {
 				genderValidation = false;
 				checkStepTwoVariables();
 			} else {
-				$("#ssn_check").html("");
-				genderValidation = true;
-				checkStepTwoVariables();
+				console.log($("#birthInput").val()[0])
+				if ($("#birthInput").val()[0] !== "9" && ($(this).val() === "3" || $(this).val() === "4") || $("#birthInput").val()[0] == "9" && ($(this).val() === "1" || $(this).val() === "2")) {
+					console.log("성별 형식 맞음")
+					$("#ssn_check").html("");
+					genderValidation = true;
+					checkStepTwoVariables();
+				}else{alert("주민번호 첫 자리가 생년월일과 맞지 않습니다.")}
+
 			}
 		}
 	});
@@ -503,15 +515,7 @@ $(document).ready(function() {
 
 	// step 2 다음 버튼 눌렀을 때
 	$('#stepTwoNextBnt').on("click", function() {
-		if (signupValidation) {
-			$('.stepOneBox').hide();
-			$('.stepTwoBox').hide();
-			$('.stepThreeBox').show();
-		} else {
-			$('.stepOneBox').hide();
-			$('.stepTwoBox').show();
-			$('.stepThreeBox').hide();
-		}
+
 		let phoneFirst = "";
 		if ($(".basicInfo__phone .typeName").html() !== "직접입력") {
 			phoneFirst = $(".basicInfo__phone .typeName").html();
@@ -535,18 +539,27 @@ $(document).ready(function() {
 					data: { id: $("#idInput").val() }
 				}).done(function(resp) {
 					console.log(resp)
-					$(".userWelcome__conf").html(resp.name+"님 ("+$("#idInput").val()+")의 회원가입이 성공적으로 완료되었습니다.")
+					if (signupValidation) {
+						$('.stepOneBox').hide();
+						$('.stepTwoBox').hide();
+						$('.stepThreeBox').show();
+					} else {
+						$('.stepOneBox').hide();
+						$('.stepTwoBox').show();
+						$('.stepThreeBox').hide();
+					}
+					$(".userWelcome__conf").html(resp.name + "님 (" + $("#idInput").val() + ")의 회원가입이 성공적으로 완료되었습니다.")
 				});
 			}
 		})
 	});
-	
-	$("#goHome").on("click",function(){
-		location.href="/";
+
+	$("#goHome").on("click", function() {
+		location.href = "/";
 	})
-	
-	$("#goLogin").on("click",function(){
-		location.href="/member/goLogin";
+
+	$("#goLogin").on("click", function() {
+		location.href = "/member/goLogin";
 	})
 });
 
