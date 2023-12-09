@@ -15,9 +15,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
-		System.out.println(request.getRemoteAddr());
-		System.out.println(request.getRequestURL());
-		System.out.println((String)session.getAttribute("loginID")+"home");
 		return "home";
 	}
 	
