@@ -87,5 +87,10 @@ public class MemberDAO {
 	public Map<String, Object> selectMainMypageInfoById(String id) {
 		return db.selectOne("Member.selectMainMypageInfoById", id);
 	}
+	
+	// 비밀번호 가져오기
+	public String getPw(String id) {
+		return db.selectOne("Member.getPw",id);
+	}
 
 }

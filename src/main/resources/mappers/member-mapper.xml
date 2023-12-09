@@ -100,4 +100,8 @@
 		select profile_image, level_id, point from member where id = #{id};
 	</select>
 	
+	
+	<select id="getPw" resultType="String">
+		select pw from member where id = #{id};
+	</select>
 </mapper>
