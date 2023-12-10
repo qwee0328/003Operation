@@ -44,11 +44,11 @@ public class SecurityConfig {
 		.requestMatchers(new AntPathRequestMatcher("/board/mypage/**")).authenticated() // 마이페이지 내 게시글 관리
 		.requestMatchers(new AntPathRequestMatcher("/qna/admin/**")).hasRole("ADMIN") // 관리자 Q&A 답글 작성/수정/수정내용 불러오기 관리자만 가능
 		.requestMatchers(new AntPathRequestMatcher("/**")).permitAll();
-		//http.formLogin();
+
 		http.formLogin().loginPage("/member/goLogin").defaultSuccessUrl("/")
 		.successHandler((request, response, authentication) -> {
 			// 성공했을 때
-			 // 인증 객체에서 사용자 정보 가져오기
+			// 인증 객체에서 사용자 정보 가져오기
 	        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 	        String loginID = userDetails.getUsername(); // 아이디
 			session.setAttribute("loginID", loginID);
