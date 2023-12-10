@@ -40,8 +40,8 @@
 									class="fa-solid fa-chevron-down colorWhite"></i></a>
 								<ul id="mypageMenu">
 									<li><a href="/member/mypage/viewMypage">내 정보</a></li>
-									<li><a href="#">게임 기록</a></li>
-									<li><a href="#">포인트 적립 내역</a></li>
+									<li><a href="/member/mypage/myGameRecord">게임 기록</a></li>
+									<li><a href="/member/mypage/goMyPost">포인트 적립 내역</a></li>
 									<li><a href="/member/mypage/goMyPost">내 게시글</a></li>
 								</ul>
 							</div>
@@ -99,8 +99,8 @@
 							<c:when test="${not empty loginID}">
 								<div class="ham-mypage"><a href="/member/mypage/goMypage">마이페이지</a></div>
 								<div class="ham-mypage-sub"><a href="/member/mypage/viewMypage">내 정보</a></div>
-								<div class="ham-mypage-sub"><a href="#">게임 기록</a></div>
-								<div class="ham-mypage-sub"><a href="#">포인트 적립 내역</a></div>
+								<div class="ham-mypage-sub"><a href="/member/mypage/myGameRecord">게임 기록</a></div>
+								<div class="ham-mypage-sub"><a href="/member/mypage/goMyPost">포인트 적립 내역</a></div>
 								<div class="ham-mypage-sub"><a href="/member/mypage/goMyPost">내 게시글</a></div>
 							</c:when>
 						</c:choose>	

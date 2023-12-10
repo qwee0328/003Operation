@@ -29,10 +29,10 @@ public class MemberController {
 
 	@Autowired
 	private BoardService bservice;
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
 	private PasswordEncoder PasswordEncoder;
 
@@ -46,7 +46,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("/idDuplicationCheck")
 	public boolean idDuplicationCheck(@RequestParam("id") String id) {
-		System.out.println("아이디 중복체크 : "+id);
+		System.out.println("아이디 중복체크 : " + id);
 		return mservice.idDuplicationCheck(id);
 	}
 
@@ -80,7 +80,8 @@ public class MemberController {
 			@RequestParam("gender") String gender, @RequestParam("nickName") String nickName,
 			@RequestParam("email") String email, @RequestParam("recommender") String recommender) throws Exception {
 		System.out.println(PasswordEncoder.encode(pw));
-		return mservice.signupUser(id, PasswordEncoder.encode(pw), name, phoneFirst, phone, birth, gender, nickName, email, recommender);
+		return mservice.signupUser(id, PasswordEncoder.encode(pw), name, phoneFirst, phone, birth, gender, nickName,
+				email, recommender);
 	}
 
 	// 회원가입한 이름 불러오기
@@ -101,7 +102,7 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public boolean login(String id, String pw, HttpServletResponse response) {
 		// 비번 암호화
-		//pw = EncryptionUtils.getSHA512(pw);
+		// pw = EncryptionUtils.getSHA512(pw);
 		pw = PasswordEncoder.encode(pw);
 		System.out.println(pw);
 
@@ -150,7 +151,7 @@ public class MemberController {
 //		boolean re = PasswordEncoder.matches(pw, mservice.getPw((String)session.getAttribute("loginID")));
 //		System.out.println(re);
 //		return mservice.chkInfo((String) session.getAttribute("loginID"), pw);
-		return PasswordEncoder.matches(pw, mservice.getPw((String)session.getAttribute("loginID")));
+		return PasswordEncoder.matches(pw, mservice.getPw((String) session.getAttribute("loginID")));
 	}
 
 	// 마이페이지 정보 수정 페이지로 이동
@@ -218,14 +219,14 @@ public class MemberController {
 	public boolean chkNickname(String nickname) {
 		return mservice.chkNickname(nickname);
 	}
-	
+
 	// 내 닉네임 불러오기 -> 게시판에서 본인 확인용
 	@ResponseBody
 	@RequestMapping("/selectUserNick")
 	public String selectUserNick() {
-		return (String)session.getAttribute("loginNickName");
+		return (String) session.getAttribute("loginNickName");
 	}
-	
+
 	// 세션 아이디 가져오기 -> 유니티로 보내주기 위함
 	@ResponseBody
 	@RequestMapping("/userId")
@@ -233,46 +234,57 @@ public class MemberController {
 		return (String) session.getAttribute("loginID");
 	}
 
-
 	// 마이페이지 내 게시글 내역으로 이동
 	@RequestMapping("/mypage/goMyPost")
 	public String goMyPost() {
 		return "mypage/myPost";
 	}
-	
+
 	// 내 게시글 불러오기
 	@ResponseBody
 	@RequestMapping("/mypage/selectMyPost")
-	public Map<String, Object> selectMyPost(String id, @RequestParam(value = "cpage", required = false) String cpage){
+	public Map<String, Object> selectMyPost(String id, @RequestParam(value = "cpage", required = false) String cpage) {
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
 		return bservice.selectMyPost((String) session.getAttribute("loginID"), currentPage);
 	}
-	
-	
+
 	// 마이페이지 내 북마크 내역으로 이동
 	@RequestMapping("/mypage/goMyBookmark")
 	public String goMyBookmark() {
 		return "mypage/myBookmark";
 	}
-		
+
 	// 내 북마크 불러오기
 	@ResponseBody
 	@RequestMapping("/mypage/selectMyBookmark")
-	public Map<String, Object> selectMyBookmark(String id, @RequestParam(value = "cpage", required = false) String cpage){
+	public Map<String, Object> selectMyBookmark(String id,
+			@RequestParam(value = "cpage", required = false) String cpage) {
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
 		return bservice.selectMyBookmark(currentPage);
 	}
-	
+
 	// 마이페이지 내 작성한 댓글 내역으로 이동
 	@RequestMapping("/mypage/goMyReply")
 	public String goMyReply() {
 		return "mypage/myReply";
 	}
-	
+
 	// 마이페이지 내 작성한 댓글 내역으로 이동
 	@RequestMapping("/mypage/goMyQna")
 	public String goMyQna() {
 		return "mypage/myQna";
+	}
+
+	// 포인트 적립 페이지
+	@RequestMapping("/mypage/pointList")
+	public String pointList() {
+		return "mypage/myPoint";
+	}
+
+	// 게임 기록 보기
+	@RequestMapping("/mypage/myGameRecord")
+	public String myGameRecord() {
+		return "mypage/myGameRecord";
 	}
 
 	@ExceptionHandler(Exception.class)

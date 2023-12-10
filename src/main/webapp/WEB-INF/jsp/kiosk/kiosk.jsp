@@ -27,7 +27,7 @@
             	<c:when test="${info.is_game == true}">
             		<c:choose>
 		            	<c:when test="${not empty loginID}">
-		            		<script>getBestRecord();</script>
+		            		<script>/*getBestRecord();*/</script>
 		            	</c:when>
 		            </c:choose>
             	</c:when>
@@ -49,6 +49,7 @@
 				})
             </script>
             <!-- 기록 영역 ( 게임용 ) -->
+            <!-- 
             <c:choose>
             	<c:when test="${info.is_game}">
             		<c:choose>
@@ -77,7 +78,7 @@
 		            </c:choose>
             	</c:when>
             </c:choose>
-          
+           -->
         </div>
     </div>
     <%@ include file="/WEB-INF/jsp/commons/footer.jsp" %>

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.operation.dao.KioskDAO;
 import com.operation.dao.MemberDAO;
@@ -70,6 +71,7 @@ public class KioskService {
 	}
 	
 	// 키오스크 기록 추가
+	@Transactional
 	public int insert(KioskInfoDTO kiosk) {
 		KioskRecordDTO record = new KioskRecordDTO();
 		record.setKiosk_id(dao.selectId(kiosk));

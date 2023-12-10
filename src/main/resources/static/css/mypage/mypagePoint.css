@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+.guide {
+	max-width: 1300px;
+	margin: 100px auto 150px auto;
+}
+
+.userInfo {
+	margin-bottom: 100px;
+	text-align: center;
+	border: 1px solid #7d7d7d40;
+	padding: 30px;
+}
+
+.userInfo .title {
+	font-size: 40px;
+	font-weight: 700;
+}
+
+.userInfo .pointInfo {
+	font-size: 30px;
+	font-weight: 700;
+	color: #375ABB;
+}
+
+.userInfo .nextLevel {
+	width: 500px;
+	margin: auto;
+	background-color: #F6F6F6;
+	color: #7d7d7d;
+	border-radius: 5px;
+	padding: 10px;
+	margin-top: 30px;
+}
+
+.nextPoint {
+	color: black;
+	font-weight: 700;
+}
+
+.pointTable__header {
+	background-color: #D1D2D850;
+	border-bottom: 2px solid #375ABB;
+	padding: 20px;
+	display: flex;
+}
+
+.body__line {
+	display: flex;
+	padding: 20px;
+	border-bottom: 1px solid #7d7d7d40;
+}
+
+.header__th {
+	font-weight: 700;
+}
+
+.header__th:first-child,
+.body__td:first-child {
+	width: 15%;
+}
+
+.header__th:nth-child(2),
+.body__td:nth-child(2) {
+	width: 45%;
+}
+
+.header__th:nth-child(3),
+.body__td:nth-child(3) {
+	width: 20%;
+}
+
+.header__th:last-child,
+.body__td:last-child {
+	width: 20%;
+}
+
+.body__td:first-child,
+.body__td:nth-child(3) {
+	color: #375ABB;
+}
+
+@media (max-width: 786px) {
+	.guide {
+		max-width: 700px;
+		margin: 100px auto 100px auto;
+	}
+
+}

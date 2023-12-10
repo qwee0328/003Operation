@@ -102,7 +102,7 @@
 					<div class="myActivity__menu">
 						<div class="myActivity__menu1 d-flex">					
 							<div class="myActivity__game d-flex">
-								<a href="#">
+								<a href="/member/mypage/myGameRecord">
 									<div class="myActivity__icon">
 										<i class="fa-solid fa-gamepad colorGray"></i>
 									</div>
@@ -113,7 +113,7 @@
 								</a>
 							</div>
 							<div class="myActivity__point d-flex">
-								<a href="#">
+								<a href="/member/mypage/pointList">
 									<div class="myActivity__icon">
 										<i class="fa-solid fa-coins colorGray"></i>
 									</div>
