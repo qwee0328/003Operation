@@ -356,7 +356,8 @@
 	border: 2px solid black;
 }
 
-#reReplyInputSubmit,#replyInputCancle {
+#reReplyInputSubmit,
+#replyInputCancle {
 	width: 9%;
 	background-color: transparent;
 	border: none;
@@ -403,12 +404,15 @@
 }
 
 /* QNA */
-.answerTitle{
-	margin: 100px 0 20px 0;
-    font-size: 25px;
-    font-weight: 600;
+.answerTitle {
+	margin-top: 100px;
+	font-size: 25px;
+	font-weight: 600;
+	border-bottom: 1px solid #7d7d7d40;
+	padding-bottom: 20px;
 }
-.answerConf{
+
+.answerConf {
 	padding: 50px 0;
 }
 

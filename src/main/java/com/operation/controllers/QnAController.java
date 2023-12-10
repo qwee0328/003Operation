@@ -167,6 +167,14 @@ public class QnAController {
 		List<Map<String, Object>> result = qservice.selectFileById(postId);
 		return result;
 	}
+	
+	// 게시글 답변 파일 불러오기
+	@ResponseBody
+	@RequestMapping("/selectAnswerFileById")
+	public List<Map<String,Object>> selectAnswerFileById(@RequestParam String postId){
+		int id=Integer.parseInt(postId);
+		return qservice.selectAnswerFileById(id);
+	}
 
 	// 내 Qna 불러오기
 	@ResponseBody

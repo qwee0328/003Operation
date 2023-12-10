@@ -71,6 +71,11 @@ public class QnADAO {
 		return db.selectList("Qna.selectFileById", postId);
 	}
 	
+	// 답변 파일 불러오기
+	public List<Map<String, Object>> selectAnswerFileById(int postId) {
+		return db.selectList("Qna.selectAnswerFileById", postId);
+	}
+	
 	// 내 qna 게시글 목록 불러오기
 	public List<Map<String, Object>> selectMyQnaAll(Map<String, Object> param) {
 		return db.selectList("Qna.selectMyQnaAll", param);

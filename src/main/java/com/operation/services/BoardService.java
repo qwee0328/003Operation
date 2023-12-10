@@ -364,11 +364,17 @@ public class BoardService {
 		List<ReplyDTO> list = dao.selectAllReply(param);
 
 		int recordTotalCount = dao.selectTotalReplyCnt(id);
-
+		Map<String, Object> rereply = new HashMap<>();
+		for(int i=0;i<list.size();i++) {
+			int parentId = list.get(i).getId();
+			List<ReplyDTO> reply = selectReReplyAll(list.get(i).getId());
+			rereply.put("rereply"+i, reply);
+		}
 		Map<String, Object> result = new HashMap<>();
 		result.put("replyList", list);
 		System.out.println(list);
 		result.put("recordTotalCount", recordTotalCount);
+		result.put("rereply", rereply);
 		return result;
 	}
 

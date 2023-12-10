@@ -268,7 +268,7 @@ public class BoardController {
 		result.put("recordTotalCount", list.get("recordTotalCount"));
 		result.put("recordCountPerPage", Constants.REPLY_COUNT_PER_PAGE);
 		result.put("naviCountPerPage", Constants.NAVI_COUNT_PER_PAGE);
-
+		result.put("reReply",list.get("rereply"));
 		return result;
 	}
 

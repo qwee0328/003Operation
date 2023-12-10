@@ -80,10 +80,15 @@
 		delete from qna_question_board where id=#{id};
 	</delete>
 	
+	<!-- 파일 불러오기 -->
 	<select id="selectFileById" resultType="map">
 		select * from qna_question_board_file where qna_question_board_id=#{postId};
 	</select>
 	
+	<!-- 답변 파일 불러오기 -->
+	<select id="selectAnswerFileById" resultType="map">
+		select f.* from qna_answer_board a join qna_answer_board_file f on a.id=f.qna_answer_board_id where qna_question_board_id=#{postId};
+	</select>
 	
 	<!-- 내 qna 게시글 목록 불러오기 -->
 	<select id="selectMyQnaAll" resultMap="qna_info">

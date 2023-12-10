@@ -76,8 +76,32 @@ $(document).ready(function() {
 			files.append(title).append(conf);
 			$(".postConf").after(files);
 		}
-
 	});
+	
+	// 답변 파일 불러오기
+	$.ajax({
+		url: "/qna/selectAnswerFileById",
+		data: { postId: $("#postId").val() },
+		type: "post"
+	}).done(function(resp){
+		console.log(resp)
+		if(resp.length>0){
+			let files = $("<div>").attr("class", "files");
+			let title = $("<div>").attr("class", "files__title").html("첨부파일");
+			let conf = $("<div>").attr("calss", "files__conf");
+			for (let i = 0; i < resp.length; i++) {
+				let fileLine = $("<div>").attr("class", "files__Line").attr("sysName", resp[i].system_name).attr("oriName", resp[i].origin_name);
+				let fileDown = $("<a>").attr("class", "fileDown").attr("href", "/board/downloadFile?sysName=" + resp[i].system_name + "&oriName=" + resp[i].origin_name);
+				let fileIcon = $("<i>").attr("class", "fa-regular fa-file");
+				let fileName = $("<div>").html(resp[i].origin_name);
+				fileDown.append(fileIcon).append(fileName);
+				conf.append(fileLine.append(fileDown));
+			}
+			files.append(title).append(conf);
+			$(".answerConf").after(files);
+		}
+	})
+		
 
 	// 답변 작성 시에 파일 삽입 시 목록 출력
 	$(document).on("change","#fileInput", function(e) {
@@ -163,16 +187,6 @@ $(document).on("click", ".write", function() {
 		processData: false
 	}).done(function() {
 		location.reload();
-		// 내용 불러오는 기능 구현하면 reload 보다는 직접 요소 뿌려주는 게 나을 것 같아요
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		// 이렇게 하면 확인하겠지...?
-		//
 	});
 });
 

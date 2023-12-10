@@ -15,6 +15,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.operation.constants.Constants;
@@ -163,7 +166,7 @@ public class QnAService {
 		} else {
 			result.put("question", question);
 			Map<String, Object> answer = dao.selectAnswerById(id);
-			if(answer!=null) {
+			if (answer != null) {
 				answer.put("timeCal", timeCal(answer.get("write_date")));
 			}
 
@@ -188,7 +191,7 @@ public class QnAService {
 	}
 
 	// qna 게시글 답변 정보 불러오기 (수정용)
-	public Map<String, Object> selectAnswerById(int id){
+	public Map<String, Object> selectAnswerById(int id) {
 		Map<String, Object> answer = dao.selectAnswerById(id);
 		return answer;
 	}
@@ -256,8 +259,7 @@ public class QnAService {
 
 		}
 	}
-	
-	
+
 	// 답변 게시글 수정
 	@Transactional
 	public void update(QnaAnswerDTO dto, MultipartFile[] files, Integer[] deleteFileList,
@@ -322,7 +324,6 @@ public class QnAService {
 		}
 	}
 
-
 	// 게시글 삭제
 	public void deletePost(int id) {
 		dao.deletePost(id);
@@ -332,12 +333,16 @@ public class QnAService {
 	public List<Map<String, Object>> selectFileById(String postId) {
 		return dao.selectFileById(postId);
 	}
-	
-	
+
+	// 게시글 답변 파일 불러오기
+	public List<Map<String, Object>> selectAnswerFileById(int postId) {
+		return dao.selectAnswerFileById(postId);
+	}
+
 	// 내 qna 게시글 목록 불러오기
 	public List<Map<String, Object>> selectMyQnaAll(int currentPage) {
 		Map<String, Object> param = new HashMap<>();
-		param.put("member_id",(String) session.getAttribute("loginID"));
+		param.put("member_id", (String) session.getAttribute("loginID"));
 		param.put("start", currentPage * Constants.RECORD_COUNT_PER_PAGE - (Constants.RECORD_COUNT_PER_PAGE - 1) - 1);
 		param.put("count", Constants.RECORD_COUNT_PER_PAGE);
 		return dao.selectMyQnaAll(param);
