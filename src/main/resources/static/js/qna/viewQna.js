@@ -156,7 +156,7 @@ $(document).on("click", ".write", function() {
 	}
 
 	$.ajax({
-		url: "/qna/writeAnswer",
+		url: "/qna/admin/writeAnswer",
 		type: "post",
 		data: formData,
 		contentType: false,
@@ -180,7 +180,7 @@ $(document).on("click", ".write", function() {
 // 답변 수정
 $(document).on("click", ".answerUpdate", function() {
 	$.ajax({
-		url:"/qna/goUpdateAnswer/"+parseInt($(this).attr("data-id"))
+		url:"/qna/admin/goUpdateAnswer/"+parseInt($(this).attr("data-id"))
 	}).done(function(answer){	
 		$(".answerContents").css("display","none");
 		$(".answerUpdate").css("display","none");
@@ -324,7 +324,7 @@ $(document).on("click",".updateAnswer",function(){
 	}
 		
 	$.ajax({
-		url:"/qna/updateAnswerPost",
+		url:"/qna/admin/updateAnswerPost",
 		type:"post",
 		data:formData,
 		contentType: false,

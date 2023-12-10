@@ -43,7 +43,7 @@ public class QnAController {
 
 	// QNA 답글작성
 	@ResponseBody
-	@RequestMapping("/writeAnswer")
+	@RequestMapping("/admin/writeAnswer")
 	public void writeAnswer(QnaAnswerDTO dto,
 			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
 			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList) throws Exception {
@@ -121,7 +121,7 @@ public class QnAController {
 
 	// 답변 게시글 수정 페이지
 	@ResponseBody
-	@RequestMapping("/goUpdateAnswer/{post_id}")
+	@RequestMapping("/admin/goUpdateAnswer/{post_id}")
 	public Map<String, Object> goUpdateAnswer(@PathVariable int post_id) {
 		Map<String, Object> data = qservice.selectAnswerById(post_id);
 		return data;
@@ -141,7 +141,7 @@ public class QnAController {
 	
 	// 답글 수정
 	@ResponseBody
-	@RequestMapping("/updateAnswerPost")
+	@RequestMapping("/admin/updateAnswerPost")
 	public void updatePost(QnaAnswerDTO dto,
 			@RequestParam(value = "attachFiles", required = false) MultipartFile[] attachFiles,
 			@RequestParam(value = "deleteFileList", required = false) Integer[] deleteFileList,
@@ -170,7 +170,7 @@ public class QnAController {
 
 	// 내 Qna 불러오기
 	@ResponseBody
-	@RequestMapping("/selectMyQnaAll")
+	@RequestMapping("/mypage/selectMyQnaAll")
 	public Map<String, Object> selectMyQnaAll(@RequestParam(value = "cpage", required = false) String cpage) {
 		Map<String, Object> result = new HashMap<>();
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
@@ -187,7 +187,7 @@ public class QnAController {
 	
 	// 마이페이지 > 내 Qna에서 선택한 게시글 일괄 삭제
 	@ResponseBody
-	@RequestMapping("/deleteSelectQna")
+	@RequestMapping("/mypage/deleteSelectQna")
 	public void deleteSelectPost(@RequestParam(value = "deleteIds", required = false) String[] deleteIds) {
 		if (deleteIds != null && deleteIds.length>=1) {
 			qservice.deleteSelectQna(deleteIds);

@@ -7,7 +7,7 @@ $(document).ready(function(){
 // 게시글 정보 불러오기
 function postLoad(cpage){
 	$.ajax({
-		url:"/member/selectMyBookmark",
+		url:"/member/mypage/selectMyBookmark",
 		type:"post",
 		data:{cpage:cpage}
 	}).done(function(result){
@@ -205,7 +205,7 @@ function search(cpage){
 	select = $(".search__select option:selected").val() != +"" ? $(".search__select option:selected").val() : "";
 
 	$.ajax({
-		url:"/board/searchMyBookmark",
+		url:"/board/mypage/searchMyBookmark",
 		data:{
 			select:select,
 			keyword:keyword,

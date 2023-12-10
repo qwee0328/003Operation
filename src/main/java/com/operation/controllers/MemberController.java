@@ -123,14 +123,14 @@ public class MemberController {
 	// 마이페이지 -------------------------------------
 
 	// 마이페이지로 이동
-	@RequestMapping("/goMypage")
+	@RequestMapping("/mypage/goMypage")
 	public String goMapage(Model model) {
 		model.addAttribute("info", mservice.selectMainMypageInfoById((String) session.getAttribute("loginID")));
 		return "mypage/mypageMain";
 	}
 
 	// 마이페이지 내 정보
-	@RequestMapping("/viewMypage")
+	@RequestMapping("/mypage/viewMypage")
 	public String viewMapage(Model model) {
 		MemberDTO dto = mservice.selectInfoById((String) session.getAttribute("loginID"));
 		model.addAttribute("info", dto);
@@ -138,14 +138,14 @@ public class MemberController {
 	}
 
 	// 마이페이지 정보 수정 전 비밀번호 확인창을 이동
-	@RequestMapping("/goChkInfo")
+	@RequestMapping("/mypage/goChkInfo")
 	public String goChkInfo() {
 		return "mypage/mypageChkInfo";
 	}
 
 	// 마이페이지 정보 수정 전 비밀번호 확인
 	@ResponseBody
-	@RequestMapping("/chkInfo")
+	@RequestMapping("/mypage/chkInfo")
 	public boolean chkInfo(String pw) {
 //		boolean re = PasswordEncoder.matches(pw, mservice.getPw((String)session.getAttribute("loginID")));
 //		System.out.println(re);
@@ -154,7 +154,7 @@ public class MemberController {
 	}
 
 	// 마이페이지 정보 수정 페이지로 이동
-	@RequestMapping("/goUpdateInfo")
+	@RequestMapping("/mypage/goUpdateInfo")
 	public String goUpdateInfo(Model model) {
 		MemberDTO dto = mservice.selectInfoById((String) session.getAttribute("loginID"));
 		model.addAttribute("info", dto);
@@ -164,7 +164,7 @@ public class MemberController {
 
 	// 마이페이지 정보 수정
 	@ResponseBody
-	@RequestMapping("/updateInfo")
+	@RequestMapping("/mypage/updateInfo")
 	public int updateInfo(String key, String value) {
 		if (key.equals("pw")) {
 			value = PasswordEncoder.encode(value);
@@ -180,7 +180,7 @@ public class MemberController {
 
 	// 프로필 이미지 변경
 	@ResponseBody
-	@RequestMapping("/updateProfileImg")
+	@RequestMapping("/mypage/updateProfileImg")
 	public int updateProfileImg(MultipartFile profileImg) throws Exception {
 //		String path = "C:/003Operation/profileImgs/";
 //		File uploadPath = new File(path);
@@ -235,14 +235,14 @@ public class MemberController {
 
 
 	// 마이페이지 내 게시글 내역으로 이동
-	@RequestMapping("/goMyPost")
+	@RequestMapping("/mypage/goMyPost")
 	public String goMyPost() {
 		return "mypage/myPost";
 	}
 	
 	// 내 게시글 불러오기
 	@ResponseBody
-	@RequestMapping("/selectMyPost")
+	@RequestMapping("/mypage/selectMyPost")
 	public Map<String, Object> selectMyPost(String id, @RequestParam(value = "cpage", required = false) String cpage){
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
 		return bservice.selectMyPost((String) session.getAttribute("loginID"), currentPage);
@@ -250,27 +250,27 @@ public class MemberController {
 	
 	
 	// 마이페이지 내 북마크 내역으로 이동
-	@RequestMapping("/goMyBookmark")
+	@RequestMapping("/mypage/goMyBookmark")
 	public String goMyBookmark() {
 		return "mypage/myBookmark";
 	}
 		
 	// 내 북마크 불러오기
 	@ResponseBody
-	@RequestMapping("/selectMyBookmark")
+	@RequestMapping("/mypage/selectMyBookmark")
 	public Map<String, Object> selectMyBookmark(String id, @RequestParam(value = "cpage", required = false) String cpage){
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
 		return bservice.selectMyBookmark(currentPage);
 	}
 	
 	// 마이페이지 내 작성한 댓글 내역으로 이동
-	@RequestMapping("/goMyReply")
+	@RequestMapping("/mypage/goMyReply")
 	public String goMyReply() {
 		return "mypage/myReply";
 	}
 	
 	// 마이페이지 내 작성한 댓글 내역으로 이동
-	@RequestMapping("/goMyQna")
+	@RequestMapping("/mypage/goMyQna")
 	public String goMyQna() {
 		return "mypage/myQna";
 	}
