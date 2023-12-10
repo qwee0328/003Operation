@@ -32,8 +32,9 @@ public class SecurityConfig {
 	
 	@Bean
 	protected SecurityFilterChain config(HttpSecurity http) throws Exception {
-		// 스프링 시큐리티를 커스터 마이징 해주는 내용을 넣어주면 됨
+		// 스프링 시큐리티를 커스터 마이징 해주는 내용
 		http.csrf().disable();
+		// 페이지 별 권한부여
 		http.authorizeHttpRequests()
 		.requestMatchers(new AntPathRequestMatcher("/board/goWritePost/**")).authenticated()
 		.requestMatchers(new AntPathRequestMatcher("/board/viewPostConf/**")).authenticated()
@@ -43,7 +44,6 @@ public class SecurityConfig {
 		http.formLogin().loginPage("/member/goLogin").defaultSuccessUrl("/")
 		.successHandler((request, response, authentication) -> {
 			// 성공했을 때
-			System.out.println("로그인 성공");
 			 // 인증 객체에서 사용자 정보 가져오기
 	        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 	        String loginID = userDetails.getUsername(); // 아이디
@@ -52,13 +52,7 @@ public class SecurityConfig {
 		})
 		.failureHandler((request, response, exception) -> {
 			// 실패했을 때
-			System.out.println("로그인 실패");
-			try {
-	            // 로그인 페이지로 리다이렉션
-	            response.sendRedirect("/member/goLogin?error");
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+			response.sendRedirect("/member/goLogin");
 		});
 		http.logout().invalidateHttpSession(true);
 		http.exceptionHandling().accessDeniedPage("/denied");

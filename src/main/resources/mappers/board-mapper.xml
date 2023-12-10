@@ -129,7 +129,7 @@
 	<!-- 게시글 댓글 수 불러오기 -->
 	<select id="selectReplyById" resultType="int">
 		select count(*) count
-		from reply where bulletin_board_id=#{id};
+		from reply where bulletin_board_id=#{id} and parent_reply_id is null;
 	</select>
 
 	<!-- 게시글 추천 -->

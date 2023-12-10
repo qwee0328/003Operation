@@ -34,18 +34,14 @@
             </c:choose>
 			<script type="text/javascript">
 	        	$(document).ready(function() {
-	        			        		
 	        		$(".kiosk__area").css({"width":(${info.width}+20+"px"),"height":(${info.height}+60+"px")});
-	        		
-	        		let userId = "";
+
 	        		$('#kioskFrame').on('load', function() {
 					$.ajax({
 							url: "/member/userId",
 							type: "post",
 							async:"false"
 						}).done(function(resp) {
-							/* alert("ajax") */
-							userId=resp;
 							var iframe = document.querySelector('iframe');
 							iframe.contentWindow.postMessage(JSON.stringify(resp), 'https://kiosk003.github.io/');
 						})
