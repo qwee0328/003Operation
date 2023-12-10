@@ -126,7 +126,7 @@
 						</div>
 						<div class="myActivity__menu2 d-flex">
 							<div class="myActivity__game d-flex">
-								<a href="/member/goMyPost">
+								<a href="/member/mypage/goMyPost">
 									<div class="myActivity__icon">
 										<i class="fa-solid fa-file colorGray"></i>
 									</div>
@@ -137,7 +137,7 @@
 								</a>
 							</div>						
 							<div class="myActivity__point d-flex">	
-								<a href="/member/goMyBookmark">
+								<a href="/member/mypage/goMyBookmark">
 									<div class="myActivity__icon">
 										<i class="fa-solid fa-bookmark colorGray"></i>
 									</div>
@@ -150,7 +150,7 @@
 						</div>
 						<div class="myActivity__menu3 d-flex">
 							<div class="myActivity__game d-flex">
-								<a href="/member/goMyReply">
+								<a href="/member/mypage/goMyReply">
 									<div class="myActivity__icon">
 										<i class="fa-solid fa-comment-dots colorGray"></i>
 									</div>
@@ -169,7 +169,7 @@
 					<div class="myAsk__menu">
 						<div class="myAsk__menu1 d-flex">					
 							<div class="myAsk__qna d-flex">
-								<a href="/member/goMyQna">
+								<a href="/member/mypage/goMyQna">
 									<div class="myAsk__icon">
 										<i class="fa-solid fa-circle-question colorGray"></i>
 									</div>
@@ -188,7 +188,7 @@
 					<div class="myInfo__menu">
 						<div class="myInfo__menu1 d-flex">
 							<div class="myInfo__setting d-flex">
-								<a href="/member/viewMypage">
+								<a href="/member/mypage/viewMypage">
 									<div class="myInfo__icon">
 										<i class="fa-solid fa-gear colorGray"></i>
 									</div>

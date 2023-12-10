@@ -132,7 +132,7 @@ $(document).ready(function() {
 
 	// 돌아가기
 	$(".footerBtn__back").on("click", function() {
-		location.href = "/member/viewMypage"
+		location.href = "/member/mypage/viewMypage"
 	})
 
 	// 개인정보 변경
@@ -143,7 +143,7 @@ $(document).ready(function() {
 			value = $(".inputPw__pw").val();
 		}
 		$.ajax({
-			url: "/member/updateInfo",
+			url: "/member/mypage/updateInfo",
 			data: {
 				key: key,
 				value: value
@@ -155,7 +155,7 @@ $(document).ready(function() {
 			} else {
 				alert("문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
 			}
-			location.href = "/member/viewMypage";
+			location.href = "/member/mypage/viewMypage";
 		});
 
 	});
@@ -171,7 +171,7 @@ $(document).ready(function() {
 		formData.append("profileImg",e.target.files[0]);
 		
 		$.ajax({
-			url:"/member/updateProfileImg",
+			url:"/member/mypage/updateProfileImg",
 			data:formData,
 			type:"post",
 	 		contentType: false, // 데이터를 직렬화하지 않도록 설정
@@ -187,7 +187,7 @@ $(document).ready(function() {
 			} else {
 				alert("문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
 			}
-			location.href = "/member/viewMypage";
+			location.href = "/member/mypage/viewMypage";
 		});
 	});
 });

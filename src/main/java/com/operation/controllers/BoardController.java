@@ -377,7 +377,7 @@ public class BoardController {
 	
 	// 마이페이지 > 내 게시글에서 선택한 게시글 일괄 삭제
 	@ResponseBody
-	@RequestMapping("/deleteSelectPost")
+	@RequestMapping("/mypage/deleteSelectPost")
 	public void deleteSelectPost(@RequestParam(value = "deleteIds", required = false) String[] deleteIds) {
 		if (deleteIds != null && deleteIds.length>=1) {
 			bservice.deleteSelectPost(deleteIds);
@@ -386,7 +386,7 @@ public class BoardController {
 	
 	// 마이페이지 > 내 게시글 검색
 	@ResponseBody
-	@RequestMapping("/searchMyPost")
+	@RequestMapping("/mypage/searchMyPost")
 	public Map<String, Object> searchMyPost(@RequestParam(value = "cpage", required = false) String cpage, String select, String keyword){
 		Map<String, Object> result = new HashMap<>();
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);
@@ -403,7 +403,7 @@ public class BoardController {
 	
 	// 마이페이지 > 내 북마크 게시글 검색
 	@ResponseBody
-	@RequestMapping("/searchMyBookmark")
+	@RequestMapping("/mypage/searchMyBookmark")
 	public Map<String, Object> searchMyBookmark(@RequestParam(value = "cpage", required = false) String cpage, String select, String keyword){
 		Map<String, Object> result = new HashMap<>();
 		int currentPage = (cpage == null || cpage.isEmpty()) ? 1 : Integer.parseInt(cpage);

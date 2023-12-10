@@ -89,7 +89,7 @@ function postLoad(result){
 
 function getPost(cpage){
 	$.ajax({
-		url:"/qna/selectMyQnaAll",
+		url:"/qna/mypage/selectMyQnaAll",
 		data:{cpage:cpage},
 		type:"post"
 	}).done(function(resp){
@@ -245,7 +245,7 @@ $(document).on("click",".board__selectDelete",function(){
 			formData.append("deleteIds",$(e).closest(".board__post").find(".post__seq").text());
 		})
 		$.ajax({
-			url:"/qna/deleteSelectQna",
+			url:"/qna/mypage/deleteSelectQna",
 			type:"post",
             data: formData,
 			contentType: false,

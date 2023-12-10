@@ -8,7 +8,7 @@ $(document).ready(function(){
 // 게시글 목록 불러오기
 function postLoad(cpage){
 	$.ajax({
-		url:"/member/selectMyPost",
+		url:"/member/mypage/selectMyPost",
 		type:"post",
 		data:{cpage:cpage}
 	}).done(function(result){
@@ -223,7 +223,7 @@ $(document).on("click",".board__selectDelete",function(){
 			formData.append("deleteIds",$(e).closest(".board__post").find(".post__seq").text());
 		})
 		$.ajax({
-			url:"/board/deleteSelectPost",
+			url:"/board/mypage/deleteSelectPost",
 			type:"post",
             data: formData,
 			contentType: false,
@@ -240,7 +240,7 @@ function search(cpage){
 	select = $(".search__select option:selected").val() != +"" ? $(".search__select option:selected").val() : "";
 
 	$.ajax({
-		url:"/board/searchMyPost",
+		url:"/board/mypage/searchMyPost",
 		data:{
 			select:select,
 			keyword:keyword,

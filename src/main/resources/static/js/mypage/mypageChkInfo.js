@@ -10,12 +10,12 @@ $(document).ready(function(){
 		}
 		
 		$.ajax({
-			url:"/member/chkInfo",
+			url:"/member/mypage/chkInfo",
 			data:{pw:$(".content_pw").val()},
 			type:"post"
 		}).done(function(result){
 			if(result){
-				location.href="/member/goUpdateInfo";
+				location.href="/member/mypage/goUpdateInfo";
 			}else{
 				alert("비밀번호를 다시 확인해주세요.");
 				$(".content_pw").val("").focus();	
